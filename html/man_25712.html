@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Swissa Toney</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}body {font-family: "Open Sans"}
+h5.double {line-height: 2}
+</style>
+</head>
+<!-- w3-content defines a container for fixed size centered content, and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:2000px">
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-48 w3-white">
+<h1 class="w3-xxxlarge"><b>FPL <span class="w3-tag">GUI</span></b></h1>
+<h6>Max Winokan</h6>
+</header>
+<div class="w3-bar w3-black">
+<a href="https://mwinokan.github.io/FPL_GUI/index.html" class="wr-bar-item w3-button w3-center">🏠</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/fixtures.html" class="wr-bar-item w3-button w3-center">🗓</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/assets.html" class="wr-bar-item w3-button w3-center">📊</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html" class="wr-bar-item w3-button">💎</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html" class="wr-bar-item w3-button">🚽</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Guildford-Ultimate-La-Liga.html" class="wr-bar-item w3-button">🦌</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/RU-FPL.html" class="wr-bar-item w3-button">📚</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Super-Dinner-League.html" class="wr-bar-item w3-button">🍝</a>
+</div>
+<!-- Grid -->
+<div class="w3-row w3-border">
+<!-- Content -->
+<div class="w3-col l12 s12">
+<div class="w3-container w3-white w3-padding">
+<div class="w3-justify">
+<div class="w3-center">
+<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/kits/man_25712.png?raw=true" alt="Team" width="66" height="87"><h2>Swissa Toney</h2>
+<h3>Ed Shardlow</h3>
+</div>
+<h2>Quick Links</h2>
+<ul>
+<li><a href="https://fantasy.premierleague.com/entry/25712/event/16">FPL: Event</a></li>
+<li><a href="https://fantasy.premierleague.com/entry/25712/history">FPL: History</a></li>
+</ul>
+<h2>Trophy Cabinet</h2>
+<p><strong>Choose which league awards to show:</strong></p>
+<div class="w3-bar w3-black">
+<button class="w3-bar-item w3-button w3-mobile tablink w3-red" onclick="openLeague(event,937886)">Guildford Ultimate La Liga</button>
+</div>
+<div id="937886" class="w3-container w3-border league">
+<div class="w3-justify w3-row-padding">
+<div class="w3-justify"><div class="w3-row-padding"><div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-pale-red w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> 🤡 Clown</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW6</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-green w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> 🧑‍🔬 Scientist</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW10</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-purple w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> 🔮 Fortune Teller</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW2</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-red w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> 🐓 Cock</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW16</span></h2>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+function openLeague(evt, leagueName) {
+var i, x, tablinks;
+x = document.getElementsByClassName("league");
+for (i = 0; i < x.length; i++) {
+x[i].style.display = "none";
+}
+tablinks = document.getElementsByClassName("tablink");
+for (i = 0; i < x.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+}
+document.getElementById(leagueName).style.display = "block";
+evt.currentTarget.className += " w3-red";
+}
+</script>
+<h2>Chips</h2>
+<div class="w3-responsive">
+<table class="w3-table w3-border w3-hoverable">
+<tr>
+<th class="w3-center">Chip</th>
+<th class="w3-center">GW</th>
+<th class="w3-center">Detail</th>
+</tr>
+<tr>
+<td class="w3-center w3-blue">Bench Boost</td>
+<td class="w3-center">1</td>
+<td class="w3-center">+12 points gained</td>
+</tr>
+<tr>
+<td class="w3-center w3-red">First Wildcard</td>
+<td class="w3-center">9</td>
+<td class="w3-center">+7 points gained</td>
+</tr>
+</table>
+</div>
+<h2>Picks</h2>
+<div class="w3-responsive">
+<table class="w3-table w3-border w3-hoverable">
+<tr>
+<th class="w3-center">Pos</th>
+<th class="w3-center">Team</th>
+<th>Name</th>
+<th class="w3-center">Price</th>
+<th class="w3-center">ΣPts</th>
+<th class="w3-center">Trans.</th>
+<th class="w3-center">GW11</th>
+<th class="w3-center">GW12</th>
+<th class="w3-center">GW13</th>
+<th class="w3-center">GW14</th>
+<th class="w3-center">GW15</th>
+<th class="w3-center">GW16</th>
+<th class="w3-center">Form</th>
+<th class="w3-center">GW17</th>
+<th class="w3-center">GW18</th>
+<th class="w3-center">GW19</th>
+<th class="w3-center">GW20</th>
+<th class="w3-center">GW21</th>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:black;color:red;"><b>GKP</b></td>
+<td class="w3-center" style="background-color:black;color:red;"><b>BRE</b></td>
+<td style="background-color:black;color:red;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_81.html">Raya</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£4.6</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">61</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.2%</td>
+<td onclick="document.getElementById('id81_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">10</td><div id="id81_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id81_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW11</h3><p>Brentford: Won 2-0 at home to Brighton.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-aqua">2 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> <span class="w3-tag w3-blue">7 Saves</span> </p></div></div></div><td onclick="document.getElementById('id81_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">10</td><div id="id81_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id81_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW12</h3><p>Brentford: Drew 0-0 at home to Chelsea.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> <span class="w3-tag w3-blue">5 Saves</span> </p></div></div></div><td onclick="document.getElementById('id81_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id81_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id81_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW13</h3><p>Brentford: Lost 4-0 away to Aston Villa.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">4 Goals Conceded</span> <span class="w3-tag w3-blue">7 Saves</span> </p></div></div></div><td onclick="document.getElementById('id81_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3</td><div id="id81_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id81_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW14</h3><p>Brentford: Drew 1-1 at home to Wolves.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">3 Saves</span> </p></div></div></div><td onclick="document.getElementById('id81_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id81_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id81_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW15</h3><p>Brentford: Drew 2-2 away to Nott'm Forest.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">2 Goals Conceded</span> <span class="w3-tag w3-blue">5 Saves</span> </p></div></div></div><td onclick="document.getElementById('id81_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3</td><div id="id81_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id81_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW16</h3><p>Brentford: Won 1-2 away to Man City.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">5 Saves</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">TOT (1.9)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">whu (2.6)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">LIV (2.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">BOU (2.5)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">lee (2.2)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:RoyalBlue;color:Red;"><b>GKP</b></td>
+<td class="w3-center" style="background-color:RoyalBlue;color:Red;"><b>CRY</b></td>
+<td style="background-color:RoyalBlue;color:Red;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_152.html">Guaita</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£4.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">48</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.7%</td>
+<td onclick="document.getElementById('id152_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">11</td><div id="id152_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id152_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Guaita in GW11</h3><p>Crystal Palace: Drew 0-0 away to Leicester.</p>
+<p>Guaita: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> <span class="w3-tag w3-blue">6 Saves</span> </p></div></div></div><td onclick="document.getElementById('id152_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3</td><div id="id152_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id152_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Guaita in GW12</h3><p>Crystal Palace: Won 2-1 at home to Wolves.</p>
+<p>Guaita: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">3 Saves</span> </p></div></div></div><td onclick="document.getElementById('id152_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id152_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id152_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Guaita in GW13</h3><p>Crystal Palace: Lost 3-0 away to Everton.</p>
+<p>Guaita: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">3 Goals Conceded</span> <span class="w3-tag w3-blue">3 Saves</span> </p></div></div></div><td onclick="document.getElementById('id152_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">9</td><div id="id152_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id152_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Guaita in GW14</h3><p>Crystal Palace: Won 1-0 at home to Southampton.</p>
+<p>Guaita: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-aqua">2 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> <span class="w3-tag w3-blue">4 Saves</span> </p></div></div></div><td onclick="document.getElementById('id152_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id152_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id152_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Guaita in GW15</h3><p>Crystal Palace: Won 1-2 away to West Ham.</p>
+<p>Guaita: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id152_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id152_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id152_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Guaita in GW16</h3><p>Crystal Palace: Lost 1-0 away to Nott'm Forest.</p>
+<p>Guaita: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">4.8</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">FUL (2.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">bou (2.4)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">TOT (1.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">che (2.2)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">NEW (2.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:LightSkyBlue;color:black;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:LightSkyBlue;color:black;"><b>MCI</b></td>
+<td style="background-color:LightSkyBlue;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_306.html">Cancelo</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£7.4</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">70</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.2%</td>
+<td onclick="document.getElementById('id306_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id306_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id306_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cancelo in GW11</h3><p>Man City: Lost 1-0 away to Liverpool.</p>
+<p>Cancelo: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id306_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">x</td><div id="id306_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id306_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cancelo in GW12</h3><p>No fixture.</p></div></div></div><td onclick="document.getElementById('id306_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id306_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id306_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cancelo in GW13</h3><p>Man City: Won 3-1 at home to Brighton.</p>
+<p>Cancelo: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id306_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">6</td><div id="id306_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id306_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cancelo in GW14</h3><p>Man City: Won 0-1 away to Leicester.</p>
+<p>Cancelo: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id306_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">-2</td><div id="id306_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id306_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cancelo in GW15</h3><p>Man City: Won 2-1 at home to Fulham.</p>
+<p>Cancelo: <span class="w3-tag w3-dark-grey">25 mins</span> <span class="w3-tag w3-red">Red Card</span> </p></div></div></div><td onclick="document.getElementById('id306_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id306_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id306_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cancelo in GW16</h3><p>Man City: Lost 1-2 at home to Brentford.</p>
+<p>Cancelo: <span class="w3-tag w3-dark-grey">86 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1.8</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">lee (4.3)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">EVE (5.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">che (4.4)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">mun (4.2)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">WOL (5.3)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>NEW</b></td>
+<td style="background-color:WhiteSmoke;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_357.html">Trippier</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.9</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">94</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.2%</td>
+<td onclick="document.getElementById('id357_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">6</td><div id="id357_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id357_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Trippier in GW11</h3><p>Newcastle: Drew 0-0 away to Man Utd.</p>
+<p>Trippier: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id357_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">9</td><div id="id357_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id357_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Trippier in GW12</h3><p>Newcastle: Won 1-0 at home to Everton.</p>
+<p>Trippier: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id357_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id357_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id357_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Trippier in GW13</h3><p>Newcastle: Won 1-2 away to Spurs.</p>
+<p>Trippier: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id357_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">11</td><div id="id357_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id357_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Trippier in GW14</h3><p>Newcastle: Won 4-0 at home to Aston Villa.</p>
+<p>Trippier: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">2 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id357_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">12</td><div id="id357_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id357_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Trippier in GW15</h3><p>Newcastle: Won 1-4 away to Southampton.</p>
+<p>Trippier: <span class="w3-tag w3-dark-grey">79 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id357_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5</td><div id="id357_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id357_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Trippier in GW16</h3><p>Newcastle: Won 1-0 at home to Chelsea.</p>
+<p>Trippier: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">7.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">lei (5.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">LEE (5.3)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">ars (4.9)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">FUL (5.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">cry (5.6)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:red;color:white;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:red;color:white;"><b>ARS</b></td>
+<td style="background-color:red;color:white;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_16.html">Gabriel</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.2</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">68</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">1.5%</td>
+<td onclick="document.getElementById('id16_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">8</td><div id="id16_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id16_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gabriel in GW11</h3><p>Arsenal: Won 0-1 away to Leeds.</p>
+<p>Gabriel: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id16_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">🪑</td><div id="id16_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id16_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gabriel in GW12</h3><p>No fixture.</p></div></div></div><td onclick="document.getElementById('id16_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id16_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id16_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gabriel in GW13</h3><p>Arsenal: Drew 1-1 away to Southampton.</p>
+<p>Gabriel: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id16_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">6</td><div id="id16_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id16_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gabriel in GW14</h3><p>Arsenal: Won 5-0 at home to Nott'm Forest.</p>
+<p>Gabriel: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id16_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">15</td><div id="id16_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id16_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gabriel in GW15</h3><p>Arsenal: Won 0-1 away to Chelsea.</p>
+<p>Gabriel: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id16_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id16_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id16_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gabriel in GW16</h3><p>Arsenal: Drew 0-0 away to Wolves.</p>
+<p>Gabriel: <span class="w3-tag w3-dark-grey">37 mins</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">6.4</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">WHU (4.7)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">bha (3.9)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">NEW (3.7)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">tot (3.6)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">MUN (3.8)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:darkblue;color:white;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:darkblue;color:white;"><b>CHE</b></td>
+<td style="background-color:darkblue;color:white;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_112.html">Cucurella</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.1</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">31</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.9%</td>
+<td onclick="document.getElementById('id112_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id112_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id112_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cucurella in GW11</h3><p>Chelsea: Won 0-2 away to Aston Villa.</p>
+<p>Cucurella: <span class="w3-tag w3-dark-grey">45 mins</span> </p></div></div></div><td onclick="document.getElementById('id112_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">6</td><div id="id112_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id112_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cucurella in GW12</h3><p>Chelsea: Drew 0-0 away to Brentford.</p>
+<p>Cucurella: <span class="w3-tag w3-dark-grey">60 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id112_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id112_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id112_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cucurella in GW13</h3><p>Chelsea: Drew 1-1 at home to Man Utd.</p>
+<p>Cucurella: <span class="w3-tag w3-dark-grey">35 mins</span> </p></div></div></div><td onclick="document.getElementById('id112_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id112_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id112_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cucurella in GW14</h3><p>Chelsea: Lost 4-1 away to Brighton.</p>
+<p>Cucurella: <span class="w3-tag w3-dark-grey">63 mins</span> <span class="w3-tag w3-orange">3 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id112_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id112_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id112_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cucurella in GW15</h3><p>Chelsea: Lost 0-1 at home to Arsenal.</p>
+<p>Cucurella: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id112_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id112_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id112_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cucurella in GW16</h3><p>Chelsea: Lost 1-0 away to Newcastle.</p>
+<p>Cucurella: <span class="w3-tag w3-dark-grey">17 mins</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">BOU (2.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">nfo (3.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">MCI (2.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">CRY (2.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">liv (2.3)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:lightblue;color:maroon;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:lightblue;color:maroon;"><b>AVL</b></td>
+<td style="background-color:lightblue;color:maroon;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_39.html">Mings</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£4.3</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">33</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.3%</td>
+<td onclick="document.getElementById('id39_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id39_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id39_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mings in GW11</h3><p>Aston Villa: Lost 0-2 at home to Chelsea.</p>
+<p>Mings: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">2 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id39_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">-2</td><div id="id39_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id39_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mings in GW12</h3><p>Aston Villa: Lost 3-0 away to Fulham.</p>
+<p>Mings: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag">Own Goal</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-orange">3 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id39_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">10</td><div id="id39_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id39_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mings in GW13</h3><p>Aston Villa: Won 4-0 at home to Brentford.</p>
+<p>Mings: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">1 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id39_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td><div id="id39_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id39_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mings in GW14</h3><p>Aston Villa: Lost 4-0 away to Newcastle.</p>
+<p>Mings: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">4 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id39_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id39_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id39_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mings in GW15</h3><p>Aston Villa: Won 3-1 at home to Man Utd.</p>
+<p>Mings: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id39_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id39_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id39_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mings in GW16</h3><p>Aston Villa: Away to Brighton.</p>
+<p>Mings: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1.7</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">LIV (2.2)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">tot (2.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">WOL (3.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">LEE (2.4)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">sou (2.7)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:LightSkyBlue;color:black;"><b>MID</b></td>
+<td class="w3-center" style="background-color:LightSkyBlue;color:black;"><b>MCI</b></td>
+<td style="background-color:LightSkyBlue;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_301.html">De Bruyne</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£12.6</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">90</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.1%</td>
+<td onclick="document.getElementById('id301_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id301_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id301_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>De Bruyne in GW11</h3><p>Man City: Lost 1-0 away to Liverpool.</p>
+<p>De Bruyne: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id301_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">x</td><div id="id301_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id301_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>De Bruyne in GW12</h3><p>No fixture.</p></div></div></div><td onclick="document.getElementById('id301_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">9</td><div id="id301_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id301_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>De Bruyne in GW13</h3><p>Man City: Won 3-1 at home to Brighton.</p>
+<p>De Bruyne: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-aqua">2 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id301_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">11</td><div id="id301_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id301_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>De Bruyne in GW14</h3><p>Man City: Won 0-1 away to Leicester.</p>
+<p>De Bruyne: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id301_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">7</td><div id="id301_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id301_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>De Bruyne in GW15</h3><p>Man City: Won 2-1 at home to Fulham.</p>
+<p>De Bruyne: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">2 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id301_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id301_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id301_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>De Bruyne in GW16</h3><p>Man City: Lost 1-2 at home to Brentford.</p>
+<p>De Bruyne: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">6.2</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">lee (7.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">EVE (7.2)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">che (7.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">mun (7.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">WOL (7.3)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:RoyalBlue;color:Red;"><b>MID</b></td>
+<td class="w3-center" style="background-color:RoyalBlue;color:Red;"><b>CRY</b></td>
+<td style="background-color:RoyalBlue;color:Red;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_160.html">Zaha</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£7.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">64</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-1.3%</td>
+<td onclick="document.getElementById('id160_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3</td><div id="id160_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id160_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Zaha in GW11</h3><p>Crystal Palace: Drew 0-0 away to Leicester.</p>
+<p>Zaha: <span class="w3-tag w3-dark-grey">76 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id160_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">8</td><div id="id160_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id160_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Zaha in GW12</h3><p>Crystal Palace: Won 2-1 at home to Wolves.</p>
+<p>Zaha: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-aqua">1 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id160_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id160_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id160_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Zaha in GW13</h3><p>Crystal Palace: Lost 3-0 away to Everton.</p>
+<p>Zaha: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id160_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id160_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id160_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Zaha in GW14</h3><p>Crystal Palace: Won 1-0 at home to Southampton.</p>
+<p>Zaha: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id160_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">12</td><div id="id160_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id160_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Zaha in GW15</h3><p>Crystal Palace: Won 1-2 away to West Ham.</p>
+<p>Zaha: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">2 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id160_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td><div id="id160_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id160_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Zaha in GW16</h3><p>Crystal Palace: Lost 1-0 away to Nott'm Forest.</p>
+<p>Zaha: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag">Penalty Miss</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">4.3</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">FUL (5.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">bou (5.9)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">TOT (5.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">che (5.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">NEW (5.8)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:red;color:white;"><b>MID</b></td>
+<td class="w3-center" style="background-color:red;color:white;"><b>ARS</b></td>
+<td style="background-color:red;color:white;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_19.html">Martinelli</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£6.8</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">72</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.2%</td>
+<td onclick="document.getElementById('id19_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3</td><div id="id19_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Martinelli in GW11</h3><p>Arsenal: Won 0-1 away to Leeds.</p>
+<p>Martinelli: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id19_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">🪑</td><div id="id19_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Martinelli in GW12</h3><p>No fixture.</p></div></div></div><td onclick="document.getElementById('id19_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id19_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Martinelli in GW13</h3><p>Arsenal: Drew 1-1 away to Southampton.</p>
+<p>Martinelli: <span class="w3-tag w3-dark-grey">70 mins</span> </p></div></div></div><td onclick="document.getElementById('id19_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">8</td><div id="id19_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Martinelli in GW14</h3><p>Arsenal: Won 5-0 at home to Nott'm Forest.</p>
+<p>Martinelli: <span class="w3-tag w3-dark-grey">62 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id19_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3</td><div id="id19_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Martinelli in GW15</h3><p>Arsenal: Won 0-1 away to Chelsea.</p>
+<p>Martinelli: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id19_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id19_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Martinelli in GW16</h3><p>Arsenal: Drew 0-0 away to Wolves.</p>
+<p>Martinelli: <span class="w3-tag w3-dark-grey">37 mins</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3.4</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">WHU (6.3)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">bha (6.2)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">NEW (6.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">tot (6.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">MUN (6.1)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:red;color:black;"><b>MID</b></td>
+<td class="w3-center" style="background-color:red;color:black;"><b>BOU</b></td>
+<td style="background-color:red;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_70.html">Billing</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.3</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">59</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-1.7%</td>
+<td onclick="document.getElementById('id70_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5</td><div id="id70_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id70_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Billing in GW11</h3><p>Bournemouth: Drew 2-2 away to Fulham.</p>
+<p>Billing: <span class="w3-tag w3-dark-grey">79 mins</span> <span class="w3-tag w3-blue">Assist</span> </p></div></div></div><td onclick="document.getElementById('id70_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id70_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id70_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Billing in GW12</h3><p>Bournemouth: Lost 0-1 at home to Southampton.</p>
+<p>Billing: <span class="w3-tag w3-dark-grey">82 mins</span> </p></div></div></div><td onclick="document.getElementById('id70_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id70_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id70_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Billing in GW13</h3><p>Bournemouth: Lost 2-0 away to West Ham.</p>
+<p>Billing: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id70_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id70_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id70_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Billing in GW14</h3><p>Bournemouth: Lost 2-3 at home to Spurs.</p>
+<p>Billing: <span class="w3-tag w3-dark-grey">62 mins</span> </p></div></div></div><td onclick="document.getElementById('id70_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">7</td><div id="id70_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id70_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Billing in GW15</h3><p>Bournemouth: Lost 4-3 away to Leeds.</p>
+<p>Billing: <span class="w3-tag w3-dark-grey">87 mins</span> <span class="w3-tag w3-green">Goal</span> </p></div></div></div><td onclick="document.getElementById('id70_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3</td><div id="id70_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id70_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Billing in GW16</h3><p>Bournemouth: Won 3-0 at home to Everton.</p>
+<p>Billing: <span class="w3-tag w3-dark-grey">87 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">che (3.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">CRY (3.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">mun (3.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">bre (3.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">NFO (3.9)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:darkblue;color:white;"><b>MID</b></td>
+<td class="w3-center" style="background-color:darkblue;color:white;"><b>EVE</b></td>
+<td style="background-color:darkblue;color:white;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_195.html">Gordon</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.3</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">40</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-1.5%</td>
+<td onclick="document.getElementById('id195_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">x</td><div id="id195_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id195_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gordon in GW11</h3><p>Everton: Lost 2-0 away to Spurs.</p>
+<p>Gordon: Did not play.</p></div></div></div><td onclick="document.getElementById('id195_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id195_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id195_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gordon in GW12</h3><p>Everton: Lost 1-0 away to Newcastle.</p>
+<p>Gordon: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id195_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">8</td><div id="id195_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id195_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gordon in GW13</h3><p>Everton: Won 3-0 at home to Crystal Palace.</p>
+<p>Gordon: <span class="w3-tag w3-dark-grey">85 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id195_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3</td><div id="id195_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id195_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gordon in GW14</h3><p>Everton: Drew 0-0 away to Fulham.</p>
+<p>Gordon: <span class="w3-tag w3-dark-grey">85 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id195_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id195_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id195_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gordon in GW15</h3><p>Everton: Lost 0-2 at home to Leicester.</p>
+<p>Gordon: <span class="w3-tag w3-dark-grey">19 mins</span> </p></div></div></div><td onclick="document.getElementById('id195_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black"><s>1</s></td><div id="id195_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id195_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Gordon in GW16</h3><p>Everton: Lost 3-0 away to Bournemouth.</p>
+<p>Gordon: <span class="w3-tag w3-dark-grey">15 mins</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">2.3</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">WOL (4.3)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">mci (4.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">BHA (4.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">SOU (4.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">whu (4.2)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:LightSkyBlue;color:black;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:LightSkyBlue;color:black;"><b>MCI</b></td>
+<td style="background-color:LightSkyBlue;color:black;"><b>(C) <a href="https://mwinokan.github.io/FPL_GUI/html/player_318.html">Haaland</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£12.2</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">123</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id318_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id318_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id318_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Haaland in GW11</h3><p>Man City: Lost 1-0 away to Liverpool.</p>
+<p>Haaland: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id318_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">x</td><div id="id318_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id318_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Haaland in GW12</h3><p>No fixture.</p></div></div></div><td onclick="document.getElementById('id318_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">13</td><div id="id318_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id318_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Haaland in GW13</h3><p>Man City: Won 3-1 at home to Brighton.</p>
+<p>Haaland: <span class="w3-tag w3-dark-grey">79 mins</span> <span class="w3-tag w3-green">2 Goals</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id318_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">x</td><div id="id318_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id318_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Haaland in GW14</h3><p>Man City: Won 0-1 away to Leicester.</p>
+<p>Haaland: Did not play.</p></div></div></div><td onclick="document.getElementById('id318_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5</td><div id="id318_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id318_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Haaland in GW15</h3><p>Man City: Won 2-1 at home to Fulham.</p>
+<p>Haaland: <span class="w3-tag w3-dark-grey">26 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-aqua">1 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id318_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id318_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id318_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Haaland in GW16</h3><p>Man City: Lost 1-2 at home to Brentford.</p>
+<p>Haaland: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">4.2</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">lee (9.4)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">EVE (8.5)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">che (8.6)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">mun (8.9)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">WOL (8.9)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>NEW</b></td>
+<td style="background-color:WhiteSmoke;color:black;"><b>⚠️ <a href="https://mwinokan.github.io/FPL_GUI/html/player_356.html">Wilson</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£7.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">55</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-3.4%</td>
+<td onclick="document.getElementById('id356_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id356_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id356_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Wilson in GW11</h3><p>Newcastle: Drew 0-0 away to Man Utd.</p>
+<p>Wilson: <span class="w3-tag w3-dark-grey">77 mins</span> </p></div></div></div><td onclick="document.getElementById('id356_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">2</td><div id="id356_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id356_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Wilson in GW12</h3><p>Newcastle: Won 1-0 at home to Everton.</p>
+<p>Wilson: <span class="w3-tag w3-dark-grey">86 mins</span> </p></div></div></div><td onclick="document.getElementById('id356_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5</td><div id="id356_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id356_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Wilson in GW13</h3><p>Newcastle: Won 1-2 away to Spurs.</p>
+<p>Wilson: <span class="w3-tag w3-dark-grey">87 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id356_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:darkgreen;color:white">19</td><div id="id356_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id356_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Wilson in GW14</h3><p>Newcastle: Won 4-0 at home to Aston Villa.</p>
+<p>Wilson: <span class="w3-tag w3-dark-grey">85 mins</span> <span class="w3-tag w3-green">2 Goals</span> <span class="w3-tag w3-blue">2 Assists</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id356_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id356_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id356_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Wilson in GW15</h3><p>Newcastle: Won 1-4 away to Southampton.</p>
+<p>Wilson: <span class="w3-tag w3-dark-grey">45 mins</span> </p></div></div></div><td onclick="document.getElementById('id356_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id356_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id356_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Wilson in GW16</h3><p>Newcastle: Won 1-0 at home to Chelsea.</p>
+<p>Wilson: <span class="w3-tag w3-dark-grey">14 mins</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">⚠️ lei (3.8)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">LEE (5.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">ars (5.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">FUL (5.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">cry (5.1)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:black;color:white;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:black;color:white;"><b>FUL</b></td>
+<td style="background-color:black;color:white;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_210.html">Mitrović</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£6.8</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">61</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-2.5%</td>
+<td onclick="document.getElementById('id210_11').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">7</td><div id="id210_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id210_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mitrović in GW11</h3><p>Fulham: Drew 2-2 at home to Bournemouth.</p>
+<p>Mitrović: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-aqua">1 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id210_12').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">6</td><div id="id210_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id210_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mitrović in GW12</h3><p>Fulham: Won 3-0 at home to Aston Villa.</p>
+<p>Mitrović: <span class="w3-tag w3-dark-grey">84 mins</span> <span class="w3-tag w3-green">Goal</span> </p></div></div></div><td onclick="document.getElementById('id210_13').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">6</td><div id="id210_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id210_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mitrović in GW13</h3><p>Fulham: Won 2-3 away to Leeds.</p>
+<p>Mitrović: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> </p></div></div></div><td onclick="document.getElementById('id210_14').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">1</td><div id="id210_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id210_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mitrović in GW14</h3><p>Fulham: Drew 0-0 at home to Everton.</p>
+<p>Mitrović: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id210_15').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id210_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id210_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mitrović in GW15</h3><p>Fulham: Lost 2-1 away to Man City.</p>
+<p>Mitrović: Upcoming fixture.</p></div></div></div><td onclick="document.getElementById('id210_16').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id210_16" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id210_16').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mitrović in GW16</h3><p>Fulham: Home to Man Utd.</p>
+<p>Mitrović: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">3.3</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">⛔️ cry (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">SOU (7.4)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">lei (7.4)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">new (7.4)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">TOT (7.4)</td>
+</tr>
+<tr>
+<td class="w3-center"></td>
+<td class="w3-center"></td>
+<td class="w3-center">Ed Shardlow</td>
+<td class="w3-center">£101.2</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">790</td>
+<td class="w3-center"> </td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">50</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">44</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">49</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">57</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">58</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">19</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">61.4</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">66.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">69.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">67.7</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">68.8</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:lightgreen;color:black">70.6</td>
+</tr>
+</table>
+</div>
+<h2>History</h2>
+<div class="w3-responsive">
+<table class="w3-table-all w3-hoverable">
+<tr>
+<th class="w3-center">GW</th>
+<th class="w3-center">Total Score</th>
+<th class="w3-center">Overall Rank</th>
+<th class="w3-center">GW score</th>
+<th class="w3-center">GW rank</th>
+<th class="w3-center">Transfers Taken</th>
+<th class="w3-center">Total Value</th>
+</tr>
+<tr>
+<td class="w3-center">16</td>
+<td class="w3-center">798</td>
+<td class="w3-center">3.7M</td>
+<td class="w3-center">19</td>
+<td class="w3-center">8.2M</td>
+<td><br>Mount (2) ➡️  Zaha (0)<br>gain= -2<br></td>
+<td class="w3-center">£101.2</td>
+</tr>
+<tr>
+<td class="w3-center">15</td>
+<td class="w3-center">779</td>
+<td class="w3-center">3.5M</td>
+<td class="w3-center">58</td>
+<td class="w3-center">3.9M</td>
+<td><br>Salah (15) ➡️  De Bruyne (7)<br>Toney (0) ➡️  Wilson (1)<br>gain= -7<br></td>
+<td class="w3-center">£101.1</td>
+</tr>
+<tr>
+<td class="w3-center">14</td>
+<td class="w3-center">721</td>
+<td class="w3-center">3.6M</td>
+<td class="w3-center">57</td>
+<td class="w3-center">6.0M</td>
+<td></td>
+<td class="w3-center">£101.4</td>
+</tr>
+<tr>
+<td class="w3-center">13</td>
+<td class="w3-center">664</td>
+<td class="w3-center">3.4M</td>
+<td class="w3-center">49</td>
+<td class="w3-center">6.7M</td>
+<td><br>Dunk (1) ➡️  Cancelo (2)<br>gain= 1<br></td>
+<td class="w3-center">£101.0</td>
+</tr>
+<tr>
+<td class="w3-center">12</td>
+<td class="w3-center">615</td>
+<td class="w3-center">3.2M</td>
+<td class="w3-center">44</td>
+<td class="w3-center">4.1M</td>
+<td><br>Maddison (0) ➡️  Mount (3)<br>Jesus (0) ➡️  Toney (2)<br>gain= 1<br></td>
+<td class="w3-center">£100.7</td>
+</tr>
+<tr>
+<td class="w3-center">11</td>
+<td class="w3-center">575</td>
+<td class="w3-center">3.1M</td>
+<td class="w3-center">50</td>
+<td class="w3-center">3.6M</td>
+<td><br>James (0) ➡️  Cucurella (1)<br>gain= 1<br></td>
+<td class="w3-center">£100.6</td>
+</tr>
+<tr>
+<td class="w3-center">10</td>
+<td class="w3-center">525</td>
+<td class="w3-center">3.4M</td>
+<td class="w3-center">56</td>
+<td class="w3-center">6.3M</td>
+<td><br>Coufal (0) ➡️  Mings (2)<br>gain= 2<br></td>
+<td class="w3-center">£100.5</td>
+</tr>
+<tr>
+<td class="w3-center">9</td>
+<td class="w3-center">469</td>
+<td class="w3-center">3.1M</td>
+<td class="w3-center">99</td>
+<td class="w3-center">303k</td>
+<td><strong>WC</strong> <br>Mendy (0) ➡️  Raya (6)<br>Ward (8) ➡️  Guaita (1)<br>Robertson (0) ➡️  James (2)<br>Targett (1) ➡️  Coufal (0)<br>Groß (2) ➡️  Gordon (1)<br>Dewsbury-Hall (6) ➡️  Maddison (18)<br>Gündogan (2) ➡️  Salah (5)<br>De Bruyne (8) ➡️  Billing (3)<br>Mbeumo (2) ➡️  Mitrović (0)<br>gain= 7<br></td>
+<td class="w3-center">£100.3</td>
+</tr>
+<tr>
+<td class="w3-center">8</td>
+<td class="w3-center">370</td>
+<td class="w3-center">4.8M</td>
+<td class="w3-center">49</td>
+<td class="w3-center">5.6M</td>
+<td><br>Walker (0) ➡️  Targett (2)<br>Salah (0) ➡️  De Bruyne (10)<br>gain= 12<br></td>
+<td class="w3-center">£100.5</td>
+</tr>
+<tr>
+<td class="w3-center">7</td>
+<td class="w3-center">321</td>
+<td class="w3-center">4.8M</td>
+<td class="w3-center">0</td>
+<td class="w3-center">1</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">6</td>
+<td class="w3-center">321</td>
+<td class="w3-center">4.8M</td>
+<td class="w3-center">45</td>
+<td class="w3-center">4.9M</td>
+<td><br>De Bruyne (7) ➡️  Groß (5)<br>Solanke (12) ➡️  Haaland (9)<br>gain= -9<br></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">5</td>
+<td class="w3-center">280</td>
+<td class="w3-center">4.6M</td>
+<td class="w3-center">40</td>
+<td class="w3-center">9.1M</td>
+<td><br>Mount (5) ➡️  Gündogan (3)<br>gain= -2<br></td>
+<td class="w3-center">£100.2</td>
+</tr>
+<tr>
+<td class="w3-center">4</td>
+<td class="w3-center">240</td>
+<td class="w3-center">2.4M</td>
+<td class="w3-center">38</td>
+<td class="w3-center">9.2M</td>
+<td><br>Cash (1) ➡️  Walker (1)<br>gain= 0<br></td>
+<td class="w3-center">£100.1</td>
+</tr>
+<tr>
+<td class="w3-center">3</td>
+<td class="w3-center">202</td>
+<td class="w3-center">251k</td>
+<td class="w3-center">53</td>
+<td class="w3-center">3.1M</td>
+<td><br>Saint-Maximin (13) ➡️  Martinelli (6)<br>gain= -7<br></td>
+<td class="w3-center">£99.9</td>
+</tr>
+<tr>
+<td class="w3-center">2</td>
+<td class="w3-center">149</td>
+<td class="w3-center">281k</td>
+<td class="w3-center">72</td>
+<td class="w3-center">1.4M</td>
+<td><br>Son (2) ➡️  De Bruyne (14)<br>gain= 12<br></td>
+<td class="w3-center">£100.0</td>
+</tr>
+<tr>
+<td class="w3-center">1</td>
+<td class="w3-center">77</td>
+<td class="w3-center">465k</td>
+<td class="w3-center">77</td>
+<td class="w3-center">465k</td>
+<td></td>
+<td class="w3-center">£100.0</td>
+</tr>
+</table>
+</div>
+<h4>Graphs</h4>
+<div class="w3-center">
+<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/graphs/25712_ranks.png?raw=true" alt="Manager Graph">
+<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/graphs/25712_points.png?raw=true" alt="Manager Graph">
+<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/graphs/25712_leaguepos.png?raw=true" alt="Manager Graph">
+</div>
+</div>
+</div>
+<hr>
+</div>
+<!-- END GRID -->
+</div>
+<!-- END w3-content -->
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey" style="padding:32px">
+<h5><a href="https://mwinokan.github.io/FPL_GUI/index.html">Home</a></h5>
+<h5><a href="https://mwinokan.github.io/FPL_GUI/html/fixtures.html">Fixtures</a></h5>
+<h5>League Summaries</h5>
+<ul>
+<li><a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html">The RBS Diamond Invitational</a></li>
+<li><a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html">Tesco Bean Value Toilet League</a></li>
+<li><a href="https://mwinokan.github.io/FPL_GUI/html/Guildford-Ultimate-La-Liga.html">Guildford Ultimate La Liga</a></li>
+<li><a href="https://mwinokan.github.io/FPL_GUI/html/RU-FPL.html">RU FPL</a></li>
+<li><a href="https://mwinokan.github.io/FPL_GUI/html/Super-Dinner-League.html">Super Dinner League</a></li>
+</ul><a href="#" class="w3-button w3-black w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>Back to top</a>
+<div class="w3-center">
+<p>Accurate as of 2022-11-12 20:27:30, (GW16)</p>
+<p>Max Winokan <span class="w3-tag">mwinokan@me.com</span></a></p>
+</div>
+</footer>
+</html>
