@@ -1723,6 +1723,10 @@ def create_leaguepage(league,sidebar_md,leagues,i):
 			print("Best GW Rank",sorted_managers[0:num],scores[0])
 			json[str(league.id)]['half']['awards']['best_gwr'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
 			html_buffer += award_panel('🎢',f'Peaker','Highest GW Rank',f'{api.big_number_format(scores[0])}',sorted_managers[0:num],colour='lime',name_class="h2")
+			
+			# glow-up (best improvement in the quarter season (GW8-GW16))
+
+			# best chip uses
 
 	if gw > 0:
 		mout.debugOut(f"create_leaguepage({league})::Template")
