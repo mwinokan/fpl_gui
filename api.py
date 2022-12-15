@@ -32,11 +32,21 @@ class FPL_API():
 
 	_skip_gws = [7]
 
-	def __init__(self,force_generate_kits=False,quick=True):
+	def __init__(self,offline=False,force_generate_kits=False,quick=True):
 		mout.debugOut(f"FPL_API.__init__(quick={quick})")
 
 		self._init_time = datetime.datetime.now()
 		self._request_log = []
+		self._offline = offline
+
+		if offline:
+			if exists("data_2223.json"):
+				f = open("data_2223.json","rt")
+				self._request_data = js.load(f)
+			else:
+				mout.errorOut("No offline data found!",fatal=True)
+		else:
+			self._request_data = {}
 
 		self._scrape_team_pairs = [
 			[0,'Man Utd'],
@@ -117,7 +127,19 @@ class FPL_API():
 		print(f"Wiki: GW{self._wiki_gw}")
 		print(f"Live: {self._live_gw}")
 
+	def request(self,handle,json=True):
+		r = requests.get(handle)
+		self._request_data[handle] = r
+		self._request_log.append(handle)
+		if json:
+			return r.json()
+		else:
+			return r
+
 	def finish(self):
+
+		if not offline:
+			js.dump(self._request_data,open('data_2223.json','wt'), indent="\t")
 
 		mout.varOut("#requests=",len(self._request_log))
 
