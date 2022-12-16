@@ -96,6 +96,7 @@ force_go_graphs = True
 test = False
 force = False
 halfway_awards = False
+offline = True
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
@@ -206,7 +207,7 @@ def main():
 		pull_changes()
 
 	global api
-	api = fpl_api.FPL_API(quick=False,force_generate_kits=force_generate_kits)
+	api = fpl_api.FPL_API(offline=offline,quick=False,force_generate_kits=force_generate_kits)
 
 	global squad
 	squad = Squad()
@@ -315,7 +316,8 @@ def main():
 			halfway_awards = True
 		if halfway_awards:
 			create_christmaspage(leagues,sidebar_md)
-			exit()
+			# api.finish()
+			# exit()
 
 		get_manager_json_positions(api,leagues)
 
@@ -1630,9 +1632,14 @@ def christmas_awards(league):
 	create_key(json[str(league.id)],'half')
 	create_key(json[str(league.id)]['half'],'awards')
 
+	# print(league.managers)
+	# print(league.active_managers)
+
 	sorted_managers = sorted(league.active_managers, key=lambda x: x.total_livescore, reverse=True)
 	scores = [x.total_livescore for x in sorted_managers]
 	data = Counter(scores)
+	# print(data)
+	# print(scores)
 	num = data[scores[0]]
 	if num < 4:
 		if num > 1: 

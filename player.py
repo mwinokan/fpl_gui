@@ -445,7 +445,11 @@ class Player():
 					strs.append(self._api.team_name(self.fixtures['team_a'][rgw],short=short))
 				else:
 					if lower_away:
-						strs.append(self._api.team_name(self.fixtures['team_h'][rgw],short=short)).lower()
+						# try:
+						strs.append(self._api.team_name(self.fixtures['team_h'][rgw],short=short).lower())
+						# except AttributeError:
+							# mout.errorOut(self.fixtures['team_h'][rgw])
+							# mout.errorOut(self._api.team_name(self.fixtures['team_h'][rgw],short=short))
 					else:
 						strs.append(self._api.team_name(self.fixtures['team_h'][rgw],short=short))
 
@@ -644,10 +648,16 @@ class Player():
 
 		if opponent is None:
 			opponent = self.team_obj.get_opponent(gw)
+
+		if isinstance(opponent,list):
+			total = 0
+			for opp in opponent:
+				total += self.expected_points(opponent=opp,gw=gw,fit_ratio=fit_ratio,debug=debug,use_official=use_official,force=force)
+			return total
+
 		if opponent is None:
 			if debug:
 				mout.out(f'no opponent (gw={gw})')
-			self._api._exp_archive[self.id][gw] = 0
 			return 0
 
 		# use flag status for prediction

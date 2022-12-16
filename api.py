@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 
-
 from team import Team
 from player import Player
 from os.path import exists
@@ -127,19 +126,33 @@ class FPL_API():
 		print(f"Wiki: GW{self._wiki_gw}")
 		print(f"Live: {self._live_gw}")
 
-	def request(self,handle,json=True):
-		r = requests.get(handle)
-		self._request_data[handle] = r
-		self._request_log.append(handle)
-		if json:
-			return r.json()
+		if offline:
+			mout.warningOut("Offline mode!")
+
+	def request(self,handle):
+		if self._offline and handle in self._request_data.keys():
+			return self._request_data[handle]
 		else:
-			return r
+			try:
+				r = requests.get(handle)
+			except requests.exceptions.ConnectionError:
+				mout.warningOut("ConnectionError, trying again...")
+				return self.request(handle)
+
+			if '404' in str(r):
+				print(handle)
+				mout.errorOut("Request 404'd",fatal=True)
+				return {}
+
+			json = r.json()
+			self._request_data[handle] = json
+			self._request_log.append(handle)
+			return json
 
 	def finish(self):
 
-		if not offline:
-			js.dump(self._request_data,open('data_2223.json','wt'), indent="\t")
+		js.dump(self._request_data,open('data_2223.json','wt'))
+		# js.dump(self._request_data,open('data_2223.json','wt'), indent="\t")
 
 		mout.varOut("#requests=",len(self._request_log))
 
@@ -181,9 +194,7 @@ class FPL_API():
 	@property
 	def fixtures(self):
 		if self._fixtures is None:
-			r = requests.get(url+'fixtures/')
-			self._request_log.append(url+'fixtures/')
-			json = r.json()
+			json = self.request(url+'fixtures/')
 			self._fixtures = pd.DataFrame(json)
 
 		return self._fixtures
@@ -193,12 +204,8 @@ class FPL_API():
 			gw = self._current_gw
 
 		if gw not in self._gw_fixtures.keys():
-			try:
-				r = requests.get(url+f'fixtures/?event={gw}')
-			except requests.exceptions.ConnectionError:
-				return self.get_gw_fixtures(gw)
-			self._request_log.append(url+f'fixtures/?event={gw}')
-			json = r.json()
+
+			json = self.request(url+f'fixtures/?event={gw}')
 
 			if len(json) == 0:
 				self._gw_fixtures[gw] = []
@@ -214,9 +221,7 @@ class FPL_API():
 		return self._gw_fixtures[gw]
 
 	def parse_bootstrap(self):
-		r = requests.get(url+'bootstrap-static/')
-		self._request_log.append(url+'bootstrap-static/')
-		self._bootstrapjson = r.json()
+		self._bootstrapjson = self.request(url+'bootstrap-static/')
 		self.__events = None
 		self.__elements = None
 		self.__element_types = None
@@ -336,22 +341,6 @@ class FPL_API():
 
 			self._session = requests.Session()
 
-			# headers = {
-			#    'authority': 'users.premierleague.com' ,
-			#    'cache-control': 'max-age=0' ,
-			#    'upgrade-insecure-requests': '1' ,
-			#    'origin': 'https://fantasy.premierleague.com' ,
-			#    'content-type': 'application/x-www-form-urlencoded' ,
-			#    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36' ,
-			#    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' ,
-			#    'sec-fetch-site': 'same-site' ,
-			#    'sec-fetch-mode': 'navigate' ,
-			#    'sec-fetch-user': '?1' ,
-			#    'sec-fetch-dest': 'document' ,
-			#    'referer': 'https://fantasy.premierleague.com/my-team' ,
-			#    'accept-language': 'en-US,en;q=0.9,he;q=0.8' ,
-			# }
-
 			headers = {'authority': 'users.premierleague.com',
 				'method': 'POST',
 				'path': '/accounts/login/',
@@ -397,17 +386,6 @@ class FPL_API():
 			url = "https://users.premierleague.com/accounts/login/"
 
 			response = self._session.post(url,data=data,headers=headers)
-			# response = self._session.post(url,data=data)
-			# print(response)
-
-			# team_url = "https://fantasy.premierleague.com/api/my-team/780664/"
-			# res = self._session.get(team_url)
-			# print(json.loads(res.content))
-
-
-			# team_url = "https://fantasy.premierleague.com/api/my-team/1234567/"
-			# res = s.get(team_url)
-			# json.loads(res.content)
 
 			if "<Response [403]>" in str(response):
 				mout.errorOut("Could not authenticate",code=403,fatal=True)
@@ -417,6 +395,7 @@ class FPL_API():
 			self._authenticated = True
 	
 	def team_name(self,index,short=False):
+		# print(index)
 		if short:
 			return self._teamdata['short_name'][index-1]
 		else:
@@ -495,14 +474,9 @@ class FPL_API():
 		if player_id in self._element_summaries:
 			return self._element_summaries[player_id]
 		else:
-			try:
-				r = requests.get(url+'element-summary/'+str(player_id)+'/')
-				self._request_log.append(url+'element-summary/'+str(player_id)+'/')
-				json = r.json()
-				self._element_summaries[player_id] = json
-				return json
-			except requests.exceptions.ConnectionError:
-				return self.get_player_summary(player_id)
+			json = self.request(url+'element-summary/'+str(player_id)+'/')
+			self._element_summaries[player_id] = json
+			return json
 
 	def get_player_history(self,player_id):
 		if player_id in self._element_histories:
@@ -514,14 +488,13 @@ class FPL_API():
 			return df
 
 	def request_event_stats(self,gw):
-		r = requests.get(url+'event/'+str(gw)+'/live')
-		self._request_log.append(url+'event/'+str(gw)+'/live')
-		try:
-			json = r.json()
-		except:
-			print(url+'event/'+str(gw)+'/live')
-			mout.errorOut("Problem parsing event stats JSON, trying again")
-			return self.request_event_stats(gw)
+		json = self.request(url+'event/'+str(gw)+'/live')
+		# try:
+		# 	json = r.json()
+		# except:
+		# 	print(url+'event/'+str(gw)+'/live')
+		# 	mout.errorOut("Problem parsing event stats JSON, trying again")
+		# 	return self.request_event_stats(gw)
 		return json
 
 	def get_player_event_stats(self,gw,player_id,dgw_index=0):
@@ -542,25 +515,22 @@ class FPL_API():
 		return list(self._events['average_entry_score'][0:self._current_gw])
 
 	def get_manager_history(self,id):
-		r = requests.get(url+'entry/'+str(id)+'/history/')
-		self._request_log.append(url+'entry/'+str(id)+'/history/')
-		try:
-			json = r.json()
-		except:
-			print(url+'entry/'+str(id)+'/history/')
-			mout.errorOut("Problem parsing manager stats JSON, trying again")
-			return self.get_manager_history(id)
+		json = self.request(url+'entry/'+str(id)+'/history/')
+		# try:
+		# 	json = r.json()
+		# except:
+		# 	print(url+'entry/'+str(id)+'/history/')
+		# 	mout.errorOut("Problem parsing manager stats JSON, trying again")
+		# 	return self.get_manager_history(id)
 		return json
 
 	def get_manager_transfers(self,id):
-		try:
-			url = f'https://fantasy.premierleague.com/api/entry/{id}/transfers/'
-			r = requests.get(url)
-			self._request_log.append(url)
-			json = r.json()
-			return list(json)
-		except:
-			return []
+		# try:
+		json = self.request(f'https://fantasy.premierleague.com/api/entry/{id}/transfers/')
+		# print(id,json)
+		return list(json)
+		# except:
+		# 	return []
 
 	def get_manager_team(self,id,gw=None,authenticate=True):
 
@@ -592,14 +562,15 @@ class FPL_API():
 			this_url = f"https://fantasy.premierleague.com/api/entry/{id}/event/{gw}/picks/"
 
 			# print(this_url)
-			try:
-				r = requests.get(this_url)
-			except requests.exceptions.ConnectionError:
-				mout.warningOut(f"Connection error for {id}'s picks, retrying...")
-				return self.get_manager_team(id,authenticate)
-			self._request_log.append(this_url)
-
-			json = r.json()
+			# try:
+			# 	r = requests.get(this_url)
+			# except requests.exceptions.ConnectionError:
+			# 	mout.warningOut(f"Connection error for {id}'s picks, retrying...")
+			# 	return self.get_manager_team(id,authenticate)
+			# self._request_log.append(this_url)
+			# json = r.json()
+			
+			json = self.request(this_url)
 
 			if 'picks' not in json.keys():
 				print(this_url)
@@ -657,13 +628,16 @@ class FPL_API():
 	def get_manager_team_shirt(self,id):
 		import json as js
 		mout.debugOut(f"get_manager_team_shirt({id})")
-		r = requests.get(url+'entry/'+str(id)+'/')
-		self._request_log.append(url+'entry/'+str(id)+'/')
-		try:
-			json = r.json()
-		except:
-			print(url+'entry/'+str(id)+'/')
-			mout.errorOut("Problem parsing JSON")
+
+		json = self.request(url+'entry/'+str(id)+'/')
+
+		# r = requests.get(url+'entry/'+str(id)+'/')
+		# self._request_log.append(url+'entry/'+str(id)+'/')
+		# try:
+		# 	json = r.json()
+		# except:
+		# 	print(url+'entry/'+str(id)+'/')
+		# 	mout.errorOut("Problem parsing JSON")
 
 		if json['kit'] is None:
 			return None
@@ -782,16 +756,20 @@ class FPL_API():
 		# standings?page_standings=2
 		json2 = None
 		
-		# print(f"{url}leagues-classic/{code}/standings/")
-		r = requests.get(f"{url}leagues-classic/{code}/standings/")
-		self._request_log.append(f"{url}leagues-classic/{code}/standings/")
-		json = r.json()
+		# # print(f"{url}leagues-classic/{code}/standings/")
+		# r = requests.get(f"{url}leagues-classic/{code}/standings/")
+		# self._request_log.append(f"{url}leagues-classic/{code}/standings/")
+		# json = r.json()
+
+		json = self.request(f"{url}leagues-classic/{code}/standings/")
 
 		if json['standings']['has_next']:
-			# print(f"{url}leagues-classic/{code}/standings/?page_standings=2")
-			r = requests.get(f"{url}leagues-classic/{code}/standings/?page_standings=2")
-			self._request_log.append(f"{url}leagues-classic/{code}/standings/?page_standings=2")
-			json2 = r.json()
+			# # print(f"{url}leagues-classic/{code}/standings/?page_standings=2")
+			# r = requests.get(f"{url}leagues-classic/{code}/standings/?page_standings=2")
+			# self._request_log.append(f"{url}leagues-classic/{code}/standings/?page_standings=2")
+			# json2 = r.json()
+
+			json2 = self.request(f"{url}leagues-classic/{code}/standings/?page_standings=2")
 
 		if isinstance(json,str):
 			mout.errorOut(json)

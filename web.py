@@ -275,13 +275,26 @@ def get_player_history_table(player):
 			html_buffer += f'<td class="w3-center" style={style_str}>'
 			opp = player.team_obj.get_opponent(gw)
 			if opp is not None:
-				is_home = player.team_obj.get_gw_fixtures(gw)['team_a'] == opp.id
-				opp_str = opp.shortname
-				if is_home:
-					opp_str += " (H)"
+				fixs = player.team_obj.get_gw_fixtures(gw)
+				if isinstance(fixs,list):
+					many = True
+					is_home = False
 				else:
-					opp_str += " (A)"
-				html_buffer += f'<img class="w3-image" src="{opp._badge_url}" alt="{opp.shortname}" width="20" height="20"> '
+					many = False
+					is_home = player.team_obj.get_gw_fixtures(gw)['team_a'] == opp.id
+
+				if many:	
+					opp_strs = []
+					for o in opp:
+						opp_strs.append(o.shortname)
+					opp_str = ' '.join(opp_strs)
+				else:
+					opp_str = opp.shortname
+					if is_home:
+						opp_str += " (H)"
+					else:
+						opp_str += " (A)"
+					html_buffer += f'<img class="w3-image" src="{opp._badge_url}" alt="{opp.shortname}" width="20" height="20"> '
 				html_buffer += f'{opp_str}{flag_str}'
 			else:
 				html_buffer += f'-'
