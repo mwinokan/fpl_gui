@@ -30,6 +30,7 @@ class FPL_API():
 	_exp_archive = {}
 
 	_skip_gws = [7]
+	_wc_cutoff = 16
 
 	def __init__(self,offline=False,force_generate_kits=False,quick=True):
 		mout.debugOut(f"FPL_API.__init__(quick={quick})")

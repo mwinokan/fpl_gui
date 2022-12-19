@@ -191,9 +191,25 @@ class Manager():
 				# self._bb_rank = self._event_rank[rel_gw]
 			elif chip['name'] == 'freehit':
 				self._fh_week = chip['event']
+				rel_gw = self.active_gws.index(self._fh_week)
+				self._fh_total = self._event_points[rel_gw]
+				self._fh_gwrank = self._event_rank[rel_gw]
+				self._fh_or = self._overall_rank[rel_gw]
+				self._fh_orprev = self._overall_rank[rel_gw-1]
 			elif chip['name'] == 'wildcard':
 				if self._wc1_week is None:
 					self._wc1_week = chip['event']
+					cutoff = min(self._api._wc_cutoff,self._wc1_week+5)
+					rel_gw1 = self.active_gws.index(self._wc1_week-1)
+					rel_gw2 = self.active_gws.index(cutoff)
+					self._wc1_ordelta = self._overall_rank[rel_gw1] - self._overall_rank[rel_gw2]
+					self._wc1_ordelta_percent = 100*self._wc1_ordelta/self._overall_rank[rel_gw1]
+
+					# self._fh_total = self._event_points[rel_gw]
+					# self._fh_gwrank = self._event_rank[rel_gw]
+					# self._fh_or = self._overall_rank[rel_gw]
+					# self._fh_orprev = self._overall_rank[rel_gw-1]
+
 				else:
 					self._wc2_week = chip['event']
 			else:

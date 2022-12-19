@@ -16,8 +16,9 @@ from squad import Squad
 
 Christmas To-Do's
 
-- Analyse best chip usage
+- Add best wc1 usage to manager page
 - Show halfway awards on manager pages
+- Can there be an offline w3.css?
 - Write summaries
 
 '''
@@ -111,6 +112,10 @@ league_colours = ['cyan','grey','green','red','purple']
 league_shortnames = ['Diamond','Toilet','GU','RU','Dinner']
 league_icons = ["💎","🚽","🦌","📚","🍝"]
 
+brk = '</p><p>'
+
+league_halfway_text = {663873:f"The RBS Diamond Invitational proved to be a wild ride so far, in which our elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award some shiny new limited-edition awards to a lucky few recipients.{brk}Ed Lees saw himself off to a strong start with some clever picks in GW1, and a daring triple captain on Erling Haaland in GW2 (he did only net five points but hey it's something!). Personally, the most memorable part of Ed's FPL so far was transferring out Haaland for Toney in GW5 in a combined move that saw him lose 19 points. In fact, most weeks had Ed not made any transfers he would have been better off, and this is reflected in his Christmas Clown award for having the worst total transfer gain in the league.{brk}Following Ed's demise, GW6 turned out to be a real turning point where managers Thomas Allan and Rob Sutton would escape the pack and prove exceptionally hard to chase as they sit in second and first place respectively. Rob's trophy cabinet of course contains his Christmas King award but there's barely any room as he averaged 1.5 awards every week, totalling 24 (with only one actually bad one with his GW4 clown!) Rob's consistent differential power moves were not always an instant success (except when he brought in Son for his 19-pointer before promptly wildcarding him out) but his faith in Maddison, Zaha, Toney, and Salah particularly rewarded him throughout the season so far. Rob's Take the Plange now sit comfortably at 44k worldwide. Will Rob find himself topping the diamond league at the end of GW38?{brk}Thomas Allan' season does seem to look a bit like Rob's with only a few missteps. An impressive GW8 wildcard brought about a +95% improvement in overall rank within five gameweeks, and a tactical GW12 free hit helped cement a solid top 100k rank and the Christmas Fortune Teller award with an impressive +62 point total for his transfers up to the world cup.{brk}Going further down the table my team 'Loyd's Groß Men' sits in third place after a relatively quiet start, and a decent GW12 wildcard that saw my boys climb a few ranks and a Robertson 9-pointer sat me nicely in the top 650k OR, hopefully onwards and upwards.{brk}As we approach mid-table the points totals all get a bit more compressed, Horatio Turner and Tanya Fozzard sit in fourth and fifth place. While their ranks are quite similar the journeys these two managers have been on are wildly different. Tanya's 'Mikel ArTanya' reached a gameweek rank height of 44k in GW5 with a massive 97 points, while Horatio's gameweek ranks have been more modest, but consistent. What impresses me most, however, is that Tanya has managed to achieve such success with only ten non-wildcard transfers, earning her the first Iceman award. Well done.{brk}Before we get to the relegation battle, Matthew Wiggins' escape from the bottom has to be commended. In GW6 he sat dead last, trailing the global average by 17 points. Matthew's improvement since that GW6 wildcard has been remarkable, however, and a fantastic GW16 bench boost confirmed his escape from relegation (at least for now). Matthew has won the Glow-Up award for his improvement since GW8.{brk}Now we turn to the relegation battle. Some managers like Ed and Joe Pashley only narrowly ended up down here with a couple unlucky results in recent gameweeks. Joe's season was off to a bad start with a GW2 wildcard that lost him 20 points. Nevertheless, his rank did climb as he won his own 'Massive Goal FC' award four times, before taking a bit of a plunge with two bad gameweeks in 15 and 16.{brk}Second to last is Joseph Conlon, who hasn't made a transfer since GW7. That's probably how he ended up with his eight Chair awards. We've seen that big comebacks are possible so please come back, Joe...{brk}And finally, the man we've all been waiting to discuss is of course Ethan Barker. Ethan's journey can only be described as a Shakespearean tragedy, and this man must have nerves of steel to not have done an Elon and just perma-banned all of us. His trophy cabinet contains six cocks and four clowns, and unfortunately, the Christmas awards don't look any better with the Christmas Cock, Kneejerker, Peasant, and Has-Been awards.{brk}What a fun season it has been so far with shake-ups and drama. I can't wait to see what GW17 and beyond have in store for us. Will Ethan, Ed, and the Joe's be relegated? Will anyone catch Rob and Tom?",910674:"Some of the performances in the toilet league would leave many wondering what makes the diamond league so special?"}
+
 watchlist = [
 			"Callum Wilson",
 			# "Guaita",
@@ -194,7 +199,10 @@ json = {}
 def main():
 	mout.debugOut("main()")
 	import os
-	os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
+	if offline:
+		os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update [OFFLINE]' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
+	else:
+		os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
 
 	if create_launchd_plist:
 		# launchd_plist(interval=300)
@@ -649,9 +657,9 @@ def create_playerpage(api,player,sidebar_md,leagues):
 
 def create_trophycabinet(api,man):
 
-	award_flavourtext = dict(king="👑 King",cock="🐓 Cock",goals="⚽️ Massive Goal FC",boner="🦴 Boner",scientist="🧑‍🔬 Scientist",smooth_brain="🧠 Smooth Brain",chair="🪑 Chair",asbo="🥊 ASBO",nerd="🤓 Nerd",innovator="🎓 Innovator",fortune="🔮 Fortune Teller",clown="🤡 Clown")
+	award_flavourtext = dict(king="👑 King",cock="🐓 Cock",goals="⚽️ Massive Goal FC",boner="🦴 Boner",scientist="🧑‍🔬 Scientist",smooth_brain="🧠 Smooth Brain",chair="🪑 Chair",asbo="🥊 ASBO",nerd="🤓 Nerd",innovator="🎓 Innovator",fortune="🔮 Fortune Teller",clown="🤡 Clown",oligarch="🛢 Oligarch",iceman="🥶 Iceman",peasant="🏚 Peasant",glow_up="💡 Glow-Up",has_been="👨‍🦳 Has-Been",kneejerker="🔨 Kneejerker")
 	award_unittext = dict(king="points",cock="points",goals="goals",boner="points",scientist="points",smooth_brain="points on the bench",chair="'",asbo="cards",nerd="%",innovator="%",fortune="points gained",clown="points lost")
-	award_colour = dict(king="amber",cock="red",goals="indigo",scientist="green",boner="grey",smooth_brain="pale-red",chair="brown",asbo="yellow",fortune="purple",clown="pale-red",nerd="pale-yellow",innovator="grey")
+	award_colour = dict(king="amber",cock="red",goals="indigo",scientist="green",boner="grey",smooth_brain="pale-red",chair="brown",asbo="yellow",fortune="purple",clown="pale-red",nerd="pale-yellow",innovator="grey",oligarch="black",iceman="aqua",peasant='brown',glow_up='pale-yellow',has_been='grey',kneejerker='deep-orange')
 
 	html_buffer = f'<h2>Trophy Cabinet</h2>\n'
 
@@ -680,11 +688,13 @@ def create_trophycabinet(api,man):
 
 		html_buffer += '<div class="w3-justify w3-row-padding">\n'
 
-		awards = [a for a in man._awards if league.name in a['league']]
+		awards = [a for a in man._awards if league.name in a['league'] and a['gw'] not in ['half','full','chips']]
 
-		if len(awards) > 0:
+		half_awards = [a for a in man._awards if league.name in a['league'] and a['gw'] == 'half']
+		full_awards = [a for a in man._awards if league.name in a['league'] and a['gw'] == 'full']
+		chip_awards = [a for a in man._awards if league.name in a['league'] and a['gw'] == 'chips']
 
-			# html_buffer += '<ul>\n'
+		if len(awards+half_awards+full_awards+chip_awards) > 0:
 
 			html_buffer += '<div class="w3-justify">'
 			html_buffer += '<div class="w3-row-padding">'
@@ -693,24 +703,36 @@ def create_trophycabinet(api,man):
 
 			award_panels = []
 
+			# full > half > chips > normal
+			for award in half_awards:
+
+				key = award['key']
+				
+				colour = award_colour[key]
+				# icon = award_icon[key]
+
+				html_buffer += '<div class="w3-col s12 m6 l4">\n'
+				html_buffer += f'<div style="border:8px solid" class="w3-panel w3-{colour} w3-card w3-border-green">\n'
+				html_buffer += '<table class="w3-table">\n'
+				html_buffer += '<tr>\n'
+				html_buffer += '<td style="text-align:left;vertical-align:middle;">\n'
+				html_buffer += f'<h1>{award_flavourtext[key]}</h1>\n'
+				html_buffer += '</td>\n'
+				html_buffer += '<td style="text-align:right;vertical-align:middle;">\n'
+				html_buffer += f'<h2><span class="w3-tag">Christmas</span></h2>\n'
+				html_buffer += '</tr>\n'
+				html_buffer += '</table>\n'
+				html_buffer += '</div>\n'
+				html_buffer += '</div>\n'
+
+			# if chip_awards:
+			# 	print(man.name,chip_awards)
+
 			for key in award_keys:
 
 				gws = sorted([a["gw"] for a in awards if a["key"] == key],key=lambda x: int(x))
 				count = len(gws)
 				icon = ""
-
-				# if award["key"] == 'scientist':
-				# 	cap_str = ""
-				# 	if award['is_captain']:
-				# 		cap_str = "Captain "
-				# 	p = Player(None,api,index=api.get_player_index(award["player"]))
-				# 	html_buffer += f'<li>(GW{award["gw"]}) {award_flavourtext[award["key"]]} with {award["score"]} {award_unittext[award["key"]]} from {cap_str}{p.name} in {award["league"]}</li>\n'
-				# elif award["key"] == 'nerd':
-				# 	html_buffer += f'<li>(GW{award["gw"]}) {award_flavourtext[award["key"]]} with {award["score"]:.1f} {award_unittext[award["key"]]} in {award["league"]}</li>\n'
-				# elif award["key"] == 'innovator':
-				# 	html_buffer += f'<li>(GW{award["gw"]}) {award_flavourtext[award["key"]]} with {award["score"]:.1f} {award_unittext[award["key"]]} in {award["league"]}</li>\n'
-				# else:
-				# 	html_buffer += f'<li>(GW{award["gw"]}) {award_flavourtext[award["key"]]} with {award["score"]} {award_unittext[award["key"]]} in {award["league"]}</li>\n'
 
 				colour = award_colour[key]
 
@@ -739,7 +761,6 @@ def create_trophycabinet(api,man):
 
 				html_buffer += panel_buffer
 
-			# html_buffer += '</ul>\n'
 			html_buffer += '</div>\n'
 			html_buffer += '</div>\n'
 
@@ -1228,6 +1249,26 @@ def get_manager_json_awards(api,leagues):
 		for gw_id, gw_data in l_data.items():
 
 			if 'half' in gw_id:
+
+				for key,data in gw_data['awards'].items():
+
+					# print(key,data)
+
+					for m_id in data[0]:
+						m = api.get_manager(id=m_id)
+						m._awards.append(dict(key=key,score=data[-1],league=l_name,gw='half'))
+
+				continue
+
+			if 'chips' in gw_id:
+
+				for key,data in gw_data.items():
+					for key2,data2 in data.items():
+
+						for m_id in data2[1]:
+							m = api.get_manager(id=m_id)
+							m._awards.append(dict(key=f'{key}_{key2}',score=data2[0],league=l_name,gw='chips'))
+
 				continue
 
 			for d_id, d_data in gw_data.items():
@@ -1453,11 +1494,13 @@ def create_christmaspage(leagues,sidebar_md):
 
 		html_buffer += '<div class="w3-justify w3-row-padding">\n'
 
-		html_buffer += "<p>Max's Summary</p>\n"
+		html_buffer += "<p>\n"
+		html_buffer += league_halfway_text[league.id]
+		html_buffer += "</p>\n"
 
 		html_buffer += "<h3>Chip Usage</h3>\n"
 
-		html_buffer += league_chip_table(league)
+		html_buffer += league_best_chips(league)
 		
 		html_buffer += "<h3>League Graph</h3>\n"
 
@@ -1491,19 +1534,53 @@ def create_christmaspage(leagues,sidebar_md):
 	navbar = create_navbar(leagues, active='C', colour='black', active_colour='red')
 	html_page(f'html/christmas.html',None,title='2022 Christmas Review',sidebar_content=sidebar_md, gw=api._current_gw, html=html_buffer, bar_html=navbar, showtitle=True)
 
-def league_chip_table(league):
+def manager_ids(mans):
+	return [m.id for m in mans]
+
+def league_best_chips(league):
+
+	global json
 
 	html_buffer = ""
+
+	create_key(json[str(league.id)],'chips')
+
+	finished = api._current_gw == 38 and not api._live_gw
 
 	# bench boost
 	bb_subset = [m for m in league.managers if m._bb_week]
 	bb_best = get_winners("Best BB", bb_subset, lambda x: x._bb_ptsgain)
 	bb_worst = get_losers("Worst BB", bb_subset, lambda x: x._bb_ptsgain)
+	if finished:
+		create_key(json[str(league.id)]['chips'],'bb')
+		json[str(league.id)]['chips']['bb']['best'] = [bb_best[0],manager_ids(bb_best[1])]
+		json[str(league.id)]['chips']['bb']['worst'] = [bb_worst[0],manager_ids(bb_worst[1])]
 
 	# triple captain
 	tc_subset = [m for m in league.managers if m._tc_week]
 	tc_best = get_winners("Best TC", tc_subset, lambda x: x._tc_ptsgain)
 	tc_worst = get_losers("Worst TC", tc_subset, lambda x: x._tc_ptsgain)
+	if finished:
+		create_key(json[str(league.id)]['chips'],'tc')
+		json[str(league.id)]['chips']['tc']['best'] = [tc_best[0],manager_ids(tc_best[1])]
+		json[str(league.id)]['chips']['tc']['worst'] = [tc_worst[0],manager_ids(tc_worst[1])]
+
+	# Free hit
+	fh_subset = [m for m in league.managers if m._fh_week]
+	fh_best = get_losers("Best fh", fh_subset, lambda x: x._fh_gwrank)
+	fh_worst = get_winners("Worst fh", fh_subset, lambda x: x._fh_gwrank)
+	if finished:
+		create_key(json[str(league.id)]['chips'],'fh')
+		json[str(league.id)]['chips']['fh']['best'] = [fh_best[0],manager_ids(fh_best[1])]
+		json[str(league.id)]['chips']['fh']['worst'] = [fh_worst[0],manager_ids(fh_worst[1])]
+
+	# First wildcard
+	wc1_subset = [m for m in league.managers if m._wc1_week]
+	wc1_best = get_winners("Best wc1", wc1_subset, lambda x: x._wc1_ordelta_percent)
+	wc1_worst = get_losers("Worst wc1", wc1_subset, lambda x: x._wc1_ordelta_percent)
+	create_key(json[str(league.id)]['chips'],'wc1')
+	json[str(league.id)]['chips']['wc1']['best'] = [wc1_best[0],manager_ids(wc1_best[1])]
+	json[str(league.id)]['chips']['wc1']['worst'] = [wc1_worst[0],manager_ids(wc1_worst[1])]
 
 	# table
 	html_buffer += '<table class="w3-table-all w3-hoverable">\n'
@@ -1547,6 +1624,84 @@ def league_chip_table(league):
 			html_buffer += f'with {man._tc_name} in GW{man._tc_week}\n'
 		html_buffer +='</td>\n'
 		html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc_worst[0])}</td>\n'
+	html_buffer += '</tr>\n'
+
+	### wildcard 1
+	html_buffer += '<tr>\n'
+	html_buffer += f'<td class="w3-red" style="text-align:center;">WC</td>\n'
+	html_buffer += f'<td style="text-align:center;">\n'
+	for i,man in enumerate(wc1_best[1]):
+		if i != 0:
+			html_buffer += "<br>\n"
+		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+		if 'Toilet' in league.name and man.is_diamond:
+			html_buffer += "💎"
+		html_buffer += f' in GW{man._wc1_week}\n'
+	html_buffer +='</td>\n'
+	delta = man._wc1_ordelta_percent
+	if delta > 0:
+		delta = f"+{delta:.0f}"
+	else:
+		delta = f"{delta:.0f}"
+	html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
+	if len(wc1_subset) == 1:
+		html_buffer += f'<td></td>\n'
+		html_buffer += f'<td></td>\n'
+	else:
+		html_buffer += f'<td style="text-align:center;">\n'
+		for i,man in enumerate(wc1_worst[1]):
+			if i != 0:
+				html_buffer += "<br>\n"
+			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+			if 'Toilet' in league.name and man.is_diamond:
+				html_buffer += "💎"
+			html_buffer += f' in GW{man._wc1_week}\n'
+		html_buffer +='</td>\n'
+		delta = man._wc1_ordelta_percent
+		if delta > 0:
+			delta = f"+{delta:.0f}"
+		else:
+			delta = f"{delta:.0f}"
+		html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
+	html_buffer += '</tr>\n'
+
+	### free hit
+	html_buffer += '<tr>\n'
+	html_buffer += f'<td class="w3-green" style="text-align:center;">FH</td>\n'
+	html_buffer += f'<td style="text-align:center;">\n'
+	for i,man in enumerate(fh_best[1]):
+		if i != 0:
+			html_buffer += "<br>\n"
+		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+		if 'Toilet' in league.name and man.is_diamond:
+			html_buffer += "💎"
+		html_buffer += f'with {man._fh_total}pts in GW{man._fh_week}\n'
+	html_buffer +='</td>\n'
+	delta = 100*(man._fh_orprev-man._fh_or)/man._fh_orprev
+	if delta > 0:
+		delta = f"+{delta:.0f}"
+	else:
+		delta = f"{delta:.0f}"
+	html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
+	if len(fh_subset) == 1:
+		html_buffer += f'<td></td>\n'
+		html_buffer += f'<td></td>\n'
+	else:
+		html_buffer += f'<td style="text-align:center;">\n'
+		for i,man in enumerate(fh_worst[1]):
+			if i != 0:
+				html_buffer += "<br>\n"
+			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+			if 'Toilet' in league.name and man.is_diamond:
+				html_buffer += "💎"
+			html_buffer += f'with {man._fh_total}pts in GW{man._fh_week}\n'
+		html_buffer +='</td>\n'
+		delta = 100*(man._fh_orprev-man._fh_or)/man._fh_orprev
+		if delta > 0:
+			delta = f"+{delta:.0f}"
+		else:
+			delta = f"{delta:.0f}"
+		html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
 	html_buffer += '</tr>\n'
 
 	### bench boost
@@ -1646,8 +1801,8 @@ def christmas_awards(league):
 			s = "s"
 		else: 		
 			s = ""
-		html_buffer += award_panel('👑',f'King{s}','Best Score',f'{scores[0]} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0:num],colour='amber',name_class="h2",halfonly=True)
-		json[str(league.id)]['half']['awards']['king'] = [m.id for m in sorted_managers[0:num]]+[scores[0]]
+		html_buffer += award_panel('👑',f'King{s}','Best Score',f'{scores[0]} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0:num],colour='amber',border='green',name_class="h2",halfonly=True)
+		json[str(league.id)]['half']['awards']['king'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
 	else:
 		mout.warningOut("Too many people sharing king award")
 		json[str(league.id)]['half']['awards']['king'] = None
@@ -1659,8 +1814,8 @@ def christmas_awards(league):
 	if num < 4:
 		if num > 1: s = "s"
 		else: 		s = ""
-		html_buffer += award_panel('🐓',f'Cock{s}','Worst Score',f'{scores[0]} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0:num],colour='red',name_class="h2",halfonly=True)
-		json[str(league.id)]['half']['awards']['cock'] = [m.id for m in sorted_managers[0:num]]+[scores[0]]
+		html_buffer += award_panel('🐓',f'Cock{s}','Worst Score',f'{scores[0]} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0:num],colour='red',border='green',name_class="h2",halfonly=True)
+		json[str(league.id)]['half']['awards']['cock'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
 	else:
 		mout.warningOut("Too many people sharing cock award")
 		json[str(league.id)]['half']['awards']['cock'] = None
@@ -1670,8 +1825,8 @@ def christmas_awards(league):
 	data = Counter(scores)
 	num = data[scores[0]]
 	if num < 4:
-		html_buffer += award_panel('🔮',f'Fortune Teller','Best Transfers',f"+{scores[0]} pts",sorted_managers[0:num],colour='purple',name_class="h2",halfonly=True)
-		json[str(league.id)]['half']['awards']['fortune'] = [m.id for m in sorted_managers[0:num]]+[scores[0]]
+		html_buffer += award_panel('🔮',f'Fortune Teller','Best Total Transfer Gain',f"+{scores[0]} pts",sorted_managers[0:num],colour='purple',border='green',name_class="h2",halfonly=True)
+		json[str(league.id)]['half']['awards']['fortune'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
 	else:
 		mout.warningOut("Too many people sharing fortune spot")
 		json[str(league.id)]['half']['awards']['fortune'] = None
@@ -1681,8 +1836,8 @@ def christmas_awards(league):
 	data = Counter(scores)
 	num = data[scores[0]]
 	if num < 4:
-		html_buffer += award_panel('🤡',f'Clown','Worst Transfers',f"{scores[0]} pts",sorted_managers[0:num],colour='pale-red',name_class="h2",halfonly=True)
-		json[str(league.id)]['half']['awards']['clown'] = [m.id for m in sorted_managers[0:num]]+[scores[0]]
+		html_buffer += award_panel('🤡',f'Clown','Worst Total Transfer Gain',f"{scores[0]} pts",sorted_managers[0:num],colour='pale-red',border='green',name_class="h2",halfonly=True)
+		json[str(league.id)]['half']['awards']['clown'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
 	else:
 		mout.warningOut("Too many people sharing clown spot")
 		json[str(league.id)]['half']['awards']['clown'] = None
@@ -1699,11 +1854,11 @@ def christmas_awards(league):
 		num = data[scores2[0]]
 		print("Kneejerker",sorted_managers2[0:num],scores[0],scores2[0])
 		json[str(league.id)]['half']['awards']['kneejerker'] = [[m.id for m in sorted_managers2[0:num]],scores[0],scores2[0]]
-		html_buffer += award_panel('🔨',f'Kneejerker','Most Transfers',f'{scores[0]} transfers, {scores2[0]} hits',sorted_managers2[0:num],colour='deep-orange',name_class="h2",halfonly=True)
+		html_buffer += award_panel('🔨',f'Kneejerker','Most Transfers',f'{scores[0]} transfers, {scores2[0]} hits',sorted_managers2[0:num],colour='deep-orange',border='green',name_class="h2",halfonly=True)
 	else:
 		print("Kneejerker",sorted_managers[0:num],scores[0],sorted_managers[0].num_hits)
-		json[str(league.id)]['half']['awards']['kneejerker'] = [sorted_managers[0].id,scores[0],sorted_managers[0].num_hits]
-		html_buffer += award_panel('🔨',f'Kneejerker','Most Transfers',f'{scores[0]} transfers, {sorted_managers[0].num_hits} hits',sorted_managers[0],colour='deep-orange',name_class="h2",halfonly=True)
+		json[str(league.id)]['half']['awards']['kneejerker'] = [[sorted_managers[0].id],scores[0],sorted_managers[0].num_hits]
+		html_buffer += award_panel('🔨',f'Kneejerker','Most Transfers',f'{scores[0]} transfers, {sorted_managers[0].num_hits} hits',sorted_managers[0],colour='deep-orange',border='green',name_class="h2",halfonly=True)
 
 	# iceman
 	sorted_managers.reverse()
@@ -1717,11 +1872,11 @@ def christmas_awards(league):
 		num = data[scores2[0]]
 		print("Iceman",sorted_managers2[0:num],scores[0],scores2[0])
 		json[str(league.id)]['half']['awards']['iceman'] = [[m.id for m in sorted_managers2[0:num]],scores[0],scores2[0]]
-		html_buffer += award_panel('🥶',f'Iceman','Least Transfers',f'{scores[0]} transfers, {scores2[0]} hits',sorted_managers2[0:num],colour='aqua',name_class="h2",halfonly=True)
+		html_buffer += award_panel('🥶',f'Iceman','Least Transfers',f'{scores[0]} transfers, {scores2[0]} hits',sorted_managers2[0:num],colour='aqua',border='green',name_class="h2",halfonly=True)
 	else:
 		print("Iceman",sorted_managers[0:num],scores[0],sorted_managers[0].num_hits)
 		json[str(league.id)]['half']['awards']['iceman'] = [[sorted_managers[0].id],scores[0],sorted_managers[0].num_hits]
-		html_buffer += award_panel('🥶',f'Iceman','Least Transfers',f'{scores[0]} transfers, {sorted_managers[0].num_hits} hits',sorted_managers[0],colour='aqua',name_class="h2",halfonly=True)
+		html_buffer += award_panel('🥶',f'Iceman','Least Transfers',f'{scores[0]} transfers, {sorted_managers[0].num_hits} hits',sorted_managers[0],colour='aqua',border='green',name_class="h2",halfonly=True)
 
 	# oligarch
 	sorted_managers = sorted(league.active_managers, key=lambda x: x.team_value, reverse=True)
@@ -1729,7 +1884,7 @@ def christmas_awards(league):
 	data = Counter(scores)
 	num = data[scores[0]]
 	json[str(league.id)]['half']['awards']['oligarch'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	html_buffer += award_panel('🛢',f'Oligarch','Highest Team Value',f'£{scores[0]:.1f}',sorted_managers[0:num],colour='black',name_class="h2",halfonly=True)
+	html_buffer += award_panel('🛢',f'Oligarch','Highest Team Value',f'£{scores[0]:.1f}',sorted_managers[0:num],colour='black',border='green',name_class="h2",halfonly=True)
 
 	# peasant
 	sorted_managers.reverse()
@@ -1737,27 +1892,27 @@ def christmas_awards(league):
 	data = Counter(scores)
 	num = data[scores[0]]
 	json[str(league.id)]['half']['awards']['peasant'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	html_buffer += award_panel('🏚',f'Peasant','Lowest Team Value',f'£{scores[0]:.1f}',sorted_managers[0:num],colour='brown',name_class="h2",halfonly=True)
+	html_buffer += award_panel('🏚',f'Peasant','Lowest Team Value',f'£{scores[0]:.1f}',sorted_managers[0:num],colour='brown',border='green',name_class="h2",halfonly=True)
 	
 	# glow-up (best improvement in the quarter season (GW8-GW16))
 	sorted_managers = sorted(league.active_managers, key=lambda x: (x.get_specific_overall_rank(8)-x.get_specific_overall_rank(16))/x.get_specific_overall_rank(8), reverse=True)
 	m = sorted_managers[0]
 	s = (m.get_specific_overall_rank(8)-m.get_specific_overall_rank(16))/m.get_specific_overall_rank(8)
-	json[str(league.id)]['half']['awards']['glow-up'] = [m.id,s]
+	json[str(league.id)]['half']['awards']['glow_up'] = [[m.id],s]
 	if s > 0:
-		html_buffer += award_panel('💡',f'Glow-Up','Best 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = +{100*s:.1f}%',m,colour='pale-yellow',name_class="h2",halfonly=True)
+		html_buffer += award_panel('💡',f'Glow-Up','Best 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = +{100*s:.1f}%',m,colour='pale-yellow',border='green',name_class="h2",halfonly=True)
 	else:
-		html_buffer += award_panel('💡',f'Glow-Up','Best 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = {100*s:.1f}%',m,colour='pale-yellow',name_class="h2",halfonly=True)
+		html_buffer += award_panel('💡',f'Glow-Up','Best 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = {100*s:.1f}%',m,colour='pale-yellow',border='green',name_class="h2",halfonly=True)
 
 	# iceman
 	m = sorted_managers[-1]
 	s = m.get_specific_overall_rank(16)-m.get_specific_overall_rank(8)
 	s = -s/m.get_specific_overall_rank(8)
-	json[str(league.id)]['half']['awards']['has-been'] = [m.id,s]
+	json[str(league.id)]['half']['awards']['has_been'] = [[m.id],s]
 	if s > 0:
-		html_buffer += award_panel('👨‍🦳',f'Has-Been','Worst 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = +{100*s:.1f}%',m,colour='grey',name_class="h2",halfonly=True)
+		html_buffer += award_panel('👨‍🦳',f'Has-Been','Worst 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = +{100*s:.1f}%',m,colour='grey',border='green',name_class="h2",halfonly=True)
 	else:
-		html_buffer += award_panel('👨‍🦳',f'Has-Been','Worst 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = {100*s:.1f}%',m,colour='grey',name_class="h2",halfonly=True)
+		html_buffer += award_panel('👨‍🦳',f'Has-Been','Worst 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = {100*s:.1f}%',m,colour='grey',border='green',name_class="h2",halfonly=True)
 
 	# has-been (best improvement in the quarter season (GW8-GW16))
 
@@ -1838,7 +1993,7 @@ def create_overall_page():
 		# for l in leagues:
 		# 	f.write(f'* [{l}]({l.name.replace(" ","-")})\n')
 
-def award_panel(icon,name,description,value,manager,colour='light-grey',name_class="h1",value_class="h2",halfonly=False):
+def award_panel(icon,name,description,value,manager,colour='light-grey',border=None,name_class="h1",value_class="h2",halfonly=False):
 
 	many = isinstance(manager,list)
 
@@ -1851,7 +2006,10 @@ def award_panel(icon,name,description,value,manager,colour='light-grey',name_cla
 		html_buffer += f'<div class="w3-col s12 m12 l6">\n'
 	else:
 		html_buffer += f'<div class="w3-col s12 m6 l4">\n'
-	html_buffer += f'<div class="w3-panel w3-{colour} w3-card">\n'
+	if border:
+		html_buffer += f'<div style="border:8px solid" class="w3-panel w3-{colour} w3-card w3-border-{border}">\n'
+	else:
+		html_buffer += f'<div class="w3-panel w3-{colour} w3-card">\n'
 	html_buffer += f'<table class="w3-table">\n'
 	html_buffer += f'<tr>\n'
 	html_buffer += f'<td style="text-align:left;vertical-align:middle;">\n'
