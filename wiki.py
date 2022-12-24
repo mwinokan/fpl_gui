@@ -16,17 +16,14 @@ from squad import Squad
 
 Christmas To-Do's
 
-- Add best wc1 usage to manager page
-- Show halfway awards on manager pages
-- Can there be an offline w3.css?
+- By default only show prize winners on the toilet graph
+
 - Write summaries
-
-'''
-
-'''
 
 	To-Do's
 	
+	- Can there be an offline w3.css?
+
 	* Transfer stats within the league
 
 	* Adjust sidebar based on page
@@ -89,15 +86,15 @@ path = '../FPL_GUI.wiki'
 create_launchd_plist = False
 scrape_kits = False
 force_generate_kits = False
-run_push_changes = False
+run_push_changes = True
 fetch_latest = True
 force_plot = True
 recalculate = True
 force_go_graphs = True
 test = False
 force = False
-halfway_awards = False
-offline = True
+# halfway_awards = False
+offline = False
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
@@ -112,9 +109,11 @@ league_colours = ['cyan','grey','green','red','purple']
 league_shortnames = ['Diamond','Toilet','GU','RU','Dinner']
 league_icons = ["💎","🚽","🦌","📚","🍝"]
 
+_league_table_html = {}
+
 brk = '</p><p>'
 
-league_halfway_text = {663873:f"The RBS Diamond Invitational proved to be a wild ride so far, in which our elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award some shiny new limited-edition awards to a lucky few recipients.{brk}Ed Lees saw himself off to a strong start with some clever picks in GW1, and a daring triple captain on Erling Haaland in GW2 (he did only net five points but hey it's something!). Personally, the most memorable part of Ed's FPL so far was transferring out Haaland for Toney in GW5 in a combined move that saw him lose 19 points. In fact, most weeks had Ed not made any transfers he would have been better off, and this is reflected in his Christmas Clown award for having the worst total transfer gain in the league.{brk}Following Ed's demise, GW6 turned out to be a real turning point where managers Thomas Allan and Rob Sutton would escape the pack and prove exceptionally hard to chase as they sit in second and first place respectively. Rob's trophy cabinet of course contains his Christmas King award but there's barely any room as he averaged 1.5 awards every week, totalling 24 (with only one actually bad one with his GW4 clown!) Rob's consistent differential power moves were not always an instant success (except when he brought in Son for his 19-pointer before promptly wildcarding him out) but his faith in Maddison, Zaha, Toney, and Salah particularly rewarded him throughout the season so far. Rob's Take the Plange now sit comfortably at 44k worldwide. Will Rob find himself topping the diamond league at the end of GW38?{brk}Thomas Allan' season does seem to look a bit like Rob's with only a few missteps. An impressive GW8 wildcard brought about a +95% improvement in overall rank within five gameweeks, and a tactical GW12 free hit helped cement a solid top 100k rank and the Christmas Fortune Teller award with an impressive +62 point total for his transfers up to the world cup.{brk}Going further down the table my team 'Loyd's Groß Men' sits in third place after a relatively quiet start, and a decent GW12 wildcard that saw my boys climb a few ranks and a Robertson 9-pointer sat me nicely in the top 650k OR, hopefully onwards and upwards.{brk}As we approach mid-table the points totals all get a bit more compressed, Horatio Turner and Tanya Fozzard sit in fourth and fifth place. While their ranks are quite similar the journeys these two managers have been on are wildly different. Tanya's 'Mikel ArTanya' reached a gameweek rank height of 44k in GW5 with a massive 97 points, while Horatio's gameweek ranks have been more modest, but consistent. What impresses me most, however, is that Tanya has managed to achieve such success with only ten non-wildcard transfers, earning her the first Iceman award. Well done.{brk}Before we get to the relegation battle, Matthew Wiggins' escape from the bottom has to be commended. In GW6 he sat dead last, trailing the global average by 17 points. Matthew's improvement since that GW6 wildcard has been remarkable, however, and a fantastic GW16 bench boost confirmed his escape from relegation (at least for now). Matthew has won the Glow-Up award for his improvement since GW8.{brk}Now we turn to the relegation battle. Some managers like Ed and Joe Pashley only narrowly ended up down here with a couple unlucky results in recent gameweeks. Joe's season was off to a bad start with a GW2 wildcard that lost him 20 points. Nevertheless, his rank did climb as he won his own 'Massive Goal FC' award four times, before taking a bit of a plunge with two bad gameweeks in 15 and 16.{brk}Second to last is Joseph Conlon, who hasn't made a transfer since GW7. That's probably how he ended up with his eight Chair awards. We've seen that big comebacks are possible so please come back, Joe...{brk}And finally, the man we've all been waiting to discuss is of course Ethan Barker. Ethan's journey can only be described as a Shakespearean tragedy, and this man must have nerves of steel to not have done an Elon and just perma-banned all of us. His trophy cabinet contains six cocks and four clowns, and unfortunately, the Christmas awards don't look any better with the Christmas Cock, Kneejerker, Peasant, and Has-Been awards.{brk}What a fun season it has been so far with shake-ups and drama. I can't wait to see what GW17 and beyond have in store for us. Will Ethan, Ed, and the Joe's be relegated? Will anyone catch Rob and Tom?",910674:"Some of the performances in the toilet league would leave many wondering what makes the diamond league so special?"}
+league_halfway_text = {663873:f"The RBS Diamond Invitational has proved to be a wild ride so far, in which our elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award some shiny new limited-edition awards to a lucky few recipients.{brk}<a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1731530.html\">Ed Lees</a> saw himself off to a strong start with some clever picks in GW1, and a daring triple captain on <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_318.html\">Erling Haaland</a> in GW2 (he did only net five points but hey it's something!). Personally, the most memorable part of Ed's FPL so far was transferring out Haaland for <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_80.html\">Toney</a> in GW5 in a combined move that saw him lose 19 points. In fact, most weeks had Ed not made any transfers he would have been better off, and this is reflected in his Christmas Clown award for having the worst total transfer gain in the league.{brk}Following Ed's demise, GW6 turned out to be a real turning point where managers <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1153277.html\">Thomas Allan</a> and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_3106633.html\">Rob Sutton</a> would escape the pack and prove exceptionally hard to chase as they sit in second and first place respectively. Rob's trophy cabinet of course contains his Christmas King award but there's barely any room as he averaged 1.5 awards every week, totalling 24 (with only one actually bad one with his GW4 clown!) Rob's consistent differential power moves were not always an instant success (except when he brought in <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_428.html\">Son</a> for his 19-pointer before promptly wildcarding him out) but his faith in <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_261.html\">Maddison</a>, <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_160.html\">Zaha</a>, <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_80.html\">Toney</a>, and <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_283.html\">Salah</a> particularly rewarded him throughout the season so far. Rob's Take the Plange now sit comfortably at 44k worldwide. Will Rob find himself topping the diamond league at the end of GW38?{brk}Thomas Allan' season does seem to look a bit like Rob's with only a few missteps. An impressive GW8 wildcard brought about a +95% improvement in overall rank within five gameweeks, and a tactical GW12 free hit helped cement a solid top 100k rank and the Christmas Fortune Teller award with an impressive +62 point total for his transfers up to the world cup.{brk}Going further down the table my team <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_780664.html\">Loyd's Groß Men</a> sits in third place after a relatively quiet start, and a decent GW12 wildcard that saw my boys climb a few ranks and a Robertson 9-pointer sat me nicely in the top 650k OR, hopefully onwards and upwards.{brk}As we approach mid-table the points totals all get a bit more compressed, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_123660.html\">Horatio Turner</a> and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1636178.html\">Tanya Fozzard</a> sit in fourth and fifth place. While their ranks are quite similar the journeys these two managers have been on are wildly different. Tanya's 'Mikel ArTanya' reached a gameweek rank height of 44k in GW5 with a massive 97 points, while Horatio's gameweek ranks have been more modest, but consistent. What impresses me most, however, is that Tanya has managed to achieve such success with only ten non-wildcard transfers, earning her the first Iceman award. Well done.{brk}Before we get to the relegation battle, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_2778113.html\">Matthew Wiggins</a>' escape from the bottom has to be commended. In GW6 he sat dead last, trailing the global average by 17 points. Matthew's improvement since that GW6 wildcard has been remarkable, however, and a fantastic GW16 bench boost confirmed his escape from relegation (at least for now). Matthew has won the Glow-Up award for his improvement since GW8.{brk}Now we turn to the relegation battle. Some managers like <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1731530.html\">Ed</a> and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1737071.html\">Joe Pashley</a> only narrowly ended up down here with a couple unlucky results in recent gameweeks. Joe's season was off to a bad start with a GW2 wildcard that lost him 20 points. Nevertheless, his rank did climb as he won his own 'Massive Goal FC' award four times, before taking a bit of a plunge with two bad gameweeks in 15 and 16.{brk}Second to last is <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_5279233.html\">Joseph Conlon</a>, who hasn't made a transfer since GW7. That's probably how he ended up with his eight Chair awards. We've seen that big comebacks are possible so please come back, Joe...{brk}And finally, the man we've all been waiting to discuss is of course <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1105564.html\">Ethan Barker</a>. Ethan's journey can only be described as a Shakespearean tragedy, and this man must have nerves of steel to not have done an Elon and just perma-banned all of us. His trophy cabinet contains six cocks and four clowns, and unfortunately, the Christmas awards don't look any better with the Christmas Cock, Kneejerker, Peasant, and Has-Been awards.{brk}What a fun season it has been so far with shake-ups and drama. I can't wait to see what GW17 and beyond have in store for us. Will Ethan, Ed, and the Joe's be relegated? Will anyone catch Rob and Tom?",910674:f"Now we turn to the Tesco Bean Value Toilet League which boasts over 60 active managers competing for glory, awards, and of course promotion to the Diamond League. With such a large pool of players each gameweek the awards have been exciting and varied, with managers from all over the table adding to their trophy cabinets. The Christmas awards are no exception.{brk}In first place sits <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_3106633.html\">Rob Sutton</a> on 965 points, earning him the Christmas King award in both leagues. Our Christmas Cock and egg-holder in 75th place in the league is <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_9680336.html\">Yasir Arafat</a> who did only join in GW5, but this does not protect him from the dreaded cock. Our fortune teller is <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_4237714.html\">Andrew Toon</a> who managed to gain an astounding 109 points through his net transfers so far. The clown award goes to <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_7545553.html\">Priam Ghatak</a> who lost a net 20 points to transfers.{brk}All the following awards are new for Christmas. The Kneejerker and Iceman awards relate to the total number of transfers made so far won by <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_3677532.html\">Jacob Clipsham</a> and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_5250876.html\">Aldo Ventresca</a>, respectively. Team value, although not as important as at the start of the season, is still an interesting gauge of a manager's wisdom, and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_587733.html\">Jonah Varney</a> (depicted as Roman Abramovich above) takes the Oligarch award with an astounding £104.1M total squad value. <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_4376362.html\">Sam Watkins</a> will have rather less money to spend on their free world cup transfers with £98.4M and the Peasant award. Our final two awards split the season so far into two 8 GW chunks, and look at who's improved the most - <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_71985.html\">Ben Pelling</a> with his Glow-Up - and the least - <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_4542423.html\">Reece Smith</a> as our Has-Been.{brk}Now we turn to those with the prospect of promotion tantalisingly in sight. Currently, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1629225.html\">Kieran Sabine</a>, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_3754813.html\">Kajan Kugananthajothy</a>, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_105722.html\">Owen Wilmot</a>, and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_6441720.html\">Sam Collins</a> stand to make history. Nevertheless, over half the season still remains to be played and make shake-ups are undubitably still in store. I hope you have enjoyed the season so far, and look forward to all the gossip to come."}
 
 watchlist = [
 			"Callum Wilson",
@@ -320,13 +319,6 @@ def main():
 
 		sidebar_md = create_sidebar(leagues)
 		
-		if api._current_gw == 16 and not api._live_gw:
-			halfway_awards = True
-		if halfway_awards:
-			create_christmaspage(leagues,sidebar_md)
-			# api.finish()
-			# exit()
-
 		get_manager_json_positions(api,leagues)
 
 		leagues[0].create_points_graph()
@@ -334,6 +326,13 @@ def main():
 
 		for i,l in enumerate(leagues):
 			create_leaguepage(l,sidebar_md,leagues,i)
+
+		if api._current_gw == 16 and not api._live_gw:
+			halfway_awards = True
+		if halfway_awards:
+			create_christmaspage(leagues,sidebar_md)
+			# api.finish()
+			# exit()
 
 		json['timestamp'] = timestamp
 
@@ -657,9 +656,9 @@ def create_playerpage(api,player,sidebar_md,leagues):
 
 def create_trophycabinet(api,man):
 
-	award_flavourtext = dict(king="👑 King",cock="🐓 Cock",goals="⚽️ Massive Goal FC",boner="🦴 Boner",scientist="🧑‍🔬 Scientist",smooth_brain="🧠 Smooth Brain",chair="🪑 Chair",asbo="🥊 ASBO",nerd="🤓 Nerd",innovator="🎓 Innovator",fortune="🔮 Fortune Teller",clown="🤡 Clown",oligarch="🛢 Oligarch",iceman="🥶 Iceman",peasant="🏚 Peasant",glow_up="💡 Glow-Up",has_been="👨‍🦳 Has-Been",kneejerker="🔨 Kneejerker")
+	award_flavourtext = dict(king="👑 King",cock="🐓 Cock",goals="⚽️ Massive Goal FC",boner="🦴 Boner",scientist="🧑‍🔬 Scientist",smooth_brain="🧠 Smooth Brain",chair="🪑 Chair",asbo="🥊 ASBO",nerd="🤓 Nerd",innovator="🎓 Innovator",fortune="🔮 Fortune Teller",clown="🤡 Clown",oligarch="🛢 Oligarch",iceman="🥶 Iceman",peasant="🏚 Peasant",glow_up="💡 Glow-Up",has_been="👨‍🦳 Has-Been",kneejerker="🔨 Kneejerker",wc1_best="Best Wildcard 1",wc1_worst="Worst Wildcard 1")
 	award_unittext = dict(king="points",cock="points",goals="goals",boner="points",scientist="points",smooth_brain="points on the bench",chair="'",asbo="cards",nerd="%",innovator="%",fortune="points gained",clown="points lost")
-	award_colour = dict(king="amber",cock="red",goals="indigo",scientist="green",boner="grey",smooth_brain="pale-red",chair="brown",asbo="yellow",fortune="purple",clown="pale-red",nerd="pale-yellow",innovator="grey",oligarch="black",iceman="aqua",peasant='brown',glow_up='pale-yellow',has_been='grey',kneejerker='deep-orange')
+	award_colour = dict(king="amber",cock="red",goals="indigo",scientist="green",boner="grey",smooth_brain="pale-red",chair="brown",asbo="yellow",fortune="purple",clown="pale-red",nerd="pale-yellow",innovator="grey",oligarch="black",iceman="aqua",peasant='brown',glow_up='pale-yellow',has_been='grey',kneejerker='deep-orange',wc1_best="red",wc1_worst="red")
 
 	html_buffer = f'<h2>Trophy Cabinet</h2>\n'
 
@@ -720,6 +719,34 @@ def create_trophycabinet(api,man):
 				html_buffer += '</td>\n'
 				html_buffer += '<td style="text-align:right;vertical-align:middle;">\n'
 				html_buffer += f'<h2><span class="w3-tag">Christmas</span></h2>\n'
+				html_buffer += '</tr>\n'
+				html_buffer += '</table>\n'
+				html_buffer += '</div>\n'
+				html_buffer += '</div>\n'
+
+			for award in chip_awards:
+
+				key = award['key']
+				
+				colour = award_colour[key]
+				# icon = award_icon[key]
+
+				html_buffer += '<div class="w3-col s12 m6 l4">\n'
+				html_buffer += f'<div style="border:8px solid" class="w3-panel w3-{colour} w3-card w3-border-black">\n'
+				html_buffer += '<table class="w3-table">\n'
+				html_buffer += '<tr>\n'
+				html_buffer += '<td style="text-align:left;vertical-align:middle;">\n'
+				html_buffer += f'<h1>{award_flavourtext[key]}</h1>\n'
+				html_buffer += '</td>\n'
+				html_buffer += '<td style="text-align:right;vertical-align:middle;">\n'
+
+				# delta = man._wc1_ordelta_percent
+				# if delta > 0:
+				# 	delta = f"+{delta:.0f}"
+				# else:
+				# 	delta = f"{delta:.0f}"
+
+				# html_buffer += f'<h2><span class="w3-tag">Christmas</span></h2>\n'
 				html_buffer += '</tr>\n'
 				html_buffer += '</table>\n'
 				html_buffer += '</div>\n'
@@ -956,6 +983,14 @@ def create_chip_table(api,man):
 						detail = f"+{pts_delta} points gained"
 					else:
 						detail = f"{pts_delta} points lost"
+
+					delta = man._wc1_ordelta_percent
+					if delta > 0:
+						delta = f"+{delta:.0f}"
+					else:
+						delta = f"{delta:.0f}"
+					detail += f'({delta}% OR)'
+
 				case 'wc2':
 					color = 'red'
 					pts_delta = man.calculate_transfer_gain(gw=chip[1])
@@ -963,22 +998,25 @@ def create_chip_table(api,man):
 						detail = f"+{pts_delta} points gained"
 					else:
 						detail = f"{pts_delta} points lost"
+					
+					delta = man._wc2_ordelta_percent
+					if delta > 0:
+						delta = f" +{delta:.0f}"
+					else:
+						delta = f" {delta:.0f}"
+					detail += f'({delta}% OR)'
 				case 'fh':
 					color = 'green'
 					pts = man.get_event_score(chip[1])
 					rank = [r for i,r in zip(man.active_gws,man._event_rank) if i == chip[1]][0]
 					detail = f"GW Points: {pts}, GW Rank: {api.big_number_format(rank)}"
 				case 'bb':
-					old_squad = man._squad
-					squad = man.get_current_squad(gw=chip[1],force=True)
-					# print(f"{man.name} ({man.id}): Bench boost GW{chip[1]}")
 					color = 'blue'
-					pts = sum([p.get_event_score(chip[1],not_playing_is_none=False) for p in squad.players[-4:]])
+					pts = man._bb_ptsgain
 					if pts > 0:
 						detail = f"+{pts} points gained"
 					else:
 						detail = f"{pts} points lost"
-					man._squad = old_squad
 				case 'tc':
 					color = 'amber'
 					old_squad = man._squad
@@ -987,11 +1025,15 @@ def create_chip_table(api,man):
 						mout.warningOut(f"Squad is none for GW{chip[1]} (manager {man.id})")
 						detail = f"-"
 						break
+
 					pts_delta = squad.captain.get_event_score(gw=chip[1])
 					if pts_delta > 0:
 						detail = f"+{pts_delta} points gained"
 					else:
 						detail = f"{pts_delta} points lost"
+
+					detail += f'with {man._tc_name}'
+
 					man._squad = old_squad
 				case _:
 					color = 'black'
@@ -1499,18 +1541,32 @@ def create_christmaspage(leagues,sidebar_md):
 		html_buffer += "</p>\n"
 
 		html_buffer += "<h3>Chip Usage</h3>\n"
-
 		html_buffer += league_best_chips(league)
-		
-		html_buffer += "<h3>League Graph</h3>\n"
 
+		award_buffer = ""
+		award_buffer += "<h3>Halfway Awards</h3>\n"
+		award_buffer += christmas_awards(league)
+
+		if league.num_managers > 20:
+			subset = []
+			subset += sum([d[0] for d in json[str(league.id)]['half']['awards'].values()],[])
+			subset += sum([d[-1] for d in json[str(league.id)]['chips']['wc1'].values()],[])
+		else:
+			subset = None
+
+		html_buffer += "<h3>League Graph</h3>\n"
 		import sys
 		sys.path.insert(1,'go')
 		from goleague import create_league_figure
-		html_buffer += create_league_figure(api, league)
+		html_buffer += create_league_figure(api, league, subset)
 
-		html_buffer += "<h3>Halfway Awards</h3>\n"
-		html_buffer += christmas_awards(league)
+		html_buffer += award_buffer
+
+		md_buffer = ""
+		md_buffer += f"\n## League Table:\n"
+		md_buffer += f"Is your team's kit the boring default? Design it [here](https://fantasy.premierleague.com/entry-update)\n\n"
+		html_buffer += md2html(md_buffer)
+		html_buffer += _league_table_html[league.id]
 
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -1608,6 +1664,9 @@ def league_best_chips(league):
 		if 'Toilet' in league.name and man.is_diamond:
 			html_buffer += "💎"
 		html_buffer += f'with {man._tc_name} in GW{man._tc_week}\n'
+
+		# html_buffer += f'<a href="https://mwinokan.github.io/FPL_GUI/html/player_{player.id}.html">{player.name}</a></b></td>\n'
+
 	html_buffer +='</td>\n'
 	html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc_best[0])}</td>\n'
 	if len(tc_subset) == 1:
@@ -1675,7 +1734,7 @@ def league_best_chips(league):
 		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
 		if 'Toilet' in league.name and man.is_diamond:
 			html_buffer += "💎"
-		html_buffer += f'with {man._fh_total}pts in GW{man._fh_week}\n'
+		html_buffer += f' with {man._fh_total}pts in GW{man._fh_week}\n'
 	html_buffer +='</td>\n'
 	delta = 100*(man._fh_orprev-man._fh_or)/man._fh_orprev
 	if delta > 0:
@@ -2631,6 +2690,9 @@ def league_table_html(league,gw):
 	html_buffer += '</table>\n'
 	html_buffer += '</div>\n'
 
+	global _league_table_html
+	_league_table_html[league.id] = html_buffer
+
 	return html_buffer
 
 def league_template(league,gw):
@@ -2822,4 +2884,4 @@ def dump_json(data):
 
 if __name__ == '__main__':
 	main()
-# 
+

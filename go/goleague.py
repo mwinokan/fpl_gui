@@ -19,9 +19,12 @@ def main():
 
 	create_league_figure(api,league,show=True)
 
-def create_league_figure(api,league,show=False):
+def create_league_figure(api,league,subset=None,show=False):
 	gw = api._current_gw
 	mout.debugOut(f"create_league_figure()")
+
+	if subset:
+		print(subset)
 
 	fig = go.Figure()
 	
@@ -48,7 +51,14 @@ def create_league_figure(api,league,show=False):
 			this_x = [0] + this_x
 			this_y = [0] + this_y
 
-		fig.add_trace(go.Scatter(name=man.name,opacity=1.0,x=this_x,text=text, y=this_y,textposition="bottom center",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
+		if subset and man.id not in subset:
+			visible = 'legendonly'
+		else:
+			visible = True
+
+		# print(man,visible)
+
+		fig.add_trace(go.Scatter(name=man.name,opacity=1.0,x=this_x,text=text, y=this_y,visible=visible,textposition="bottom center",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
 
 	fig.update_traces(marker=dict(line=dict(width=1,color='Black')),selector=dict(mode='markers'))
 
