@@ -14,11 +14,11 @@ from squad import Squad
 
 '''
 
-Christmas To-Do's
+	Christmas To-Do's
 
-- By default only show prize winners on the toilet graph
+	- By default only show prize winners on the toilet graph
 
-- Write summaries
+	- Write summaries
 
 	To-Do's
 	
@@ -2847,7 +2847,7 @@ def push_changes():
 	num_changes = int(os.popen("git status | grep 'modified:' | grep -v '.pyc' | wc -l").read())
 	if num_changes > 0:
 	# os.system(f'cd {path}; git add *.md; git commit -m "auto-generated {timestamp}"; git push; cd {path.replace(".wiki","")}')
-		os.system(f'rm kits/*.webp; git add *.py images/*.png go/*.html go/*.py graphs/*.png index.html html/*.html images/*.png data_wiki.json kits/*.png ct_total_fit.json; git commit -m "auto-generated {timestamp}"; git push')
+		os.system(f'rm kits/*.webp; git add *.py images/*.png go/*.html go/*.py graphs/*.png index.html html/*.html images/*.png *.json kits/*.png ct_total_fit.json; git commit -m "auto-generated {timestamp}"; git push')
 		os.system("terminal-notifier -title 'FPL_GUI' -message 'Completed Wiki Update' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
 		exit(code=69)
 	else:

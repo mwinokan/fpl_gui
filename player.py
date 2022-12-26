@@ -248,6 +248,22 @@ class Player():
 						mout.errorOut("Unsupported DGW. Player::get_playing_chance()")
 						print(self.name,gw)
 						return 1.0
+
+						# return a list of probabilities for each fixture
+
+						# result = []
+
+						# fixtures = self._api.get_gw_fixtures(gw)
+
+						# for fix in fixs:
+						# 	fix = [f for f in fixtures if f['team_a'] == fixs['team_a']][0]
+						# 	kickoff = datetime.datetime.strptime(fix['kickoff'], '%Y-%m-%dT%H:%M:%SZ')
+						# 	kickoff = kickoff.replace(tzinfo=pytz.utc).astimezone(local_tz)
+						# 	if kickoff < self._returndate:
+						# 		return self._chance_of_playing_next_round
+						# 	else:
+						# 		return 1.0
+
 				else:
 					fixtures = self._api.get_gw_fixtures(gw)
 					fix = [f for f in fixtures if f['team_a'] == fixs['team_a']][0]
