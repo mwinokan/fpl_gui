@@ -93,7 +93,7 @@ recalculate = True
 force_go_graphs = True
 test = False
 force = False
-# halfway_awards = False
+halfway_awards = False
 offline = False
 
 import sys
@@ -327,6 +327,7 @@ def main():
 		for i,l in enumerate(leagues):
 			create_leaguepage(l,sidebar_md,leagues,i)
 
+		global halfway_awards
 		if api._current_gw == 16 and not api._live_gw:
 			halfway_awards = True
 		if halfway_awards:
@@ -1026,7 +1027,7 @@ def create_chip_table(api,man):
 						detail = f"-"
 						break
 
-					pts_delta = squad.captain.get_event_score(gw=chip[1])
+					pts_delta = squad.captain.get_event_score(gw=chip[1],not_playing_is_none=False)
 					if pts_delta > 0:
 						detail = f"+{pts_delta} points gained"
 					else:
