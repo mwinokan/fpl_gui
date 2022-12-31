@@ -245,24 +245,30 @@ class Player():
 					if len(fixs) < 1:
 						return 0.0
 					else:
-						mout.errorOut("Unsupported DGW. Player::get_playing_chance()")
-						print(self.name,gw)
-						return 1.0
+						mout.warningOut(f"{self.name} has DGW{gw} and is flagged! Player::get_playing_chance()")
 
-						# return a list of probabilities for each fixture
+						all_fixtures = self._api.get_gw_fixtures(gw)
 
-						# result = []
+						probs = []
 
-						# fixtures = self._api.get_gw_fixtures(gw)
+						for player_fix in fixs:
 
-						# for fix in fixs:
-						# 	fix = [f for f in fixtures if f['team_a'] == fixs['team_a']][0]
-						# 	kickoff = datetime.datetime.strptime(fix['kickoff'], '%Y-%m-%dT%H:%M:%SZ')
-						# 	kickoff = kickoff.replace(tzinfo=pytz.utc).astimezone(local_tz)
-						# 	if kickoff < self._returndate:
-						# 		return self._chance_of_playing_next_round
-						# 	else:
-						# 		return 1.0
+							team_a = player_fix['team_a']
+							team_h = player_fix['team_h']
+
+							fix = [f for f in all_fixtures if f['team_a'] == team_a and f['team_h'] == team_h][0]
+
+							kickoff = datetime.datetime.strptime(fix['kickoff'], '%Y-%m-%dT%H:%M:%SZ')
+							kickoff = kickoff.replace(tzinfo=pytz.utc).astimezone(local_tz)
+
+							if kickoff < self._returndate:
+								probs.append(self._chance_of_playing_next_round)
+							else:
+								probs.append(1.0)
+
+						print(probs)
+
+						return sum(probs)/len(probs)
 
 				else:
 					fixtures = self._api.get_gw_fixtures(gw)

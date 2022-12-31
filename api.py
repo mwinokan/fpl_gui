@@ -32,12 +32,13 @@ class FPL_API():
 	_skip_gws = [7]
 	_wc_cutoff = 16
 
-	def __init__(self,offline=False,force_generate_kits=False,quick=True):
+	def __init__(self,offline=False,force_generate_kits=False,quick=True,write_offline_data=False):
 		mout.debugOut(f"FPL_API.__init__(quick={quick})")
 
 		self._init_time = datetime.datetime.now()
 		self._request_log = []
 		self._offline = offline
+		self._write_offline_data = write_offline_data
 
 		if offline:
 			if exists("data_2223.json"):
@@ -152,8 +153,9 @@ class FPL_API():
 
 	def finish(self):
 
-		js.dump(self._request_data,open('data_2223.json','wt'))
-		# js.dump(self._request_data,open('data_2223.json','wt'), indent="\t")
+		if self._write_offline_data:
+			js.dump(self._request_data,open('data_2223.json','wt'))
+			# js.dump(self._request_data,open('data_2223.json','wt'), indent="\t")
 
 		mout.varOut("#requests=",len(self._request_log))
 

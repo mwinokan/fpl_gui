@@ -214,7 +214,7 @@ def main():
 		pull_changes()
 
 	global api
-	api = fpl_api.FPL_API(offline=offline,quick=False,force_generate_kits=force_generate_kits)
+	api = fpl_api.FPL_API(offline=offline,quick=False,force_generate_kits=force_generate_kits,write_offline_data=True)
 
 	global squad
 	squad = Squad()
