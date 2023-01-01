@@ -245,7 +245,7 @@ class Player():
 					if len(fixs) < 1:
 						return 0.0
 					else:
-						mout.warningOut(f"{self.name} has DGW{gw} and is flagged! Player::get_playing_chance()")
+						# mout.warningOut(f"{self.name} has DGW{gw} and is flagged! Player::get_playing_chance()")
 
 						all_fixtures = self._api.get_gw_fixtures(gw)
 
@@ -266,9 +266,14 @@ class Player():
 							else:
 								probs.append(1.0)
 
-						print(probs)
+						gw_prob = sum(probs)/len(probs)
 
-						return sum(probs)/len(probs)
+						if gw_prob < 1:
+							# mout.warningOut(f"{self.name} has DGW{gw} and is flagged! Player::get_playing_chance()")
+							# print(probs,gw_prob)
+							return gw_prob
+						else:
+							return 1.0
 
 				else:
 					fixtures = self._api.get_gw_fixtures(gw)
@@ -475,7 +480,8 @@ class Player():
 					else:
 						strs.append(self._api.team_name(self.fixtures['team_h'][rgw],short=short))
 
-			return strs
+			# return strs
+			return " + ".join(strs)
 
 		if relative_gw is None:
 			return " - "

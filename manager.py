@@ -1031,12 +1031,17 @@ class Manager():
 		bench = [p for p in self.players if p.multiplier == 0]
 
 		if len(bench) != 4:
-			mout.warningOut(f'Bench has wrong number of players ({self.name})')
-			bench = self.players[-4:]
-			for p in bench:
-				if p.is_captain:
-					self.squad.vice_captain.multiplier = 2
-				p.multiplier = 0
+			if self._bb_week != self._api._current_gw:
+				mout.warningOut(f'Bench has wrong number of players ({self.name}). And no BB played!')
+				print("before:",bench)
+				bench = self.players[-4:]
+				print("after:",bench)
+				for p in bench:
+					if p.is_captain:
+						self.squad.vice_captain.multiplier = 2
+					p.multiplier = 0
+			else:
+				bench = self.players[-4:]
 
 		if all([p.needs_autosub for p in bench[1:]]):
 			mout.warningOut(f'No one on the bench is playing ({self.name})')
