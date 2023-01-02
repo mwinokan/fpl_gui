@@ -16,6 +16,8 @@ def main():
 	else:
 		lookforward = 5
 
+	extra = 1.9
+
 	use_official = False
 	if lookforward == 1:
 		use_official = True
@@ -72,13 +74,13 @@ def main():
 		# get best affordable replacement
 
 		if p.position_id == 1:
-			affordable = [q for q in gkps if q.price <= p.selling_price + man._bank_balance[-1] and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			affordable = [q for q in gkps if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
 		elif p.position_id == 2:
-			affordable = [q for q in defs if q.price <= p.selling_price + man._bank_balance[-1] and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			affordable = [q for q in defs if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
 		elif p.position_id == 3:
-			affordable = [q for q in mids if q.price <= p.selling_price + man._bank_balance[-1] and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			affordable = [q for q in mids if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
 		elif p.position_id == 4:
-			affordable = [q for q in fwds if q.price <= p.selling_price + man._bank_balance[-1] and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			affordable = [q for q in fwds if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
 
 		replacement = sorted(affordable, key=lambda x: x.next_expected(lookforward,use_official)-p.next_expected(lookforward,use_official), reverse=True)
 
@@ -96,13 +98,15 @@ def main():
 	str_buffer = "From,To,"
 	for i in range(gw+1,gw+1+lookforward):
 		str_buffer += f"GW{i},"
-	str_buffer += f"Total\n"
+	str_buffer += f"Total,"
+	str_buffer += f"Budget\n"
 	
 	for option in sorted_options:
 		str_buffer += f'{man.players[option["index"]]},{option["replacement"].name},'
 		for i in range(gw+1,gw+1+lookforward):
 			str_buffer += f'{option["replacement"].expected_points(gw=i)-man.players[option["index"]].expected_points(gw=i):.1f},'
-		str_buffer += f'+{option["gain"]:.1f}'
+		str_buffer += f'+{option["gain"]:.1f},'
+		str_buffer += f'+{man.players[option["index"]].selling_price-option["replacement"].price:.1f}'
 		str_buffer += '\n'
 
 	result = os.popen(f'echo "{str_buffer}" | table.sh -s ","').read()

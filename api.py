@@ -342,34 +342,31 @@ class FPL_API():
 
 			print('Authenticating...')
 
-			self._session = requests.Session()
+			self._session = requests.session()
 
 			headers = {'authority': 'users.premierleague.com',
-				'method': 'POST',
-				'path': '/accounts/login/',
+				'method': 'GET',
+				'path': '/',
 				'scheme': 'https',
 				'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 				'accept-encoding': 'gzip, deflate, br',
 				'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
 				'cache-control': 'max-age=0',
-				'content-length': '135',
-				'content-type': 'application/x-www-form-urlencoded',
-				'cookie': '_ga=GA1.2.2034644234.1659355469; _gid=GA1.2.45577834.1659355473; _gat_UA-33785302-1=1; pl_euconsent-v2=CPdDY0PPdDY0PFCABAENCaCsAP_AAH_AAAwIF5wAQF5gXnABAXmAAAAA.YAAAAAAAAAAA; pl_euconsent-v2-intent-confirmed={%22tcf%22:[755]%2C%22oob%22:[]}; pl_oob-vendors={}; datadome=.5A3bcQJ3EF09o2-lcnDIOPd.0VPhlFVP4HtHdGoM7Kjb7.m1W3t28AoAGNsagOEtt4cAUm2R-amL-WCA.ddfMHQX_d.Zc88auUiG2XWBFSrMrdLG-YniuRVpZe1egd7',
-				'origin': 'https://fantasy.premierleague.com',
-				'referer': 'https://fantasy.premierleague.com/',
+				'cookie': 'csrftoken=3Ci7DiqxgqBVAFvchL7ROqqZ859ZT2tDagwUC2xGtaB3kVVDQFlr2xGZNXnz3d96; pl_euconsent-v2=CPk8z79Pk8z79FCABAENCxCsAP_AAH_AAAwIF5wAQF5gXnABAXmAAAAA.YAAAAAAAAAAA; pl_euconsent-v2-intent-confirmed={%22tcf%22:[755]%2C%22oob%22:[]}; pl_oob-vendors={}; datadome=2YW-GABAEQ1V5FjfgWNySZPgXNHsgH98p2u-jeNu-mSDIme0zkA4eFEJUXzTJgg9sjHdLWvu5P6~4~bp-FgZZWIxqxA_tCIFveJ25u1BVcoc2YH8Kzd1a5RCiJR2QKMt',
+				'referer': 'https://users.premierleague.com/accounts/login/',
 				'sec-ch-device-memory': '8',
-				'sec-ch-ua': '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
+				'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
 				'sec-ch-ua-arch': '"x86"',
-				'sec-ch-ua-full-version-list': '".Not/A)Brand";v="99.0.0.0", "Google Chrome";v="103.0.5060.134", "Chromium";v="103.0.5060.134"',
+				'sec-ch-ua-full-version-list': '"Not?A_Brand";v="8.0.0.0", "Chromium";v="108.0.5359.124", "Google Chrome";v="108.0.5359.124"',
 				'sec-ch-ua-mobile': '?0',
 				'sec-ch-ua-model': '""',
 				'sec-ch-ua-platform': '"macOS"',
 				'sec-fetch-dest': 'document',
 				'sec-fetch-mode': 'navigate',
-				'sec-fetch-site': 'same-site',
+				'sec-fetch-site': 'same-origin',
 				'sec-fetch-user': '?1',
 				'upgrade-insecure-requests': '1',
-				'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+				'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
 			}
 
 			import json
@@ -387,11 +384,18 @@ class FPL_API():
 			# json.dump(payload,file)
 
 			url = "https://users.premierleague.com/accounts/login/"
+			# url = "https://users.premierleague.com"
+
+			# print(data)
+			# print(headers)
 
 			response = self._session.post(url,data=data,headers=headers)
+			# response = self._session.post(url,data=data)
+			# print(response)
 
 			if "<Response [403]>" in str(response):
-				mout.errorOut("Could not authenticate",code=403,fatal=True)
+				print("https://mkyong.com/computer-tips/how-to-view-http-headers-in-google-chrome/")
+				mout.errorOut("Could not authenticate. Refresh the headers?",code=403,fatal=True)
 				self._authenticated = False
 				return
 
