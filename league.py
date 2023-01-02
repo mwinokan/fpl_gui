@@ -169,10 +169,15 @@ class League():
 			lst += m.squad.starting_forwards
 		return lst
 
-	def get_starting_players(self,unique=False):
+	def get_starting_players(self,unique=False,active_only=True):
 		lst = []
-		for m in self.managers:
-			lst += m.squad.starting_players
+		if active_only:
+			for m in self.active_managers:
+				lst += m.squad.starting_players
+		else:
+			for m in self.managers:
+				lst += m.squad.starting_players
+
 		new_set = []
 		names = []
 		for p in lst:
