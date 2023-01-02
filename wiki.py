@@ -94,7 +94,7 @@ force_go_graphs = True
 test = False
 force = False
 halfway_awards = False
-offline = True
+offline = False
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
