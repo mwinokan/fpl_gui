@@ -136,6 +136,7 @@ watchlist = [
 			"Mount",
 			# "Fofana",
 			# "Sinisterra",
+			"Digne",
 			# "March",
 			"Trent",
 			# "Aaronson",
