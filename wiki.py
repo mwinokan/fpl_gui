@@ -130,6 +130,7 @@ watchlist = [
 			# "Reece James",
 			# "Kyle Walker",
 			# "Luis D",
+			"Salah",
 			# "Haaland",
 			"Kane",
 			"Mount",
