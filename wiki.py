@@ -2529,10 +2529,9 @@ def create_leaguepage(league,sidebar_md,leagues,i):
 		html_buffer += md2html(md_buffer)
 		html_buffer += league_table_html(league, gw)
 
-	if league.num_managers > 20:
+	if league.num_managers and awards > 20:
 		subset = []
-		subset += sum([d[0] for d in json[str(league.id)]['half']['awards'].values()],[])
-		subset += sum([d[-1] for d in json[str(league.id)]['chips']['wc1'].values()],[])
+		subset += sum([d[0] for d in json[str(league.id)][gw]['awards'].values()],[])
 	else:
 		subset = None
 
