@@ -28,6 +28,7 @@ class FPL_API():
 	_gw_fixtures = {}
 	_loaded_players = []
 	_exp_archive = {}
+	_elements_by_team = None
 
 	_skip_gws = [7]
 	_wc_cutoff = 16
@@ -248,6 +249,31 @@ class FPL_API():
 		if self.__element_types is None:
 			self.__element_types = pd.DataFrame(self._bootstrapjson['element_types'])
 		return self.__element_types
+
+	@property
+	def elements_by_team(self):
+		# mout.debugOut(f"FPL_API.elements_by_team()")
+
+		if not self._elements_by_team:
+
+			self._elements_by_team = {}
+
+			player_ids = self._elements['id']
+
+			for i,pid in enumerate(player_ids):
+
+				if self._elements['minutes'][i] < 90:
+					continue
+
+				index = self.get_player_index(pid)
+
+				p = Player(None, self, index=index)
+
+				if p._shortteam not in self._elements_by_team.keys():
+					self._elements_by_team[p._shortteam] = []
+				self._elements_by_team[p._shortteam].append(p)
+							
+		return self._elements_by_team
 
 	@property
 	def _elements(self):

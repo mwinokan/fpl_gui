@@ -94,7 +94,7 @@ force_go_graphs = True
 test = False
 force = False
 halfway_awards = False
-offline = False
+offline = True
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
@@ -240,6 +240,9 @@ def main():
 
 		if test:
 
+			create_teampage(api,None,[])
+			exit()
+
 			# league = League(663873, api)
 
 
@@ -331,6 +334,8 @@ def main():
 
 		for i,l in enumerate(leagues):
 			create_leaguepage(l,sidebar_md,leagues,i)
+		
+		create_teampage(api,sidebar_md,leagues)
 
 		global halfway_awards
 		if api._current_gw == 16 and not api._live_gw:
@@ -396,6 +401,199 @@ def main():
 
 	if run_push_changes:
 		push_changes()
+
+def create_teampage(api,sidebar_md,leagues):
+	mout.debugOut(f"create_teampage()")
+
+	html_buffer = ""
+
+	for i,team in enumerate(api.teams):
+		mout.progress(i,20)
+
+		html_buffer += f'<h2><img class="w3-image" src="{team._badge_url}" alt="Team" width="30" height="30">\t{team.name}</h2>\n'
+
+		players = api.elements_by_team[team.shortname]
+
+		team_bg_color = team.get_style()['background-color']
+		team_text_color = team.get_style()['color']
+		team_style_str = f'"background-color:{team_bg_color};color:{team_text_color};"'
+
+		# Recent results
+
+		gw_range = range(max(1,api._current_gw-3),api._current_gw+4)
+
+		html_buffer += '<table class="w3-table w3-hoverable">\n'
+
+		html_buffer += '<tr>\n'
+		# html_buffer += f'<th class="w3-center" style={team_style_str}>GW</th>\n'
+		
+		for gw in gw_range:
+			html_buffer += f'<th class="w3-center">GW{gw}</td>\n'
+
+		html_buffer += '</tr>\n'
+
+		html_buffer += '<tr>\n'
+		# html_buffer += f'<th class="w3-center" style={team_style_str}>Opponent</th>\n'
+
+		for gw in gw_range:
+			fixs = team.get_gw_fixtures(gw)
+
+			if not isinstance(fixs, list):
+
+				opp = team.get_opponent(gw)
+				is_home = fixs['team_a'] == opp.id
+				
+				diff_delta = team.strength(is_home,overall=True) - opp.strength(not is_home,overall=True)
+				style_str = get_style_from_difficulty(diff_delta)
+
+				html_buffer += f'<td class="w3-center" style={style_str}>\n'
+				html_buffer += f'<img class="w3-image" src="{opp._badge_url}" alt="{opp.shortname}" width="20" height="20"> '
+				html_buffer += f'{opp.shortname} '
+
+				if is_home:
+					html_buffer += '(H)\n'
+				else:
+					html_buffer += '(A)\n'
+
+				html_buffer += '</td>\n'
+
+			else:
+
+				opps = team.get_opponent(gw)
+				for fix,opp in zip(fixs,opps):
+
+					is_home = fix['team_a'] == opp.id
+					
+					diff_delta = team.strength(is_home,overall=True) - opp.strength(not is_home,overall=True)
+					style_str = get_style_from_difficulty(diff_delta)
+
+					html_buffer += f'<td class="w3-center" style={style_str}>\n'
+					html_buffer += f'<img class="w3-image" src="{opp._badge_url}" alt="{opp.shortname}" width="20" height="20"> '
+					html_buffer += f'{opp.shortname} '
+
+					if is_home:
+						html_buffer += '(H)\n'
+					else:
+						html_buffer += '(A)\n'
+						html_buffer += '\t'
+
+				html_buffer += '</td>\n'
+
+		html_buffer += '</tr>\n'
+
+		html_buffer += '<tr>\n'
+		# html_buffer += f'<th class="w3-center" style={team_style_str}>Score</th>\n'
+
+		for gw in gw_range:
+
+			fixs = team.get_gw_fixtures(gw)
+
+			if isinstance(fixs,list):
+				opps = team.get_opponent(gw)
+				for fix,opp in zip(fixs,opps):
+
+					is_home = fix['team_a'] == opp.id
+
+					team_h_score = fix['team_h_score']
+					team_a_score = fix['team_a_score']
+
+					if not fix['started']:
+						team_h_obj = api.get_player_team_obj(fix['team_h'])
+						team_a_obj = api.get_player_team_obj(fix['team_a'])
+						team_h_score = (team_a_obj.goals_conceded_per_game + team_h_obj.goals_scored_per_game)/2 * (1-team_a_obj.expected_clean_sheet(team_h_obj))
+						team_a_score = (team_h_obj.goals_conceded_per_game + team_a_obj.goals_scored_per_game)/2 * (1-team_h_obj.expected_clean_sheet(team_a_obj))
+
+					style_str = get_style_from_game_score(is_home, team_h_score, team_a_score)
+					html_buffer += f'<td class="w3-center" style={style_str}>\n'
+					if not fix['started']:
+						html_buffer += f"({team_h_score:.0f} - {team_a_score:.0f})"
+					else:
+						html_buffer += f"{team_h_score:.0f} - {team_a_score:.0f}"
+					
+					html_buffer += '\t'
+
+				html_buffer += '</td>\n'
+
+			else:
+
+				opp = team.get_opponent(gw)
+				is_home = fixs['team_a'] == opp.id
+
+				team_h_score = fixs['team_h_score']
+				team_a_score = fixs['team_a_score']
+
+				if not fixs['started']:
+					team_h_obj = api.get_player_team_obj(fixs['team_h'])
+					team_a_obj = api.get_player_team_obj(fixs['team_a'])
+					team_h_score = (team_a_obj.goals_conceded_per_game + team_h_obj.goals_scored_per_game)/2 * (1-team_a_obj.expected_clean_sheet(team_h_obj))
+					team_a_score = (team_h_obj.goals_conceded_per_game + team_a_obj.goals_scored_per_game)/2 * (1-team_h_obj.expected_clean_sheet(team_a_obj))
+
+				style_str = get_style_from_game_score(is_home, team_h_score, team_a_score)
+				html_buffer += f'<td class="w3-center" style={style_str}>\n'
+				if not fixs['started']:
+					html_buffer += f"({team_h_score:.0f} - {team_a_score:.0f})"
+				else:
+					html_buffer += f"{team_h_score:.0f} - {team_a_score:.0f}"
+
+				html_buffer += '</td>\n'
+
+		html_buffer += '</tr>\n'		
+		html_buffer += '</table>\n'
+
+		html_buffer += '<br>\n'
+
+		html_buffer += '<table class="w3-table w3-hoverable">\n'
+
+		def player_name_str(p):
+			str_buffer = ""
+			if p.is_yellow_flagged:
+				str_buffer += f'⚠️ '
+			elif p.is_red_flagged:
+				str_buffer += f'⛔️ '
+			str_buffer += f'<a href="https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html">{p.name}</a>\n'
+			return str_buffer
+
+		# Top scoring assets
+		html_buffer += '<tr>\n'
+		html_buffer += f'<th style={team_style_str}>Total Points</th>\n'
+		sorted_players = sorted(players,key=lambda x: x.total_points,reverse=True)
+		for p in sorted_players[:5]:
+			style_str = get_style_from_event_score(p.total_points/p.appearances)
+			html_buffer += f'<td class="w3-center" style={style_str}>'
+			html_buffer += f'{player_name_str(p)} {p.total_points}'
+			html_buffer += '</td>\n'
+		html_buffer += '</tr>\n'
+
+		# Best form assets
+		html_buffer += '<tr>\n'
+		html_buffer += f'<th style={team_style_str}>Best Form</th>\n'
+		sorted_players = sorted(players,key=lambda x: x.form,reverse=True)
+		for p in sorted_players[:5]:
+			style_str = get_style_from_event_score(p.form)
+			html_buffer += f'<td class="w3-center" style={style_str}>'
+			html_buffer += f'{player_name_str(p)} {p.form}'
+			html_buffer += '</td>\n'
+		html_buffer += '</tr>\n'
+
+		# Top predicted points assets
+		html_buffer += '<tr>\n'
+		html_buffer += f'<th style={team_style_str}>Next 5 xPts</th>\n'
+		sorted_players = sorted(players,key=lambda x: x.next5_expected,reverse=True)
+		for p in sorted_players[:5]:
+			style_str = get_style_from_event_score(p.next5_expected/5)
+			html_buffer += f'<td class="w3-center" style={style_str}>'
+			html_buffer += f'{player_name_str(p)} {p.next5_expected:.1f}'
+			html_buffer += '</td>\n'
+		html_buffer += '</tr>\n'
+		
+		html_buffer += '</table>\n'
+
+		# break
+
+	mout.progress(20,20)
+
+	navbar = create_navbar(leagues, active='T', colour='black', active_colour='green')
+	html_page('html/teams.html',None,title=f"Teams",sidebar_content=sidebar_md, gw=api._current_gw, html=html_buffer, showtitle=True, bar_html=navbar)
 
 def create_assetpage(sidebar_md,leagues):
 	mout.debugOut(f"create_assetpage()")
@@ -479,6 +677,14 @@ def create_navbar(leagues,active=None,colour='black',active_colour='green'):
 	else:
 		html_buffer += f'<a href="{url}" class="wr-bar-item w3-button w3-center">'
 	html_buffer += f'🎄'
+	html_buffer += f'</a>\n'
+
+	url = f'https://mwinokan.github.io/FPL_GUI/html/teams.html'
+	if active is not None and active == 'T':
+		html_buffer += f'<a href="{url}" class="wr-bar-item w3-button w3-center w3-{active_colour}">'
+	else:
+		html_buffer += f'<a href="{url}" class="wr-bar-item w3-button w3-center">'
+	html_buffer += f'👨‍👨‍👦‍👦'
 	html_buffer += f'</a>\n'
 
 	for i,league in enumerate(leagues):
@@ -1108,7 +1314,7 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 			html_buffer += f'(C) '
 		if player.is_yellow_flagged:
 			html_buffer += f'⚠️ '
-		elif player.is_yellow_flagged:
+		elif player.is_red_flagged:
 			html_buffer += f'⛔️ '
 		if player.was_subbed:
 			html_buffer += f'🔄 '
@@ -1222,7 +1428,6 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 
 def get_style_from_difficulty(difficulty,old=False):
 
-	style_str = None
 	style_str = '"border:2px solid white;border-collapse:collapse;'
 
 	if old:
@@ -1253,6 +1458,35 @@ def get_style_from_difficulty(difficulty,old=False):
 				style_str += 'background-color:darkred;color:white'
 		
 	style_str += '"'
+	return style_str
+
+def get_style_from_game_score(is_home,team_h_score,team_a_score):
+
+	_team_h_score = float(team_h_score)
+	_team_a_score = float(team_a_score)
+
+	if not is_home:
+		_team_h_score, _team_a_score = _team_a_score, _team_h_score
+
+	style_str = '"border:2px solid white;border-collapse:collapse;'
+
+	won = _team_h_score > _team_a_score
+	draw = _team_h_score == _team_a_score
+	clean_sheet = _team_a_score == 0
+	opp_clean_sheet = _team_h_score == 0
+
+	if won:
+		if clean_sheet:
+			style_str += 'background-color:darkgreen;color:white'
+		else:
+			style_str += 'background-color:lightgreen'
+	elif not draw:
+		if opp_clean_sheet:
+			style_str += 'background-color:darkred;color:white'
+		else:
+			style_str += 'background-color:red'
+	style_str += '"'
+
 	return style_str
 
 def get_manager_json_positions(api,leagues):
@@ -2295,15 +2529,28 @@ def create_leaguepage(league,sidebar_md,leagues,i):
 		html_buffer += md2html(md_buffer)
 		html_buffer += league_table_html(league, gw)
 
-	if len(league._graph_paths) > 0:
+	if league.num_managers > 20:
+		subset = []
+		subset += sum([d[0] for d in json[str(league.id)]['half']['awards'].values()],[])
+		subset += sum([d[-1] for d in json[str(league.id)]['chips']['wc1'].values()],[])
+	else:
+		subset = None
 
-		html_buffer += '<h4>Graphs</h4>\n'
-		html_buffer += '<div class="w3-center">\n'
+	html_buffer += "<h3>League Graph</h3>\n"
+	import sys
+	sys.path.insert(1,'go')
+	from goleague import create_league_figure
+	html_buffer += create_league_figure(api, league, subset)
 
-		for p in league._graph_paths:
-			html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{p}?raw=true" alt="League Graph">\n'
+	# if len(league._graph_paths) > 0:
+
+	# 	html_buffer += '<h4>Graphs</h4>\n'
+	# 	html_buffer += '<div class="w3-center">\n'
+
+	# 	for p in league._graph_paths:
+	# 		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{p}?raw=true" alt="League Graph">\n'
 		
-		html_buffer += '</div>\n'
+	# 	html_buffer += '</div>\n'
 
 	navbar = create_navbar(leagues, active=i, colour='black', active_colour='green')
 	html_page(f'html/{league.name.replace(" ","-")}.html',None,title=f"{league.name}",sidebar_content=sidebar_md, gw=gw, html=html_buffer, bar_html=navbar, showtitle=True)

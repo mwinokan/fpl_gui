@@ -109,10 +109,12 @@ def main():
 	expected_total_points = []
 
 	player_ids = api._elements['id']
-	for pid in player_ids:
+	for i,pid in enumerate(player_ids):
+		mout.progress(i,len(player_ids))
 		index = api.get_player_index(pid)
-		if index%50 == 0:
-			print(index)
+		if api._elements['minutes'][index] < 90:
+			continue
+
 		p = Player(None, api, index=index)
 
 		# plt.scatter(p.history['creativity'],p.history['assists'],label=p.name)
@@ -142,6 +144,8 @@ def main():
 		elif p.position_id == 4:
 			forward_xdata.append(p.ct_total_scaled)
 			forward_ydata.append(p.attacking_points_per90)
+
+	mout.progress(len(player_ids),len(player_ids))
 	
 	plt.scatter(defender_xdata,defender_ydata,label=p.name,color='r')
 	plt.scatter(midfielder_xdata,midfielder_ydata,label=p.name,color='g')
