@@ -1050,20 +1050,20 @@ class Manager():
 				bench = self.players[-4:]
 
 		if all([p.needs_autosub for p in bench[1:]]):
-			mout.warningOut(f'No one on the bench is playing ({self.name})')
+			# mout.warningOut(f'No one on the bench is playing ({self.name})')
 			return
 
 		# goalkeeper
 		for player in self.squad.starting_goalkeepers:
 			if player.needs_autosub:
-				mout.out(f'{player.name} did not play ({self.name})',end=' ')
+				# mout.out(f'{player.name} did not play ({self.name})',end=' ')
 				# mout.varOut("bench",bench)
 				replacement = bench[0]
-				mout.varOut('replacement',replacement)
+				# mout.varOut('replacement',replacement)
 			else:
 				break
 			if replacement.needs_autosub:
-				mout.warningOut(f'{replacement.name} also did not play. No change made')
+				# mout.warningOut(f'{replacement.name} also did not play. No change made')
 				break
 			else:
 				# make the change
@@ -1071,7 +1071,7 @@ class Manager():
 				replacement.multiplier = 1
 				replacement.was_subbed = True
 				bench[0] = player
-				mout.varOut("new bench",bench)
+				# mout.varOut("new bench",bench)
 				break
 
 		n_defenders = len(self.squad.starting_defenders)
@@ -1087,9 +1087,9 @@ class Manager():
 				continue
 
 			if player.needs_autosub:
-				mout.out(f'{player.name} did not play ({self.name}).',end=' ')
-				mout.varOut("bench",bench)
-				mout.varOut("squad",self.players)
+				# mout.out(f'{player.name} did not play ({self.name}).',end=' ')
+				# mout.varOut("bench",bench)
+				# mout.varOut("squad",self.players)
 
 				# select replacement
 				replacement = bench[1]
@@ -1100,7 +1100,7 @@ class Manager():
 						# mout.warningOut(f'{replacement.name} also did not play.')
 						replacement = bench[3]
 						if replacement.needs_autosub:
-							mout.errorOut(f'No one on the bench is playing.')
+							# mout.errorOut(f'No one on the bench is playing.')
 							break
 
 				# check for formation validity
@@ -1111,10 +1111,10 @@ class Manager():
 					elif bench[3].position_id == 2 and not bench[3].needs_autosub:
 						replacement = bench[3]
 					else:
-						mout.warningOut(f'Could not find replacement defender. {self.name}, {self.id}')
+						# mout.warningOut(f'Could not find replacement defender. {self.name}, {self.id}')
 						continue
 
-				mout.varOut('replacement',replacement)
+				# mout.varOut('replacement',replacement)
 
 				# check for captaincy
 				if player.is_captain:
@@ -1126,7 +1126,7 @@ class Manager():
 					new_cap.is_captain = True
 					new_cap.is_vice_captain = False
 					new_cap.multiplier = 2
-					mout.warningOut(f'{new_cap.name} is now captain!')
+					# mout.warningOut(f'{new_cap.name} is now captain!')
 
 				# make the change
 				player.multiplier = 0

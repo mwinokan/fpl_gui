@@ -406,6 +406,76 @@ def create_teampage(api,sidebar_md,leagues):
 	mout.debugOut(f"create_teampage()")
 
 	html_buffer = ""
+	
+	html_buffer += '<h2>Fixture Table</h2>\n'
+
+	html_buffer += '<table class="w3-table w3-hoverable">\n'
+
+	sorted_teams = sorted(api.teams,key=lambda x: x.difficulty_next5, reverse=True)
+
+	table_buffer = ""
+
+	gw_range = range(api._current_gw,min(api._current_gw+8,38))
+
+	for i,team in enumerate(sorted_teams):
+
+		team_bg_color = team.get_style()['background-color']
+		team_text_color = team.get_style()['color']
+		team_style_str = f'"border:2px solid white;border-collapse:collapse;background-color:{team_bg_color};color:{team_text_color};"'
+
+		table_buffer += '<tr>\n'
+		table_buffer += f'<th style={team_style_str}>'
+		table_buffer += f'<img class="w3-image" src="{team._badge_url}" alt="{team.shortname}" width="20" height="20"> '
+		table_buffer += f' {team.name}</th>\n'
+
+		for gw in gw_range:
+			fixs = team.get_gw_fixtures(gw)
+			opps = team.get_opponent(gw)
+
+			if not isinstance(opps,list):
+				fixs = [fixs]
+				opps = [opps]
+
+			total = 0
+			for fix,opp in zip(fixs,opps):
+				is_home = fix['team_a'] == opp.id
+				total += team.strength(is_home,overall=True) - opp.strength(not is_home,overall=True)
+			diff_delta = total / len(opps)
+
+			style_str = get_style_from_difficulty(diff_delta)
+			table_buffer += f'<td class="w3-center" style={style_str}>\n'
+
+			if len(opps) > 1:
+				table_buffer += "<strong>"
+			table_buffer += " ".join([t.shortname if f['team_a'] == t.id else t.shortname.lower() for f,t in zip(fixs,opps)])
+
+			table_buffer += f'</td>\n'
+
+		table_buffer += '</tr>\n'
+
+	html_buffer += '<tr>\n'
+	html_buffer += '<th>Team</th>\n'
+	for gw in gw_range:
+		gw_str = "GW"
+		if gw in api._special_gws.keys():
+			gw_str = api._special_gws[gw]
+		if gw_str in ["DGW","TGW"]:
+			html_buffer += f'<th class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow">{gw_str}{gw}</th>\n'
+		elif gw_str == "BGW":
+			html_buffer += f'<th class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red">{gw_str}{gw}</th>\n'
+		else:
+			html_buffer += f'<th class="w3-center">{gw_str}{gw}</th>\n'
+	html_buffer += '</tr>\n'
+
+	html_buffer += table_buffer
+	
+	html_buffer += '</table>\n'
+
+	html_buffer += '<br>\n'
+
+	html_buffer += '<h2>Best Assets by Team</h2>\n'
+
+	gw_range = range(max(1,api._current_gw-3),api._current_gw+5)
 
 	for i,team in enumerate(api.teams):
 		mout.progress(i,20)
@@ -420,20 +490,12 @@ def create_teampage(api,sidebar_md,leagues):
 
 		# Recent results
 
-		gw_range = range(max(1,api._current_gw-3),api._current_gw+4)
-
 		html_buffer += '<table class="w3-table w3-hoverable">\n'
 
-		html_buffer += '<tr>\n'
-		# html_buffer += f'<th class="w3-center" style={team_style_str}>GW</th>\n'
-		
-		for gw in gw_range:
-			html_buffer += f'<th class="w3-center">GW{gw}</td>\n'
-
-		html_buffer += '</tr>\n'
-
-		html_buffer += '<tr>\n'
+		table_buffer += '<tr>\n'
 		# html_buffer += f'<th class="w3-center" style={team_style_str}>Opponent</th>\n'
+
+		table_buffer = ""
 
 		for gw in gw_range:
 			fixs = team.get_gw_fixtures(gw)
@@ -446,16 +508,15 @@ def create_teampage(api,sidebar_md,leagues):
 				diff_delta = team.strength(is_home,overall=True) - opp.strength(not is_home,overall=True)
 				style_str = get_style_from_difficulty(diff_delta)
 
-				html_buffer += f'<td class="w3-center" style={style_str}>\n'
-				html_buffer += f'<img class="w3-image" src="{opp._badge_url}" alt="{opp.shortname}" width="20" height="20"> '
-				html_buffer += f'{opp.shortname} '
+				table_buffer += f'<td class="w3-center" style={style_str}>\n'
+				table_buffer += f'<img class="w3-image" src="{opp._badge_url}" alt="{opp.shortname}" width="20" height="20"> '
 
 				if is_home:
-					html_buffer += '(H)\n'
+					table_buffer += f'{opp.shortname} '
 				else:
-					html_buffer += '(A)\n'
+					table_buffer += f'{opp.shortname.lower()} '
 
-				html_buffer += '</td>\n'
+				table_buffer += '</td>\n'
 
 			else:
 
@@ -467,28 +528,32 @@ def create_teampage(api,sidebar_md,leagues):
 					diff_delta = team.strength(is_home,overall=True) - opp.strength(not is_home,overall=True)
 					style_str = get_style_from_difficulty(diff_delta)
 
-					html_buffer += f'<td class="w3-center" style={style_str}>\n'
-					html_buffer += f'<img class="w3-image" src="{opp._badge_url}" alt="{opp.shortname}" width="20" height="20"> '
-					html_buffer += f'{opp.shortname} '
+					table_buffer += f'<td class="w3-center" style={style_str}>\n'
+					table_buffer += f'<img class="w3-image" src="{opp._badge_url}" alt="{opp.shortname}" width="20" height="20"> '
 
 					if is_home:
-						html_buffer += '(H)\n'
+						table_buffer += f'{opp.shortname} '
 					else:
-						html_buffer += '(A)\n'
-						html_buffer += '\t'
+						table_buffer += f'{opp.shortname.lower()} '
+						table_buffer += '\t'
 
-				html_buffer += '</td>\n'
+				table_buffer += '</td>\n'
 
-		html_buffer += '</tr>\n'
+		table_buffer += '</tr>\n'
 
-		html_buffer += '<tr>\n'
-		# html_buffer += f'<th class="w3-center" style={team_style_str}>Score</th>\n'
+		table_buffer += '<tr>\n'
+		# table_buffer += f'<th class="w3-center" style={team_style_str}>Score</th>\n'
+
+		special_gws = {}
 
 		for gw in gw_range:
 
 			fixs = team.get_gw_fixtures(gw)
 
 			if isinstance(fixs,list):
+
+				special_gws[gw] = len(fixs)
+
 				opps = team.get_opponent(gw)
 				for fix,opp in zip(fixs,opps):
 
@@ -504,15 +569,15 @@ def create_teampage(api,sidebar_md,leagues):
 						team_a_score = (team_h_obj.goals_conceded_per_game + team_a_obj.goals_scored_per_game)/2 * (1-team_h_obj.expected_clean_sheet(team_a_obj))
 
 					style_str = get_style_from_game_score(is_home, team_h_score, team_a_score)
-					html_buffer += f'<td class="w3-center" style={style_str}>\n'
+					table_buffer += f'<td class="w3-center" style={style_str}>\n'
 					if not fix['started']:
-						html_buffer += f"({team_h_score:.0f} - {team_a_score:.0f})"
+						table_buffer += f"({team_h_score:.0f} - {team_a_score:.0f})"
 					else:
-						html_buffer += f"{team_h_score:.0f} - {team_a_score:.0f}"
+						table_buffer += f"{team_h_score:.0f} - {team_a_score:.0f}"
 					
-					html_buffer += '\t'
+					table_buffer += '\t'
 
-				html_buffer += '</td>\n'
+				table_buffer += '</td>\n'
 
 			else:
 
@@ -529,16 +594,40 @@ def create_teampage(api,sidebar_md,leagues):
 					team_a_score = (team_h_obj.goals_conceded_per_game + team_a_obj.goals_scored_per_game)/2 * (1-team_h_obj.expected_clean_sheet(team_a_obj))
 
 				style_str = get_style_from_game_score(is_home, team_h_score, team_a_score)
-				html_buffer += f'<td class="w3-center" style={style_str}>\n'
+				table_buffer += f'<td class="w3-center" style={style_str}>\n'
 				if not fixs['started']:
-					html_buffer += f"({team_h_score:.0f} - {team_a_score:.0f})"
+					table_buffer += f"({team_h_score:.0f} - {team_a_score:.0f})"
 				else:
-					html_buffer += f"{team_h_score:.0f} - {team_a_score:.0f}"
+					table_buffer += f"{team_h_score:.0f} - {team_a_score:.0f}"
 
-				html_buffer += '</td>\n'
+				table_buffer += '</td>\n'
+
+		html_buffer += '<tr>\n'
+		
+		for gw in gw_range:
+
+			if gw in special_gws.keys():
+				num_fixs = special_gws[gw]
+				if num_fixs == 2:
+					html_buffer += f'<th class="w3-center" scope="col" colspan="2" style="border:2px solid white;border-collapse:collapse;background-color:yellow">DGW{gw}</th>\n'
+				elif num_fixs == 3:
+					html_buffer += f'<th class="w3-center" scope="col" colspan="3" style="border:2px solid white;border-collapse:collapse;background-color:yellow">TGW{gw}</th>\n'
+				elif num_fixs == 0:
+					html_buffer += f'<th class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red">BGW{gw}</th>\n'
+			else:
+				html_buffer += f'<th class="w3-center">GW{gw}</th>\n'
+
+			# html_buffer += f'<th class="w3-center">GW{gw}</td>\n'
+
+		html_buffer += '</tr>\n'
+
+		html_buffer += table_buffer
 
 		html_buffer += '</tr>\n'		
 		html_buffer += '</table>\n'
+
+		if test:
+			break
 
 		html_buffer += '<br>\n'
 
@@ -1431,21 +1520,26 @@ def get_style_from_difficulty(difficulty,old=False):
 	style_str = '"border:2px solid white;border-collapse:collapse;'
 
 	if old:
-		if difficulty == 5:
-			style_str += 'background-color:darkred;color:white'
-		elif difficulty == 4:
-			style_str += 'background-color:red'
+
+		# difficulty = round(difficulty+1)
+
+		if difficulty == 1:
+			style_str += 'background-color:darkgreen;color:white'
 		elif difficulty == 2:
 			style_str += 'background-color:lightgreen'
-		elif difficulty == 1:
-			style_str += 'background-color:darkgreen;color:white'
+		elif difficulty == 3:
+			pass
+		elif difficulty == 4:
+			style_str += 'background-color:red'
+		elif difficulty == 5:
+			style_str += 'background-color:darkred;color:white'
 	else:
 		if not isinstance(difficulty,float):
 			style_str += 'background-color: black;""color:white'
 			return style_str
 
 		if abs(difficulty) < 1.0:
-			return None
+			pass
 		elif difficulty > 0.0:
 			if difficulty < 2.0:
 				style_str += 'background-color:lightgreen'

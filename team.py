@@ -51,6 +51,7 @@ class Team():
 		self._clean_sheets = None
 		self._clean_sheets_broken = None
 		self._games_played = None
+		self._difficulty_next5 = None
 
 		self._shortname = self._api._teamdata['short_name'][id-1]
 
@@ -93,18 +94,26 @@ class Team():
 	def shortname(self):
 		return self._shortname
 
-	def get_fixture_str(self,gw,short=True,lower_away=True):
-
-		print(self.get_gw_fixtures(gw))
-
-		return 'x'
-
 	def get_gw_fixtures(self,gw):
+
 		fixs = []
 
 		for fix_d in self.fixtures:
 			if fix_d['event'] == gw:
 				fixs.append(fix_d)
+		
+		match len(fixs):
+			case 3:
+				self._api._special_gws[gw] = "TGW"
+			case 2:
+				if gw in self._api._special_gws.keys():
+					if self._api._special_gws[gw] == "BGW":
+						self._api._special_gws[gw] = "DGW"
+				else:
+					self._api._special_gws[gw] = "DGW"
+			case 0:
+				if gw not in self._api._special_gws.keys():
+					self._api._special_gws[gw] = "BGW"
 
 		if len(fixs) == 1:
 			return fixs[0]
@@ -212,6 +221,36 @@ class Team():
 		if self.games_played == 0:
 			return None
 		return self.goals_scored/self.games_played
+
+	@property
+	def difficulty_next5(self):
+		if not self._difficulty_next5:
+
+			if self._api._current_gw == 38:
+				return 0.0
+
+			total = 0
+			count = 0
+
+			for gw in range(self._api.current_gw+1,min(self._api.current_gw+5,38)):
+				
+				fixs = self.get_gw_fixtures(gw)
+				opps = self.get_opponent(gw)
+
+				if not isinstance(fixs, list):
+					fixs = [fixs]
+					opps = [opps]
+
+				for fix,opp in zip(fixs,opps):
+
+					is_home = fix['team_a'] == opp.id
+					total += self.strength(is_home,overall=True) - opp.strength(not is_home,overall=True)
+					# total += - opp.strength(not is_home,overall=True)
+					count += 1
+
+			self._difficulty_next5 = total / count					
+
+		return self._difficulty_next5
 
 	@property
 	def fixtures(self):

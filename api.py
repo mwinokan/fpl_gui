@@ -29,6 +29,7 @@ class FPL_API():
 	_loaded_players = []
 	_exp_archive = {}
 	_elements_by_team = None
+	_special_gws = {}
 
 	_skip_gws = [7]
 	_wc_cutoff = 16
