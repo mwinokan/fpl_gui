@@ -148,10 +148,15 @@ class FPL_API():
 				mout.errorOut("Request 404'd",fatal=True)
 				return {}
 
-			json = r.json()
-			self._request_data[handle] = json
-			self._request_log.append(handle)
-			return json
+			try:
+				json = r.json()
+				self._request_data[handle] = json
+				self._request_log.append(handle)
+				return json
+			except requests.exceptions.JSONDecodeError:
+				print(r)
+				mout.errorOut(f"Problem handling JSON from {handle}",fatal=True)
+
 
 	def finish(self):
 
