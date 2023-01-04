@@ -16,7 +16,8 @@ def main():
 	else:
 		lookforward = 5
 
-	extra = 1.9
+	# extra cash for any pre-booked but not executed transfers
+	extra = 0.0
 
 	use_official = False
 	if lookforward == 1:
