@@ -70,6 +70,21 @@ class Player():
 		self._attacking_returns_per90 = None
 		self._next5_expected = None
 
+		self._weeks_owned = []
+		self._weeks_started = []
+		self._weeks_benched = []
+		self._weeks_captained = []
+		self._num_weeks_owned = 0
+		self._num_weeks_started = 0
+		self._num_weeks_benched = 0
+		self._num_weeks_captained = 0
+		self._multiplier_history = None
+
+		self._points_while_owned = 0
+		self._points_while_started = 0
+		self._points_while_captained = 0
+		self._points_while_benched = 0
+
 		self.__minutes = None
 		self.__goals_scored = None
 		self.__assists = None
@@ -946,6 +961,11 @@ class Player():
 		self.__threat = event_stats["threat"]
 		self.__ict_index = event_stats["ict_index"]
 
+	def fetch_event_stats(self,gw):
+		gw = gw or self._api.current_gw
+		event_stats = self._api.get_player_event_stats(gw,self._id)
+		self.extract_event_stats(event_stats)
+		
 	@property
 	def event_yellows(self):
 		gw=self._api.current_gw
@@ -953,8 +973,7 @@ class Player():
 			mout.errorOut("Gameweek has not happened yet")
 			return None
 		if self.__yellow_cards is None:
-			event_stats = self._api.get_player_event_stats(gw,self._id)
-			self.extract_event_stats(event_stats)
+			self.fetch_event_stats(gw)
 		return self.__yellow_cards
 
 	@property
@@ -964,8 +983,7 @@ class Player():
 			mout.errorOut("Gameweek has not happened yet")
 			return None
 		if self.__red_cards is None:
-			event_stats = self._api.get_player_event_stats(gw,self._id)
-			self.extract_event_stats(event_stats)
+			self.fetch_event_stats(gw)
 		return self.__red_cards
 
 	@property
@@ -975,8 +993,7 @@ class Player():
 			mout.errorOut("Gameweek has not happened yet")
 			return None
 		if self.__minutes is None:
-			event_stats = self._api.get_player_event_stats(gw,self._id)
-			self.extract_event_stats(event_stats)
+			self.fetch_event_stats(gw)
 		return self.__minutes
 
 	@property
@@ -986,8 +1003,7 @@ class Player():
 			mout.errorOut("Gameweek has not happened yet")
 			return None
 		if self.__bps is None:
-			event_stats = self._api.get_player_event_stats(gw,self._id)
-			self.extract_event_stats(event_stats)
+			self.fetch_event_stats(gw)
 		return self.__bps
 
 	@property
@@ -997,8 +1013,7 @@ class Player():
 			mout.errorOut("Gameweek has not happened yet")
 			return None
 		if self.__bonus is None:
-			event_stats = self._api.get_player_event_stats(gw,self._id)
-			self.extract_event_stats(event_stats)
+			self.fetch_event_stats(gw)
 		return self.__bonus
 
 	@property
@@ -1008,8 +1023,7 @@ class Player():
 			mout.errorOut("Gameweek has not happened yet")
 			return None
 		if self.__goals_scored is None:
-			event_stats = self._api.get_player_event_stats(gw,self._id)
-			self.extract_event_stats(event_stats)
+			self.fetch_event_stats(gw)
 		return self.__goals_scored
 
 	def get_event_summary(self,gw,event_stats=None,md_bold=True,pts_line=True,team_line=True,html_highlight=True):
@@ -1243,6 +1257,14 @@ class Player():
 
 	def __repr__(self):
 		return self.name
+
+	def __hash__(self):
+		return hash(self.id)
+
+	def __eq__(self,other):
+		if type(self) != type(other):
+			return False
+		return self.id == other.id
 
 	@property
 	def outstanding_gwfix(self):

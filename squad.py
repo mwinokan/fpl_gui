@@ -1,18 +1,18 @@
 
 class Squad():
-	def __init__(self,gameweek=None,api=None):
+	def __init__(self,gw=None,api=None):
 		self._api = api
 		self._players = []
-		if gameweek is not None:
-			self._gameweek = gameweek
+		if gw is not None:
+			self._gw = gw
 
 	def add_player(self,player):
 		if player is not None:
 			self._players.append(player)
 
 	@property
-	def gameweek(self):
-		return self._gameweek
+	def gw(self):
+		return self._gw
 
 	@property
 	def players(self):

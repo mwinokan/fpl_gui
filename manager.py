@@ -332,19 +332,80 @@ class Manager():
 				self.make_autosubs()
 			else:
 				old_cap = self._squad.captain
+				old_cap.fetch_event_stats(gw)
 				# print(f"Captain: {old_cap.name}")
 				# print(f"Captain: {old_cap.multiplier}")
 				# print(f"Captain: {old_cap.is_captain}")
 				# print(f"Captain: {old_cap.is_vice_captain}")
 				if old_cap.event_minutes == 0:
 					new_cap = self._squad.vice_captain
-					# print(f"Captain: {old_cap.name} --> {new_cap.name}")
+					# print(f"GW{gw} Captain: {old_cap.name} --> {new_cap.name}")
 					new_cap.multiplier = 2
 					new_cap.is_captain = True
 					old_cap.multiplier = 0
 					old_cap.is_captain = False
 				
 		return self._squad
+
+	def get_squad_history(self):
+
+		gw_squads = {}
+		for gw in self.active_gws:
+			gw_squads[gw] = self.get_current_squad(gw,force=True)
+
+		all_players = list(set(sum([squad.players for squad in gw_squads.values()],[])))
+
+		for p in all_players:
+			owned = []
+			started = []
+			benched = []
+			captained = []
+			multipliers = []
+			for gw,squad in gw_squads.items():
+				if p in squad.players:
+					p2 = squad.players[squad.players.index(p)]
+					owned.append(gw)
+					# print(p2,gw,p2.multiplier)
+					if p2.multiplier > 0:
+						started.append(gw)
+					if p2.multiplier > 1:
+						captained.append(gw)
+					if p2.multiplier == 0 and p2.event_minutes > 0:
+						benched.append(gw)
+					multipliers.append(p2.multiplier)
+			p._weeks_owned = owned
+			p._weeks_started = started
+			p._weeks_benched = benched
+			p._weeks_captained = captained
+			p._num_weeks_owned = len(owned)
+			p._num_weeks_started = len(started)
+			p._num_weeks_captained = len(captained)
+			p._num_weeks_benched = len(benched)
+			p._multiplier_history = multipliers
+
+			for gw,multiplier in zip(p._weeks_owned,p._multiplier_history):
+				pts = p.get_event_score(gw,not_playing_is_none=False)
+				p._points_while_owned += pts
+				if multiplier > 1:
+					p._points_while_captained += pts
+				if multiplier > 0:
+					p._points_while_started += pts
+				if multiplier == 0 and p2.event_minutes > 0:
+					p._points_while_benched += pts
+			
+			p._avg_pts_owned = round(p._points_while_owned/len(owned),1) if owned else None
+			p._avg_pts_started = round(p._points_while_started/len(started),1) if started else None
+			p._avg_pts_benched = round(p._points_while_benched/len(benched),1) if benched else None
+			p._avg_pts_captained = round(p._points_while_captained/len(captained),1) if captained else None
+			p._avg_pts_total = round(p.total_points/p.appearances,1) if p.appearances else None
+
+		all_players = sorted(all_players,key=lambda x: x._num_weeks_owned,reverse=True)
+
+		self._squad_history = Squad(gw=self.active_gws)
+		for p in all_players:
+			self._squad_history.add_player(p)
+
+		return self._squad_history
 
 	@property
 	def name(self):

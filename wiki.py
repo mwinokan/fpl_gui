@@ -240,8 +240,8 @@ def main():
 
 		if test:
 
-			create_teampage(api,None,[])
-			exit()
+			# create_teampage(api,None,[])
+			# exit()
 
 			# league = League(663873, api)
 
@@ -254,7 +254,9 @@ def main():
 			
 			man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=False)
 
-			print(man._history_current.keys())
+			create_manager_pick_history(api, man)
+
+			# print(man._history_current.keys())
 
 			# man = Manager("Max Winokan", 4999117, api, team_name="Loyd's Groß Men", authenticate=False)
 			# man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=True)
@@ -1514,6 +1516,28 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 	html_buffer += '</div>\n'
 
 	return html_buffer
+
+def create_manager_pick_history(api,man):
+
+	squad = man.get_squad_history()
+
+	for p in squad.players:
+		# print(p,p._points_while_started,p._points_while_owned,p.total_points,p._weeks_owned,p._weeks_started)
+		print(f'{p.name.rjust(20)} {p._num_weeks_owned:2n} started:{p._avg_pts_started} benched:{p._avg_pts_benched} total:{p._avg_pts_total}')
+		# print(f'{p.name.rjust(20)} {p._num_weeks_owned:2n} started/owned={100*p._points_while_started/p._points_while_owned if p._points_while_owned > 0 else 0:5.1f}% owned/total={100*p._points_while_started/p.total_points:5.1f}%')
+
+	for p in squad.players:
+		print(f'{p.name.rjust(20)}',end=' ')
+		for gw in man.active_gws:
+			if gw in p._weeks_captained:
+				print("C",end='')
+			elif gw in p._weeks_started:
+				print("*",end='')
+			elif gw in p._weeks_benched:
+				print("-",end='')
+			else:
+				print(" ",end='')
+		print(" ")
 
 def get_style_from_difficulty(difficulty,old=False):
 
