@@ -369,7 +369,7 @@ def main():
 			mout.progress(i,maximum,width=50,fill="#")
 			m.create_rank_graph(plot=plot,show=False)
 			m.create_points_graph(plot=plot,show=False)
-			m.create_leaguepos_graph(plot=plot,show=False)
+			# m.create_leaguepos_graph(plot=plot,show=False)
 			create_managerpage(api, m, sidebar_md, leagues)
 		mout.progress(maximum,maximum,width=50,fill="#")
 		mout.showDebug()
