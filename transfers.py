@@ -19,6 +19,8 @@ def main():
 	# extra cash for any pre-booked but not executed transfers
 	extra = 0.0
 
+	consider_best11 = True
+
 	use_official = False
 	if lookforward == 1:
 		use_official = True
@@ -69,28 +71,62 @@ def main():
 	names = [p.name for p in man.players]
 
 	options = []
+	
+	if consider_best11:
 
-	for i,p in enumerate(man.players):
+		for i,p in enumerate(man.players):
 
-		# get best affordable replacement
+			if p.position_id == 1:
+				affordable = [q for q in gkps if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			elif p.position_id == 2:
+				affordable = [q for q in defs if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			elif p.position_id == 3:
+				affordable = [q for q in mids if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			elif p.position_id == 4:
+				affordable = [q for q in fwds if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
 
-		if p.position_id == 1:
-			affordable = [q for q in gkps if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
-		elif p.position_id == 2:
-			affordable = [q for q in defs if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
-		elif p.position_id == 3:
-			affordable = [q for q in mids if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
-		elif p.position_id == 4:
-			affordable = [q for q in fwds if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			for q in affordable:
 
-		replacement = sorted(affordable, key=lambda x: x.next_expected(lookforward,use_official)-p.next_expected(lookforward,use_official), reverse=True)
+				total = 0
 
-		if len(replacement) < 1:
-			continue
+				for j in range(gw,gw+lookforward):
 
-		replacement = replacement[0]
+					total += man.squad.expected_transfer_return(j,p,q)
 
-		options.append(dict(index=i,replacement=replacement,gain=replacement.next_expected(lookforward,use_official)-p.next_expected(lookforward,use_official)))
+				j._temp = total
+
+			replacement = sorted(affordable, key=lambda x: x._temp, reverse=True)
+
+			if len(replacement) < 1:
+				continue
+
+			replacement = replacement[0]
+
+			options.append(dict(index=i,replacement=replacement,gain=replacement.next_expected(lookforward,use_official)-p.next_expected(lookforward,use_official)))
+
+	else:
+
+		for i,p in enumerate(man.players):
+
+			# get best affordable replacement
+
+			if p.position_id == 1:
+				affordable = [q for q in gkps if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			elif p.position_id == 2:
+				affordable = [q for q in defs if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			elif p.position_id == 3:
+				affordable = [q for q in mids if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+			elif p.position_id == 4:
+				affordable = [q for q in fwds if q.price <= p.selling_price + man._bank_balance[-1] + extra and q.name not in names and q.next_expected(lookforward,use_official) > p.next_expected(lookforward,use_official)]
+
+			replacement = sorted(affordable, key=lambda x: x.next_expected(lookforward,use_official)-p.next_expected(lookforward,use_official), reverse=True)
+
+			if len(replacement) < 1:
+				continue
+
+			replacement = replacement[0]
+
+			options.append(dict(index=i,replacement=replacement,gain=replacement.next_expected(lookforward,use_official)-p.next_expected(lookforward,use_official)))
 
 	mout.headerOut("\nSuggested Transfers:")
 

@@ -412,7 +412,7 @@ class FPL_API():
 				'cache-control': 'max-age=0',
 				'content-length': '224',
 				'content-type': 'application/x-www-form-urlencoded',
-				'cookie': 'csrftoken=3Ci7DiqxgqBVAFvchL7ROqqZ859ZT2tDagwUC2xGtaB3kVVDQFlr2xGZNXnz3d96; pl_euconsent-v2=CPk8z79Pk8z79FCABAENCxCsAP_AAH_AAAwIF5wAQF5gXnABAXmAAAAA.YAAAAAAAAAAA; pl_euconsent-v2-intent-confirmed={%22tcf%22:[755]%2C%22oob%22:[]}; pl_oob-vendors={}; datadome=52Bf4pUwfqwpdm_S-yGWn5KPeHw5QJ3qlRMSTTQer7Hr0x45v25gIBsVcjAXIq-0yPl-5O-vz6v9~lLXorDbcYozF2VGnrCfZ8ilE4nvXNczWJuc7onPX8gEgXKRsxB',
+				'cookie': 'csrftoken=3Ci7DiqxgqBVAFvchL7ROqqZ859ZT2tDagwUC2xGtaB3kVVDQFlr2xGZNXnz3d96; pl_euconsent-v2=CPk8z79Pk8z79FCABAENCxCsAP_AAH_AAAwIF5wAQF5gXnABAXmAAAAA.YAAAAAAAAAAA; pl_euconsent-v2-intent-confirmed={%22tcf%22:[755]%2C%22oob%22:[]}; pl_oob-vendors={}; datadome=7WQ3aBUJ-FOkg4azLJDLuyoIGNzyJqXpzM2aL9Q8kVcJWdRDVMG-50_YSLah1x_woJPe1qEe2GZjU1aJVvnw_gVfoktuHmJ-HlcpatZkvZ4gpGDYQub2MuCCeop8Glh-',
 				'origin': 'https://users.premierleague.com',
 				'referer': 'https://users.premierleague.com/?state=fail&reason=credentials',
 				'sec-ch-device-memory': '8',

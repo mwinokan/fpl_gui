@@ -14,6 +14,8 @@ class Squad():
 	def gw(self):
 		return self._gw
 
+	
+
 	@property
 	def players(self):
 		return self._players
@@ -148,6 +150,19 @@ class Squad():
 		if summary:
 			for p in self.players:
 				print(f'{p.expected_points(gw=gw,debug=debug,use_official=use_official):5.1f}',p.multiplier,p.name)
+
+	def expected_transfer_return(self,gw,player_out,player_in,assume_best_multipliers):
+
+		if not assume_best_multipliers:
+			self.set_best_multipliers(gw)
+
+		copy = self.copy()
+
+		copy.players[copy.players.index(player_out)] = player_in
+
+		copy.set_best_multipliers(gw)
+
+		return copy.expected_points(gw) - self.expected_points(gw)
 
 	def next5_expected(self):
 
