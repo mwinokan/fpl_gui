@@ -197,9 +197,17 @@ class Team():
 		return self.clean_sheets/self.games_played
 
 	def expected_clean_sheet(self,opponent):
-		prob = (self.clean_sheet_probability + 1 - opponent.clean_sheet_breaking_probability)/2
-		return (prob + 1 - min(1.0,self.expected_goals_conceded(opponent)))/2
-		# return prob
+		if isinstance(opponent, list):
+			probs = []
+			for opp in opponent:
+				p = (self.clean_sheet_probability + 1 - opp.clean_sheet_breaking_probability)/2
+				p = (p + 1 - min(1.0,self.expected_goals_conceded(opp)))/2
+				probs.append(p)
+			prob = sum(probs)/len(probs)
+		else:
+			prob = (self.clean_sheet_probability + 1 - opponent.clean_sheet_breaking_probability)/2
+			prob = (prob + 1 - min(1.0,self.expected_goals_conceded(opponent)))/2
+		return prob
 
 	def expected_goals_conceded(self,opponent):
 		return (self.goals_conceded_per_game + opponent.goals_scored_per_game)/2
