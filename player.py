@@ -1061,6 +1061,8 @@ class Player():
 		if event_stats is None:
 			event_stats = self._api.get_player_event_stats(gw,self._id,dgw_index)
 
+		# print(h_index,gw,dgw_index,player_lines)
+
 		self.extract_event_stats(event_stats)
 
 		if team_line:
@@ -1086,10 +1088,8 @@ class Player():
 
 				if md_bold:
 					str_buffer = f'<b>{self.team}</b>: {result_str} to {opp_team}.\n'
-					str_buffer += f'<b>{self.name}</b>: '
 				else:
 					str_buffer = f'{self.team}: {result_str} to {opp_team}.\n'
-					str_buffer += f'{self.name}: '
 
 			else:
 
@@ -1097,15 +1097,19 @@ class Player():
 				
 				if md_bold:
 					str_buffer = f'<b>{self.team}</b>: {result_str} to {opp_team}.\n'
-					str_buffer += f'<b>{self.name}</b>: '
 				else:
 					str_buffer = f'{self.team}: {result_str} to {opp_team}.\n'
-					str_buffer += f'{self.name}: '
 		
+			if not player_lines:
+				return str_buffer
+
+			if md_bold:
+				str_buffer += f'<b>{self.name}</b>: '
+			else:
+				str_buffer += f'{self.name}: '
+
 		elif not pts_line:
 			str_buffer = ''
-		elif not player_lines:
-			return str_buffer
 		else:
 			if md_bold:
 				str_buffer = f'<b>{self.name}</b>: '
