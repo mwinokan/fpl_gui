@@ -245,6 +245,9 @@ def main():
 
 			# league = League(663873, api)
 
+			p = Player("Leno",api)
+
+			print(p.get_event_score(19,True))
 
 			# import sys
 			# sys.path.insert(1,'go')
@@ -252,9 +255,9 @@ def main():
 			# from gwexp import create_gwexp_figure
 			# create_fixturepage(api,None,[])
 			
-			man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=False)
+			# man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=False)
 
-			create_manager_pick_history(api, man)
+			# create_manager_pick_history(api, man)
 
 			# print(man._history_current.keys())
 

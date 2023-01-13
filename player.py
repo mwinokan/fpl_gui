@@ -1048,15 +1048,15 @@ class Player():
 		if len(h_indices)==1:
 			return self.get_event_strbuff(h_indices[0],gw,0,md_bold=md_bold,event_stats=event_stats,pts_line=pts_line,team_line=team_line,html_highlight=html_highlight)
 		elif len(h_indices)==2:
-			return self.get_event_strbuff(h_indices[0],gw,0,md_bold=md_bold) + '\n\n' + self.get_event_strbuff(h_indices[1],gw,1,md_bold=md_bold,html_highlight=html_highlight)
+			return self.get_event_strbuff(h_indices[0],gw,0,md_bold=md_bold,html_highlight=html_highlight,player_lines=False) + '\n\n' + self.get_event_strbuff(h_indices[1],gw,1,md_bold=md_bold,html_highlight=html_highlight)
 		elif len(h_indices)==3:
-			return self.get_event_strbuff(h_indices[0],gw,0,md_bold=md_bold,html_highlight=html_highlight) + '\n\n' + self.get_event_strbuff(h_indices[1],gw,1,md_bold=md_bold,html_highlight=html_highlight) + '\n\n' + self.get_event_strbuff(h_indices[2],gw,2,md_bold=md_bold,html_highlight=html_highlight)
+			return self.get_event_strbuff(h_indices[0],gw,0,md_bold=md_bold,html_highlight=html_highlight,player_lines=False) + '\n\n' + self.get_event_strbuff(h_indices[1],gw,1,md_bold=md_bold,html_highlight=html_highlight,player_lines=False) + '\n\n' + self.get_event_strbuff(h_indices[2],gw,2,md_bold=md_bold,html_highlight=html_highlight)
 		else:
 
 			str_buffer = "No fixture."
 			return str_buffer
 
-	def get_event_strbuff(self,h_index,gw,dgw_index,event_stats=None,md_bold=True,pts_line=True,html_highlight=True,team_line=True):
+	def get_event_strbuff(self,h_index,gw,dgw_index,event_stats=None,md_bold=True,pts_line=True,html_highlight=True,team_line=True,player_lines=True):
 
 		if event_stats is None:
 			event_stats = self._api.get_player_event_stats(gw,self._id,dgw_index)
@@ -1104,6 +1104,8 @@ class Player():
 		
 		elif not pts_line:
 			str_buffer = ''
+		elif not player_lines:
+			return str_buffer
 		else:
 			if md_bold:
 				str_buffer = f'<b>{self.name}</b>: '
