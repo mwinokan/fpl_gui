@@ -243,11 +243,16 @@ class Team():
 			for gw in range(self._api.current_gw+1,min(self._api.current_gw+5,38)):
 				
 				fixs = self.get_gw_fixtures(gw)
+				
+				if not fixs:
+					continue
+				
 				opps = self.get_opponent(gw)
 
 				if not isinstance(fixs, list):
 					fixs = [fixs]
 					opps = [opps]
+
 
 				for fix,opp in zip(fixs,opps):
 

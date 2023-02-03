@@ -435,6 +435,11 @@ def create_teampage(api,sidebar_md,leagues):
 
 		for gw in gw_range:
 			fixs = team.get_gw_fixtures(gw)
+
+			if not fixs:
+				table_buffer += f'<td class="w3-center">-</td>\n'
+				continue
+
 			opps = team.get_opponent(gw)
 
 			if not isinstance(opps,list):
@@ -523,10 +528,11 @@ def create_teampage(api,sidebar_md,leagues):
 
 				table_buffer += '</td>\n'
 
-			else:
+			elif fixs:
 
 				opps = team.get_opponent(gw)
 				for fix,opp in zip(fixs,opps):
+
 
 					is_home = fix['team_a'] == opp.id
 					
@@ -544,6 +550,10 @@ def create_teampage(api,sidebar_md,leagues):
 
 				table_buffer += '</td>\n'
 
+			else:
+				table_buffer += f'<td class="w3-center">-</td>\n'
+
+
 		table_buffer += '</tr>\n'
 
 		table_buffer += '<tr>\n'
@@ -555,7 +565,7 @@ def create_teampage(api,sidebar_md,leagues):
 
 			fixs = team.get_gw_fixtures(gw)
 
-			if isinstance(fixs,list):
+			if isinstance(fixs,list) and len(fixs) > 0:
 
 				special_gws[gw] = len(fixs)
 
@@ -583,6 +593,9 @@ def create_teampage(api,sidebar_md,leagues):
 					table_buffer += '\t'
 
 				table_buffer += '</td>\n'
+
+			elif len(fixs) == 0:
+				table_buffer += f'<td class="w3-center">-</td>\n'
 
 			else:
 
