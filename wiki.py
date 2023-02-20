@@ -14,25 +14,16 @@ from squad import Squad
 
 '''
 
-	Christmas To-Do's
+	Issues:
 
-	- By default only show prize winners on the toilet graph
-
-	- Write summaries
+	- Bench points incorrect
+	- Differentials not including autosubs?
 
 	To-Do's
 	
 	- Can there be an offline w3.css?
 
-	* Transfer stats within the league
-
-	* Adjust sidebar based on page
-
-	* parallel?
 	* Use gitpython to handle pushing changes and catching errors
-
-	* Highest scorers in all categories on homepage
-	* Transferred in and out summary on homepage
 
 	* Get player image for template & captain stats
 
