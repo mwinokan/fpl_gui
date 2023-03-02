@@ -82,7 +82,7 @@ fetch_latest = True
 force_plot = True
 recalculate = True
 force_go_graphs = True
-test = False
+test = True
 force = False
 halfway_awards = False
 offline = False
@@ -236,9 +236,13 @@ def main():
 
 			# league = League(663873, api)
 
-			p = Player("Leno",api)
+			p = Player("Martinelli",api)
 
-			print(p.get_event_score(19,True))
+			print(p.history.columns)
+
+			print(p.get_event_score(25,True))
+
+			exit()
 
 			# import sys
 			# sys.path.insert(1,'go')

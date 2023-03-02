@@ -812,6 +812,9 @@ class Player():
 			self._api._exp_archive[self.id][gw] = expected_points
 			return self._api._exp_archive[self.id][gw]
 
+	# def performed_xpts(self,gw):
+		
+
 	def expected_total_points(self,debug=False,return_actual=False,fit_ratio=0.5,use_official=True):
 
 		if self.appearances == 0:
