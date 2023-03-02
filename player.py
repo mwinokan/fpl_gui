@@ -599,6 +599,45 @@ class Player():
 		else:
 			return score
 
+	def get_performed_xpts(self,gw=None):
+		if gw is None:
+			gw=self._api.current_gw
+		if gw > self._api.current_gw:
+			mout.errorOut("Gameweek has not happened yet")
+			return None
+
+		indices = [i for i,r in enumerate(self.history['round']) if r == gw]
+
+		minutes = [float(self.history['minutes'][i]) for i in indices]
+		xgc = [float(self.history['expected_goals_conceded'][i]) for i in indices]
+		
+		xpts = 0
+
+		for gc,mins in zip(xgc,minutes):
+			if mins > 0:
+				xpts += 1
+			if mins > 59:
+				xpts += 1
+			if gc < 0.5:
+				if self.position_id < 3:
+					xpts += 4
+				if self.position_id == 3:
+					xpts += 1
+			if self.position_id < 3:
+				xpts -= 0.5*gc
+
+		xg = sum([float(self.history['expected_goals'][i]) for i in indices])
+		xa = sum([float(self.history['expected_assists'][i]) for i in indices])
+
+		if self.position_id < 3:
+			xpts += xg*6+xa*3
+		elif self.position_id == 3:
+			xpts += xg*5+xa*3
+		elif self.position_id == 4:
+			xpts += xg*4+xa*3
+
+		return xpts
+
 	@property
 	def attacking_history(self):
 		pts = []
@@ -813,7 +852,7 @@ class Player():
 			return self._api._exp_archive[self.id][gw]
 
 	# def performed_xpts(self,gw):
-		
+
 
 	def expected_total_points(self,debug=False,return_actual=False,fit_ratio=0.5,use_official=True):
 

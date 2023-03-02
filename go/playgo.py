@@ -28,6 +28,7 @@ def create_player_figure(api,player,show=False):
 	event_summaries = []
 	event_form = []
 	event_expected = []
+	event_performed_xpts = []
 
 	style = player.team_obj.style
 
@@ -38,11 +39,13 @@ def create_player_figure(api,player,show=False):
 		past_3 = [ event_points[j-1] for j in range(max(1,i-3),i+1)]
 		event_form.append(sum(past_3)/len(past_3))
 		event_expected.append(round(player.expected_points(gw=i),1))
+		event_performed_xpts.append(round(player.get_performed_xpts(gw=i),1))
 
 	fig = go.Figure()
 	fig.add_trace(go.Bar(name="Points",x=active_gws, y=event_points, hovertext=event_summaries,marker=dict(color=style['color'])))
 	fig.add_trace(go.Scatter(name="Form",x=active_gws, y=event_form, mode='lines',line_width=4,marker=dict(color=style['accent'])))
 	fig.add_trace(go.Scatter(name="xPoints",x=active_gws, y=event_expected, mode='markers',marker_size=12,marker=dict(color=style['accent'])))
+	fig.add_trace(go.Scatter(name="Performed xPoints",x=active_gws, y=event_performed_xpts, mode='lines',marker=dict(color=style['color'])))
 
 	fig.update_layout(autosize=True,margin=dict(l=20, r=20, t=20, b=20),plot_bgcolor=style['background-color'])
 	fig.update_xaxes(title_text="GW")

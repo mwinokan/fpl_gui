@@ -82,10 +82,10 @@ fetch_latest = True
 force_plot = True
 recalculate = True
 force_go_graphs = True
-test = True
+test = False
 force = False
 halfway_awards = False
-offline = False
+offline = True
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
@@ -240,9 +240,11 @@ def main():
 
 			print(p.history.columns)
 
-			print(p.get_event_score(25,True))
+			print(p.get_performed_xpts(25))
 
-			exit()
+			# print(p.get_event_score(25,True))
+
+			# exit()
 
 			# import sys
 			# sys.path.insert(1,'go')
