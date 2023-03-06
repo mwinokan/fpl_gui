@@ -45,7 +45,7 @@ def create_player_figure(api,player,show=False):
 	fig.add_trace(go.Bar(name="Points",x=active_gws, y=event_points, hovertext=event_summaries,marker=dict(color=style['color'])))
 	fig.add_trace(go.Scatter(name="Form",x=active_gws, y=event_form, mode='lines',line_width=4,marker=dict(color=style['accent'])))
 	fig.add_trace(go.Scatter(name="xPoints",x=active_gws, y=event_expected, mode='markers',marker_size=12,marker=dict(color=style['accent'])))
-	fig.add_trace(go.Scatter(name="Performed xPoints",x=active_gws, y=event_performed_xpts, mode='lines',marker=dict(color=style['color'])))
+	fig.add_trace(go.Scatter(name="Performed xPoints",x=active_gws, y=event_performed_xpts, mode='lines',marker=dict(color=style['accent']),line={'dash': 'dash'}))
 
 	fig.update_layout(autosize=True,margin=dict(l=20, r=20, t=20, b=20),plot_bgcolor=style['background-color'])
 	fig.update_xaxes(title_text="GW")
