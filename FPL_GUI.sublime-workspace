@@ -1,0 +1,1084 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"expected",
+				"expected_goals_conceded"
+			],
+			[
+				"get_event_",
+				"get_event_score\tfunction"
+			],
+			[
+				"expec",
+				"expected_transfer_return\tfunction"
+			],
+			[
+				"muli",
+				"multiplier"
+			],
+			[
+				"mul",
+				"multiplier"
+			],
+			[
+				"create_manager",
+				"create_manager_pick_history\tfunction"
+			],
+			[
+				"get_style",
+				"get_style_from_game_score\tfunction"
+			],
+			[
+				"sorted",
+				"sorted_players\tstatement"
+			],
+			[
+				"_elem",
+				"_elements_by_team\tstatement"
+			],
+			[
+				"team_name",
+				"team_shortname"
+			],
+			[
+				"bb_",
+				"_bb_week\tstatement"
+			],
+			[
+				"wri",
+				"write_offline_data"
+			],
+			[
+				"_bb_",
+				"_bb_ptsgain"
+			],
+			[
+				"halfway",
+				"league_halfway_text\tstatement"
+			],
+			[
+				"_even",
+				"_event_rank\tstatement"
+			],
+			[
+				"w3-displa",
+				"w3-display-bottomleft"
+			],
+			[
+				"make",
+				"make_movie_data"
+			],
+			[
+				"w3-paddin",
+				"w3-padding-large"
+			],
+			[
+				"screen",
+				"screencap_url"
+			],
+			[
+				"w3-padd",
+				"w3-padding-large"
+			],
+			[
+				"ref_",
+				"ref_rms_rcds\tstatement"
+			],
+			[
+				"thresh",
+				"threshold_likelihood\tstatement"
+			],
+			[
+				"mi",
+				"min_index\tstatement"
+			],
+			[
+				"ref",
+				"reference_traj\tstatement"
+			],
+			[
+				"half",
+				"halfway_awards\tfunction"
+			],
+			[
+				"tiple",
+				"triple_histograms\tfunction"
+			],
+			[
+				"maxima",
+				"maxima_ys\tstatement"
+			],
+			[
+				"error",
+				"errorbar"
+			],
+			[
+				"midfie",
+				"midfielder_ydata\tstatement"
+			],
+			[
+				"get_man",
+				"get_manager_team\tfunction"
+			],
+			[
+				"plot_charge",
+				"plot_charge_compare_barrier\tfunction"
+			],
+			[
+				"inde",
+				"indent=\tparam"
+			],
+			[
+				"parse",
+				"parseDat"
+			],
+			[
+				"next",
+				"next5_expected\tfunction"
+			],
+			[
+				"ligh",
+				"LightSkyBlue"
+			],
+			[
+				"debug",
+				"showDebug"
+			],
+			[
+				"def",
+				"defs\tMethod"
+			],
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"total_",
+				"total_points\tfunction"
+			],
+			[
+				"tota",
+				"total_points\tfunction"
+			],
+			[
+				"plot_2d_",
+				"plot_2d_nextbasesep_hist\tfunction"
+			],
+			[
+				"eve",
+				"_event_rank\tstatement"
+			],
+			[
+				"creat",
+				"create_rank_graph\tfunction"
+			],
+			[
+				"create_l",
+				"create_overall_page\tfunction"
+			],
+			[
+				"kit_shirt",
+				"kit_shirt_type"
+			],
+			[
+				"kit_shi",
+				"kit_shirt_secondary"
+			],
+			[
+				"start",
+				"starting_forwards\tfunction"
+			],
+			[
+				"start_",
+				"starting_goalkeepers\tfunction"
+			],
+			[
+				"sort",
+				"sorted_managers\tstatement"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"get_manager_te",
+				"get_manager_team_shirt\tfunction"
+			],
+			[
+				"xerr",
+				"xerr=\tparam"
+			],
+			[
+				"over",
+				"overall_diff"
+			],
+			[
+				"dna",
+				"dna_stat_pm6_bars"
+			],
+			[
+				"weight",
+				"weight_entries"
+			],
+			[
+				"weigh",
+				"weight_entries"
+			],
+			[
+				"date",
+				"datetimes"
+			],
+			[
+				"window",
+				"window_padding"
+			],
+			[
+				"frame",
+				"frame_padding"
+			],
+			[
+				"names",
+				"names_array"
+			],
+			[
+				"inp",
+				"input1"
+			],
+			[
+				"system",
+				"system_array"
+			],
+			[
+				"opt",
+				"opt_reactant"
+			],
+			[
+				"constra",
+				"constrain_final"
+			],
+			[
+				"ne",
+				"n_images"
+			],
+			[
+				"Fake",
+				"FakeSurfaceCalculator"
+			],
+			[
+				"optmi",
+				"optimizer"
+			],
+			[
+				"write",
+				"writeDebugState"
+			],
+			[
+				"Fak",
+				"FakeSurfaceCalculator"
+			],
+			[
+				"thism",
+				"this_min"
+			],
+			[
+				"hi",
+				"hiindex"
+			],
+			[
+				"diff",
+				"barrier_difference"
+			],
+			[
+				"close",
+				"closest_z1"
+			],
+			[
+				"clos",
+				"closest_z1"
+			],
+			[
+				"maxi",
+				"maxima_x"
+			],
+			[
+				"min",
+				"min_coords"
+			],
+			[
+				"max",
+				"max_coords"
+			],
+			[
+				"wha",
+				"wham_key"
+			],
+			[
+				"G_err",
+				"G_errmin"
+			],
+			[
+				"wham",
+				"wham_num"
+			],
+			[
+				"WHAM",
+				"WHAMNUM"
+			],
+			[
+				"smt",
+				"smtp_obj"
+			],
+			[
+				"inser",
+				"insert_spice"
+			],
+			[
+				"exang",
+				"exangdata1"
+			],
+			[
+				"unit",
+				"unit_vec1"
+			],
+			[
+				"search",
+				"search_ydata"
+			],
+			[
+				"ang",
+				"ang_data"
+			],
+			[
+				"tors",
+				"torsdata"
+			],
+			[
+				"univ",
+				"unit_vec3"
+			],
+			[
+				"torsion",
+				"torsion_indices"
+			],
+			[
+				"shift",
+				"shift_forces"
+			],
+			[
+				"shif",
+				"shift_forces"
+			],
+			[
+				"lbe",
+				"label_size"
+			],
+			[
+				"path",
+				"path_pullx"
+			],
+			[
+				"comple",
+				"complex_system"
+			],
+			[
+				"compl",
+				"complex_system"
+			],
+			[
+				"duple",
+				"duplex_system"
+			],
+			[
+				"complex",
+				"complex_endDC5"
+			],
+			[
+				"duplex",
+				"duplex_system"
+			],
+			[
+				"last",
+				"last_positions"
+			],
+			[
+				"tau",
+				"tau_sys"
+			],
+			[
+				"num",
+				"num_images"
+			],
+			[
+				"sety",
+				"set_ylim"
+			],
+			[
+				"base",
+				"base2_slopes"
+			],
+			[
+				"label",
+				"label_size"
+			],
+			[
+				"peak",
+				"peak_sep_data"
+			],
+			[
+				"get",
+				"get_asym_data"
+			],
+			[
+				"grad",
+				"gradcut"
+			],
+			[
+				"plot",
+				"plot_peak_data"
+			],
+			[
+				"slope",
+				"slope_stdev"
+			],
+			[
+				"slop",
+				"slope_stdev"
+			],
+			[
+				"mid",
+				"mid_data"
+			],
+			[
+				"yda",
+				"ydataerr"
+			],
+			[
+				"new_sl",
+				"new_slope_stdev"
+			],
+			[
+				"thi",
+				"this_tdata"
+			],
+			[
+				"clean",
+				"clean_sep"
+			],
+			[
+				"data",
+				"data_dump"
+			],
+			[
+				"chunk",
+				"chunk_width"
+			],
+			[
+				"ang_",
+				"ang_asym2"
+			],
+			[
+				"ang_as",
+				"ang_asym1"
+			],
+			[
+				"all",
+				"all_ang"
+			],
+			[
+				"wt",
+				"write_ang"
+			],
+			[
+				"NVT",
+				"NVT_MDP"
+			],
+			[
+				"EQ",
+				"EQDIR"
+			],
+			[
+				"clear",
+				"clear_last_text"
+			],
+			[
+				"handler",
+				"handler1"
+			],
+			[
+				"player",
+				"player_color"
+			],
+			[
+				"windo",
+				"window_00"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "player.py",
+			"settings":
+			{
+				"buffer_size": 40096,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "go/playgo.py",
+			"settings":
+			{
+				"buffer_size": 2181,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api.py",
+			"settings":
+			{
+				"buffer_size": 36318,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"Basic Builder - PdfLaTeX"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install pack\t",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"install package ",
+				"Package Control: Install Package"
+			],
+			[
+				"install package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 157.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/mw00368/Box Sync/Python/FPL_GUI",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/go"
+	],
+	"file_history":
+	[
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/wiki.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/transfers.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/league.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/player.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/team.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/squad.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/api.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/manager.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/_auth_payload",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/web.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/predictor.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/temp",
+		"/Users/mw00368/AseMolPlot/asemolplot/io.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/2CM_sep_rst_louie.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/2CM_N624A_rst_louie.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/gro/2CM_donut_p500_rep0_long_eq.gro",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/gro/2CM_donut_p500_rep0_long_eq_amp.gro",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/gro/2CM_donut_p500_rep0_long_eq_N624A.gro",
+		"/Users/mw00368/gromax/pdb_mod.sh",
+		"/Users/mw00368/sh/newgit.sh",
+		"/Users/mw00368/AseMolPlot/asemolplot/__init__.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/2CM_rst_louie.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/2CM_N625A_rst.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/amino.py",
+		"/Users/mw00368/AseMolPlot/asemolplot/mutate/__init__.py",
+		"/Users/mw00368/AseMolPlot/asemolplot/mutator/__init__.py",
+		"/Users/mw00368/AseMolPlot/asemolplot/residue.py",
+		"/Users/mw00368/AseMolPlot/asemolplot/mutator/protein.py",
+		"/Users/mw00368/miniconda3/lib/python3.10/json/encoder.py",
+		"/Users/mw00368/Box Sync/Python/FPL_GUI/html/man_1731530.html",
+		"/Users/mw00368/Box Sync/html/RichardSites/generate.py",
+		"/Users/mw00368/Box Sync/html/RichardSites/cool_beans/index.html",
+		"/Users/mw00368/Box Sync/html/RichardSites/cool_beans/index_manual.html",
+		"/Users/mw00368/Box Sync/html/RichardSites/katuni/generate.py",
+		"/Users/mw00368/Box Sync/html/RichardSites/cool_beans/generate.py",
+		"/Users/mw00368/Box Sync/html/RichardSites/share/movies.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln03-768dia/residue.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-0_x6ts/.bash_profile",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-bvhpgx/auto_umb_2DM.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-hnl_dd/rst.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-nc0mtj/auto_umb_2CM.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-5rfw2s/big_queue.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-7t_cy6/rst_DT662.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-26xw5s/big_queue_e89.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-bw33cf/big_queue",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-e94u05/auto_umb_louie_e89.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-ygdbji/w00.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-600xs7/2DM_umb_10ps_BLYP_notraj_template.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-_b04oa/umb_10ps_f20k_BLYP_notraj.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-jomqwp/umb_10ps_BLYP_2DM_template.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-4axgq1/mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-j4b6fg/rcpath.png",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/IntrabaseHelicase/rst_DT662.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/Watson-Crick-tautomerism-in-AT-and-GC-base-pairs/.git/config",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-9yp9mc/.bash_profile",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/qmmmplot.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/rmsd.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/umbrella.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-arvzzi/cp2k_gmx_pfrc_e89_BLYP.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login1-9if508/gmx.sh",
+		"/Users/mw00368/.local/lib/python3.9/site-packages/ase/io/utils.py",
+		"/Users/mw00368/.local/lib/python3.9/site-packages/ase/visualize/plot.py",
+		"/Users/mw00368/AseMolPlot/asemolplot/signal/modify.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/slice.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login1-1zukck/PullAT_pull50min_rep1_nvt_pullx.xvg",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login1-310c0f/PullAT_pull50min_rep1_nvt_pullf.xvg",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login1-fwqsav/md200ps_dna_pull50min.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login1-2a67yb/dhb_plot_pull.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login1-_p21sb/gmx_pull_fix_e2.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login1-cs048o/auto.sh",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/combplot.py",
+		"/Users/mw00368/AseMolPlot/asemolplot/signal/io.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/compplot.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/fullmonte.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-npyyry/index.ndx",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-wafrs1/umb_8ps_f20k_2CM_BLYP_notraj.mdp",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/test_umb_louie_b3lyp.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-4t4093/md50ns_pfrc.mdp",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/plot.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-n0pgvh/qmmm8ps_pfrc.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-81rz6_/cp2k_gmx_pfrc_e89.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-79fazv/gmx_pfrc_e89.sh",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/newplot.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-zwwl2j/qmmm8ps_pfcr.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-6r9znz/_gromppNVT.log",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/LouieWobble/cp2k_gmx_pfrc_e89.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-3w6ov6/md10ns_pfrc.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-qq5hkq/md50ns_pfrc.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-7h2w_3/md10ns_pfrc.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-d7barc/md10ns_pfrc.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-b__xhg/auto_us2.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-_0t1p2/eq1ns_f0k_notors_notraj.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-9bpi9h/md10ns_pfrc.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-lwnqqy/_gromppNVT.log",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-dgem8u/pullx.xvg",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-bem9w6/gmx.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-f9csbx/gmx_pfrc_e89.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-h_byjh/pullf.xvg",
+		"/Users/mw00368/AseMolPlot/asemolplot/signal/peaks.py",
+		"/Users/mw00368/OneDrive - University of Surrey/Leverhulme/Projects/ArcherUmbrellaHelicase/compplot.py",
+		"/Users/mw00368/AseMolPlot/asemolplot/signal/__init__.py",
+		"/Users/mw00368/Downloads/wordle.py",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-bashup/umb_1ns_f20k_notors_notraj_w6.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-3s2gk8/umb_1ns_f20k_notors_notraj_w5.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-5pjkt3/umb_1ns_f20k_notors_notraj_w4.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-ydd92f/umb_1ns_f20k_notors_notraj_w3.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-_majj4/umb_1ns_f20k_notors_notraj_w2.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-gi8uuh/umb_1ns_f20k_notors_notraj_w1.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-dcuxjf/big_queue.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-brc6w6/umb_1ns_f20k_notors_notraj_w6.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-9vjb8v/umb_1ns_f20k_notors_notraj_w5.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-3lhzp3/umb_1ns_f20k_notors_notraj_w4.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-enpn2c/umb_1ns_f20k_notors_notraj_w3.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-6qgs0i/umb_1ns_f20k_notors_notraj_w2.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login7.swmgmt.eureka-gsgd2f/umb_1ns_f20k_notors_notraj_w1.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln01-x4zdt4/super_wham_sep_louie_e89.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-lzp6xn/auto_us1.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/login7.swmgmt.eureka-y6099k/umb_1ns_f20k_notors_notraj_w1.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-p57qe0/md10ns_angout2.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-dxkugk/umb_1ns_f20k_notors_notraj_w1.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-egtf9q/umb_1ns_f20k_notors_notraj_w1.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-xoh2nr/big_queue.sh",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-wokxg2/md1ns_angout2.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-g1nfs1/umb_1ns_f20k_notraj_w1.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-ew53ic/umb_1ns_f20k_notors_notraj_w1.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-ja8743/umb_1ns_f20k_notraj_w1.mdp",
+		"/var/folders/br/f4g_2c5s6kn42968_03p29y00000gp/T/ln04-duxws9/eq500ps.mdp",
+		"/Users/mw00368/Downloads/117168-79319 - Comp Coursework Part 1 - 6628311 - 08 November, 2022 336 PM.mw"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 118.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"xgc",
+			"assists",
+			"goals",
+			"pts.append(",
+			"history",
+			"get_event_score",
+			"clown",
+			"-</td>",
+			"create_teampage",
+			"player_lines",
+			"print(",
+			"request",
+			"test",
+			"clean_sheet",
+			"force_plot",
+			"graph",
+			"managerpage",
+			"fetch_event_stats",
+			"started",
+			"None",
+			")",
+			"appearances",
+			"owned",
+			"captained",
+			"started",
+			"if",
+			"))",
+			"if",
+			":5.1f",
+			"owned",
+			"started",
+			"owned",
+			"fetch_event_stats",
+			"event_stats = self._api.get_player_event_stats(gw,self._id)\n\t\t\tself.extract_event_stats(event_stats)",
+			"event_minutes",
+			"multiplier",
+			"_weeks_started",
+			"p.",
+			"_gameweek",
+			"gameweek",
+			"total_points",
+			"Squad",
+			"__(",
+			"__"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "player.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 40096,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15954,
+								15954
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9647.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "go/playgo.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2181,
+								2181
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 205.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "api.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 36318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17502,
+								17520
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 10283.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 308.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.latextools":
+	{
+		"height": 273.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "FPL_GUI.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 218.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
