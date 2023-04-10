@@ -238,9 +238,9 @@ class FPL_API():
 		self.__teamdata = None
 		self.__teams = None
 
-	def bootstrap_df(self):
-		return pd.read_csv(self.request(url+'bootstrap-static/'))
-		
+	# def bootstrap_df(self):
+	# 	return pd.DataFrame.from_dict(self.request(url+'bootstrap-static/'))
+
 	@property
 	def total_players(self):
 		return int(self._bootstrapjson['total_players'])

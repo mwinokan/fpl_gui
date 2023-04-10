@@ -20,15 +20,19 @@ from api import FPL_API
 
 api = FPL_API()
 
-df = api.parse_bootstrap()
+elements = api._bootstrapjson['elements']
+df = pd.DataFrame.from_records(elements)
 
-print(df.columns)
+df = df.astype({'now_cost': float})
+df = df.astype({'total_points': int})
+df = df.astype({'element_type': int})
+df = df.astype({'selected_by_percent': float})
 
 app = Dash(__name__)
 
 app.layout = html.Div([
-    html.H1(children='Title of Dash App', style={'textAlign':'center'}),
-    dcc.Dropdown(df.country.unique(), 'Canada', id='dropdown-selection'),
+    html.H1(children='Dash FPL', style={'textAlign':'center'}),
+    dcc.Dropdown(['All'] + list(df.team.unique()), 'All', id='dropdown-selection'),
     dcc.Graph(id='graph-content')
 ])
 
@@ -38,12 +42,12 @@ app.layout = html.Div([
 )
 def update_graph(value):
         
+    if value == 'All':
+        dff = df
+    else:
+        dff = df[df.team==value]
 
-
-    # dff = df[df.country==value]
-
-
-    return px.line(df, x='year', y='pop')
+    return px.scatter(dff, x='now_cost', y='total_points',color='element_type',size='selected_by_percent')
 
 if __name__ == '__main__':
     app.run_server(debug=True)
