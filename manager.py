@@ -13,6 +13,8 @@ class Manager():
 		self._id = id
 		self._api = api
 
+		self._entry_json = None
+
 		self._authenticate = authenticate
 
 		self._league_positions = {}
@@ -82,6 +84,85 @@ class Manager():
 	def assign_league(self,league):
 		if league.name not in [l.name for l in self._leagues]:
 			self._leagues.append(league)
+
+	@property
+	def entry_json(self):
+		if not self._entry_json:
+			self._entry_json = self._api.get_manager_base(self.id)
+		return self._entry_json
+
+	def get_cup_matches(self,league):
+
+		# get manager leagues
+		leagues = self.entry_json['leagues']['classic']
+
+		# get all cup_matches
+		cup_matches = self.entry_json['leagues']['cup_matches']
+
+		# get cup league associated to the league
+		for l in leagues:
+			if l['id'] == league.id:
+				cup_league_id = l['cup_league']
+				break
+		else:
+			# mout.errorOut(f"{self} not in {league}'s Cup")
+			return []
+
+		league_matches = [m for m in cup_matches if m['league'] == cup_league_id]
+
+		matches = []
+
+		for match in league_matches:
+
+			# print(match)
+			
+			# print(match['event'])
+
+			# print(self.name)
+			# print(self.team_name)
+			# print(self.get_event_score(self._api._current_gw))
+			# print(self.fixtures_played)
+			# print(self.total_fixtures)
+
+			# print(match['entry_2_entry'])
+
+			if match['is_bye']:
+				opponent = None
+			else:
+
+				if self.id == match['entry_1_entry']:
+					opponent = self._api.get_manager(id=match['entry_2_entry'])
+				else:
+					opponent = self._api.get_manager(id=match['entry_1_entry'])
+
+				if opponent.id == self.id:
+					mout.warningOut(f"{self}'s GW{match['event']} oppenent is themselves!")
+					continue
+
+			# print(self,self.id,opponent)
+
+			# print(opponent.name)
+			# print(opponent.team_name)
+			# print(opponent.get_event_score(self._api._current_gw))
+			# print(opponent.fixtures_played)
+			# print(opponent.total_fixtures)
+
+			matches.append({
+				'gw': match['event'],
+				'title': match['knockout_name'],
+				'winner': match['winner'],
+				'self': self,
+				'bye': match['is_bye'],
+				'opponent': opponent
+			})
+
+			# print(match['id'])
+			# print(match['league'])
+
+		return matches
+
+		# print(self.entry_json['leagues']['cup_matches'])
+
 
 	def get_stats(self):
 

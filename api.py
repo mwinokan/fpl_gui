@@ -585,6 +585,12 @@ class FPL_API():
 		# print(self._events['average_entry_score'][0:self._current_gw])		
 		return list(self._events['average_entry_score'][0:self._current_gw])
 
+	def get_manager_base(self,id):
+
+		json = self.request(url+'entry/'+str(id)+'/')
+
+		return json
+
 	def get_manager_history(self,id):
 		json = self.request(url+'entry/'+str(id)+'/history/')
 		# try:

@@ -231,6 +231,12 @@ def main():
 
 		if test:
 
+			toilet = League(910674, api)
+
+			create_cup_page(api,toilet,[toilet],None)
+
+			exit()
+
 			# create_teampage(api,None,[])
 			# exit()
 
@@ -328,6 +334,8 @@ def main():
 		create_homepage(leagues)
 
 		sidebar_md = create_sidebar(leagues)
+
+		create_cup_page(api,leagues[1],leagues,sidebar_md)
 		
 		get_manager_json_positions(api,leagues)
 
@@ -403,6 +411,174 @@ def main():
 
 	if run_push_changes:
 		push_changes()
+
+def create_cup_page(api,league,leagues,sidebar_md):
+
+	# try and get data pertaining to the cups
+
+	# the page should be a bunch of tables separating by gameweek
+
+	# each table row should contain:
+
+	"""
+
+	Team Name  	 | Points         | vs. | Points         | Team Name
+	Manager Name | Fixtures/Total |     | Fixtures/Total | Manager Name
+
+	"""
+
+	all_matches = []
+
+	# for manager in [Manager("Max Winokan",780664,api)]:
+
+	mout.debugOut(f"Getting all cup matches in {league.name}...")
+	for i,manager in enumerate(league.managers):
+		mout.progress(i,league.num_managers,width=50)
+		matches = manager.get_cup_matches(league)
+		# print(i,manager.name,len(matches))
+		all_matches += manager.get_cup_matches(league)
+	mout.progress(league.num_managers,league.num_managers,width=50)
+
+	# go by gameweek
+
+	gws = list(set([m['gw'] for m in all_matches]))
+	
+
+	html_buffer = ""
+
+	for gw in sorted(gws,reverse=True):
+
+		matches = [m for m in all_matches if m['gw'] == gw]
+		# print(len(matches))
+	
+		processed = []
+
+		# print(f'GW{gw} Cup Matches')
+
+		html_buffer += f'<h2>GW{gw} Cup Matches: {matches[0]["title"]}</h2>\n'
+		html_buffer += '<table class="w3-table-all">\n'
+
+		html_buffer += '<tr>\n'
+
+		html_buffer += f'<th class="w3-right">\n'
+		html_buffer += f'Player 1\n'
+		html_buffer += f'</th>\n'
+
+		html_buffer += f'<th>\n'
+		html_buffer += f'</th>\n'
+		html_buffer += f'<th>\n'
+		html_buffer += f'</th>\n'
+
+		html_buffer += f'<th class="w3-center">\n'
+		html_buffer += f'</th>\n'
+
+		html_buffer += f'<th>\n'
+		html_buffer += f'</th>\n'
+		html_buffer += f'<th>\n'
+		html_buffer += f'</th>\n'
+
+		html_buffer += f'<th class="w3-left">\n'
+		html_buffer += f'Player 2\n'
+		html_buffer += f'</th>\n'
+		
+		html_buffer += '</tr>\n'
+
+		for match in matches:
+
+			man1 = match['self']
+			man1_score = man1.get_event_score(gw)
+
+			processed.append(man1.id)
+
+			is_bye = match['bye']
+
+			if not is_bye:
+
+				man2 = match['opponent']
+				
+				if man2.id in processed:
+					# print('Skipping!')
+					continue
+
+				man2_score = man2.get_event_score(gw)
+
+				if match['winner']:
+					winner = winner
+
+				else:
+
+					if man1_score > man2_score:
+						winner = 1
+					elif man1_score == man2_score:
+						winner = 0
+					else:
+						winner = 2
+
+			else:
+
+				man2 = None
+				winner = 1
+
+			# print(man1,man2)
+
+			html_buffer += '<tr>\n'
+
+			html_buffer += f'<td class="w3-right">\n'
+			html_buffer += f'<a href="{man1.gui_url}">{man1.name}</a><br><a href="{man1.gui_url}">{man1.team_name}</a>\n'
+			html_buffer += '</td>\n'
+
+			html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{man1._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
+			
+			if winner == 1:
+				html_buffer += f'<td class="w3-green w3-center">\n'
+			else:
+				html_buffer += f'<td class="w3-center">\n'
+
+			html_buffer += f'{man1_score}'
+			if gw == api._current_gw:
+				html_buffer += f'<br>({man1.fixtures_played}/{man1.total_fixtures})\n'
+			html_buffer += '</td>\n'
+
+			html_buffer += f'<td class="w3-center">\n'
+			html_buffer += f'vs.\n'
+			html_buffer += '</td>\n'
+
+			if is_bye:
+
+				html_buffer += f'<td class="w3-center">\n'
+				html_buffer += '</td>\n'
+
+				html_buffer += f'<td class="w3-center">\n'
+				html_buffer += '</td>\n'
+				
+				html_buffer += f'<td style="text-align:left;vertical-align:middle;">\n'
+				html_buffer += 'BYE!\n'
+				html_buffer += '</td>\n'
+
+			else:
+
+				if winner == 2:
+					html_buffer += f'<td class="w3-green w3-center">\n'
+				else:
+					html_buffer += f'<td class="w3-center">\n'
+
+				html_buffer += f'{man2_score}'
+				if gw == api._current_gw:
+					html_buffer += f'<br>({man2.fixtures_played}/{man2.total_fixtures})\n'
+				html_buffer += '</td>\n'
+
+				html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{man2._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
+
+				html_buffer += f'<td class="w3-left">\n'
+				html_buffer += f'<a href="{man2.gui_url}">{man2.name}</a><br><a href="{man2.gui_url}">{man2.team_name}</a>\n'
+				html_buffer += '</td>\n'
+
+			html_buffer += '</tr>\n'
+		
+		html_buffer += '</table>\n'
+
+	navbar = create_navbar(leagues, active='K', colour='black', active_colour='green')
+	html_page('html/toilet_cup.html',None,title=f"Tesco Value Cup",sidebar_content=sidebar_md, gw=api._current_gw, html=html_buffer, showtitle=True, bar_html=navbar)
 
 def create_teampage(api,sidebar_md,leagues):
 	mout.debugOut(f"create_teampage()")
@@ -789,6 +965,14 @@ def create_navbar(leagues,active=None,colour='black',active_colour='green'):
 	else:
 		html_buffer += f'<a href="{url}" class="wr-bar-item w3-button w3-center">'
 	html_buffer += f'👨‍👨‍👦‍👦'
+	html_buffer += f'</a>\n'
+
+	url = f'https://mwinokan.github.io/FPL_GUI/html/toilet_cup.html'
+	if active is not None and active == 'K':
+		html_buffer += f'<a href="{url}" class="wr-bar-item w3-button w3-center w3-{active_colour}">'
+	else:
+		html_buffer += f'<a href="{url}" class="wr-bar-item w3-button w3-center">'
+	html_buffer += f'🏆'
 	html_buffer += f'</a>\n'
 
 	for i,league in enumerate(leagues):
