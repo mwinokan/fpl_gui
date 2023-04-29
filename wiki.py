@@ -85,7 +85,7 @@ force_go_graphs = True
 test = True
 force = False
 halfway_awards = False
-offline = False
+offline = True
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
@@ -503,8 +503,11 @@ def create_cup_page(api,league,leagues,sidebar_md):
 				man2_score = man2.get_event_score(gw)
 
 				if match['winner']:
-					winner = winner
-					print(winner)
+					
+					if man1.id == match['winner']:
+						winner = 1
+					else:
+						winner = 2
 
 				else:
 
