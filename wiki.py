@@ -3061,7 +3061,7 @@ def league_table_html(league,gw):
 	show_avg_select = gw == 1
 	# show_team_value = not api._live_gw
 	show_team_value = False
-	show_pos_delta = gw > 1
+	show_pos_delta = False
 	show_tot_score = gw > 1
 	show_gw_rank = gw > 1
 	# show_transfers = gw > 1 and not api._live_gw
