@@ -152,6 +152,10 @@ class FPL_API():
 				json = r.json()
 				self._request_data[handle] = json
 				self._request_log.append(handle)
+				
+				if 'The game is being updated.' in json:
+					mout.errorOut("The game is being updated.",fatal=True)
+				
 				return json
 			except requests.exceptions.JSONDecodeError:
 				print(r)
@@ -166,7 +170,6 @@ class FPL_API():
 
 		mout.varOut("#requests=",len(self._request_log))
 
-		# sorted_managers = sorted(league.managers, key=lambda x: x.livescore, reverse=True)
 		reqs = [x for x in self._request_log]
 		data = Counter(reqs)
 		for req in self._request_log:

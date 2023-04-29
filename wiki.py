@@ -82,7 +82,7 @@ fetch_latest = True
 force_plot = True
 recalculate = True
 force_go_graphs = True
-test = False
+test = True
 force = False
 halfway_awards = False
 offline = False
@@ -504,6 +504,7 @@ def create_cup_page(api,league,leagues,sidebar_md):
 
 				if match['winner']:
 					winner = winner
+					print(winner)
 
 				else:
 
