@@ -114,9 +114,9 @@ class Manager():
 
 		for match in league_matches:
 
-			print(match)
+			# print(match)
 			
-			print(match['winner'])
+			# print(match['winner'])
 			
 			# print(match['event'])
 
