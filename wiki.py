@@ -85,7 +85,7 @@ force_go_graphs = True
 test = False
 force = False
 halfway_awards = False
-offline = False
+offline = True
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
@@ -335,9 +335,9 @@ def main():
 
 		sidebar_md = create_sidebar(leagues)
 
-		create_cup_page(api,leagues[1],leagues,sidebar_md)
-		
 		get_manager_json_positions(api,leagues)
+		
+		create_cup_page(api,leagues[1],leagues,sidebar_md)
 
 		leagues[0].create_points_graph()
 		leagues[-1].create_points_graph()
@@ -446,10 +446,11 @@ def create_cup_page(api,league,leagues,sidebar_md):
 
 	html_buffer = ""
 
-	for gw in sorted(gws,reverse=True):
+	prog_step = (50/len(gws))
+
+	for i,gw in enumerate(sorted(gws,reverse=True)):
 
 		matches = [m for m in all_matches if m['gw'] == gw]
-		# print(len(matches))
 	
 		processed = []
 
@@ -483,7 +484,9 @@ def create_cup_page(api,league,leagues,sidebar_md):
 		
 		html_buffer += '</tr>\n'
 
-		for match in matches:
+		for j,match in enumerate(matches):
+
+			mout.progress(i*prog_step + j*prog_step/len(matches),50,width=50)
 
 			man1 = match['self']
 			man1_score = man1.get_event_score(gw)
@@ -528,7 +531,10 @@ def create_cup_page(api,league,leagues,sidebar_md):
 			html_buffer += '<tr>\n'
 
 			html_buffer += f'<td class="w3-right">\n'
-			html_buffer += f'<a href="{man1.gui_url}">{man1.name}</a><br><a href="{man1.gui_url}">{man1.team_name}</a>\n'
+			html_buffer += f'<a href="{man1.gui_url}">{man1.name}</a>'
+			if man1.is_diamond:
+				html_buffer += '💎'
+			html_buffer += f'<br><a href="{man1.gui_url}">{man1.team_name}</a>\n'
 			html_buffer += '</td>\n'
 
 			html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{man1._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
@@ -574,12 +580,17 @@ def create_cup_page(api,league,leagues,sidebar_md):
 				html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{man2._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
 
 				html_buffer += f'<td class="w3-left">\n'
-				html_buffer += f'<a href="{man2.gui_url}">{man2.name}</a><br><a href="{man2.gui_url}">{man2.team_name}</a>\n'
+				html_buffer += f'<a href="{man2.gui_url}">{man2.name}</a>'
+				if man2.is_diamond:
+					html_buffer += '💎'
+				html_buffer += f'<br><a href="{man2.gui_url}">{man2.team_name}</a>\n'
 				html_buffer += '</td>\n'
 
 			html_buffer += '</tr>\n'
 		
 		html_buffer += '</table>\n'
+
+	mout.progress(50,50,width=50)
 
 	navbar = create_navbar(leagues, active='K', colour='black', active_colour='green')
 	html_page('html/toilet_cup.html',None,title=f"Tesco Value Cup",sidebar_content=sidebar_md, gw=api._current_gw, html=html_buffer, showtitle=True, bar_html=navbar)
