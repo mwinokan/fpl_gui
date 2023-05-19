@@ -85,7 +85,8 @@ force_go_graphs = True
 test = False
 force = False
 halfway_awards = False
-offline = False
+season_awards = True
+offline = True
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
@@ -354,6 +355,11 @@ def main():
 			create_christmaspage(leagues,sidebar_md)
 			# api.finish()
 			# exit()
+
+		if api._current_gw == 38 and not api._live_gw:
+			season_awards = True
+		if season_awards:
+			create_seaonpage(leagues,sidebar_md)
 
 		json['timestamp'] = timestamp
 
@@ -3123,10 +3129,13 @@ def league_table_html(league,gw):
 
 		is_last = i+1 == len(sorted_managers)
 
+		# print(i,m.id,4+diamond_count)
+
 		if 'Toilet' in league.name and m.is_diamond and m.id != 3902717:
 			diamond_count += 1
 			# html_buffer += '<tr class="w3-pale-blue">\n'
-		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i < 4 + diamond_count:
+		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i <= 4 + diamond_count:
+			# print('dimiond')
 			html_buffer += '<tr class="w3-pale-green">\n'
 		elif 'Diamond' in league.name and i >= len(sorted_managers)-4:
 			html_buffer += '<tr class="w3-pale-red">\n'
