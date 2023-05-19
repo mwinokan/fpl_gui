@@ -85,7 +85,7 @@ force_go_graphs = True
 test = False
 force = False
 halfway_awards = False
-offline = False
+offline = True
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
@@ -3126,7 +3126,7 @@ def league_table_html(league,gw):
 		if 'Toilet' in league.name and m.is_diamond:
 			diamond_count += 1
 			# html_buffer += '<tr class="w3-pale-blue">\n'
-		elif 'Toilet' in league.name and not m.is_diamond and i < 4 + diamond_count:
+		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i < 4 + diamond_count:
 			html_buffer += '<tr class="w3-pale-green">\n'
 		elif 'Diamond' in league.name and i >= len(sorted_managers)-4:
 			html_buffer += '<tr class="w3-pale-red">\n'
