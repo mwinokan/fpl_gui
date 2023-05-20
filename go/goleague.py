@@ -19,7 +19,7 @@ def main():
 
 	create_league_figure(api,league,show=True)
 
-def create_league_figure(api,league,subset=None,show=False):
+def create_league_figure(api,league,subset=None,show=False,rank=True):
 	gw = api._current_gw
 	mout.debugOut(f"create_league_figure()")
 
@@ -28,28 +28,42 @@ def create_league_figure(api,league,subset=None,show=False):
 
 	fig = go.Figure()
 	
-	data = [(i+1,y) for i,y in enumerate(api.get_event_averages()) if i+1 not in api._skip_gws]
+	if not rank:
+		data = [(i+1,y) for i,y in enumerate(api.get_event_averages()) if i+1 not in api._skip_gws]
 
-	x = [0]+[d[0] for d in data]
-	y = [d[1] for d in data]
-	y = [0]+[sum(y[:i+1]) for i,_ in enumerate(y)]
+		x = [0]+[d[0] for d in data]
+		y = [d[1] for d in data]
+		y = [0]+[sum(y[:i+1]) for i,_ in enumerate(y)]
 
-	data_dict = dict()
-	for x,y in zip(x,y):
-		data_dict[x] = y
+		data_dict = dict()
+		for x,y in zip(x,y):
+			data_dict[x] = y
 
 	for i,man in enumerate(sorted(league.managers,key= lambda x: x.name)):
 
-		pts = man._total_points
-
-		text = [None]+man.chip_text_list(with_name=False)
+		if not rank:
+			text = [None]+man.chip_text_list(with_name=False)
+		else:
+			text = man.chip_text_list(with_name=False)
 
 		this_x = [i for i in man.active_gws if i not in api._skip_gws]
-		this_y = [p-data_dict[i] for i,p in zip(man.active_gws,pts) if i not in api._skip_gws]
+		
+		if not rank:
 
-		if this_x[0] == 1:
-			this_x = [0] + this_x
-			this_y = [0] + this_y
+			pts = man._total_points
+			this_y = [p-data_dict[i] for i,p in zip(man.active_gws,pts) if i not in api._skip_gws]
+
+		else:
+
+			pts = man._overall_rank
+			this_y = [p for i,p in zip(man.active_gws,pts) if i not in api._skip_gws]
+
+			# print(man.name,pts[:5])
+
+		if not rank:
+			if this_x[0] == 1:
+				this_x = [0] + this_x
+				this_y = [0] + this_y
 
 		if subset and man.id not in subset:
 			visible = 'legendonly'
@@ -58,13 +72,23 @@ def create_league_figure(api,league,subset=None,show=False):
 
 		# print(man,visible)
 
-		fig.add_trace(go.Scatter(name=man.name,opacity=1.0,x=this_x,text=text, y=this_y,visible=visible,textposition="bottom center",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
+		if text[-1] is None:
+			text[-1] = man.name
+		else:
+			text[-1] += f' {man.name}'
 
-	fig.update_traces(marker=dict(line=dict(width=1,color='Black')),selector=dict(mode='markers'))
+		# fig.add_trace(go.Scatter(name=man.name,opacity=1.0,x=this_x,text=text, y=this_y,visible=visible,textposition="bottom center",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
+		fig.add_trace(go.Scatter(name=man.name,opacity=1.0,x=this_x,text=text, y=this_y,visible=visible,textposition="middle right",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
+
+	if not rank:
+		fig.update_traces(marker=dict(line=dict(width=1,color='Black')),selector=dict(mode='markers'))
+		fig.update_yaxes(title_text=f"Total points relative to global average",zeroline=True, zerolinewidth=2, zerolinecolor='Black')
+		
+	else:
+		fig.update_yaxes(title_text=f"Overall Rank",autorange='reversed',type='log')
 
 	fig.update_layout(legend_title_text = f"{league.name}",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
 	fig.update_xaxes(title_text=f"Gameweek")
-	fig.update_yaxes(title_text=f"Total points relative to global average",zeroline=True, zerolinewidth=2, zerolinecolor='Black')
 
 	# Get HTML representation of plotly.js and this figure
 	plot_div = plot(fig, output_type='div', include_plotlyjs=True)

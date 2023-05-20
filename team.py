@@ -260,8 +260,10 @@ class Team():
 					total += self.strength(is_home,overall=True) - opp.strength(not is_home,overall=True)
 					# total += - opp.strength(not is_home,overall=True)
 					count += 1
-
-			self._difficulty_next5 = total / count					
+			if count:
+				self._difficulty_next5 = total / count					
+			else:
+				self._difficulty_next5 = 0
 
 		return self._difficulty_next5
 

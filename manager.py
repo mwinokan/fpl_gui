@@ -295,11 +295,11 @@ class Manager():
 
 				else:
 					self._wc2_week = chip['event']
-					cutoff = min(38,self._wc1_week+5,self._api._current_gw)
-					rel_gw1 = self.active_gws.index(self._wc1_week-1)
+					cutoff = min(38,self._wc2_week+5,self._api._current_gw)
+					rel_gw1 = self.active_gws.index(self._wc2_week-1)
 					rel_gw2 = self.active_gws.index(cutoff)
 					self._wc2_ordelta = self._overall_rank[rel_gw1] - self._overall_rank[rel_gw2]
-					self._wc2_ordelta_percent = 100*self._wc1_ordelta/self._overall_rank[rel_gw1]
+					self._wc2_ordelta_percent = 100*self._wc2_ordelta/self._overall_rank[rel_gw1]
 
 			else:
 				print("Unrecognised chip: "+chip['name'])
