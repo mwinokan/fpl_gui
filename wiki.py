@@ -1255,7 +1255,7 @@ def create_trophycabinet(api,man):
 				html_buffer += f'<h1>{award_flavourtext[key]}</h1>\n'
 				html_buffer += '</td>\n'
 				html_buffer += '<td style="text-align:right;vertical-align:middle;">\n'
-				html_buffer += f'<h2><span class="w3-tag">Christmas</span></h2>\n'
+				html_buffer += f'<h2><span class="w3-tag">Season</span></h2>\n'
 				html_buffer += '</tr>\n'
 				html_buffer += '</table>\n'
 				html_buffer += '</div>\n'
