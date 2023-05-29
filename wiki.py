@@ -3461,7 +3461,7 @@ def league_table_html(league,gw,awardkey=None):
 		if 'Toilet' in league.name and m.is_diamond and m.id != 3902717:
 			diamond_count += 1
 			# html_buffer += '<tr class="w3-pale-blue">\n'
-		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i <= 4 + diamond_count:
+		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i <= 5 + diamond_count:
 			# print('dimiond')
 			html_buffer += '<tr class="w3-pale-green">\n'
 		elif 'Diamond' in league.name and i >= len(sorted_managers)-4:
