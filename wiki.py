@@ -85,8 +85,8 @@ force_go_graphs = True
 test = False
 force = False
 halfway_awards = False
-season_awards = False
-offline = False
+season_awards = True
+offline = True
 
 wc1_cutoff = 16
 
@@ -364,8 +364,8 @@ def main():
 			season_awards = True
 		if season_awards:
 			create_seasonpage(leagues,sidebar_md)
-			api.finish()
-			exit()
+			# api.finish()
+			# exit()
 
 		json['timestamp'] = timestamp
 
@@ -375,7 +375,8 @@ def main():
 		navbar = create_navbar(leagues, active='H', colour='black', active_colour='green')
 		html_page('index.html',f'{path}/Home.md', title="Max's FPL GUI", sidebar_content=sidebar_md, gw=api._current_gw,bar_html=navbar)
 
-		create_fixturepage(api,sidebar_md,leagues)
+		if api._current_gw < 38 or api._live_gw:
+			create_fixturepage(api,sidebar_md,leagues)
 
 		get_manager_json_awards(api,leagues)
 		get_manager_json_positions(api,leagues)
@@ -1192,9 +1193,9 @@ def create_playerpage(api,player,sidebar_md,leagues):
 
 def create_trophycabinet(api,man):
 
-	award_flavourtext = dict(king="👑 King",cock="🐓 Cock",goals="⚽️ Massive Goal FC",boner="🦴 Boner",scientist="🧑‍🔬 Scientist",smooth_brain="🧠 Smooth Brain",chair="🪑 Chair",asbo="🥊 ASBO",nerd="🤓 Nerd",innovator="🎓 Innovator",fortune="🔮 Fortune Teller",clown="🤡 Clown",oligarch="🛢 Oligarch",iceman="🥶 Iceman",peasant="🏚 Peasant",glow_up="💡 Glow-Up",has_been="👨‍🦳 Has-Been",kneejerker="🔨 Kneejerker",wc1_best="Best Wildcard 1",wc1_worst="Worst Wildcard 1")
+	award_flavourtext = dict(king="👑 King",cock="🐓 Cock",goals="⚽️ Massive Goal FC",boner="🦴 Boner",scientist="🧑‍🔬 Scientist",smooth_brain="🧠 Smooth Brain",chair="🪑 Chair",asbo="🥊 ASBO",nerd="🤓 Nerd",innovator="🎓 Innovator",fortune="🔮 Fortune Teller",clown="🤡 Clown",oligarch="🛢 Oligarch",iceman="🥶 Iceman",peasant="🏚 Peasant",glow_up="💡 Glow-Up",has_been="👨‍🦳 Has-Been",kneejerker="🔨 Kneejerker",wc1_best="Best Wildcard 1",wc1_worst="Worst Wildcard 1",wc2_best="Best Wildcard 2",wc2_worst="Worst Wildcard 2",tc_best='Best Triple Captain',tc_worst='Worst Triple Captain',bb_best='Best Bench Boost',bb_worst='Worst Bench Boost',fh_best='Best Free Hit',fh_worst='Worst Free Hit')
 	award_unittext = dict(king="points",cock="points",goals="goals",boner="points",scientist="points",smooth_brain="points on the bench",chair="'",asbo="cards",nerd="%",innovator="%",fortune="points gained",clown="points lost")
-	award_colour = dict(king="amber",cock="red",goals="indigo",scientist="green",boner="grey",smooth_brain="pale-red",chair="brown",asbo="yellow",fortune="purple",clown="pale-red",nerd="pale-yellow",innovator="grey",oligarch="black",iceman="aqua",peasant='brown',glow_up='pale-yellow',has_been='grey',kneejerker='deep-orange',wc1_best="red",wc1_worst="red")
+	award_colour = dict(king="amber",cock="red",goals="indigo",scientist="green",boner="grey",smooth_brain="pale-red",chair="brown",asbo="yellow",fortune="purple",clown="pale-red",nerd="pale-yellow",innovator="grey",oligarch="black",iceman="aqua",peasant='brown',glow_up='pale-yellow',has_been='grey',kneejerker='deep-orange',wc1_best="red",wc1_worst="red",wc2_best="red",wc2_worst="red",tc_best='yellow',tc_worst='yellow',bb_best='blue',bb_worst='blue',fh_best='green',fh_worst='green')
 
 	html_buffer = f'<h2>Trophy Cabinet</h2>\n'
 
@@ -1223,10 +1224,10 @@ def create_trophycabinet(api,man):
 
 		html_buffer += '<div class="w3-justify w3-row-padding">\n'
 
-		awards = [a for a in man._awards if league.name in a['league'] and a['gw'] not in ['half','full','chips']]
+		awards = [a for a in man._awards if league.name in a['league'] and a['gw'] not in ['half','season','chips']]
 
 		half_awards = [a for a in man._awards if league.name in a['league'] and a['gw'] == 'half']
-		full_awards = [a for a in man._awards if league.name in a['league'] and a['gw'] == 'full']
+		full_awards = [a for a in man._awards if league.name in a['league'] and a['gw'] == 'season']
 		chip_awards = [a for a in man._awards if league.name in a['league'] and a['gw'] == 'chips']
 
 		if len(awards+half_awards+full_awards+chip_awards) > 0:
@@ -1239,6 +1240,27 @@ def create_trophycabinet(api,man):
 			award_panels = []
 
 			# full > half > chips > normal
+			for award in full_awards:
+
+				key = award['key']
+				
+				colour = award_colour[key]
+				# icon = award_icon[key]
+
+				html_buffer += '<div class="w3-col s12 m6 l4">\n'
+				html_buffer += f'<div style="border:8px solid" class="w3-panel w3-{colour} w3-card w3-border-yellow">\n'
+				html_buffer += '<table class="w3-table">\n'
+				html_buffer += '<tr>\n'
+				html_buffer += '<td style="text-align:left;vertical-align:middle;">\n'
+				html_buffer += f'<h1>{award_flavourtext[key]}</h1>\n'
+				html_buffer += '</td>\n'
+				html_buffer += '<td style="text-align:right;vertical-align:middle;">\n'
+				html_buffer += f'<h2><span class="w3-tag">Christmas</span></h2>\n'
+				html_buffer += '</tr>\n'
+				html_buffer += '</table>\n'
+				html_buffer += '</div>\n'
+				html_buffer += '</div>\n'
+
 			for award in half_awards:
 
 				key = award['key']
@@ -1893,6 +1915,18 @@ def get_manager_json_awards(api,leagues):
 
 				continue
 
+			if 'season' in gw_id:
+
+				for key,data in gw_data['awards'].items():
+
+					# print(key,data)
+
+					for m_id in data[0]:
+						m = api.get_manager(id=m_id)
+						m._awards.append(dict(key=key,score=data[-1],league=l_name,gw='season'))
+
+				continue
+
 			if 'chips' in gw_id:
 
 				for key,data in gw_data.items():
@@ -1919,6 +1953,9 @@ def get_manager_json_awards(api,leagues):
 								m._awards.append(dict(key=key,player=data[1],is_captain=data[2],score=data[3],gw=gw_id,league=l_name))
 						else:
 							subset = data[0:-1]
+							# print(subset)
+							# print(key)
+							# print(data)
 							for id in subset:
 								if id in api._managers.keys():
 									m = api.get_manager(id=id)
@@ -2096,7 +2133,7 @@ def create_seasonpage(leagues,sidebar_md):
 
 	html_buffer += '<div class="w3-center">\n'
 	html_buffer += f"<h2>{title}</h2>\n"
-	html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/psd/christmas22.png?raw=true" alt="Banner" width="1320" height="702">\n'
+	# html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/psd/christmas22.png?raw=true" alt="Banner" width="1320" height="702">\n'
 	html_buffer += '</div>\n'
 
 	html_buffer += '<div class="w3-bar w3-black">\n'
@@ -2119,9 +2156,9 @@ def create_seasonpage(leagues,sidebar_md):
 
 		html_buffer += '<div class="w3-justify w3-row-padding">\n'
 
-		html_buffer += "<p>\n"
-		html_buffer += league_season_text[league.id]
-		html_buffer += "</p>\n"
+		# html_buffer += "<p>\n"
+		# html_buffer += league_season_text[league.id]
+		# html_buffer += "</p>\n"
 
 		html_buffer += "<h3>Chip Usage</h3>\n"
 		html_buffer += league_best_chips(league)
