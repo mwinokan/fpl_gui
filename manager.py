@@ -316,6 +316,15 @@ class Manager():
 		return self.__bb_ptsgain
 
 	@property
+	def gw_rank_gain(self):
+		try:
+			rel_gw1 = self.active_gws.index(self._api._current_gw)
+			rel_gw2 = self.active_gws.index(self._api._current_gw-1)
+			return 100*(self._overall_rank[rel_gw2] - self._overall_rank[rel_gw1])/self._overall_rank[rel_gw2]
+		except ValueError:
+			return 0
+
+	@property
 	def _tc_ptsgain(self):
 		if self.__tc_ptsgain is None:
 			self.get_current_squad(gw=self._tc_week,force=True)
@@ -693,15 +702,15 @@ class Manager():
 	
 	@property
 	def yellows(self):
-		return sum([p.event_yellows for p in self.players])
+		return sum([p.event_yellows*p.multiplier for p in self.players])
 
 	@property
 	def reds(self):
-		return sum([p.event_reds for p in self.players])
+		return sum([p.event_reds*p.multiplier for p in self.players])
 
 	@property
 	def minutes(self):
-		return sum([p.event_minutes for p in self.players])
+		return sum([p.event_minutes*p.multiplier for p in self.players])
 
 	@property
 	def bench_points(self):
@@ -709,15 +718,15 @@ class Manager():
 
 	@property
 	def bps(self):
-		return sum([p.event_bps for p in self.players])
+		return sum([p.event_bps*p.multiplier for p in self.players])
 
 	@property
 	def goals(self):
-		return sum([p.event_goals for p in self.players])
+		return sum([p.event_goals*p.multiplier for p in self.players])
 
 	@property
 	def bonus(self):
-		return sum([p.event_bonus for p in self.players])
+		return sum([p.event_bonus*p.multiplier for p in self.players])
 	
 	def get_card_count(self,red_mult=2.1):
 		return self.yellows + red_mult * self.reds
@@ -810,6 +819,7 @@ class Manager():
 
 		if len(transfers) == 0:
 			self._transfer_gain[gw] = 0
+			self._transfer_uniqueness = 0
 			return 0
 
 		wc_active = False
@@ -818,13 +828,21 @@ class Manager():
 		elif self._wc2_week is not None and gw == self._wc2_week:
 			wc_active = True
 
+		transfer_uniqueness = 0.0
+
 		for d in transfers:
 			p_out = Player(None,self._api,index=self._api.get_player_index(d['element_out']))
 			p_in = Player(None,self._api,index=self._api.get_player_index(d['element_in']))
+			
 			p_in_score = p_in.get_event_score(gw=gw)
 			p_out_score = p_out.get_event_score(gw=gw)
+			
+			transfer_uniqueness -= p_in.transfer_percent 
+			transfer_uniqueness += p_out.transfer_percent 
+
 			if p_in_score is None: p_in_score = 0
 			if p_out_score is None: p_out_score = 0
+
 			score += -p_out_score
 			score += p_in_score
 
@@ -832,6 +850,7 @@ class Manager():
 			score -= self.get_transfer_cost(gw)
 
 		self._transfer_gain[gw] = score
+		self._transfer_uniqueness = transfer_uniqueness
 
 		return score
 
@@ -877,7 +896,7 @@ class Manager():
 			score += -p_out_score
 			score += p_in_score
 			if not short:
-				str_buff += f"{p_out.name} ({p_out_score}) ➡️  {p_in.name} ({p_in_score})\n"
+				str_buff += f"{p_out.name} ({p_out_score}) → {p_in.name} ({p_in_score})\n"
 		score -= self.get_transfer_cost(gw)
 		if short:
 			str_buff += f"{len(transfers)} "
@@ -922,6 +941,24 @@ class Manager():
 		j = gw - start_gw
 
 		return self._event_points[j-1]
+
+	def get_event_performed_xpts(self,gw):
+		return float(sum([p.get_performed_xpts(gw)*p.multiplier for p in self.players]))
+
+	@property
+	def gw_xg(self):
+		gw = self._api._current_gw
+		return float(sum([p.get_gw_xg(gw)*p.multiplier for p in self.players]))
+
+	@property
+	def gw_xa(self):
+		gw = self._api._current_gw
+		return float(sum([p.get_gw_xa(gw)*p.multiplier for p in self.players]))
+
+	@property
+	def gw_performed_xpts(self):
+		gw = self._api._current_gw
+		return self.get_event_performed_xpts(gw)
 
 	@property
 	def active_gws(self):
@@ -1143,21 +1180,21 @@ class Manager():
 				hit_yerrs = [[ h for h in hit_cost],[ 0 for h in hit_cost]]
 				ax.errorbar(x,y,yerr=hit_yerrs,label="Transfer Cost",marker='o',color="k",zorder=2,linewidth=0,elinewidth=2,fmt='none',capsize=3,capthick=2)
 
-				for league in self._leagues:
-					# x = [i for i in range(1,self._api._current_gw+1) if i not in self._api._skip_gws]
-					# y = [p if i not in self._api._skip_gws else None for i,p in zip(range(1,self._api._current_gw+1),league.average_event_points)]
+				# for league in self._leagues:
+				# 	# x = [i for i in range(1,self._api._current_gw+1) if i not in self._api._skip_gws]
+				# 	# y = [p if i not in self._api._skip_gws else None for i,p in zip(range(1,self._api._current_gw+1),league.average_event_points)]
 
-					x = []
-					y = []
+				# 	x = []
+				# 	y = []
 
-					for gw,pts in zip(range(1,self._api._current_gw+1),league.average_event_points):
-						if gw in self._api._skip_gws:
-							continue
-						x.append(gw)
-						y.append(pts)
+				# 	for gw,pts in zip(range(1,self._api._current_gw+1),league.average_event_points):
+				# 		if gw in self._api._skip_gws:
+				# 			continue
+				# 		x.append(gw)
+				# 		y.append(pts)
 
-					# ax.plot(range(1,self._api._current_gw+1),league.average_event_points,linestyle='--',marker=None,label=f"{league.shortname} Average",zorder=1,color=league.colour_str)
-					ax.plot(x,y,linestyle='--',marker=None,label=f"{league.shortname} Average",zorder=1,color=league.colour_str)
+				# 	# ax.plot(range(1,self._api._current_gw+1),league.average_event_points,linestyle='--',marker=None,label=f"{league.shortname} Average",zorder=1,color=league.colour_str)
+				# 	ax.plot(x,y,linestyle='--',marker=None,label=f"{league.shortname} Average",zorder=1,color=league.colour_str)
 				
 				# axis ticks
 				ax.set_axisbelow(True)

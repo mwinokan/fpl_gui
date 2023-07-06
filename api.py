@@ -180,7 +180,7 @@ class FPL_API():
 
 		self._finish_time = datetime.datetime.now()
 
-		mout.varOut("Execution Time",self._finish_time-self._init_time)
+		mout.varOut("Execution Time",str(self._finish_time-self._init_time))
 
 	def create_team_styles_css(self):
 
@@ -198,6 +198,11 @@ class FPL_API():
 			html_buffer += '{'
 			html_buffer += f'color:{team.style["background-color"]} !important; '
 			html_buffer += f'background-color:{team.style["color"]} !important'
+			html_buffer += '}\n'
+
+			html_buffer += f'.w3-{team.shortname.lower()}-acc'
+			html_buffer += '{'
+			html_buffer += f'background-color:{team.style["accent"]} !important'
 			html_buffer += '}\n'
 
 			# .w3-theme-l5 {color:#000 !important; background-color:#f0f4f8 !important}

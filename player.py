@@ -599,6 +599,31 @@ class Player():
 		else:
 			return score
 
+	def get_gw_xg(self,gw=None):
+		if gw is None:
+			gw=self._api.current_gw
+		if gw > self._api.current_gw:
+			mout.errorOut("Gameweek has not happened yet")
+			return None
+
+		indices = [i for i,r in enumerate(self.history['round']) if r == gw]
+		xg = sum([float(self.history['expected_goals'][i]) for i in indices])
+		return xg
+
+	def get_gw_xa(self,gw=None):
+		if gw is None:
+			gw=self._api.current_gw
+		if gw > self._api.current_gw:
+			mout.errorOut("Gameweek has not happened yet")
+			return None
+
+		indices = [i for i,r in enumerate(self.history['round']) if r == gw]
+		xa = sum([float(self.history['expected_assists'][i]) for i in indices])
+		return xa
+
+	def get_gw_xgi(self,gw=None):
+		return self.get_gw_xg(gw=gw) + self.get_gw_xa(gw=gw)
+
 	def get_performed_xpts(self,gw=None):
 		if gw is None:
 			gw=self._api.current_gw

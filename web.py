@@ -44,21 +44,12 @@ def fix_table_classes(html):
 	<table>    --> 		<table class="w3-table-all w3-hoverable">
 	'''
 
-	html = html.replace('<table>','<div class="w3-responsive">\n<table class="w3-table-all w3-hoverable">')
+	html = html.replace('<table>','<div class="w3-responsive">\n<table class="w3-table w3-hoverable">')
 	html = html.replace('</table>','</table>\n</div>')
 	return html
 
-def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None):
+def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None,colour='white',nonw3_colour=False):
 	mout.debugOut(f"html_page({target})")
-	
-	'''			
-				Max's FPL GUI
-		---------------------------
-					 		|
-			MARKDOWN		| SIDE
-			CONTENT	 		| -BAR
-					 		|
-	'''
 
 	if mdfile is None:
 		html_content = html
@@ -86,69 +77,63 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 	fout.write('h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}')
 	fout.write('body {font-family: "Open Sans"}\n')
 	fout.write('h5.double {line-height: 2}\n')
+	fout.write('/*drop shadow*/\n')
+	fout.write('.shadow10 {box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}\n')
+	fout.write('/*drop shadow*/\n')
+	fout.write('.shadow20 {box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}\n')
+	fout.write('/*inner shadow*/\n')
+	fout.write('.shadow25 {box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;}\n')
+	fout.write('/*pink effect*/\n')
+	fout.write('.shadow50 {box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;}\n')
+	fout.write('/*soft inner and outer*/\n')
+	fout.write('.shadow87 {box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}\n')
+	fout.write('/*button shadow*/\n')
+	fout.write('.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}\n')
+
 	if extra_style is not None:
 		fout.write(extra_style)
 	fout.write('</style>\n')
 	fout.write('</head>\n')
-	# fout.write('<body class="w3-light-grey">\n') ### COMMENT
-	fout.write('<!-- w3-content defines a container for fixed size centered content, ')
-	fout.write('and is wrapped around the whole page content, except for the footer in this example -->\n')
-	fout.write('<div class="w3-content" style="max-width:2000px">\n')
-	fout.write('<!-- Header -->\n')
-	fout.write('<header class="w3-container w3-center w3-padding-48 w3-white">\n')
-	fout.write('<h1 class="w3-xxxlarge"><b>FPL <span class="w3-tag">GUI</span></b></h1>\n')
-	fout.write('<h6>Max Winokan</h6>\n')
-	fout.write('</header>\n')
+
+	# BAR
 	if bar_html is not None:
 		fout.write(bar_html)
-	fout.write('<!-- Grid -->\n')
-	fout.write('<div class="w3-row w3-border">\n')
-	fout.write('<!-- Content -->\n')
-	# fout.write('<div class="w3-col l8 s12">\n')
-	fout.write('<div class="w3-col l12 s12">\n') 
-	# fout.write('<div class="w3-container w3-white">\n')
-	fout.write('<div class="w3-container w3-white w3-padding">\n')
-	# fout.write('<div class="w3-container w3-white w3-margin w3-padding-large">\n')
+
+	# BODY
+	if nonw3_colour:
+		fout.write(f'<body class="shadow25" style="background-color:{colour};">\n')
+	else:
+		fout.write(f'<body class="w3-{colour} shadow25">\n')
+
+	# CONTENT
+	fout.write('<div class="w3-content" style="max-width: 1400px;">\n')
+
+	# TITLE
 	if showtitle:
-		fout.write('<div class="w3-center">\n')
-		fout.write(f'<h1>{title}</h1>\n')
+		fout.write('<div class="w3-center w3-padding-large">\n')
+		if colour == 'white':
+			fout.write(f'\t<h1><span class="w3-tag w3-black shadow50">{title}</span></h1>\n')
+		else:
+			fout.write(f'\t<h1><span class="w3-tag w3-white shadow50">{title}</span></h1>\n')
 		fout.write('</div>\n')
-	fout.write('<div class="w3-justify">\n')
+
+	# HTML
+	fout.write('<div class="w3-row-padding w3-padding-large">\n')
 	fout.write(html_content)
 	fout.write('</div>\n')
+
+	# END CONTENT
 	fout.write('</div>\n')
-	fout.write('<hr>\n')
-	fout.write('</div>\n')
-	# if bar_html is None:
-	# 	fout.write('<!-- Sidebar -->\n')
-	# 	fout.write('<div class="w3-col l4">\n')
-	# 	fout.write('<div class="w3-white w3-margin">\n')
-	# 	fout.write('<div class="w3-container w3-black">\n')
-	# 	fout.write('<h4>FPL_GUI</h4>\n')
-	# 	fout.write(sidebar_html)
-	# 	fout.write('</div>\n')
-	# 	fout.write('</div>\n')
-	# 	# fout.write('<hr>\n')
-	# 	fout.write('</div>\n')
-	fout.write('<!-- END GRID -->\n')
-	fout.write('</div>\n')
-	fout.write('<!-- END w3-content -->\n')
-	# fout.write('</div>\n') ### COMMENT
-	fout.write('<!-- Footer -->\n')
-	fout.write('<footer class="w3-container w3-dark-grey" style="padding:32px">\n')
-	if sidebar_html is not None:
-		fout.write(sidebar_html)
-	fout.write('<a href="#" class="w3-button w3-black w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>Back to top</a>\n')
-	fout.write('<div class="w3-center">\n')
+	# END BODY
+	fout.write('</body>\n')
 
 	from datetime import datetime
 	timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 
+	fout.write('<footer class="w3-container w3-black w3-center" style="padding:32px">\n')
 	fout.write(f'<p>Accurate as of {timestamp}, (GW{gw})</p>\n')
-	fout.write('<p>Max Winokan <span class="w3-tag">mwinokan@me.com</span></a></p>\n')
-	fout.write('</div>\n')
+	fout.write('<p>Max Winokan <span class="w3-tag w3-white">mwinokan@me.com</span></a></p>\n')
 	fout.write('</footer>\n')
-	# fout.write('</body>\n') ### COMMENT
 	fout.write('</html>\n')
 
 	fout.close()
