@@ -229,6 +229,8 @@ class Manager():
 		force_generate = self._api._force_generate_kits
 		# force_generate = True
 
+		mout.debug(f'get_team_shirt({self})')
+
 		path = Path(self._kit_path)
 		if not path.is_file() or force_generate:
 		

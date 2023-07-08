@@ -247,7 +247,7 @@ def main():
 		squad.add_player(Player(name,api))
 
 	# api._force_generate_kits = not api._live_gw
-	api._skip_kits = True
+	api._skip_kits = False
 
 	clear_logs()
 
