@@ -125,15 +125,18 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 	# END CONTENT
 	fout.write('</div>\n')
 	# END BODY
-	fout.write('</body>\n')
+	# fout.write('</body>\n')
 
 	from datetime import datetime
 	timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 
-	fout.write('<footer class="w3-container w3-black w3-center" style="padding:32px">\n')
+	fout.write('<div class="w3-center" style="padding:32px">\n')
+	# fout.write('<footer class="w3-container w3-black w3-center" style="padding:32px">\n')
 	fout.write(f'<p>Accurate as of {timestamp}, (GW{gw})</p>\n')
 	fout.write('<p>Max Winokan <span class="w3-tag w3-white">mwinokan@me.com</span></a></p>\n')
-	fout.write('</footer>\n')
+	# fout.write('</footer>\n')
+	fout.write('</div>\n')
+	fout.write('</body>\n')
 	fout.write('</html>\n')
 
 	fout.close()

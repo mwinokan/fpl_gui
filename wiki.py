@@ -91,19 +91,13 @@ season_awards = False
 cup_active = True
 offline = False
 
-# if run_push_changes:
-# 	mout.error("Make sure to back up the JSON data and change the API to 23/24!!!")
-# 	exit()
-
-wc1_cutoff = 16
+wc1_cutoff = 19
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
 	create_launchd_plist = True
 elif len(sys.argv) > 1 and sys.argv[1] == '-f':
 	force = True
-
-# league_codes = [663873]
 
 # 22/23
 league_codes = [663873,910674,937886,1020381,696154]
@@ -208,79 +202,10 @@ league_halfway_text = {663873:f"The RBS Diamond Invitational has proved to be a 
 league_season_text = {663873:f"PLACEHOLDER DIAMOND SEASON REVIEW",910674:f"PLACEHOLDER TOILET SEASON REVIEW"}
 
 watchlist = [
-			# "Callum Wilson",
-			# "Guaita",
-			"Pope",
-			# "Solanke",
-			# "Dasilva",
-			# "Malacia",
-			"Botman",
-			# "Barnes",
-			"Darwin",
-			# "Trippier",
-			# "Zinchenko",
-			# "Reece James",
-			# "Kyle Walker",
-			# "Luis D",
-			"Salah",
-			# "Haaland",
-			"Kane",
-			"Mount",
-			# "Fofana",
-			# "Sinisterra",
-			"Digne",
-			# "March",
-			"Trent",
-			# "Aaronson",
-			# "Eze",
-			"Shaw",
-			# "Zaha",
-			# "Ward-Prowse",
-			# "Ederson",
-			# "Lloris",
-			# "Alisson",
-			# "Pedro Neto",
-			# "Rashford",
-			"Fabian Schär",
-			# "Mee",
-			# "Burn",
-			# "Kelly",
-			# "Emerson Royal",
-			"Cucurella",
-			"Gabriel Gabriel",
-			"Benjamin White",
-			"Saliba",
-			# "Dalot",
-			# "Anthony Gordon",
-			# "Patterson",
-			# "Perišić",
-			# "Rodrigo Rodrigo",
-			# "Jack Harrison",
-			# "Sessegnon",
-			# "Kulusevski",
-			"degaard",
-			"Saka",
-			"Mitrović",
-			# "Mbeumo",
-			"Toney",
-			# "Almirón",
-			# "Veltman",
-			# "Maddison",
-			# "Van Dijk",
-			# "De Bruyne",
-			"Foden",
-			# "Álvarez",
-			# "Isak",
 			]
 
 squad = None
-
-# graph_captain_points = None
-# graph_event_points = None
-# graph_player_selection = None
-# graph_gw_rank = None
-# graph_overall_rank = None
-# graph_past_rank = None
+preseason = False
 
 risers = []
 fallers = []
@@ -313,6 +238,9 @@ def main():
 	global api
 	api = fpl_api.FPL_API(offline=offline,quick=False,force_generate_kits=force_generate_kits,write_offline_data=True)
 
+	global preseason
+	preseason = api._current_gw < 1
+
 	global squad
 	squad = Squad()
 	for name in watchlist:
@@ -328,190 +256,187 @@ def main():
 	if len(json) == 0:
 		json = {}
 
-	if recalculate:
+	if test:
 
-		if test:
+		# toilet = League(910674, api)
 
-			# toilet = League(910674, api)
+		# create_cup_page(api,toilet,[toilet],None)
 
-			# create_cup_page(api,toilet,[toilet],None)
+		# exit()
 
-			# exit()
+		# create_teampage(api,None,[])
+		# exit()
 
-			# create_teampage(api,None,[])
-			# exit()
+		# league = League(663873, api)
 
-			# league = League(663873, api)
+		navbar = create_navbar([])
 
-			p = Player("Bell",api)
+		create_homepage(navbar)
 
-			create_playerpage(api,p,[])
+		p = Player("Bell",api)
 
-			exit()
+		create_playerpage(api,p,[])
 
-			# print(p.history.columns)
+		exit()
 
-			# print(p.get_performed_xpts(25))
+		# print(p.history.columns)
 
-			# print(p.get_event_score(25,True))
+		# print(p.get_performed_xpts(25))
 
-			# exit()
+		# print(p.get_event_score(25,True))
 
-			# import sys
-			# sys.path.insert(1,'go')
-			# from league import create_value_figure
-			# from gwexp import create_gwexp_figure
-			# create_fixturepage(api,None,[])
-			
-			# man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=False)
+		# exit()
 
-			# create_manager_pick_history(api, man)
-
-			# print(man._history_current.keys())
-
-			# man = Manager("Max Winokan", 4999117, api, team_name="Loyd's Groß Men", authenticate=False)
-			# man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=True)
-			# man = Manager("Harry", 2795914, api, team_name="Harry's Team", authenticate=False)
-			# # print(man.is_dead)
-			# # man.create_rank_graph(show=True)
-			# # man.create_leaguepos_graph(show=True)
-			# # man.create_points_graph(show=True)
-
-			# print(man.num_hits)
-			# print(man.num_nonwc_transfers)
-
-			# create_managerpage(api, man, None, [])
-
-			# print(get_player_history_table(wilson))
-
-			# create_assetpage(None,[])
-
-			# p = Player("Robert Sánchez", api)
-			# create_playerpage(api, p, None, [])
-
-			# print(p.appearances)
-
-			# create_playerpage(api,Player("Callum Wilson", api), None)
-			# create_playerpage(api,Player("Havertz", api), None)
-			# create_playerpage(api,Player("Erling", api), None,[])
-			# create_playerpage(api,Player("Arnold", api), None)
-			# create_playerpage(api,Player("Digne", api), None)
-			# create_playerpage(api,Player("Mbabu", api), None, [])
-
-			# print("GW4",wilson.get_playing_chance(4))
-			# print("GW5",wilson.get_playing_chance(5))
-			# print("GW6",wilson.get_playing_chance(6))
-			# print("GW7",wilson.get_playing_chance(7))
-			# print("GW8",wilson.get_playing_chance(8))
-
-			# man.make_autosubs()
-
-			api.finish()
-			exit()
-
-		if scrape_kits:
-			api.scrape_team_kits()
-			exit()
-
-		extra_managers = None
-
-		# extra_managers = [
-				# [5977880,'Magnus','Carlsen','KFUM Tjuvholmen**'],
-				# [3275774,'Max','Sangster','Maxier Hernández**'],
-				# [396725,'Keir','Chesterton','Nabil Fa-Keir**']]
-
-		leagues = []
-		for icon,code,colour,shortname in zip(league_icons,league_codes,league_colours,league_shortnames):
-			# if code == 910674:
-			# 	leagues.append(League(code,api,extra=[
-			# 		[3106633,'Rob','Sutton','Take the Plange*'],
-			# 		[2778113,'Matthew','Wiggins','Makin Emile Of It FC*'],
-			# 		# [5977880,'Magnus','Carlsen','KFUM Tjuvholmen**']
-			# 		]))
-			# elif code == 696154:
-			# 	leagues.append(League(code,api,extra=extra_managers))
-			# else:
-			try:
-				leagues.append(League(code,api))
-				leagues[-1]._icon = icon
-				leagues[-1]._shortname = shortname
-				leagues[-1]._colour_str = colour
-			except fpl_api.Request404:
-				mout.error(f'Could not init League({code},{shortname})')
-
-		navbar = create_navbar(leagues)
-
-		create_homepage(leagues,navbar)
-
-		# get_manager_json_positions(api,leagues)
+		# import sys
+		# sys.path.insert(1,'go')
+		# from league import create_value_figure
+		# from gwexp import create_gwexp_figure
+		# create_fixturepage(api,None,[])
 		
-		if api._current_gw > 28:
-			create_cup_page(api,leagues[1],leagues)
+		# man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=False)
 
-		# leagues[0].create_points_graph()
-		# leagues[-1].create_points_graph()
+		# create_manager_pick_history(api, man)
 
-		for i,l in enumerate(leagues):
-			create_leaguepage(l,leagues,i)
-			# exit()
-		
-		create_teampage(api,leagues)
+		# print(man._history_current.keys())
 
-		global halfway_awards
-		if api._current_gw == 19 and not api._live_gw:
-			halfway_awards = True
-		if halfway_awards:
-			create_christmaspage(leagues)
-			# api.finish()
-			# exit()
+		# man = Manager("Max Winokan", 4999117, api, team_name="Loyd's Groß Men", authenticate=False)
+		# man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=True)
+		# man = Manager("Harry", 2795914, api, team_name="Harry's Team", authenticate=False)
+		# # print(man.is_dead)
+		# # man.create_rank_graph(show=True)
+		# # man.create_leaguepos_graph(show=True)
+		# # man.create_points_graph(show=True)
 
-		# global season_awards
-		# if api._current_gw == 38 and not api._live_gw:
-		# 	season_awards = True
-		if season_awards:
-			create_seasonpage(leagues)
-			# api.finish()
-			# exit()
+		# print(man.num_hits)
+		# print(man.num_nonwc_transfers)
 
-		json['timestamp'] = timestamp
+		# create_managerpage(api, man, None, [])
 
-		dump_json(json)
-		json = load_json()
+		# print(get_player_history_table(wilson))
 
-		get_manager_json_awards(api,leagues)
-		# get_manager_json_positions(api,leagues)
+		# create_assetpage(None,[])
 
-		count = 0
-		mout.debugOut("main()::ManagerPages")
-		mout.hideDebug()
-		maximum = len(api._managers)
-		plot = force_plot or not api._live_gw
-		for i,m in enumerate(api._managers.values()):
-			mout.progress(i,maximum,width=50,fill="#")
-			if api._current_gw > 0:
-				m.create_rank_graph(plot=plot,show=False)
-				m.create_points_graph(plot=plot,show=False)
-			# m.create_leaguepos_graph(plot=plot,show=False)
-			create_managerpage(api, m, leagues)
-		mout.progress(maximum,maximum,width=50,fill="#")
-		mout.showDebug()
+		# p = Player("Robert Sánchez", api)
+		# create_playerpage(api, p, None, [])
 
-		count = 0
-		mout.debugOut("main()::PlayerPages")
-		mout.hideDebug()
-		maximum = len(api._loaded_players)
-		for pid in api._loaded_players:
-			mout.progress(count,maximum,width=50,fill="#",append=f' {count}/{maximum}')
-			pid = int(pid)
-			create_playerpage(api,Player(None,index=api.get_player_index(pid),api=api),leagues)
-			# if count > 10:
-			# 	exit()	
-			count += 1
-		mout.progress(maximum,maximum,width=50,fill="#")
-		mout.showDebug()
-		
+		# print(p.appearances)
+
+		# create_playerpage(api,Player("Callum Wilson", api), None)
+		# create_playerpage(api,Player("Havertz", api), None)
+		# create_playerpage(api,Player("Erling", api), None,[])
+		# create_playerpage(api,Player("Arnold", api), None)
+		# create_playerpage(api,Player("Digne", api), None)
+		# create_playerpage(api,Player("Mbabu", api), None, [])
+
+		# print("GW4",wilson.get_playing_chance(4))
+		# print("GW5",wilson.get_playing_chance(5))
+		# print("GW6",wilson.get_playing_chance(6))
+		# print("GW7",wilson.get_playing_chance(7))
+		# print("GW8",wilson.get_playing_chance(8))
+
+		# man.make_autosubs()
+
+		api.finish()
+		exit()
+
+	if scrape_kits:
+		api.scrape_team_kits()
+		exit()
+
+	extra_managers = None
+
+	leagues = []
+	for icon,code,colour,shortname in zip(league_icons,league_codes,league_colours,league_shortnames):
+		# if code == 910674:
+		# 	leagues.append(League(code,api,extra=[
+		# 		[3106633,'Rob','Sutton','Take the Plange*'],
+		# 		[2778113,'Matthew','Wiggins','Makin Emile Of It FC*'],
+		# 		# [5977880,'Magnus','Carlsen','KFUM Tjuvholmen**']
+		# 		]))
+		# elif code == 696154:
+		# 	leagues.append(League(code,api,extra=extra_managers))
+		# else:
+		try:
+			leagues.append(League(code,api))
+			leagues[-1]._icon = icon
+			leagues[-1]._shortname = shortname
+			leagues[-1]._colour_str = colour
+		except fpl_api.Request404:
+			mout.error(f'Could not init League({code},{shortname})')
+
+	navbar = create_navbar(leagues)
+
+	create_homepage(navbar)
+
+	# get_manager_json_positions(api,leagues)
+	
+	if api._current_gw > 28:
+		create_cup_page(api,leagues[1],leagues)
+
+	# leagues[0].create_points_graph()
+	# leagues[-1].create_points_graph()
+
+	for i,l in enumerate(leagues):
+		create_leaguepage(l,leagues,i)
+		# exit()
+	
+	create_teampage(api,leagues)
+
+	global halfway_awards
+	if api._current_gw == 19 and not api._live_gw:
+		halfway_awards = True
+	if halfway_awards:
+		create_christmaspage(leagues)
+		# api.finish()
+		# exit()
+
+	# global season_awards
+	# if api._current_gw == 38 and not api._live_gw:
+	# 	season_awards = True
+	if season_awards:
+		create_seasonpage(leagues)
+		# api.finish()
+		# exit()
+
+	json['timestamp'] = timestamp
+
+	dump_json(json)
+	json = load_json()
+
+	get_manager_json_awards(api,leagues)
+	# get_manager_json_positions(api,leagues)
+
+	count = 0
+	mout.debugOut("main()::ManagerPages")
+	mout.hideDebug()
+	maximum = len(api._managers)
+	plot = force_plot or not api._live_gw
+	for i,m in enumerate(api._managers.values()):
+		mout.progress(i,maximum,width=50,fill="#")
 		if api._current_gw > 0:
-			create_assetpage(leagues)
+			m.create_rank_graph(plot=plot,show=False)
+			m.create_points_graph(plot=plot,show=False)
+		# m.create_leaguepos_graph(plot=plot,show=False)
+		create_managerpage(api, m, leagues)
+	mout.progress(maximum,maximum,width=50,fill="#")
+	mout.showDebug()
+
+	count = 0
+	mout.debugOut("main()::PlayerPages")
+	mout.hideDebug()
+	maximum = len(api._loaded_players)
+	for pid in api._loaded_players:
+		mout.progress(count,maximum,width=50,fill="#",append=f' {count}/{maximum}')
+		pid = int(pid)
+		create_playerpage(api,Player(None,index=api.get_player_index(pid),api=api),leagues)
+		# if count > 10:
+		# 	exit()	
+		count += 1
+	mout.progress(maximum,maximum,width=50,fill="#")
+	mout.showDebug()
+	
+	if api._current_gw > 0:
+		create_assetpage(leagues)
 
 	# mout.varOut("#requests=",len(api._request_log))
 
@@ -2215,14 +2140,193 @@ def create_sidebar(leagues):
 
 	return md_buffer
 
-def create_homepage(leagues,navbar):
+def previous_player_table(min_minutes=200,show_top=10):
+
+	html_buffer = ""
+
+	# print(api._prev_elements.columns)
+
+	temp_elements = api._prev_elements[[
+		'element_type',
+		'first_name',
+		'now_cost',
+		'second_name',
+		'web_name',
+		'photo',
+		'team',
+		'team_code',
+		
+		'total_points',
+		'minutes',
+
+		'goals_scored',
+		'assists',
+		'clean_sheets',
+		'goals_conceded',
+		'own_goals',
+		'penalties_saved',
+		'penalties_missed',
+		'yellow_cards',
+		'red_cards',
+		'saves',
+		'bonus',
+		'starts',
+		'expected_goals',
+		'expected_assists',
+		'expected_goal_involvements',
+		'expected_goals_conceded',
+
+		'expected_goals_per_90',
+		'saves_per_90',
+		'expected_assists_per_90',
+		'expected_goal_involvements_per_90',
+		'expected_goals_conceded_per_90',
+		'goals_conceded_per_90',
+		
+		'points_per_game_rank',
+		'points_per_game_rank_type',
+		'starts_per_90',
+		'clean_sheets_per_90',
+	]]
+
+	temp_elements[temp_elements['minutes'] > min_minutes]
+
+	# top scoring by position
+
+	show_columns = {
+		1: ('starts','clean_sheets_per_90'),
+	}
+
+	def stat_spans(pd):
+		buffer = ""
+		if pd["goals_scored"] > 0:
+			buffer += f'<span class="w3-tag w3-green">{pd["goals_scored"]} goals</span>\n'
+
+		if pd["assists"] > 0:
+			buffer += f'<span class="w3-tag w3-blue">{pd["assists"]} assists</span>\n'
+
+		# if pd["own_goals"] > 0:
+		# 	buffer += f'<span class="w3-tag w3-black">{pd["own_goals"]} own goals</span>\n'
+
+		if pd["yellow_cards"] > 0:
+			buffer += f'<span class="w3-tag w3-yellow">{pd["yellow_cards"]} yellow cards</span>\n'
+
+		if pd["red_cards"] > 0:
+			buffer += f'<span class="w3-tag w3-red">{pd["red_cards"]} red cards</span>\n'
+
+		if pd["bonus"] > 0:
+			buffer += f'<span class="w3-tag w3-aqua">{pd["bonus"]} bonus</span>\n'
+
+		if pd["element_type"] < 4:
+			if pd["clean_sheets"] > 0:
+				buffer += f'<span class="w3-tag w3-purple">{pd["clean_sheets"]} clean sheets</span>\n'
+		
+		if pd["element_type"] == 1:
+			if pd["penalties_saved"] > 0:
+				buffer += f'<span class="w3-tag w3-green">{pd["penalties_saved"]} penalties saves</span>\n'
+			if pd["saves"] > 0:
+				buffer += f'<span class="w3-tag w3-blue">{pd["saves"]} saves</span>\n'
+
+		if pd["element_type"] < 3:
+			if pd["goals_conceded"] > 0:
+				buffer += f'<span class="w3-tag w3-orange">{pd["goals_conceded"]} goals conceded</span>\n'
+		
+		if pd["minutes"] > 0:
+			buffer += f'<span class="w3-tag w3-dark-grey">{pd["minutes"]:.0f} mins</span>\n'
+		return buffer
+
+	for i in range(4):
+
+		table_buffer = ""
+
+		html_buffer += '<div class="w3-col s12 m12 l6">\n'
+		# html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
+
+		table_buffer += '<table class="w3-table w3-bordered">\n'
+		table_buffer += '<tr>\n'
+		table_buffer += '<th>Player</th>\n'
+		table_buffer += '<th>Points</th>\n'
+		table_buffer += '<th class="w3-center">Stats</th>\n'
+		table_buffer += '</tr>\n'
+
+		elements = temp_elements[temp_elements['element_type'] == i+1]
+		elements = elements.sort_values(by=['total_points'],ascending=False)
+
+		for j in range(show_top-1):
+
+			pd = elements.iloc[j+1]
+
+			name = f'<b>{pd["web_name"]}</b>'
+			tot_pts = f'{pd["total_points"]}'
+
+			# table_buffer += f'<tr class="w3-{api._short_team_pairs[pd["team_code"]-1].lower()}">\n'
+			table_buffer += f'<tr>\n'
+
+			# table_buffer += f'<td><img class="w3-image" style="height:20px" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p{pd["photo"].replace(".jpg",".png")}"></img>\n'
+			table_buffer += f'<td>\n'
+			table_buffer += f'{name}</td>\n'
+			table_buffer += f'<td>{tot_pts}</td>\n'
+
+			table_buffer += f'<td>\n'
+
+			table_buffer += stat_spans(pd)
+			
+			table_buffer += '</td>\n'
+			table_buffer += '</tr>\n'
+
+		table_buffer += '</table>\n'
+
+		# photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/p{player_data["photo"].replace(".jpg",".png")}'
+
+
+		pd = elements.iloc[0]
+
+		html_buffer += f'<div class="w3-panel w3-{api._short_team_pairs[pd["team_code"]-1].lower()}-inv shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += f'<div class="w3-center">\n'
+		html_buffer += f"<h2>Best {['Goalkeeper','Defender','Midfielder','Forward'][i]}</h2>"
+
+		html_buffer += f'<h2>{pd["web_name"]}: {pd["total_points"]} points</h2>'
+		# html_buffer += f'{pd["team_code"]}</h2>'
+
+		html_buffer += f'<img class="w3-image" style="width:30%" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p{pd["photo"].replace(".jpg",".png")}"></img>\n'
+
+		html_buffer += f'<div class="w3-panel w3-{api._short_team_pairs[pd["team_code"]-1].lower()} w3-padding-large">\n'
+		html_buffer += stat_spans(pd)
+		html_buffer += f'</div>\n'
+
+		html_buffer += f'</div>\n'
+
+		html_buffer += table_buffer
+
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
+
+		# exit()
+
+	return html_buffer
+
+	# import plotly.graph_objects as go
+	# fig = go.Figure()
+	# trace = go.Histogram(x=temp_elements['minutes'])
+	# fig.add_trace(trace)
+
+	# fig.show()
+
+def create_homepage(navbar):
 	mout.debugOut(f"create_homepage()")
 
 	html_buffer = ""
 
-	html_buffer += floating_subtitle('🗓 Fixtures',pad=0)
-
 	gw = api._current_gw
+
+	if preseason:
+
+		# table of total player information
+		html_buffer += floating_subtitle('22/23 Top Assets',pad=0)
+
+		html_buffer += previous_player_table()
+
+	html_buffer += floating_subtitle('🗓 Fixtures',pad=1 if preseason else 0)
 
 	if gw > 0:
 		html_buffer += '<div class="w3-col s12 m12 l6">\n'
@@ -2237,7 +2341,11 @@ def create_homepage(leagues,navbar):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
-	html_page('index.html', html=html_buffer,title="Max's FPL GUI", gw=api._current_gw,bar_html=navbar,colour='aqua')
+	style = api.create_team_styles_css()
+	html_page('index.html', html=html_buffer,title="Max's FPL GUI", gw=api._current_gw,bar_html=navbar,colour='aqua',extra_style=style)
+
+		# html_page(f'html/player_{player.id}.html',None,title=f"{player.name}",sidebar_content=None, gw=gw, html=html_buffer, showtitle=False, bar_html=navbar,extra_style=style,colour=player.team_obj.style['accent'],nonw3_colour=True)
+
 
 def create_seasonpage(leagues):
 	mout.debugOut("create_seasonpage()")
@@ -3353,8 +3461,6 @@ def create_leaguepage(league,leagues,i):
 		html_buffer += md2html(md_buffer)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
-
-	preseason = gw < 1
 
 	if preseason:
 		mout.debugOut(f"create_leaguepage({league})::PreseasonTable")

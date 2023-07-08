@@ -38,6 +38,7 @@ class FPL_API():
 	_wc_cutoff = 16
 
 	_season_str = 2324
+	_last_season_str = 2324
 
 	def __init__(self,offline=False,force_generate_kits=False,quick=True,write_offline_data=False):
 		mout.debugOut(f"FPL_API.__init__(quick={quick})")
@@ -55,6 +56,12 @@ class FPL_API():
 				mout.errorOut("No offline data found!",fatal=True)
 		else:
 			self._request_data = {}
+
+		if exists(f"data_{self._last_season_str}.json"):
+			f = open(f"data_{self._last_season_str}.json","rt")
+			self._prev_request_data = js.load(f)
+		else:
+			mout.errorOut("No previous season offline data found!",fatal=False)
 
 		self._scrape_team_pairs = [
 			[0,'Man Utd'],
@@ -81,6 +88,32 @@ class FPL_API():
 			[93,'Brentford'],
 			[101,'Luton'],
 		]
+
+		self._short_team_pairs = {
+			0:'MUN',
+			1:'LEE',
+			2:'ARS',
+			3:'NEW',
+			5:'TOT',
+			6:'AVL',
+			7:'CHE',
+			10:'EVE',
+			12:'LEI',
+			13:'LIV',
+			16:"NFO",
+			19:'SOU',
+			20:'WHY',
+			30:'CRY',
+			35:'BHA',
+			38:'WOL',
+			42:'MCI',
+			48:'SHU',
+			53:'FUL',
+			89:'BUR',
+			90:'BOU',
+			93:'BRE',
+			101:'LUT',
+		}
 
 		self._team_styles = {
 			"Arsenal": {"background-color": "#B7272E","color": "white","accent":"#E5D3B7"},
@@ -123,6 +156,8 @@ class FPL_API():
 			self._ct_total_fit_data = js.load(f)
 
 		self.parse_bootstrap()
+		if self._last_season_str:
+			self.parse_bootstrap(last_season=True)
 
 		for i,is_current in enumerate(self._events['is_current']):
 			if is_current:
@@ -149,7 +184,11 @@ class FPL_API():
 		if offline:
 			mout.warningOut("Offline mode!")
 
-	def request(self,handle):
+	def request(self,handle,last_season=False):
+
+		if last_season:
+			return self._prev_request_data[handle]
+
 		if self._offline and handle in self._request_data.keys():
 			return self._request_data[handle]
 		else:
@@ -177,7 +216,6 @@ class FPL_API():
 			except requests.exceptions.JSONDecodeError:
 				print(r)
 				mout.errorOut(f"Problem handling JSON from {handle}",fatal=True)
-
 
 	def finish(self):
 
@@ -258,16 +296,25 @@ class FPL_API():
 
 		return self._gw_fixtures[gw]
 
-	def parse_bootstrap(self):
-		self._bootstrapjson = self.request(url+'bootstrap-static/')
-		self.__events = None
-		self.__elements = None
-		self.__element_types = None
-		self.__teamdata = None
-		self.__teams = None
+	def parse_bootstrap(self,last_season=False):
+		if not last_season:
+			self._bootstrapjson = self.request(url+'bootstrap-static/')
+			self.__events = None
+			self.__elements = None
+			self.__element_types = None
+			self.__teamdata = None
+			self.__teams = None
+		else:
+			self._prev_bootstrapjson = self.request(url+'bootstrap-static/',last_season=True)
+			
+			self._prev_events = pd.DataFrame(self._prev_bootstrapjson['events'])
+			self._prev_elements = pd.DataFrame(self._prev_bootstrapjson['elements'])
+			self._prev_element_types = pd.DataFrame(self._prev_bootstrapjson['element_types'])
+			self._prev_teamdata = pd.DataFrame(self._prev_bootstrapjson['teams'])
 
-	# def bootstrap_df(self):
-	# 	return pd.DataFrame.from_dict(self.request(url+'bootstrap-static/'))
+			self._prev_teams = []
+			for id,name,shortname in zip(self._prev_teamdata['id'],self._prev_teamdata['name'],self._prev_teamdata['short_name']):
+				self._prev_teams.append(Team(id,name,self,shortname=shortname))
 
 	@property
 	def total_players(self):
