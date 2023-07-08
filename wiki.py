@@ -3720,7 +3720,8 @@ def preseason_table(league):
 			html_buffer += f"\t\t<td>🥚</td>\n"
 		else:
 			html_buffer += f"\t\t<td>{i+1}</td>\n"
-		html_buffer += f'\t\t<td><img src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}"></img>\n'
+		html_buffer += f'\t\t<td><img src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></img>\n'
+
 		html_buffer += f'\t\t<a href="{m.gui_url}">{m.team_name}</a></td>\n'
 		html_buffer += f'\t\t<td>{m.name}</td>\n'
 
