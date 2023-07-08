@@ -16,6 +16,9 @@ from collections import Counter
 
 url = 'https://fantasy.premierleague.com/api/'
 
+class Request404(Exception):
+	pass
+
 class FPL_API():
 
 	_current_gw = 0
@@ -34,6 +37,8 @@ class FPL_API():
 	_skip_gws = [7]
 	_wc_cutoff = 16
 
+	_season_str = 2324
+
 	def __init__(self,offline=False,force_generate_kits=False,quick=True,write_offline_data=False):
 		mout.debugOut(f"FPL_API.__init__(quick={quick})")
 
@@ -43,8 +48,8 @@ class FPL_API():
 		self._write_offline_data = write_offline_data
 
 		if offline:
-			if exists("data_2223.json"):
-				f = open("data_2223.json","rt")
+			if exists(f"data_{self._season_str}.json"):
+				f = open(f"data_{self._season_str}.json","rt")
 				self._request_data = js.load(f)
 			else:
 				mout.errorOut("No offline data found!",fatal=True)
@@ -69,35 +74,42 @@ class FPL_API():
 			[35,'Brighton'],
 			[38,'Wolves'],
 			[42,'Man City'],
+			[48,'Sheffield Utd'],
 			[53,'Fulham'],
+			[89,'Burnley'],
 			[90,'Bournemouth'],
 			[93,'Brentford'],
+			[101,'Luton'],
 		]
 
 		self._team_styles = {
-			"Arsenal": {"background-color": "red","color": "white","accent":"blue"},
-			"Aston Villa": {"background-color": "lightblue","color": "maroon","accent":"yellow"},
-			"Brentford": {"background-color": "black","color": "red","accent":"white"},
-			"Bournemouth": {"background-color": "red","color": "black","accent":"white"},
-			"Brighton": {"background-color": "RoyalBlue","color": "white","accent":"Gold"},
-			"Burnley": {"background-color": "lightblue","color": "maroon"},
-			"Chelsea": {"background-color": "darkblue","color": "white","accent":"Gold"},
-			"Crystal Palace": {"background-color": "RoyalBlue","color": "Red","accent":"white"},
-			"Everton": {"background-color": "darkblue","color": "white","accent":"black"},
-			"Fulham": {"background-color": "black","color": "white","accent":"red"},
+			"Arsenal": {"background-color": "#B7272E","color": "white","accent":"#E5D3B7"},
+			"Aston Villa": {"background-color": "#5D1133","color": "#91B6E4","accent":"#F0D147"},
+			"Brentford": {"background-color": "#A22621","color": "white","accent":"black"},
+			"Bournemouth": {"background-color": "black","color": "#BF3B33","accent":"#B29460"},
+			"Brighton": {"background-color": "white","color": "#2253A0","accent":"#1A2561"},
+			"Burnley": {"background-color": "#9D3E45","color": "#CCDCF3", "accent":"#FBEA88"},
+			"Chelsea": {"background-color": "#051383","color": "white","accent":"PaleGoldenRod"},
+			"Crystal Palace": {"background-color": "#BE2C2A","color": "#2C67A9","accent":"white"},
+			"Everton": {"background-color": "#3A83E2","color": "white","accent":"#0F276C"},
+			"Fulham": {"background-color": "white","color": "black","accent":"#A6271E"},
 			"Leicester": {"background-color": "SteelBlue","color": "white","accent":"GoldenRod"},
 			"Leeds": {"background-color": "white","color": "GoldenRod","accent":"black"},
-			"Liverpool": {"background-color": "DarkRed","color": "white","accent":"LightSkyBlue"},
-			"Man City": {"background-color": "LightSkyBlue","color": "black","accent":"maroon"},
-			"Man Utd": {"background-color": "red","color": "black","accent":"yellow"},
-			"Newcastle": {"background-color": "WhiteSmoke","color": "black","accent":"LightSkyBlue"},
+			"Liverpool": {"background-color": "#AF2532","color": "white","accent":"#75151A"},
+			"Luton": {"background-color": "#E6552F","color": "white","accent":"#22355A"},
+			"Man City": {"background-color": "#A1C2E7","color": "#061736","accent":"white"},
+			"Man Utd": {"background-color": "#D1443F","color": "black","accent":"white"},
+			"Newcastle": {"background-color": "WhiteSmoke","color": "black","accent":"#BEA679"},
 			"Norwich": {"background-color": "limegreen","color": "yellow"},
-			"Nott'm Forest": {"background-color": "Crimson","color": "white","accent":"black"},
+			"Nott'm Forest": {"background-color": "#DF4148","color": "white","accent":"black"},
+			"Sheffield Utd": {"background-color": "white","color": "#EA4D43","accent":"black"},
 			"Southampton": {"background-color": "white","color": "FireBrick","accent":"black"},
-			"Spurs": {"background-color": "white","color": "navy","accent":"yellow"},
+			"Spurs": {"background-color": "white","color": "#212935","accent":"#E1E752"},
 			"Watford": {"background-color": "black","color": "red"},
-			"West Ham": {"background-color": "Maroon","color": "LightSkyBlue","accent":"Gold"},
-			"Wolves": {"background-color": "GoldenRod","color": "black","accent":"white"},
+			"West Ham": {"background-color": "#7A2E3D","color": "#95CDFA","accent":"white"},
+			"Wolves": {"background-color": "#F2BC44","color": "black","accent":"white"},
+
+			
 		}
 
 		self._authenticated = False
@@ -125,6 +137,10 @@ class FPL_API():
 					self._live_gw = True
 					self._wiki_gw = self._current_gw
 				break
+		else:
+			self._live_gw = False
+			self._current_gw = 0
+			self._wiki_gw = 0
 
 		print(f"Current: GW{self._current_gw}")
 		print(f"Wiki: GW{self._wiki_gw}")
@@ -145,7 +161,8 @@ class FPL_API():
 
 			if '404' in str(r):
 				print(handle)
-				mout.errorOut("Request 404'd",fatal=True)
+				mout.errorOut("Request 404'd")
+				raise Request404()
 				return {}
 
 			try:
@@ -165,7 +182,7 @@ class FPL_API():
 	def finish(self):
 
 		if self._write_offline_data:
-			js.dump(self._request_data,open('data_2223.json','wt'))
+			js.dump(self._request_data,open(f'data_{self._season_str}.json','wt'))
 			# js.dump(self._request_data,open('data_2223.json','wt'), indent="\t")
 
 		mout.varOut("#requests=",len(self._request_log))
@@ -188,22 +205,25 @@ class FPL_API():
 
 		for team in self.teams:
 
-			html_buffer += f'.w3-{team.shortname.lower()}'
-			html_buffer += '{'
-			html_buffer += f'color:{team.style["color"]} !important; '
-			html_buffer += f'background-color:{team.style["background-color"]} '
-			html_buffer += '!important}\n'
+			try:
+				html_buffer += f'.w3-{team.shortname.lower()}'
+				html_buffer += '{'
+				html_buffer += f'color:{team.style["color"]} !important; '
+				html_buffer += f'background-color:{team.style["background-color"]} '
+				html_buffer += '!important}\n'
 
-			html_buffer += f'.w3-{team.shortname.lower()}-inv'
-			html_buffer += '{'
-			html_buffer += f'color:{team.style["background-color"]} !important; '
-			html_buffer += f'background-color:{team.style["color"]} !important'
-			html_buffer += '}\n'
+				html_buffer += f'.w3-{team.shortname.lower()}-inv'
+				html_buffer += '{'
+				html_buffer += f'color:{team.style["background-color"]} !important; '
+				html_buffer += f'background-color:{team.style["color"]} !important'
+				html_buffer += '}\n'
+			except TypeError:
+				mout.error(f'Missing style for {team}')
 
-			html_buffer += f'.w3-{team.shortname.lower()}-acc'
-			html_buffer += '{'
-			html_buffer += f'background-color:{team.style["accent"]} !important'
-			html_buffer += '}\n'
+			# html_buffer += f'.w3-{team.shortname.lower()}-acc'
+			# html_buffer += '{'
+			# html_buffer += f'background-color:{team.style["accent"]} !important'
+			# html_buffer += '}\n'
 
 			# .w3-theme-l5 {color:#000 !important; background-color:#f0f4f8 !important}
 
@@ -279,8 +299,8 @@ class FPL_API():
 
 			for i,pid in enumerate(player_ids):
 
-				if self._elements['minutes'][i] < 90:
-					continue
+				# if self._elements['minutes'][i] < 90:
+				# 	continue
 
 				index = self.get_player_index(pid)
 
@@ -289,6 +309,8 @@ class FPL_API():
 				if p._shortteam not in self._elements_by_team.keys():
 					self._elements_by_team[p._shortteam] = []
 				self._elements_by_team[p._shortteam].append(p)
+
+		# print(self._elements_by_team.keys())
 							
 		return self._elements_by_team
 
@@ -782,20 +804,25 @@ class FPL_API():
 
 		# not_found = [5,9,10,12,15,16,18,19,22]
 
-		# count = 0
-		# i = 1
-		# while True:
-		# 	# print(i, count)
-		# 	try:
-		# 		urllib.request.urlretrieve(f"{url}shirt_{i+1}-66.webp", f"kits/{i}.webp")
-		# 		i += 1
-		# 		count += 1
-		# 	except urllib.error.HTTPError:
-		# 		i += 1
-		# 		continue
+		count = 0
+		i = 1
+		i = 89
+		while True:
+			print(i, count)
+			try:
+				urllib.request.urlretrieve(f"{url}shirt_{i+1}-66.webp", f"kits/{i}.webp")
+				i += 1
+				count += 1
+			except urllib.error.HTTPError:
+				i += 1
+				if i > 200:
+					break
+				continue
 
-		# 	if count == 19:
-		# 		break
+			# if count == 19:
+				# break
+
+		return
 
 		for i,name in self._scrape_team_pairs:
 			try:

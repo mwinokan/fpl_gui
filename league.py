@@ -19,7 +19,11 @@ class League():
 	def get_stats(self):
 		name, manager_df = self._api.get_league_stats(self._code)
 
-		manager_df = manager_df.drop(columns=['id', 'event_total', 'rank', 'last_rank', 'rank_sort', 'total'])
+		if self._api._current_gw < 1:
+			# manager_df = manager_df.drop(columns=['entry', 'entry_name', 'player_first_name', 'player_last_name'])
+			pass
+		else:
+			manager_df = manager_df.drop(columns=['id', 'event_total', 'rank', 'last_rank', 'rank_sort', 'total'])
 
 		if self._extra_managers is not None:
 			data = []

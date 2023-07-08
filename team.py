@@ -1,4 +1,6 @@
 
+import mout
+
 class Team():
 
 	def __init__(self, id, name, api, shortname = None):
@@ -9,10 +11,14 @@ class Team():
 		self._name = name
 		self._shortname = shortname
 
+		self._badge_url = None
 		for i,name in api._scrape_team_pairs:
 			if name == self._name:
 				self._badge_url = f"https://resources.premierleague.com/premierleague/badges/25/t{i+1}@x2.png"
 				break
+
+		if self._badge_url is None:
+			mout.error(f'No badge url for Team: {self.name}')
 
 		self._fixtures = None
 

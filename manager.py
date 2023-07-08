@@ -962,6 +962,8 @@ class Manager():
 
 	@property
 	def active_gws(self):
+		if self._api._current_gw == 0:
+			return []
 		if self._active_gws is None:
 			start_gw = 0
 			now_gw = self._api.current_gw

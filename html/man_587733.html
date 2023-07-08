@@ -11,35 +11,46 @@
 <style>
 h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}body {font-family: "Open Sans"}
 h5.double {line-height: 2}
+/*drop shadow*/
+.shadow10 {box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+/*drop shadow*/
+.shadow20 {box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}
+/*inner shadow*/
+.shadow25 {box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;}
+/*pink effect*/
+.shadow50 {box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;}
+/*soft inner and outer*/
+.shadow87 {box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}
+/*button shadow*/
+.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}
 </style>
 </head>
-<!-- w3-content defines a container for fixed size centered content, and is wrapped around the whole page content, except for the footer in this example -->
-<div class="w3-content" style="max-width:2000px">
-<!-- Header -->
-<header class="w3-container w3-center w3-padding-48 w3-white">
-<h1 class="w3-xxxlarge"><b>FPL <span class="w3-tag">GUI</span></b></h1>
-<h6>Max Winokan</h6>
-</header>
-<div class="w3-bar w3-black">
-<a href="https://mwinokan.github.io/FPL_GUI/index.html" class="wr-bar-item w3-button w3-center">🏠</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/fixtures.html" class="wr-bar-item w3-button w3-center">🗓</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/assets.html" class="wr-bar-item w3-button w3-center">📊</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/season.html" class="wr-bar-item w3-button w3-center">🏁</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/christmas.html" class="wr-bar-item w3-button w3-center">🎄</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/teams.html" class="wr-bar-item w3-button w3-center">👨‍👨‍👦‍👦</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/toilet_cup.html" class="wr-bar-item w3-button w3-center">🏆</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html" class="wr-bar-item w3-button">💎</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html" class="wr-bar-item w3-button">🚽</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/Guildford-Ultimate-La-Liga.html" class="wr-bar-item w3-button">🦌</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/RU-FPL.html" class="wr-bar-item w3-button">📚</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/Super-Dinner-League.html" class="wr-bar-item w3-button">🍝</a>
+
+<div class="w3-bar w3-black shadow89">
+<a class="w3-bar-item w3-black w3-text-black"></a>
+<div class="w3-dropdown-hover">
+<button class="w3-button w3-hover-aqua"><h3>FPL <span class="w3-tag w3-white">GUI</span></h3></button>
+<div class="w3-dropdown-content w3-bar-block w3-card-4">
+<a href="https://mwinokan.github.io/FPL_GUI/index.html" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/assets.html" class="w3-bar-item w3-button w3-hover-aqua">📊 Asset Graphs</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/teams.html" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/toilet_cup.html" class="w3-bar-item w3-button w3-hover-aqua">🏆 Toilet Cup</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua">💎 The RBS Diamond Invitational</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua">🚽 Tesco Bean Value Toilet League</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Guildford-Ultimate-La-Liga.html" class="w3-bar-item w3-button w3-hover-aqua">🦌 Guildford Ultimate La Liga</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/RU-FPL.html" class="w3-bar-item w3-button w3-hover-aqua">📚 RU FPL</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Super-Dinner-League.html" class="w3-bar-item w3-button w3-hover-aqua">🍝 Super Dinner League</a>
 </div>
-<!-- Grid -->
-<div class="w3-row w3-border">
-<!-- Content -->
-<div class="w3-col l12 s12">
-<div class="w3-container w3-white w3-padding">
-<div class="w3-justify">
+</div>
+<a class="w3-bar-item w3-black w3-text-black w3-right"></a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>
+</div>
+<div class="w3-bar w3-black">
+</div>
+<body class="w3-white shadow25">
+<div class="w3-content" style="max-width: 1400px;">
+<div class="w3-row-padding w3-padding-large">
 <div class="w3-center">
 <img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/kits/blank_kit.png?raw=true" alt="Team" width="66" height="87"><h2>The Havertzing</h2>
 <h3>Jonah Varney</h3>
@@ -84,40 +95,14 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-indigo w3-card">
+<div class="w3-panel w3-purple w3-card">
 <table class="w3-table">
 <tr>
 <td style="text-align:left;vertical-align:middle;">
-<h1> ⚽️ Massive Goal FC</h1>
+<h1> 🔮 Fortune Teller</h1>
 </td>
 <td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW26</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-yellow w3-card">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1> 🥊 ASBO</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW22</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-amber w3-card">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1> 👑 King</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW28</span></h2>
+<h2><span class="w3-tag">GW20</span></h2>
 </tr>
 </table>
 </div>
@@ -136,14 +121,40 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-purple w3-card">
+<div class="w3-panel w3-indigo w3-card">
 <table class="w3-table">
 <tr>
 <td style="text-align:left;vertical-align:middle;">
-<h1> 🔮 Fortune Teller</h1>
+<h1> ⚽️ Massive Goal FC</h1>
 </td>
 <td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW20</span></h2>
+<h2><span class="w3-tag">GW26</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-amber w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> 👑 King</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW28</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-yellow w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> 🥊 ASBO</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW22</span></h2>
 </tr>
 </table>
 </div>
@@ -155,19 +166,6 @@ h5.double {line-height: 2}
 <div id="937886" class="w3-container w3-border league" style="display:none">
 <div class="w3-justify w3-row-padding">
 <div class="w3-justify"><div class="w3-row-padding"><div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-indigo w3-card">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1>3 &times  ⚽️ Massive Goal FC</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW9, GW10, GW26</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
 <div class="w3-panel w3-grey w3-card">
 <table class="w3-table">
 <tr>
@@ -176,6 +174,19 @@ h5.double {line-height: 2}
 </td>
 <td style="text-align:right;vertical-align:middle;">
 <h2><span class="w3-tag">GW2, GW9, GW28</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-indigo w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1>3 &times  ⚽️ Massive Goal FC</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW9, GW10, GW26</span></h2>
 </tr>
 </table>
 </div>
@@ -194,19 +205,6 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-amber w3-card">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1>2 &times  👑 King</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW9, GW28</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
 <div class="w3-panel w3-pale-yellow w3-card">
 <table class="w3-table">
 <tr>
@@ -220,14 +218,27 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-green w3-card">
+<div class="w3-panel w3-amber w3-card">
 <table class="w3-table">
 <tr>
 <td style="text-align:left;vertical-align:middle;">
-<h1> 🧑‍🔬 Scientist</h1>
+<h1>2 &times  👑 King</h1>
 </td>
 <td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW24</span></h2>
+<h2><span class="w3-tag">GW9, GW28</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-pink w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> 🤡 Clown</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW2</span></h2>
 </tr>
 </table>
 </div>
@@ -246,14 +257,14 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-pale-red w3-card">
+<div class="w3-panel w3-green w3-card">
 <table class="w3-table">
 <tr>
 <td style="text-align:left;vertical-align:middle;">
-<h1> 🤡 Clown</h1>
+<h1> 🧑‍🔬 Scientist</h1>
 </td>
 <td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW2</span></h2>
+<h2><span class="w3-tag">GW24</span></h2>
 </tr>
 </table>
 </div>
@@ -282,10 +293,10 @@ h5.double {line-height: 2}
 <table class="w3-table">
 <tr>
 <td style="text-align:left;vertical-align:middle;">
-<h1>12 &times  ⚽️ Massive Goal FC</h1>
+<h1>13 &times  ⚽️ Massive Goal FC</h1>
 </td>
 <td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW2, GW9, GW10, GW12, GW25, GW26, GW27, GW29, GW32, GW34, GW35, GW37</span></h2>
+<h2><span class="w3-tag">GW2, GW9, GW10, GW12, GW25, GW26, GW27, GW29, GW32, GW34, GW35, GW37, GW38</span></h2>
 </tr>
 </table>
 </div>
@@ -304,6 +315,19 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-grey w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1>10 &times  🦴 Boner</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW2, GW8, GW9, GW12, GW20, GW24, GW27, GW28, GW37, GW38</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
 <div class="w3-panel w3-amber w3-card">
 <table class="w3-table">
 <tr>
@@ -312,45 +336,6 @@ h5.double {line-height: 2}
 </td>
 <td style="text-align:right;vertical-align:middle;">
 <h2><span class="w3-tag">GW2, GW9, GW11, GW12, GW22, GW28, GW31, GW33, GW37, GW38</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-pale-red w3-card">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1>9 &times  🧠 Smooth Brain</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW8, GW11, GW12, GW14, GW15, GW20, GW26, GW27, GW28</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-grey w3-card">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1>9 &times  🦴 Boner</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW2, GW8, GW9, GW12, GW20, GW24, GW27, GW28, GW37</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-pale-yellow w3-card">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1>9 &times  🤓 Nerd</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW2, GW12, GW23, GW26, GW27, GW31, GW34, GW37, GW38</span></h2>
 </tr>
 </table>
 </div>
@@ -369,6 +354,45 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-pale-red w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1>9 &times  🧠 Smooth Brain</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW8, GW11, GW12, GW14, GW15, GW20, GW26, GW27, GW28</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-pale-yellow w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1>8 &times  🤓 Nerd</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW2, GW12, GW23, GW26, GW27, GW31, GW34, GW37</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-pink w3-card">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1>6 &times  🤡 Clown</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW2, GW9, GW13, GW14, GW22, GW38</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
 <div class="w3-panel w3-brown w3-card">
 <table class="w3-table">
 <tr>
@@ -377,19 +401,6 @@ h5.double {line-height: 2}
 </td>
 <td style="text-align:right;vertical-align:middle;">
 <h2><span class="w3-tag">GW5, GW22, GW30, GW31, GW33, GW35</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-pale-red w3-card">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1>6 &times  🤡 Clown</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW2, GW9, GW13, GW14, GW22, GW38</span></h2>
 </tr>
 </table>
 </div>
@@ -473,7 +484,7 @@ evt.currentTarget.className += " w3-red";
 <tr>
 <td class="w3-center w3-amber">Triple Captain</td>
 <td class="w3-center">22</td>
-<td class="w3-center">+20 points gainedwith Rashford</td>
+<td class="w3-center">+20 points gainedwith None</td>
 </tr>
 <tr>
 <td class="w3-center w3-green">Free Hit</td>
@@ -1185,26 +1196,9 @@ evt.currentTarget.className += " w3-red";
 </div>
 </div>
 </div>
-<hr>
-</div>
-<!-- END GRID -->
-</div>
-<!-- END w3-content -->
-<!-- Footer -->
-<footer class="w3-container w3-dark-grey" style="padding:32px">
-<h5><a href="https://mwinokan.github.io/FPL_GUI/index.html">Home</a></h5>
-<h5><a href="https://mwinokan.github.io/FPL_GUI/html/fixtures.html">Fixtures</a></h5>
-<h5>League Summaries</h5>
-<ul>
-<li><a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html">The RBS Diamond Invitational</a></li>
-<li><a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html">Tesco Bean Value Toilet League</a></li>
-<li><a href="https://mwinokan.github.io/FPL_GUI/html/Guildford-Ultimate-La-Liga.html">Guildford Ultimate La Liga</a></li>
-<li><a href="https://mwinokan.github.io/FPL_GUI/html/RU-FPL.html">RU FPL</a></li>
-<li><a href="https://mwinokan.github.io/FPL_GUI/html/Super-Dinner-League.html">Super Dinner League</a></li>
-</ul><a href="#" class="w3-button w3-black w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>Back to top</a>
-<div class="w3-center">
-<p>Accurate as of 2023-05-29 14:59:10, (GW38)</p>
-<p>Max Winokan <span class="w3-tag">mwinokan@me.com</span></a></p>
-</div>
+</body>
+<footer class="w3-container w3-black w3-center" style="padding:32px">
+<p>Accurate as of 2023-07-06 19:18:09, (GW38)</p>
+<p>Max Winokan <span class="w3-tag w3-white">mwinokan@me.com</span></a></p>
 </footer>
 </html>

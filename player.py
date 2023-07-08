@@ -147,12 +147,21 @@ class Player():
 			except ValueError:
 				self._chance_of_playing_next_round = 1.0
 			try:
-				self._chance_of_playing_this_round = int(elements['chance_of_playing_this_round'][i])/100
+				chance = elements['chance_of_playing_this_round'][i]
+				# print(f'{chance=}')
+				if chance is None:
+					self._chance_of_playing_this_round = 0
+				else:
+					self._chance_of_playing_this_round = int(chance)/100
 			except ValueError:
 				self._chance_of_playing_this_round = 1.0
 			
-			self._exp_this_round = float(elements['ep_this'][i])
-			self._exp_next_round = float(elements['ep_next'][i])
+			if self._api._current_gw > 0:
+				self._exp_this_round = float(elements['ep_this'][i])
+				self._exp_next_round = float(elements['ep_next'][i])
+			else:
+				self._exp_this_round = 0.0
+				self._exp_next_round = 0.0
 
 			self._playing_chance = {}
 			self._playing_chance[self._api._current_gw] = self._chance_of_playing_this_round
@@ -732,7 +741,10 @@ class Player():
 	@property
 	def appearances(self):
 		if self._appearances is None:
-			self._appearances = len([m for m in self.history['minutes'] if m > 0])
+			if self.history.empty:
+				self._appearances = 0
+			else:
+				self._appearances = len([m for m in self.history['minutes'] if m > 0])
 		return self._appearances
 
 	def expected_points(self,opponent=None,gw=None,fit_ratio=0.8,debug=False,use_official=False,force=False):
