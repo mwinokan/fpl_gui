@@ -1437,14 +1437,15 @@ def create_managerpage(api,man,leagues):
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
 	
-	html_buffer += floating_subtitle('Chips')
+	if any(man._chip_dict.values()):
+		html_buffer += floating_subtitle('Chips')
 
-	html_buffer += '<div class="w3-col s12 m12 l12">\n'
-	html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
-	html_buffer += create_chip_table(api,man)
-	html_buffer += '</div>\n'
-	html_buffer += '</div>\n'
-	
+		html_buffer += '<div class="w3-col s12 m12 l12">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += create_chip_table(api,man)
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
+		
 	if api._current_gw > 0:
 		html_buffer += floating_subtitle('Picks')
 
