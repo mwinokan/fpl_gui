@@ -244,6 +244,8 @@ class Player():
 			if api._prev_element_dict:
 				if self._name in api._prev_element_dict:
 					print(api._prev_element_dict[self._name])
+				else:
+					print(f'No previous data for {self._name}')
 
 			return True
 

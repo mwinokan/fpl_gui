@@ -323,10 +323,10 @@ class FPL_API():
 
 		data = {}
 		for i,web_name in enumerate(df['web_name']):
-			data['web_name'] = {}
+			data[web_name] = {}
 			pd = df.iloc[i]
 			for col in df.columns:
-				data['web_name'][col] = pd[col]
+				data[web_name][col] = pd[col]
 
 		return data
 
