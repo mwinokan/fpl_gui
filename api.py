@@ -40,6 +40,8 @@ class FPL_API():
 	_season_str = 2324
 	_last_season_str = 2324
 
+	_prev_element_dict = None
+
 	def __init__(self,offline=False,force_generate_kits=False,quick=True,write_offline_data=False):
 		mout.debugOut(f"FPL_API.__init__(quick={quick})")
 
@@ -309,12 +311,24 @@ class FPL_API():
 			
 			self._prev_events = pd.DataFrame(self._prev_bootstrapjson['events'])
 			self._prev_elements = pd.DataFrame(self._prev_bootstrapjson['elements'])
+			self._prev_element_dict = self.build_element_dict(self._prev_elements)
 			self._prev_element_types = pd.DataFrame(self._prev_bootstrapjson['element_types'])
 			self._prev_teamdata = pd.DataFrame(self._prev_bootstrapjson['teams'])
 
 			self._prev_teams = []
 			for id,name,shortname in zip(self._prev_teamdata['id'],self._prev_teamdata['name'],self._prev_teamdata['short_name']):
 				self._prev_teams.append(Team(id,name,self,shortname=shortname))
+
+	def build_element_dict(self,df):
+
+		data = {}
+		for i,web_name in enumerate(df['web_name']):
+			data['web_name'] = {}
+			pd = df.iloc[i]
+			for col in df.columns:
+				data['web_name'][col] = pd[col]
+
+		return data
 
 	@property
 	def total_players(self):

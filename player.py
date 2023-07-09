@@ -240,6 +240,11 @@ class Player():
 			# print(api.team_name(self._team))
 
 			# mout.successOut(f"Found {self._name}")
+
+			if api._prev_element_dict:
+				if self._name in api._prev_element_dict:
+					print(api._prev_element_dict[self._name])
+
 			return True
 
 		elif len(matches) < 1:
