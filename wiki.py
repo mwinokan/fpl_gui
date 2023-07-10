@@ -269,13 +269,18 @@ def main():
 
 		# league = League(663873, api)
 
-		navbar = create_navbar([])
+		# navbar = create_navbar([])
 
-		create_homepage(navbar)
+		# create_homepage(navbar)
 
-		p = Player("Bell",api)
+		# p = Player("Havertz",api)
 
-		create_playerpage(api,p,[])
+		create_assetpage([])
+
+		# print(p.expected_points(gw=1,use_official=True))
+		# print(p.expected_points(gw=1,fit_ratio=0.8))
+
+		# create_playerpage(api,p,[])
 
 		exit()
 
@@ -435,8 +440,8 @@ def main():
 	mout.progress(maximum,maximum,width=50,fill="#")
 	mout.showDebug()
 	
-	if api._current_gw > 0:
-		create_assetpage(leagues)
+	# if api._current_gw > 0:
+	create_assetpage(leagues)
 
 	# mout.varOut("#requests=",len(api._request_log))
 
@@ -961,18 +966,25 @@ def create_assetpage(leagues):
 	else:
 		minutes = 0
 
-	players = []
+	player_minutes = {}
+
+	# this season
 	player_ids = api._elements['id']
-
-	maximum = len(api._elements['id'])
-
 	for i,pid in enumerate(player_ids):
-		if api._elements['minutes'][i] < minutes:
-			continue
+		player_minutes[pid] = api._elements['minutes'][i]
+	player_ids = api._prev_elements['id']
+	
+	# last season
+	for i,pid in enumerate(player_ids):
+		if pid in player_minutes:
+			player_minutes[pid] += api._prev_elements['minutes'][i]
 
-		index = api.get_player_index(pid)
-		p = Player(None, api, index=index)
-		players.append(p)
+	players = []
+	for pid,mins in player_minutes.items():
+		if mins > minutes:
+			index = api.get_player_index(pid)
+			p = Player(None, api, index=index)
+			players.append(p)
 
 	if force_go_graphs or not api._live_gw:
 
@@ -981,21 +993,30 @@ def create_assetpage(leagues):
 		from value import create_value_figure
 		from gwexp import create_gwexp_figure
 		from bonus import create_bonus_figure
+		from xgi import create_xgi_figure
 
 		html_buffer = ""
-		
-		html_buffer += "<h4>Best Value Assets for Next 5 Gameweeks</h4>"
-		html_buffer += create_value_figure(api,players)
-		
-		html_buffer += f"<h4>GW{gw+1} Best Assets</h4>"
-		html_buffer += create_gwexp_figure(api,players)
 
-		html_buffer += f"<h4>BPS Influence</h4>"
-		html_buffer += create_bonus_figure(api,players)
+		html_buffer += floating_subtitle('xGI: Performed vs Expected')
+		html_buffer += '<div class="w3-col s12 m12 l4">\n'
+		html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += create_xgi_figure(api,players)
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
+		
+		if gw > 0:
+			html_buffer += "<h4>Best Value Assets for Next 5 Gameweeks</h4>"
+			html_buffer += create_value_figure(api,players)
+			
+			html_buffer += f"<h4>GW{gw+1} Best Assets</h4>"
+			html_buffer += create_gwexp_figure(api,players)
+
+			html_buffer += f"<h4>BPS Influence</h4>"
+			html_buffer += create_bonus_figure(api,players)
 
 		# navbar = None
-		navbar = create_navbar(leagues, active='A')
-		html_page('html/assets.html',None,title=f"Asset Analysis", gw=gw, html=html_buffer, showtitle=True, bar_html=navbar)
+		navbar = create_navbar(leagues)
+		html_page('html/assets.html',None,title=f"Asset Analysis", gw=gw, html=html_buffer, showtitle=True, bar_html=navbar,colour='aqua')
 
 def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 

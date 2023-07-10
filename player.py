@@ -150,7 +150,8 @@ class Player():
 				chance = elements['chance_of_playing_this_round'][i]
 				# print(f'{chance=}')
 				if chance is None:
-					self._chance_of_playing_this_round = 0
+					# self._chance_of_playing_this_round = 0
+					self._chance_of_playing_this_round = 1.0
 				else:
 					self._chance_of_playing_this_round = int(chance)/100
 			except ValueError:
@@ -164,6 +165,7 @@ class Player():
 				self._exp_next_round = 0.0
 
 			self._playing_chance = {}
+			# print(f'{self._chance_of_playing_this_round=}')
 			self._playing_chance[self._api._current_gw] = self._chance_of_playing_this_round
 			self._playing_chance[self._api._current_gw+1] = self._chance_of_playing_this_round
 
@@ -198,6 +200,8 @@ class Player():
 			self._transfers_out = elements['transfers_out_event'][i]
 			
 			self._total_goals = elements['goals_scored'][i]
+			self._total_expected_goals = float(elements['expected_goals'][i])
+			self._total_expected_assists = float(elements['expected_assists'][i])
 			self._total_bps = elements['bps'][i]
 			self._total_goals_conceded = elements['goals_conceded'][i]
 			self._total_assists = elements['assists'][i]
@@ -212,40 +216,84 @@ class Player():
 			self._total_points = elements['total_points'][i]
 			self._elements_id = i
 			
-			# self._price = elements['now_cost'][i]/10
-
-			# print(elements['first_name'][i])
-			# print(elements['second_name'][i])
 			self._form = elements['form'][i]
-			# print(elements['now_cost'][i])
-			# print(elements['points_per_game'][i])
-			# print(elements['element_type'][i])
 			self._selected_by = float(elements['selected_by_percent'][i])
-			# print(elements['squad_number'][i])
-			# print(elements['status'][i])
-			# print(elements['team'][i])
-			# print(elements['team_code'][i])
-
-			# print(api.team_name(elements['team'][i]))
 
 			self._fixtures = None
 			self._history = None
 
 			self._team_obj = self._api.get_player_team_obj(self._team_id)
 
-			# print(self._fixtures)
-
-			# print(elements['minutes'][i])
-
-			# print(api.team_name(self._team))
-
-			# mout.successOut(f"Found {self._name}")
-
-			if api._prev_element_dict:
-				if self._name in api._prev_element_dict:
-					print(api._prev_element_dict[self._name])
-				else:
-					print(f'No previous data for {self._name}')
+			if api._prev_element_dict and self._name in api._prev_element_dict:
+				pd = api._prev_element_dict[self._name]
+				self._prev_dreamteam_count = pd['dreamteam_count']
+				self._prev_now_cost = pd['now_cost']
+				self._prev_points_per_game = pd['points_per_game']
+				self._prev_total_points = pd['total_points']
+				self._prev_minutes = pd['minutes']
+				self._prev_goals_scored = pd['goals_scored']
+				self._prev_assists = pd['assists']
+				self._prev_clean_sheets = pd['clean_sheets']
+				self._prev_goals_conceded = pd['goals_conceded']
+				self._prev_own_goals = pd['own_goals']
+				self._prev_penalties_saved = pd['penalties_saved']
+				self._prev_penalties_missed = pd['penalties_missed']
+				self._prev_yellow_cards = pd['yellow_cards']
+				self._prev_red_cards = pd['red_cards']
+				self._prev_saves = pd['saves']
+				self._prev_bonus = pd['bonus']
+				self._prev_bps = pd['bps']
+				self._prev_influence = pd['influence']
+				self._prev_creativity = pd['creativity']
+				self._prev_threat = pd['threat']
+				self._prev_starts = pd['starts']
+				self._prev_expected_goals = float(pd['expected_goals'])
+				self._prev_expected_assists = float(pd['expected_assists'])
+				self._prev_expected_goal_involvements = pd['expected_goal_involvements']
+				self._prev_expected_goals_conceded = pd['expected_goals_conceded']
+				self._prev_expected_goals_per_90 = pd['expected_goals_per_90']
+				self._prev_saves_per_90 = pd['saves_per_90']
+				self._prev_expected_assists_per_90 = pd['expected_assists_per_90']
+				self._prev_expected_goal_involvements_per_90 = pd['expected_goal_involvements_per_90']
+				self._prev_expected_goals_conceded_per_90 = pd['expected_goals_conceded_per_90']
+				self._prev_goals_conceded_per_90 = pd['goals_conceded_per_90']
+				self._prev_starts_per_90 = pd['starts_per_90']
+				self._prev_clean_sheets_per_90 = pd['clean_sheets_per_90']
+			else:
+				print(f'No previous data for {self._name}')
+				self._prev_dreamteam_count = None
+				self._prev_now_cost = None
+				self._prev_points_per_game = None
+				self._prev_total_points = None
+				self._prev_minutes = None
+				self._prev_goals_scored = None
+				self._prev_assists = None
+				self._prev_clean_sheets = None
+				self._prev_goals_conceded = None
+				self._prev_own_goals = None
+				self._prev_penalties_saved = None
+				self._prev_penalties_missed = None
+				self._prev_yellow_cards = None
+				self._prev_red_cards = None
+				self._prev_saves = None
+				self._prev_bonus = None
+				self._prev_bps = None
+				self._prev_influence = None
+				self._prev_creativity = None
+				self._prev_threat = None
+				self._prev_starts = None
+				self._prev_expected_goals = None
+				self._prev_expected_assists = None
+				self._prev_expected_goal_involvements = None
+				self._prev_expected_goals_conceded = None
+				self._prev_expected_goals_per_90 = None
+				self._prev_saves_per_90 = None
+				self._prev_expected_assists_per_90 = None
+				self._prev_expected_goal_involvements_per_90 = None
+				self._prev_expected_goals_conceded_per_90 = None
+				self._prev_goals_conceded_per_90 = None
+				self._prev_starts_per_90 = None
+				self._prev_clean_sheets_per_90 = None
 
 			return True
 
@@ -265,13 +313,19 @@ class Player():
 		
 		return False
 
-	def get_playing_chance(self,gw):
+	def get_playing_chance(self,gw,debug=True):
+		if debug:
+			mout.debug(f'{self.name}.get_playing_chance({gw=})')
 		if gw in self._playing_chance.keys():
+			if debug:
+				mout.debug(f'Using cached playing chance {self._playing_chance[gw]=}')
 			return self._playing_chance[gw]
 		elif gw > self._api._current_gw + 1:
 			if self._returndate is not None:
 				# future gw
 				fixs = self._team_obj.get_gw_fixtures(gw)
+				if debug:
+					print(f'{fixs=}')
 				if isinstance(fixs,list):
 					if len(fixs) < 1:
 						return 0.0
@@ -366,6 +420,14 @@ class Player():
 	@property
 	def total_goals(self):
 		return self._total_goals
+
+	# @property
+	# def total_gi_wPrev(self):
+	# 	return self.total_goals + self.total_assists + self._prev_goals_scored + self._prev_assists
+
+	# @property
+	# def total_xgi_wPrev(self):
+	# 	return self + self.total_assists + self._prev_expected_goals + self._prev_expected_assists
 
 	@property
 	def total_bps(self):
@@ -693,40 +755,47 @@ class Player():
 
 	@property
 	def attacking_points(self):
-		pts = 0
-		if len(self.history) < 1:
-			return pts
-		for goals,assists in zip(self.history['goals_scored'],self.history['assists']):
-			if self.position_id < 3:
-				pts += goals*6+assists*3
-			elif self.position_id == 3:
-				pts += goals*5+assists*3
-			elif self.position_id == 4:
-				pts += goals*4+assists*3
-		return pts
+		if self.position_id < 3:
+			return self.total_goals*6+self.total_assists*3
+		elif self.position_id == 3:
+			return self.total_goals*5+self.total_assists*3
+		elif self.position_id == 4:
+			return self.total_goals*4+self.total_assists*3
 
 	@property
 	def attacking_points_per90(self):
 		if self.appearances == 0:
 			return 0
-			self._attacking_returns_per90 = 0
+			# self._attacking_returns_per90 = 0
 		if self.total_minutes == 0:
 			return 0
-			self._attacking_returns_per90 = 0
-		self._attacking_returns_per90 = 0
-		pts = 0
-		for goals,assists in zip(self.history['goals_scored'],self.history['assists']):
-			goals = int(goals)
-			assists = int(assists)
-			self._attacking_returns_per90 += goals + assists
-			if self.position_id < 3:
-				pts += goals*6+assists*3
-			elif self.position_id == 3:
-				pts += goals*5+assists*3
-			elif self.position_id == 4:
-				pts += goals*4+assists*3
-		self._attacking_returns_per90 = self._attacking_returns_per90/self.total_minutes*90
-		return pts/self.total_minutes*90
+		return self.attacking_points/self.total_minutes*90
+
+	@property
+	def attacking_points_per90_wPrev(self):
+		return self.attacking_points_per90 + 90*(self._prev_goals_scored*self.goal_multiplier + self.assist_multiplier*self._prev_assists)/self._prev_minutes
+
+	@property
+	def attacking_points_wPrev(self):
+		# print('att. pts',self.name,self.attacking_points + self._prev_goals_scored*self.goal_multiplier + self.assist_multiplier*self._prev_assists)
+		return self.attacking_points + self._prev_goals_scored*self.goal_multiplier + self.assist_multiplier*self._prev_assists
+
+	@property
+	def goal_multiplier(self):
+		return [6,6,5,4][self.position_id-1]
+	
+	@property
+	def assist_multiplier(self):
+		return 3
+	
+	@property
+	def performed_expected_attacking_points(self):
+		return self._total_expected_goals*self.goal_multiplier + self.assist_multiplier*self._total_expected_assists
+
+	@property
+	def performed_expected_attacking_points_wPrev(self):
+		# print('att. xpts',self.name,self.performed_expected_attacking_points + self._prev_expected_goals*self.goal_multiplier + self.assist_multiplier*self._prev_expected_assists)
+		return self.performed_expected_attacking_points + self._prev_expected_goals*self.goal_multiplier + self.assist_multiplier*self._prev_expected_assists
 
 	@property
 	def bonus_points_per90(self):
@@ -754,7 +823,7 @@ class Player():
 				self._appearances = len([m for m in self.history['minutes'] if m > 0])
 		return self._appearances
 
-	def expected_points(self,opponent=None,gw=None,fit_ratio=0.8,debug=False,use_official=False,force=False):
+	def expected_points(self,opponent=None,gw=None,fit_ratio=0.8,debug=True,use_official=False,force=False):
 
 		if gw is None:
 			gw = self._api._current_gw
@@ -769,11 +838,11 @@ class Player():
 			self._api._exp_archive[self.id] = {}
 			# self._api._exp_archive[self.id][gw] = {}
 		
-		if debug:
-			mout.headerOut(self.name)
-
 		if opponent is None:
 			opponent = self.team_obj.get_opponent(gw)
+
+		if debug:
+			mout.debug(f'{self.name}.expected_points({opponent=},{gw=},{fit_ratio=},{use_official=})')
 
 		if isinstance(opponent,list):
 			total = 0
@@ -809,17 +878,18 @@ class Player():
 
 			# get expected attacking_points_per90 from CT index and fit_data
 			if fit_ratio == 0.0 or self.position_id == 1:
-				attacking_points_per90 = self.attacking_points_per90
+				print('Not using fitting')
+				attacking_points_per90 = self.attacking_points_per90_wPrev
 			else:
 				if self.position_id == 2:
 					from_fit = self._api._ct_total_fit_data['def']['intercept'] + self._api._ct_total_fit_data['def']['slope']*self.ct_total_scaled
-					attacking_points_per90 = self.attacking_points_per90*(1.0-fit_ratio) + fit_ratio*from_fit
+					attacking_points_per90 = self.attacking_points_per90_wPrev*(1.0-fit_ratio) + fit_ratio*from_fit
 				elif self.position_id == 3:
 					from_fit = self._api._ct_total_fit_data['mid']['intercept'] + self._api._ct_total_fit_data['mid']['slope']*self.ct_total_scaled
-					attacking_points_per90 = self.attacking_points_per90*(1.0-fit_ratio) + fit_ratio*from_fit
+					attacking_points_per90 = self.attacking_points_per90_wPrev*(1.0-fit_ratio) + fit_ratio*from_fit
 				elif self.position_id == 4:
 					from_fit = self._api._ct_total_fit_data['fwd']['intercept'] + self._api._ct_total_fit_data['fwd']['slope']*self.ct_total_scaled
-					attacking_points_per90 = self.attacking_points_per90*(1.0-fit_ratio) + fit_ratio*from_fit
+					attacking_points_per90 = self.attacking_points_per90_wPrev*(1.0-fit_ratio) + fit_ratio*from_fit
 				if debug:
 					mout.varOut('attacking_points_per90 (fit)',from_fit)
 			if debug:
@@ -971,6 +1041,11 @@ class Player():
 				pts += threat*1+creativity
 			# pts.append(creativity+threat)
 		return pts
+
+	@property
+	def ct_total_scaled_wPrev(self):
+		multiplier = [1.5,1.5,1.25,1][self.position_id]
+		return self.ct_total_scaled + multiplier*self._prev_threat + self._prev_creativity
 
 	# def build_ict_lists(self):
 	# 	print(self.history)
