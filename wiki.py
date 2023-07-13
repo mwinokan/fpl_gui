@@ -3759,7 +3759,7 @@ def preseason_table(league):
 
 	return html_buffer
 
-	f.write(f"| # | Team Name | Manager | Last Season Score | Last Season Rank |\n")
+	f.write(f"| # | Team Name | Manager | 22/23 Score | 22/23 Rank |\n")
 	f.write(f"| --- | --- | --- | --- | ---: |\n")
 	sorted_managers = sorted(league.managers, key=lambda x: x.last_season_score, reverse=True)
 	for i,m in enumerate(sorted_managers):
