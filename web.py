@@ -44,7 +44,7 @@ def fix_table_classes(html):
 	<table>    --> 		<table class="w3-table-all w3-hoverable">
 	'''
 
-	html = html.replace('<table>','<div class="w3-responsive">\n<table class="w3-table w3-hoverable">')
+	html = html.replace('<table>','<div class="w3-responsive">\n<table class="w3-table w3-hoverable responsive-text">')
 	html = html.replace('</table>','</table>\n</div>')
 	return html
 
@@ -89,6 +89,8 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 	fout.write('.shadow87 {box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}\n')
 	fout.write('/*button shadow*/\n')
 	fout.write('.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}\n')
+	fout.write('@media screen and (min-width: 601px) { table.responsive-text { font-size: 16px;  } }')
+	fout.write('@media screen and (max-width: 600px) { table.responsive-text { font-size: 12px;  } }')
 
 	if extra_style is not None:
 		fout.write(extra_style)
@@ -106,7 +108,7 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 		fout.write(f'<body class="w3-{colour} shadow25">\n')
 
 	# CONTENT
-	fout.write('<div class="w3-content" style="max-width: 1400px;">\n')
+	fout.write('<div class="w3-content" style="max-width:1400px;min-height:1200px;">\n')
 
 	# TITLE
 	if showtitle:

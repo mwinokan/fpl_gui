@@ -3486,10 +3486,10 @@ def create_leaguepage(league,leagues,i):
 
 	if preseason:
 		mout.debugOut(f"create_leaguepage({league})::PreseasonTable")
+		html_buffer += floating_subtitle('Last Season')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
 		html_buffer += preseason_table(league)
-		# html_buffer += md2html(md_buffer)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 	
@@ -3651,7 +3651,7 @@ def transfer_table(ids,title_str):
 
 	html_buffer += f'<h2>Transferred {title_str}:</h2>\n'
 	html_buffer += '<div class="w3-responsive w3-padding">\n'
-	html_buffer += '<table class="w3-table w3-hoverable">\n'
+	html_buffer += '<table class="w3-table w3-hoverable responsive-text">\n'
 	html_buffer += '<thead>\n'
 	html_buffer += '<tr>\n'
 
@@ -3726,22 +3726,22 @@ def transfer_table(ids,title_str):
 def preseason_table(league):
 
 	html_buffer = ""
-	html_buffer += '<table class="w3-table">\n'
+	html_buffer += '<table class="w3-table responsive-text">\n'
 	html_buffer += '\t<tr>\n'
 	html_buffer += '\t\t<th></th>\n'
 	html_buffer += '\t\t<th>Team Name</th>\n'
 	html_buffer += '\t\t<th>Manager</th>\n'
-	html_buffer += '\t\t<th>22/23 Score</th>\n'
-	html_buffer += '\t\t<th>22/23 Rank</th>\n'
+	html_buffer += '\t\t<th>Score</th>\n'
+	html_buffer += '\t\t<th>Rank</th>\n'
 	html_buffer += '\t</tr>\n'
 
 	sorted_managers = sorted(league.managers, key=lambda x: x.last_season_score, reverse=True)
 	for i,m in enumerate(sorted_managers):
 		html_buffer += '\t<tr>\n'
-		if i+1 == len(sorted_managers):
-			html_buffer += f"\t\t<td>🥚</td>\n"
-		else:
-			html_buffer += f"\t\t<td>{i+1}</td>\n"
+		# if i+1 == len(sorted_managers):
+			# html_buffer += f'\t\t<td style="text-align:right;">🥚</td>\n'
+		# else:
+		html_buffer += f'\t\t<td style="text-align:right;">{i+1}</td>\n'
 		html_buffer += f'\t\t<td><img src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></img>\n'
 
 		html_buffer += f'\t\t<a href="{m.gui_url}">{m.team_name}</a></td>\n'
@@ -3750,8 +3750,8 @@ def preseason_table(league):
 		if len(m._past_points) < 1:
 			html_buffer += f"<td>N/A</td><td>N/A</td>\n"
 		else:
-			html_buffer += f"<td>{m._past_points[-1]}</td>\n"
-			html_buffer += f"<td>{api.big_number_format(m._past_ranks[-1])}</td>\n"
+			html_buffer += f'<td>{m._past_points[-1]}</td>\n'
+			html_buffer += f'<td>{api.big_number_format(m._past_ranks[-1])}</td>\n'
 
 		html_buffer += '\t</tr>\n'
 
