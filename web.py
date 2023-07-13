@@ -118,7 +118,7 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 		fout.write('</div>\n')
 
 	# HTML
-	fout.write('<div class="w3-row-padding w3-padding-large">\n')
+	fout.write('<div class="w3-row-padding" style="padding-left:0px;padding-right:0px">\n')
 	fout.write(html_content)
 	fout.write('</div>\n')
 
@@ -133,7 +133,7 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 	fout.write('<div class="w3-center" style="padding:32px">\n')
 	# fout.write('<footer class="w3-container w3-black w3-center" style="padding:32px">\n')
 	fout.write(f'<p>Accurate as of {timestamp}, (GW{gw})</p>\n')
-	fout.write('<p>Max Winokan <span class="w3-tag w3-white">mwinokan@me.com</span></a></p>\n')
+	fout.write('<p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>\n')
 	# fout.write('</footer>\n')
 	fout.write('</div>\n')
 	fout.write('</body>\n')

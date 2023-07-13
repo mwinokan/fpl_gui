@@ -89,7 +89,7 @@ force = False
 halfway_awards = False
 season_awards = False
 cup_active = True
-offline = False
+offline = True
 
 wc1_cutoff = 19
 
