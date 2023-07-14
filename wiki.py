@@ -1982,7 +1982,7 @@ def fixture_table(api,gw):
 	html_buffer += f'<h2>GW{gw} Fixtures</h2>'
 	html_buffer += '</div>'
 	html_buffer += '<div class="w3-responsive">'
-	html_buffer += '<table class="w3-table w3-hoverable">'
+	html_buffer += '<table class="w3-table w3-hoverable responsive-text">'
 	# html_buffer += '<table class="w3-table w3-small w3-hoverable">'
 
 	new = True
@@ -2207,7 +2207,7 @@ def previous_player_table(min_minutes=200,show_top=10):
 		html_buffer += '<div class="w3-col s12 m12 l6">\n'
 		# html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
 
-		table_buffer += '<table class="w3-table w3-bordered">\n'
+		table_buffer += '<table class="w3-table w3-bordered responsive-text">\n'
 		table_buffer += '<tr>\n'
 		table_buffer += '<th>Player</th>\n'
 		table_buffer += '<th>Points</th>\n'
