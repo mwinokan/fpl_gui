@@ -12,63 +12,6 @@ import json as js
 from web import html_page, player_summary_cell_modal, get_style_from_event_score, md2html, get_player_history_table
 from squad import Squad
 
-'''
-
-	Issues:
-
-	- Bench points incorrect
-	- Differentials not including autosubs?
-
-	To-Do's
-	
-	- Can there be an offline w3.css?
-
-	* Use gitpython to handle pushing changes and catching errors
-
-	* Get player image for template & captain stats
-
-	GW: 	0000|111111111111111111111111111111111111111|22222222222222
-	Live: 	FFFFFFFFFFFFFFFF|TTTTTTTTTTTTTTT|FFFFFFFFFFFFFFFFFFFFFFFFFF
-				^ Deadline
-							^ Games Begin
-											^ Games End
-														^ Next Deadline
-
-	Pre-Season:
-
-	- Position
-	- Team Name
-	- Manager
-	* Previous Score
-	* Previous Rank			
-
-	GW1 Live:						GW1 not Live:
-									
-	- Position						- Position					
-	- Team Name						- Team Name					
-	- Manager						- Manager					
-	- GW Score						- GW Score					
-	- Rank							- Rank						
-	- Captain (Points)				- Captain (Points)			
-	* Fixtures Played				- Points/fixture						
-	- Points/fixture				* Average Player Selection
-	* Average Player Selection		* Team Value
-
-	GW1 Live:						GW1 not Live:
-									
-	* Position (Delta)				* Position (Delta)
-	- Team Name						- Team Name					
-	- Manager						- Manager					
-	* Total Score					* Total Score					
-	- GW Score						- GW Score					
-	- Rank							- Rank						
-	* GW Rank						* GW Rank						
-	- Captain (Points)				- Captain (Points)			
-	* Fixtures Played				- Points/fixture						
-	- Points/fixture 				* Team Value
-
-'''
-
 # https://stackoverflow.com/questions/60598837/html-to-image-using-python
 
 from datetime import datetime
@@ -651,16 +594,16 @@ def create_teampage(api,leagues):
 
 		html_buffer += floating_subtitle('Fixture Table',pad=0)
 
-		html_buffer += '<div class="w3-col s12 m12 l6">\n'
+		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
 
-		html_buffer += '<table class="w3-table w3-hoverable">\n'
+		html_buffer += '<table class="w3-table w3-hoverable w3-responsive">\n'
 
 		sorted_teams = sorted(api.teams,key=lambda x: x.difficulty_next5, reverse=True)
 
 		table_buffer = ""
 
-		gw_range = range(api._current_gw,min(api._current_gw+8,38))
+		gw_range = range(max(1,api._current_gw),min(api._current_gw+8,38))
 
 		for i,team in enumerate(sorted_teams):
 
@@ -4200,3 +4143,59 @@ def dump_json(data):
 if __name__ == '__main__':
 	main()
 
+'''
+
+	Issues:
+
+	- Bench points incorrect
+	- Differentials not including autosubs?
+
+	To-Do's
+	
+	- Can there be an offline w3.css?
+
+	* Use gitpython to handle pushing changes and catching errors
+
+	* Get player image for template & captain stats
+
+	GW: 	0000|111111111111111111111111111111111111111|22222222222222
+	Live: 	FFFFFFFFFFFFFFFF|TTTTTTTTTTTTTTT|FFFFFFFFFFFFFFFFFFFFFFFFFF
+				^ Deadline
+							^ Games Begin
+											^ Games End
+														^ Next Deadline
+
+	Pre-Season:
+
+	- Position
+	- Team Name
+	- Manager
+	* Previous Score
+	* Previous Rank			
+
+	GW1 Live:						GW1 not Live:
+									
+	- Position						- Position					
+	- Team Name						- Team Name					
+	- Manager						- Manager					
+	- GW Score						- GW Score					
+	- Rank							- Rank						
+	- Captain (Points)				- Captain (Points)			
+	* Fixtures Played				- Points/fixture						
+	- Points/fixture				* Average Player Selection
+	* Average Player Selection		* Team Value
+
+	GW1 Live:						GW1 not Live:
+									
+	* Position (Delta)				* Position (Delta)
+	- Team Name						- Team Name					
+	- Manager						- Manager					
+	* Total Score					* Total Score					
+	- GW Score						- GW Score					
+	- Rank							- Rank						
+	* GW Rank						* GW Rank						
+	- Captain (Points)				- Captain (Points)			
+	* Fixtures Played				- Points/fixture						
+	- Points/fixture 				* Team Value
+
+'''
