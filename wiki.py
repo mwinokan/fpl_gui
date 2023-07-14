@@ -31,7 +31,7 @@ test = False
 force = False
 halfway_awards = False
 season_awards = False
-cup_active = True
+cup_active = False
 offline = True
 
 wc1_cutoff = 19
