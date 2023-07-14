@@ -595,9 +595,9 @@ def create_teampage(api,leagues):
 		html_buffer += floating_subtitle('Fixture Table',pad=0)
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
+		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89 w3-responsive">\n'
 
-		html_buffer += '<table class="w3-table w3-hoverable w3-responsive">\n'
+		html_buffer += '<table class="w3-table w3-hoverable responsive-text">\n'
 
 		sorted_teams = sorted(api.teams,key=lambda x: x.difficulty_next5, reverse=True)
 
