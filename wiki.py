@@ -676,8 +676,8 @@ def create_teampage(api,leagues):
 	for i,team in enumerate(api.teams):
 		mout.progress(i,20)
 
-		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
+		html_buffer += '<div class="w3-col s12 m12 l6">\n'
+		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89 w3-responsive">\n'
 
 		html_buffer += f'<h2><img class="w3-image" src="{team._badge_url}" alt="Team" width="30" height="30">\t{team.name}</h2>\n'
 
@@ -689,7 +689,7 @@ def create_teampage(api,leagues):
 
 		# Recent results
 
-		html_buffer += '<table class="w3-table w3-hoverable">\n'
+		html_buffer += '<table class="w3-table w3-hoverable responsive-text">\n'
 
 		# table_buffer += '<tr>\n'
 		# html_buffer += f'<th class="w3-center" style={team_style_str}>Opponent</th>\n'
