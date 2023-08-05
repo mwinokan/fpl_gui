@@ -260,40 +260,40 @@ class Player():
 				self._prev_starts_per_90 = pd['starts_per_90']
 				self._prev_clean_sheets_per_90 = pd['clean_sheets_per_90']
 			else:
-				print(f'No previous data for {self._name}')
-				self._prev_dreamteam_count = None
-				self._prev_now_cost = None
-				self._prev_points_per_game = None
-				self._prev_total_points = None
-				self._prev_minutes = None
-				self._prev_goals_scored = None
-				self._prev_assists = None
-				self._prev_clean_sheets = None
-				self._prev_goals_conceded = None
-				self._prev_own_goals = None
-				self._prev_penalties_saved = None
-				self._prev_penalties_missed = None
-				self._prev_yellow_cards = None
-				self._prev_red_cards = None
-				self._prev_saves = None
-				self._prev_bonus = None
-				self._prev_bps = None
-				self._prev_influence = None
-				self._prev_creativity = None
-				self._prev_threat = None
-				self._prev_starts = None
-				self._prev_expected_goals = None
-				self._prev_expected_assists = None
-				self._prev_expected_goal_involvements = None
-				self._prev_expected_goals_conceded = None
-				self._prev_expected_goals_per_90 = None
-				self._prev_saves_per_90 = None
-				self._prev_expected_assists_per_90 = None
-				self._prev_expected_goal_involvements_per_90 = None
-				self._prev_expected_goals_conceded_per_90 = None
-				self._prev_goals_conceded_per_90 = None
-				self._prev_starts_per_90 = None
-				self._prev_clean_sheets_per_90 = None
+				mout.warning(f'No previous data for {self._name}')
+				self._prev_dreamteam_count = 0.0
+				self._prev_now_cost = 0.0
+				self._prev_points_per_game = 0.0
+				self._prev_total_points = 0.0
+				self._prev_minutes = 0.0
+				self._prev_goals_scored = 0.0
+				self._prev_assists = 0.0
+				self._prev_clean_sheets = 0.0
+				self._prev_goals_conceded = 0.0
+				self._prev_own_goals = 0.0
+				self._prev_penalties_saved = 0.0
+				self._prev_penalties_missed = 0.0
+				self._prev_yellow_cards = 0.0
+				self._prev_red_cards = 0.0
+				self._prev_saves = 0.0
+				self._prev_bonus = 0.0
+				self._prev_bps = 0.0
+				self._prev_influence = 0.0
+				self._prev_creativity = 0.0
+				self._prev_threat = 0.0
+				self._prev_starts = 0.0
+				self._prev_expected_goals = 0.0
+				self._prev_expected_assists = 0.0
+				self._prev_expected_goal_involvements = 0.0
+				self._prev_expected_goals_conceded = 0.0
+				self._prev_expected_goals_per_90 = 0.0
+				self._prev_saves_per_90 = 0.0
+				self._prev_expected_assists_per_90 = 0.0
+				self._prev_expected_goal_involvements_per_90 = 0.0
+				self._prev_expected_goals_conceded_per_90 = 0.0
+				self._prev_goals_conceded_per_90 = 0.0
+				self._prev_starts_per_90 = 0.0
+				self._prev_clean_sheets_per_90 = 0.0
 
 			return True
 
