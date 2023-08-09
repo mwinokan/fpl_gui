@@ -960,15 +960,28 @@ class FPL_API():
 			df = pd.concat([df,df2])
 			# print(len(df))
 
+		# PRESEASON
 		if len(df) == 0:
-			df = pd.DataFrame(json['new_entries']['results'])			
+
+			df = pd.DataFrame(json['new_entries']['results'])	
+
+			# if self.current_gw < 1:
+			# from pprint import pprint
+			# # # print(f"{url}leagues-classic/{code}/standings/")
+			# # pprint(json)
+
+			# mout.header("json['new_entries']")
+			# pprint(json['new_entries'])
+
+			json2 = self.request(f"{url}leagues-classic/{code}/standings/?page_new_entries=2")
+		
 			if json2 is not None:
 				df2 = pd.DataFrame(json2['new_entries']['results'])
 				# print(len(df),len(df2))
-				df = pd.concat([df,df2])
-				# print(len(df))
+				df = pd.concat([df,df2])				
 
 		name = json['league']['name']
+		# print(name)
 		# print(df)
 
 		# print(f'Finished getting stats for {name}')

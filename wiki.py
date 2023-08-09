@@ -201,7 +201,9 @@ def main():
 
 	if test:
 
-		# toilet = League(910674, api)
+		toilet = League(121011, api)
+
+		exit()
 
 		# create_cup_page(api,toilet,[toilet],None)
 
