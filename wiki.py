@@ -3682,6 +3682,7 @@ def preseason_table(league):
 
 	sorted_managers = sorted(league.managers, key=lambda x: x.last_season_score, reverse=True)
 	for i,m in enumerate(sorted_managers):
+
 		html_buffer += '\t<tr>\n'
 		# if i+1 == len(sorted_managers):
 			# html_buffer += f'\t\t<td style="text-align:right;">🥚</td>\n'
@@ -3690,7 +3691,11 @@ def preseason_table(league):
 		html_buffer += f'\t\t<td><img src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></img>\n'
 
 		html_buffer += f'\t\t<a href="{m.gui_url}">{m.team_name}</a></td>\n'
-		html_buffer += f'\t\t<td>{m.name}</td>\n'
+		
+		if 'Tesco Bean Value' in league.name and m.is_diamond:
+			html_buffer += f'\t\t<td>{m.name} 💎</td>\n'
+		else:
+			html_buffer += f'\t\t<td>{m.name}</td>\n'
 
 		if len(m._past_points) < 1:
 			html_buffer += f"<td>N/A</td><td>N/A</td>\n"

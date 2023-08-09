@@ -8,7 +8,7 @@ class Manager():
 
 	def __init__(self, name, id, api, team_name = None, authenticate = False):
 		mout.debugOut(f"Manager.__init__({name},{id})")
-		self._name = name
+		self._name = name.title()
 		self._team_name = team_name
 		self._id = id
 		self._api = api
@@ -47,12 +47,16 @@ class Manager():
 		self.get_team_shirt()
 
 	@property
+	def leagues(self):
+		return self._leagues
+
+	@property
 	def gui_url(self):
 		return self._gui_url
 
 	@property
 	def is_diamond(self):
-		return 'The RBS Diamond Invitational' in self._league_positions.keys()
+		return 'The RBS Diamond Invitational' in [l.name for l in self.leagues]
 
 	@property
 	def is_dead(self):
