@@ -941,7 +941,7 @@ def create_assetpage(leagues):
 		html_buffer = ""
 
 		html_buffer += floating_subtitle('xGI: Performed vs Expected')
-		html_buffer += '<div class="w3-col s12 m12 l4">\n'
+		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
 		html_buffer += create_xgi_figure(api,players)
 		html_buffer += '</div>\n'
