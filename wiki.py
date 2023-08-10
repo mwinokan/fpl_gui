@@ -203,6 +203,20 @@ def main():
 
 		toilet = League(121011, api)
 
+		members = js.load(open('members_2324.json'))
+
+		import difflib
+
+		for member in members:
+
+			matches = difflib.get_close_matches(member, [m.name for m in toilet.managers])
+
+			if len(matches) == 0:
+				# mout.error(f'{len(matches)} {member} {matches}')
+				mout.out(f'{member}')
+			# else:
+			# 	print(len(matches),member,matches)
+
 		exit()
 
 		# create_cup_page(api,toilet,[toilet],None)
