@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blingo Bongo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}body {font-family: "Open Sans"}
+h5.double {line-height: 2}
+/*drop shadow*/
+.shadow10 {box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+/*drop shadow*/
+.shadow20 {box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}
+/*inner shadow*/
+.shadow25 {box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;}
+/*pink effect*/
+.shadow50 {box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;}
+/*soft inner and outer*/
+.shadow87 {box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}
+/*button shadow*/
+.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}
+@media screen and (min-width: 601px) { .responsive-text { font-size: 16px;  } }@media screen and (max-width: 600px) { .responsive-text { font-size: 12px;  } }</style>
+</head>
+
+<div class="w3-bar w3-black shadow89">
+<a class="w3-bar-item w3-black w3-text-black"></a>
+<div class="w3-dropdown-hover">
+<button class="w3-button w3-hover-aqua"><h3>FPL <span class="w3-tag w3-white">GUI</span></h3></button>
+<div class="w3-dropdown-content w3-bar-block w3-card-4">
+<a href="https://mwinokan.github.io/FPL_GUI/index.html" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/assets.html" class="w3-bar-item w3-button w3-hover-aqua">📊 Asset Graphs</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/teams.html" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua">💎 The RBS Diamond Invitational</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua">🚽 Tesco Bean Value Toilet League</a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Super-Dinner-League.html" class="w3-bar-item w3-button w3-hover-aqua">🍝 Super Dinner League</a>
+</div>
+</div>
+<a class="w3-bar-item w3-black w3-text-black w3-right"></a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>
+<a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>
+</div>
+<div class="w3-bar w3-black">
+</div>
+<body class="w3-white shadow25">
+<div class="w3-content" style="max-width:1400px;min-height:1200px;">
+<div class="w3-row-padding" style="padding-left:0px;padding-right:0px">
+<table style="width:100%;spacing:40px;">
+<tr>
+<td style="text-align:right">
+<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/kits/blank_kit.png?raw=true" alt="Team" width="66" height="87"></td>
+<td>
+<h2>"Blingo Bongo"</h2>
+<h2>Joseph Miller</h32
+</td>
+</tr>
+</table>
+<ul>
+<li><a href="https://fantasy.premierleague.com/entry/5055400/event/1">FPL: Event</a></li>
+<li><a href="https://fantasy.premierleague.com/entry/5055400/history">FPL: History</a></li>
+</ul>
+<div class="w3-col s12 m12 l12">
+	<h1 class="w3-tag shadow89">🏆 Trophy Cabinet</h1>
+</div><div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89" style="padding:0px;">
+<div class="w3-bar w3-black">
+<button class="w3-bar-item w3-button w3-mobile tablink w3-aqua" onclick="openLeague(event,121011)">Tesco Bean Value Toilet League</button>
+</div>
+<div id="121011" class="w3-container w3-dark-grey league">
+<div class="w3-justify w3-row-padding">
+<p> Empty, no league awards to be found :(</p>
+</div>
+</div>
+<script>
+function openLeague(evt, leagueName) {
+var i, x, tablinks;
+x = document.getElementsByClassName("league");
+for (i = 0; i < x.length; i++) {
+x[i].style.display = "none";
+}
+tablinks = document.getElementsByClassName("tablink");
+for (i = 0; i < x.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" w3-aqua", "");
+}
+document.getElementById(leagueName).style.display = "block";
+evt.currentTarget.className += " w3-aqua";
+}
+</script>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">Picks</h1>
+</div><div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">
+<div class="w3-responsive">
+<table class="w3-table w3-border w3-hoverable">
+<tr>
+<th class="w3-center">Pos</th>
+<th class="w3-center">Team</th>
+<th>Name</th>
+<th class="w3-center">Price</th>
+<th class="w3-center">ΣPts</th>
+<th class="w3-center">Trans.</th>
+<th class="w3-center">GW1</th>
+<th class="w3-center">Form</th>
+<th class="w3-center">GW2</th>
+<th class="w3-center">GW3</th>
+<th class="w3-center">GW4</th>
+<th class="w3-center">GW5</th>
+<th class="w3-center">GW6</th>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#D1443F;color:black;"><b>GKP</b></td>
+<td class="w3-center" style="background-color:#D1443F;color:black;"><b>MUN</b></td>
+<td style="background-color:#D1443F;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_597.html">Onana</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id597_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id597_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id597_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Onana in GW1</h3><p>Man Utd: Home to Wolves.</p>
+<p>Onana: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">tot (3.7)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">NFO (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">ars (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">BHA (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bur (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#7A2E3D;color:#95CDFA;"><b>GKP</b></td>
+<td class="w3-center" style="background-color:#7A2E3D;color:#95CDFA;"><b>WHU</b></td>
+<td style="background-color:#7A2E3D;color:#95CDFA;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_524.html">Areola</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£4.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id524_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id524_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id524_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Areola in GW1</h3><p>West Ham: Away to Bournemouth.</p>
+<p>Areola: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">CHE (1.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bha (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">lut (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">MCI (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">liv (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#AF2532;color:white;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:#AF2532;color:white;"><b>LIV</b></td>
+<td style="background-color:#AF2532;color:white;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_290.html">Alexander-Arnold</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£8.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id290_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id290_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id290_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Alexander-Arnold in GW1</h3><p>Liverpool: Away to Chelsea.</p>
+<p>Alexander-Arnold: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">BOU (4.5)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">new (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">AVL (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">wol (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">WHU (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>NEW</b></td>
+<td style="background-color:WhiteSmoke;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_430.html">Trippier</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£6.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id430_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id430_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id430_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Trippier in GW1</h3><p>Newcastle: Home to Aston Villa.</p>
+<p>Trippier: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">mci (2.6)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">LIV (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bha (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">BRE (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">shu (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#051383;color:white;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:#051383;color:white;"><b>CHE</b></td>
+<td style="background-color:#051383;color:white;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_206.html">James</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.1%</td>
+<td onclick="document.getElementById('id206_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id206_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id206_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>James in GW1</h3><p>Chelsea: Home to Liverpool.</p>
+<p>James: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">whu (2.6)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">LUT (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">NFO (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bou (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">AVL (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#D1443F;color:black;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:#D1443F;color:black;"><b>MUN</b></td>
+<td style="background-color:#D1443F;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_401.html">Wan-Bissaka</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£4.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.0%</td>
+<td onclick="document.getElementById('id401_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id401_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id401_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Wan-Bissaka in GW1</h3><p>Man Utd: Home to Wolves.</p>
+<p>Wan-Bissaka: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">tot (2.5)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">NFO (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">ars (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">BHA (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bur (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#5D1133;color:#91B6E4;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:#5D1133;color:#91B6E4;"><b>AVL</b></td>
+<td style="background-color:#5D1133;color:#91B6E4;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_584.html">Pau</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£4.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id584_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id584_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id584_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Pau in GW1</h3><p>Aston Villa: Away to Newcastle.</p>
+<p>Pau: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:orange;color:black">EVE (2.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bur (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">liv (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">CRY (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">che (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#D1443F;color:black;"><b>MID</b></td>
+<td class="w3-center" style="background-color:#D1443F;color:black;"><b>MUN</b></td>
+<td style="background-color:#D1443F;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_396.html">Rashford</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£9.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id396_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id396_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id396_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Rashford in GW1</h3><p>Man Utd: Home to Wolves.</p>
+<p>Rashford: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">tot (3.5)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">NFO (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">ars (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">BHA (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bur (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#A1C2E7;color:#061736;"><b>MID</b></td>
+<td class="w3-center" style="background-color:#A1C2E7;color:#061736;"><b>MCI</b></td>
+<td style="background-color:#A1C2E7;color:#061736;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_354.html">Grealish</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£7.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.1%</td>
+<td onclick="document.getElementById('id354_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">🪑</td><div id="id354_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id354_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Grealish in GW1</h3><p>Man City: Won 0-1 away to Burnley.</p>
+<p>Grealish: Benched.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">NEW (3.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">shu (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">FUL (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">whu (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">NFO (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:white;color:#2253A0;"><b>MID</b></td>
+<td class="w3-center" style="background-color:white;color:#2253A0;"><b>BHA</b></td>
+<td style="background-color:white;color:#2253A0;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_143.html">Mitoma</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£6.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id143_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id143_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id143_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mitoma in GW1</h3><p>Brighton: Home to Luton.</p>
+<p>Mitoma: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">wol (2.3)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">WHU (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">NEW (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">mun (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">BOU (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>MID</b></td>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>NEW</b></td>
+<td style="background-color:WhiteSmoke;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_406.html">Bruno G.</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£6.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:red">-0.0%</td>
+<td onclick="document.getElementById('id406_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id406_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id406_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Bruno G. in GW1</h3><p>Newcastle: Home to Aston Villa.</p>
+<p>Bruno G.: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">mci (1.7)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">LIV (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bha (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">BRE (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">shu (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#5D1133;color:#91B6E4;"><b>MID</b></td>
+<td class="w3-center" style="background-color:#5D1133;color:#91B6E4;"><b>AVL</b></td>
+<td style="background-color:#5D1133;color:#91B6E4;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_34.html">Bailey</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id34_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id34_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id34_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Bailey in GW1</h3><p>Aston Villa: Away to Newcastle.</p>
+<p>Bailey: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">EVE (2.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bur (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">liv (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">CRY (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">che (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#A1C2E7;color:#061736;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:#A1C2E7;color:#061736;"><b>MCI</b></td>
+<td style="background-color:#A1C2E7;color:#061736;"><b>(C) <a href="https://mwinokan.github.io/FPL_GUI/html/player_355.html">Haaland</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£14.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id355_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5</td><div id="id355_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id355_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Haaland in GW1</h3><p>Man City: Won 0-1 away to Burnley.</p>
+<p>Haaland: <span class="w3-tag w3-dark-grey">18 mins</span> <span class="w3-tag w3-green">Goal</span> </p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">5.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">NEW (4.5)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">shu (2.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">FUL (2.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">whu (2.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">NFO (2.1)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:WhiteSmoke;color:black;"><b>NEW</b></td>
+<td style="background-color:WhiteSmoke;color:black;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_433.html">Wilson</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£8.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id433_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id433_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id433_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Wilson in GW1</h3><p>Newcastle: Home to Aston Villa.</p>
+<p>Wilson: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow;color:black">mci (2.1)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">LIV (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bha (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">BRE (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">shu (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#3A83E2;color:white;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:#3A83E2;color:white;"><b>EVE</b></td>
+<td style="background-color:#3A83E2;color:white;"><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_258.html">Maupay</a></b></td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£5.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;color:green">0.0%</td>
+<td onclick="document.getElementById('id258_1').style.display='block'" class="w3-center"  style="border:2px solid white;border-collapse:collapse;">-</td><div id="id258_1" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id258_1').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Maupay in GW1</h3><p>Everton: Home to Fulham.</p>
+<p>Maupay: Upcoming fixture.</p></div></div></div><td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red;color:black">avl (1.4)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">WOL (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">shu (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">ARS (0.0)</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">bre (0.0)</td>
+</tr>
+<tr>
+<td class="w3-center"></td>
+<td class="w3-center"></td>
+<td class="w3-center">Joseph Miller</td>
+<td class="w3-center">£100.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">0</td>
+<td class="w3-center"> </td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">10</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">5.0</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">4.1</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">4.1</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">4.1</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">4.1</td>
+<td class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:darkred;color:white">4.1</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">History</h1>
+</div><div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">
+<div class="w3-responsive">
+<table class="w3-table-all w3-hoverable">
+<tr>
+<th class="w3-center">GW</th>
+<th class="w3-center">Score</th>
+<th class="w3-center">Overall Rank</th>
+<th class="w3-center">GW Score</th>
+<th class="w3-center">GW Rank</th>
+<th class="w3-center">Transfers Taken</th>
+<th class="w3-center">Total Value</th>
+</tr>
+<tr>
+<td class="w3-center">1</td>
+<td class="w3-center">10</td>
+<td class="w3-center">N/A</td>
+<td class="w3-center">10</td>
+<td class="w3-center">N/A</td>
+<td></td>
+<td class="w3-center">£100.0</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w3-center" style="padding:32px">
+<p>Accurate as of 2023-08-11 20:23:40, (GW1)</p>
+<p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>
+</div>
+</body>
+</html>
