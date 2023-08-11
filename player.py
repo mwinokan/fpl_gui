@@ -313,7 +313,7 @@ class Player():
 		
 		return False
 
-	def get_playing_chance(self,gw,debug=True):
+	def get_playing_chance(self,gw,debug=False):
 		if debug:
 			mout.debug(f'{self.name}.get_playing_chance({gw=})')
 		if gw in self._playing_chance.keys():
@@ -773,7 +773,13 @@ class Player():
 
 	@property
 	def attacking_points_per90_wPrev(self):
+		if self._prev_minutes == 0:
+			return self.attacking_points_per90
 		return self.attacking_points_per90 + 90*(self._prev_goals_scored*self.goal_multiplier + self.assist_multiplier*self._prev_assists)/self._prev_minutes
+
+	@property
+	def attacking_returns_per90(self):
+		return self.total_goals + self.total_assists + self._prev_goals_scored + self._prev_assists
 
 	@property
 	def attacking_points_wPrev(self):
@@ -823,7 +829,8 @@ class Player():
 				self._appearances = len([m for m in self.history['minutes'] if m > 0])
 		return self._appearances
 
-	def expected_points(self,opponent=None,gw=None,fit_ratio=0.8,debug=True,use_official=False,force=False):
+	# @mout.debug_log
+	def expected_points(self,opponent=None,gw=None,fit_ratio=0.8,debug=False,use_official=False,force=False):
 
 		if gw is None:
 			gw = self._api._current_gw
@@ -878,7 +885,7 @@ class Player():
 
 			# get expected attacking_points_per90 from CT index and fit_data
 			if fit_ratio == 0.0 or self.position_id == 1:
-				print('Not using fitting')
+				# print('Not using fitting')
 				attacking_points_per90 = self.attacking_points_per90_wPrev
 			else:
 				if self.position_id == 2:
@@ -900,13 +907,13 @@ class Player():
 			if debug:
 				mout.varOut('expected_goals_scored',expected_goals_scored)
 			if debug:
-				mout.varOut('self._attacking_returns_per90',self._attacking_returns_per90)
-			if self._attacking_returns_per90 is None:
+				mout.varOut('self._attacking_returns_per90',self.attacking_returns_per90)
+			if self.attacking_points_per90 is None:
 				boost = 1
-			elif self._attacking_returns_per90 == 0:
+			elif self.attacking_returns_per90 == 0:
 				boost = 1
 			else:
-				boost = (expected_goals_scored - self._attacking_returns_per90)/self._attacking_returns_per90 + 1
+				boost = (expected_goals_scored - self.attacking_returns_per90)/self.attacking_returns_per90 + 1
 			if debug:
 				mout.varOut('boost',boost)
 			boost = max(0.7,boost)

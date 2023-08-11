@@ -24,7 +24,7 @@ scrape_kits = False
 force_generate_kits = True
 run_push_changes = True
 fetch_latest = True
-force_plot = True
+force_plot = False
 recalculate = True
 force_go_graphs = True
 test = False
@@ -201,21 +201,25 @@ def main():
 
 	if test:
 
-		toilet = League(121011, api)
+		p = Player("Havertz",api)
 
-		members = js.load(open('members_2324.json'))
+		print(p.expected_points(gw=1,use_official=True))
 
-		import difflib
+		# toilet = League(121011, api)
 
-		for member in members:
+		# members = js.load(open('members_2324.json'))
 
-			matches = difflib.get_close_matches(member, [m.name for m in toilet.managers])
+		# import difflib
 
-			if len(matches) == 0:
-				# mout.error(f'{len(matches)} {member} {matches}')
-				mout.out(f'{member}')
-			# else:
-			# 	print(len(matches),member,matches)
+		# for member in members:
+
+		# 	matches = difflib.get_close_matches(member, [m.name for m in toilet.managers])
+
+		# 	if len(matches) == 0:
+		# 		# mout.error(f'{len(matches)} {member} {matches}')
+		# 		mout.out(f'{member}')
+		# 	# else:
+		# 	# 	print(len(matches),member,matches)
 
 		exit()
 
@@ -232,7 +236,7 @@ def main():
 
 		# create_homepage(navbar)
 
-		# p = Player("Havertz",api)
+		p = Player("Havertz",api)
 
 		create_assetpage([])
 
@@ -377,7 +381,7 @@ def main():
 	plot = force_plot or not api._live_gw
 	for i,m in enumerate(api._managers.values()):
 		mout.progress(i,maximum,width=50,fill="#")
-		if api._current_gw > 0:
+		if api._current_gw > 1:
 			m.create_rank_graph(plot=plot,show=False)
 			m.create_points_graph(plot=plot,show=False)
 		# m.create_leaguepos_graph(plot=plot,show=False)
@@ -963,7 +967,7 @@ def create_assetpage(leagues):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 		
-		if gw > 0:
+		if gw > 0 and not api._live_gw:
 			html_buffer += "<h4>Best Value Assets for Next 5 Gameweeks</h4>"
 			html_buffer += create_value_figure(api,players)
 			
@@ -1407,6 +1411,7 @@ def create_managerpage(api,man,leagues):
 	html_buffer += '<ul>\n'
 	html_buffer += f'<li><a href="{man.fpl_event_url}">FPL: Event</a></li>\n'
 	html_buffer += f'<li><a href="{man.fpl_history_url}">FPL: History</a></li>\n'
+	html_buffer += f'<li>ID: {man.id}</li>\n'
 	html_buffer += '</ul>\n'
 
 	html_buffer += floating_subtitle('🏆 Trophy Cabinet',pad=0)
@@ -1720,7 +1725,7 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 		html_buffer += f'<td class="w3-center" style={style_str}>{player.form}</td>\n'
 
 		for i in range(now_gw+1,end_gw+1):
-			exp = player.expected_points(gw=i,fit_ratio=0.8)
+			exp = player.expected_points(gw=i,fit_ratio=0.8,use_official=True)
 			style_str = get_style_from_event_score(exp)
 			# difficulty = player.get_fixture_diff(i,old=True,overall=False)
 			# style_str = get_style_from_difficulty(difficulty,old=True)
@@ -2040,23 +2045,23 @@ def fixture_table(api,gw):
 			team_a_score = fix["team_a_score"]
 
 			html_buffer += f'<td class="w3-center"><b>{team_h_score:.0f} - {team_a_score:.0f}</b></td>'
-			print(team_h_obj._shortname,team_a_obj._shortname)
-			print(f"Real: {team_h_score:.0f} {team_a_score:.0f}")
-			print(f"Pred: {pred_h_score:.0f} {pred_a_score:.0f}")
+			# print(team_h_obj._shortname,team_a_obj._shortname)
+			# print(f"Real: {team_h_score:.0f} {team_a_score:.0f}")
+			# print(f"Pred: {pred_h_score:.0f} {pred_a_score:.0f}")
 
-			if team_h_score == team_a_score:
-				real_result = 'D'
-			elif team_h_score > team_a_score:
-				real_result = 'H'
-			else:
-				real_result = 'A'
+			# if team_h_score == team_a_score:
+			# 	real_result = 'D'
+			# elif team_h_score > team_a_score:
+			# 	real_result = 'H'
+			# else:
+			# 	real_result = 'A'
 
-			if round(pred_h_score,0) == round(pred_a_score,0):
-				pred_result = 'D'
-			elif round(pred_h_score,0) > round(pred_a_score,0):
-				pred_result = 'H'
-			else:
-				pred_result = 'A'
+			# if round(pred_h_score,0) == round(pred_a_score,0):
+			# 	pred_result = 'D'
+			# elif round(pred_h_score,0) > round(pred_a_score,0):
+			# 	pred_result = 'H'
+			# else:
+			# 	pred_result = 'A'
 
 			# if real_result == pred_result:
 			# 	result = True
@@ -3452,7 +3457,7 @@ def create_leaguepage(league,leagues,i):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 	
-	if gw > 0:
+	if gw > 1:
 		mout.debugOut(f"create_leaguepage({league})::Transfers")
 		ids_in, ids_out = league.get_league_transfers(gw)
 		
@@ -3507,7 +3512,7 @@ def create_leaguepage(league,leagues,i):
 	sys.path.insert(1,'go')
 	from goleague import create_league_figure
 
-	if api._current_gw > 0:
+	if api._current_gw > 1:
 		html_buffer += floating_subtitle('League Graph')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
@@ -3766,7 +3771,7 @@ def league_table_html(league,gw,awardkey=None):
 	show_transfers = gw > 1
 
 	html_buffer += '<div class="w3-responsive">\n'
-	html_buffer += '<table class="w3-table w3-hoverable">\n'
+	html_buffer += '<table class="w3-table w3-hoverable responsive-text">\n'
 	html_buffer += '<thead>\n'
 	html_buffer += '<tr>\n'
 
@@ -3972,6 +3977,7 @@ def league_table_html(league,gw,awardkey=None):
 
 	return html_buffer
 
+# @mout.debug_log
 def league_template(league,gw):
 
 	md_buffer = ""

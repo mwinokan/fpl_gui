@@ -61,6 +61,11 @@ class Team():
 
 		self._shortname = self._api._teamdata['short_name'][id-1]
 
+		# print(self._api._prev_teamdata)
+		# print(self._api._prev_teamdata.columns)
+
+		# exit()
+
 	def strength(self,is_home=True,overall=False,defence=False):
 		if is_home:
 			if overall:
@@ -171,6 +176,10 @@ class Team():
 		if self._goals_scored is None:
 			fix = self.fixtures
 		return self._goals_scored
+
+	# @property
+	# def goals_scored_wprev(self):
+	# 	return self.goals_scored + self._goals_scored_prev
 	
 	@property
 	def goals_conceded(self):
@@ -199,7 +208,7 @@ class Team():
 	@property
 	def clean_sheet_probability(self):
 		if self.games_played == 0:
-			return None
+			return 0
 		return self.clean_sheets/self.games_played
 
 	def expected_clean_sheet(self,opponent):
@@ -221,20 +230,26 @@ class Team():
 	@property
 	def clean_sheet_breaking_probability(self):
 		if self.games_played == 0:
-			return None
+			return 0
 		return self.clean_sheets_broken/self.games_played
 
 	@property
 	def goals_conceded_per_game(self):
 		if self.games_played == 0:
-			return None
+			return 0
 		return self.goals_conceded/self.games_played
 
 	@property
 	def goals_scored_per_game(self):
 		if self.games_played == 0:
-			return None
+			return 0
 		return self.goals_scored/self.games_played
+
+	@property
+	def goals_scored_per_game_wprev(self):
+		if self.games_played == 0:
+			return 0
+		return self.goals_scored_wprev/self.games_played_wprev
 
 	@property
 	def difficulty_next5(self):
