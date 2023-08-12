@@ -171,8 +171,8 @@ def main():
 	if create_launchd_plist:
 		# launchd_plist(interval=300)
 		# launchd_plist(interval=600)
-		# launchd_plist(interval=3600)
-		launchd_plist(interval=14400)
+		launchd_plist(interval=3600)
+		# launchd_plist(interval=14400)
 		exit()
 
 	if fetch_latest:
@@ -4079,22 +4079,22 @@ def launchd_plist(interval=3600):
 		<key>Label</key>
 		<string>com.mwinokan.fpl.wiki</string>
 		<key>Program</key>
-		<string>/Users/mw00368/Box Sync/Python/FPL_GUI/wiki.py</string>
+		<string>/Users/mw00368/Box/Python/FPL_GUI/wiki.py</string>
 		<key>EnvironmentVariables</key>
 		<dict>
 			<key>PATH</key>
-			<string>/Users/mw00368/miniconda3/bin:/Users/mw00368/miniconda3/condabin:/Library/TeX/texbin:/Users/mw00368/miniconda3/bin:/Users/mw00368/sh:/Users/mw00368/asap/x86_64:/Users/mw00368/Movies/autodownload:/Users/mw00368/Dropbox/MCal:/Users/mw00368/.local/bin:/Users/mw00368/usr/bin:/Users/mw00368/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/munki:/opt/X11/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/mw00368/sh:/Users/mw00368/gromax:/Users/mw00368/AseMolPlot</string>
+			<string>/Users/mw00368/miniconda3/bin:/Users/mw00368/miniconda3/condabin:/Users/mw00368/bin:/Applications/Sublime Merge.app/Contents/SharedSupport/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/munki:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/mw00368/MShTools:/Users/mw00368/MolParse:/Users/mw00368/MPyTools</string>
 			<key>PYTHONPATH</key>
-			<string>/Users/mw00368/tars_n_zips/PyRosetta4.Release.python39.mac.release-321:/Users/mw00368/pypackages/gpxpy-1.4.2:/Users/mw00368/pypackages/gpxpy-1.4.2:/Users/mw00368/asap/Python:/Users/mw00368/asap/x86_64:/Users/mw00368/.local/lib/python3.7/site-packages:/Users/mw00368/miniconda3/lib/python3.8/site-packages/::/Users/mw00368/py/:/Users/mw00368/AseMolPlot</string>
+			<string>/Users/mw00368/MolParse:/Users/mw00368/MPyTools</string>
 		</dict>
 		<key>StandardInPath</key>
-		<string>/Users/mw00368/Box Sync/Python/FPL_GUI/daemon.stdin</string>
+		<string>/Users/mw00368/Box/Python/FPL_GUI/daemon.stdin</string>
 		<key>StandardOutPath</key>
-		<string>/Users/mw00368/Box Sync/Python/FPL_GUI/daemon.stdout</string>
+		<string>/Users/mw00368/Box/Python/FPL_GUI/daemon.stdout</string>
 		<key>StandardErrorPath</key>
-		<string>/Users/mw00368/Box Sync/Python/FPL_GUI/daemon.stderr</string>
+		<string>/Users/mw00368/Box/Python/FPL_GUI/daemon.stderr</string>
 		<key>WorkingDirectory</key>
-		<string>/Users/mw00368/Box Sync/Python/FPL_GUI</string>
+		<string>/Users/mw00368/Box/Python/FPL_GUI</string>
 		<key>StartInterval</key>"""
 	str_buffer += f"        <integer>{interval}</integer>"
 	str_buffer += """    </dict>
