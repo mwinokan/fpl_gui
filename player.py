@@ -158,8 +158,8 @@ class Player():
 				self._chance_of_playing_this_round = 1.0
 			
 			if self._api._current_gw > 0:
-				self._exp_this_round = float(elements['ep_this'][i])
-				self._exp_next_round = float(elements['ep_next'][i])
+				self._exp_this_round = float(elements['ep_this'][i] if not None else 0.0)
+				self._exp_next_round = float(elements['ep_next'][i] if not None else 0.0)
 			else:
 				self._exp_this_round = 0.0
 				self._exp_next_round = 0.0

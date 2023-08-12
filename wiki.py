@@ -36,6 +36,8 @@ offline = False
 
 wc1_cutoff = 19
 
+JSON_PATH = "data_wiki_2324.json"
+
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
 	create_launchd_plist = True
@@ -1912,9 +1914,10 @@ def get_manager_json_positions(api,leagues):
 
 						m._league_positions[l_name][gw_id] = m_pos
 
+# @mout.debug_log
 def get_manager_json_awards(api,leagues):
 
-	print(json)
+	# print(json)
 
 	for l_id,l_data in json.items():
 
@@ -4159,8 +4162,8 @@ def create_key(json,key):
 
 def load_json():
 	from os.path import exists
-	if exists("data_wiki_2324.json"):
-		f = open("data_wiki_2324.json","rt")
+	if exists(JSON_PATH):
+		f = open(JSON_PATH,"rt")
 		return js.load(f)
 	else:
 		return {}
@@ -4173,7 +4176,7 @@ def dump_json(data):
 		if pair[0] not in new_dict.keys():
 			new_dict[pair[0]] = pair[1]
 	
-	f = open("data_wiki.json","wt")
+	f = open(JSON_PATH,"wt")
 	js.dump(new_dict, f, indent="\t")
 
 if __name__ == '__main__':
