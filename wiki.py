@@ -201,11 +201,14 @@ def main():
 
 	if test:
 
-		p = Player("Havertz",api)
+		# p = Player("Havertz",api)
 
-		print(p.expected_points(gw=1,use_official=True))
+		# print(p.expected_points(gw=1,use_official=True))
 
-		# toilet = League(121011, api)
+		toilet = League(121011, api)
+
+		for man in toilet.managers:
+			print(man.team_name,',', man.name)
 
 		# members = js.load(open('members_2324.json'))
 
@@ -3271,6 +3274,10 @@ def award_rules_md():
 		* Tiebreaker:
 			* Lowest transfer uniqueness
 
+	* Highest non-haaland captain points (Christmas)
+	* Which managers consistently bring players in and their average drops
+	* Rank gain and drop awards 
+
 	'''
 
 
@@ -3400,6 +3407,8 @@ def create_leaguepage(league,leagues,i):
 			score = m.calculate_transfer_gain()
 			html_buffer += award_panel('🤡','Clown','Worst Transfers',f"{score:+d} pts",m,colour=award_colour['clown'],name_class="h2")
 			json[str(league.id)][gw]['awards']['clown'] = [m.id,score]
+
+			#### BIGGEST GREEN AND RED ARROWS!!!!!
 
 		# if gw > 0:
 
