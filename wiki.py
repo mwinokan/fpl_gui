@@ -23,11 +23,11 @@ create_launchd_plist = False
 scrape_kits = False
 force_generate_kits = True
 run_push_changes = True
-fetch_latest = True
+fetch_latest = False
 force_plot = False
 recalculate = True
 force_go_graphs = True
-test = False
+test = True
 force = False
 halfway_awards = False
 season_awards = False
@@ -211,6 +211,8 @@ def main():
 
 		for man in toilet.managers:
 			print(man.team_name,',', man.name)
+			print(man.gw_performed_xpts)
+			break
 
 		# members = js.load(open('members_2324.json'))
 
