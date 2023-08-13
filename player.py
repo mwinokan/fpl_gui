@@ -721,7 +721,7 @@ class Player():
 				xpts += 1
 			if mins > 59:
 				xpts += 1
-			if gc < 0.5:
+			if mins > 59 and gc < 0.5:
 				if self.position_id < 3:
 					xpts += 4
 				if self.position_id == 3:

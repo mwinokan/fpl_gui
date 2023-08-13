@@ -23,11 +23,11 @@ create_launchd_plist = False
 scrape_kits = False
 force_generate_kits = True
 run_push_changes = True
-fetch_latest = False
+fetch_latest = True
 force_plot = False
 recalculate = True
 force_go_graphs = True
-test = True
+test = False
 force = False
 halfway_awards = False
 season_awards = False
@@ -207,7 +207,8 @@ def main():
 
 		# print(p.expected_points(gw=1,use_official=True))
 
-		toilet = League(121011, api)
+		# toilet = League(121011, api)
+		toilet = League(146330, api)
 
 		for man in toilet.managers:
 			print(man.team_name,',', man.name)

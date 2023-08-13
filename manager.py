@@ -949,8 +949,8 @@ class Manager():
 		return self._event_points[j-1]
 
 	def get_event_performed_xpts(self,gw):
-		for p in self.players:
-			print(p,p.get_event_score(),p.get_performed_xpts(gw),p.multiplier)
+		# for p in self.players:
+		# 	print(p,p.get_event_score(),p.get_performed_xpts(gw),p.multiplier)
 		return float(sum([p.get_performed_xpts(gw)*p.multiplier for p in self.players]))
 
 	@property
