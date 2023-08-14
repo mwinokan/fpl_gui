@@ -257,6 +257,11 @@ class FPL_API():
 				html_buffer += f'color:{team.style["background-color"]} !important; '
 				html_buffer += f'background-color:{team.style["color"]} !important'
 				html_buffer += '}\n'
+
+				html_buffer += f'.w3-{team.shortname.lower()}-border-inv'
+				html_buffer += '{'
+				html_buffer += f'border: 1px {team.style["color"]} solid !important; '
+				html_buffer += '}\n'
 			except TypeError:
 				mout.error(f'Missing style for {team}')
 

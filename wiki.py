@@ -355,6 +355,7 @@ def main():
 	for i,l in enumerate(leagues):
 		create_leaguepage(l,leagues,i)
 		# exit()
+	# exit()
 	
 	create_teampage(api,leagues)
 
@@ -970,7 +971,7 @@ def create_assetpage(leagues):
 
 		html_buffer += floating_subtitle('xGI: Performed vs Expected')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
 		html_buffer += create_xgi_figure(api,players)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -1089,14 +1090,14 @@ def create_playerpage(api,player,leagues):
 		'''
 
 		html_buffer += '<div class="w3-col s12 m12 l4">\n'
-		html_buffer += f'<div class="w3-panel w3-{player.team_obj.shortname.lower()}-inv shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += f'<div class="w3-panel w3-{player.team_obj.shortname.lower()}-inv shadow89" style="padding:0px;padding-bottom:4px;">\n'
 		html_buffer += f'<div class="w3-center">\n'
 		html_buffer += f'<h2>{player.name}</h2>\n'
 		html_buffer += f'<img class="w3-image" src="{player._photo_url}" alt="Player" width="220" height="280">\n'
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
-		html_buffer += f'<div class="w3-panel w3-{player.team_obj.shortname.lower()} shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += f'<div class="w3-panel w3-{player.team_obj.shortname.lower()} shadow89" style="padding:0px;padding-bottom:4px;">\n'
 		html_buffer += f'<div class="w3-responsive">\n'
 
 		######
@@ -1170,7 +1171,7 @@ def create_playerpage(api,player,leagues):
 		if api._current_gw > 0 and (force_go_graphs or not api._live_gw):
 
 			html_buffer += '<div class="w3-col s12 m12 l8">\n'
-			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
 			import sys
 			sys.path.insert(1,'go')
 			from playgo import create_player_figure
@@ -1180,7 +1181,7 @@ def create_playerpage(api,player,leagues):
 			html_buffer += f'</div>\n'
 
 		if api._current_gw > 0:
-			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
 			html_buffer += get_player_history_table(player)
 			html_buffer += f'</div>\n'
 			html_buffer += f'</div>\n'
@@ -1434,7 +1435,7 @@ def create_managerpage(api,man,leagues):
 		html_buffer += floating_subtitle('Chips')
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
 		html_buffer += create_chip_table(api,man)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -1443,7 +1444,7 @@ def create_managerpage(api,man,leagues):
 		html_buffer += floating_subtitle('Picks')
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
 		html_buffer += create_picks_table(api, man.squad.sorted_players, manager=man)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -1455,7 +1456,7 @@ def create_managerpage(api,man,leagues):
 		html_buffer += floating_subtitle('History')
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
 		html_buffer += create_manager_history_table(api,man)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -1466,7 +1467,7 @@ def create_managerpage(api,man,leagues):
 
 		for path in man._graph_paths:
 			html_buffer += '<div class="w3-col s12 m12 l6">\n'
-			html_buffer += '<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:3px;">\n'
+			html_buffer += '<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
 			html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{path}?raw=true" alt="Manager Graph">\n'
 			html_buffer += '</div>\n'
 			html_buffer += '</div>\n'
@@ -2276,7 +2277,7 @@ def previous_player_table(min_minutes=200,show_top=10):
 
 		pd = elements.iloc[0]
 
-		html_buffer += f'<div class="w3-panel w3-{api._short_team_pairs[pd["team_code"]-1].lower()}-inv shadow89" style="padding:0px;padding-bottom:3px;">\n'
+		html_buffer += f'<div class="w3-panel w3-{api._short_team_pairs[pd["team_code"]-1].lower()}-inv shadow89" style="padding:0px;padding-bottom:4px;">\n'
 		html_buffer += f'<div class="w3-center">\n'
 		html_buffer += f"<h2>Best {['Goalkeeper','Defender','Midfielder','Forward'][i]}</h2>"
 
@@ -2287,14 +2288,14 @@ def previous_player_table(min_minutes=200,show_top=10):
 
 		html_buffer += f'<div class="w3-panel w3-{api._short_team_pairs[pd["team_code"]-1].lower()} w3-padding-large">\n'
 		html_buffer += stat_spans(pd)
-		html_buffer += f'</div>\n'
+		html_buffer += f'</div>\n' # panel
 
-		html_buffer += f'</div>\n'
+		html_buffer += f'</div>\n' # center
 
 		html_buffer += table_buffer
 
-		html_buffer += '</div>\n'
-		html_buffer += '</div>\n'
+		html_buffer += '</div>\n' # panel
+		html_buffer += '</div>\n' # col
 
 		# exit()
 
@@ -3245,7 +3246,7 @@ def floating_subtitle(text,pad=1,button=False):
 	else:
 		html_buffer += f'\t<h1 class="w3-tag shadow89">{text}</h1>\n'
 
-	html_buffer += '</div>'
+	html_buffer += '</div>\n'
 	return html_buffer	
 
 def award_rules_md():
@@ -3445,19 +3446,16 @@ def create_leaguepage(league,leagues,i):
 	if gw > 0:
 		mout.debugOut(f"create_leaguepage({league})::Template")
 		html_buffer += floating_subtitle('League Template')
-		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
-		md_buffer = league_template(league, gw)
-		html_buffer += md2html(md_buffer)
-		html_buffer += '</div>\n'
-		html_buffer += '</div>\n'
+		# html_buffer += '<div class="w3-col s12 m12 l12">\n'
+		# html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:2px;padding-bottom:4px">\n'
+		html_buffer += league_template(league, gw)
+		# html_buffer += '</div>\n'
+		# html_buffer += '</div>\n'
 
-	if awards and gw > 0:
 		mout.debugOut(f"create_leaguepage({league})::Differentials")
-		# md_buffer += f"\n## Killer Differentials:\n"
 		html_buffer += floating_subtitle('Killer Differentials')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 		md_buffer = league_differentials(league, gw)
 		html_buffer += md2html(md_buffer)
 		html_buffer += '</div>\n'
@@ -3479,13 +3477,13 @@ def create_leaguepage(league,leagues,i):
 		html_buffer += floating_subtitle('Popular Moves')
 		
 		html_buffer += '<div class="w3-col s12 m6 l6">\n'
-		html_buffer += '<div class="w3-panel w3-pale-green w3-padding shadow89">\n'
+		html_buffer += '<div class="w3-panel w3-pale-green shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 		html_buffer += transfer_table(ids_in, 'In')
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
 		html_buffer += '<div class="w3-col s12 m6 l6">\n'
-		html_buffer += '<div class="w3-panel w3-pale-red w3-padding shadow89">\n'
+		html_buffer += '<div class="w3-panel w3-pale-red shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 		html_buffer += transfer_table(ids_out, 'Out')
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -3493,27 +3491,20 @@ def create_leaguepage(league,leagues,i):
 	if not preseason:
 
 		mout.debugOut(f"create_leaguepage({league})::Chips")
-		
-		# html_buffer += '<div class="w3-col s12 m6 l6">\n'
-		# html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
 		html_buffer += league_chips(league,gw)
-		# html_buffer += '</div>\n'
-		# html_buffer += '</div>\n'
 
 		mout.debugOut(f"create_leaguepage({league})::Table")
-
 		html_buffer += floating_subtitle('League Table')
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 
-		md_buffer = ""
-		md_buffer += f"\n## League Table:\n"
-		md_buffer += f"Is your team's kit the boring default? Design it [here](https://fantasy.premierleague.com/entry-update)\n\n"
-		html_buffer += md2html(md_buffer)
+		html_buffer += f'<div class="w3-padding">\n'
+		html_buffer += f"<h2>League Table:</h2>\n"
+		html_buffer += '<p>Is your team'+f's kit the boring default? Design it <a href="https://fantasy.premierleague.com/entry-update">here</a><p>\n'
+		html_buffer += f"</div>\n"
 		html_buffer += league_table_html(league, gw)
 
-		# html_buffer += '<br>\n'
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
@@ -3535,8 +3526,9 @@ def create_leaguepage(league,leagues,i):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
+	style = api.create_team_styles_css()
 	navbar = create_navbar(leagues, active=i, colour='black', active_colour='green')
-	html_page(f'html/{league.name.replace(" ","-")}.html',None,title=f"{league._icon} {league.name}", gw=gw, html=html_buffer, bar_html=navbar, showtitle=True,colour=league._colour_str)
+	html_page(f'html/{league.name.replace(" ","-")}.html',None,title=f"{league._icon} {league.name}", gw=gw, html=html_buffer, bar_html=navbar, showtitle=True,colour=league._colour_str, extra_style=style)
 
 	# exit()
 
@@ -3567,13 +3559,13 @@ def league_chips(league,gw):
 	if total_chip_count == 0:
 		return ""
 
-	html_buffer += floating_subtitle('Chips Used')
+	html_buffer += floating_subtitle('Chips')
 
 	html_buffer += '<div class="w3-col s12 m12 l12">\n'
-	html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
+	html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 
-	html_buffer += f'<h2>Chips Played:</h2>\n'
-	html_buffer += '<table class="w3-table-all w3-hoverable">\n'
+	# html_buffer += f'<h2>Chips Played:</h2>\n'
+	html_buffer += '<table class="w3-table w3-hoverable">\n'
 	html_buffer += '<thead>\n'
 	html_buffer += '<tr>\n'
 
@@ -3809,7 +3801,7 @@ def league_table_html(league,gw,awardkey=None):
 		html_buffer += '<th style="text-align:center;">Fix.</th>\n'
 
 	if show_avg_select:
-		html_buffer += '<th style="text-align:center;">Avg. Player Selection</th>\n'
+		html_buffer += '<th style="text-align:center;">Ownership</th>\n'
 
 	if show_team_value:
 		html_buffer += '<th style="text-align:center;">Team Value</th>\n'
@@ -3995,36 +3987,79 @@ def league_table_html(league,gw,awardkey=None):
 # @mout.debug_log
 def league_template(league,gw):
 
-	md_buffer = ""
+	html_buffer = ""
 
-	md_buffer += f"| Position | 1st | 2nd | 3rd |\n"
-	md_buffer += f"| --- | --- | --- | --- |\n"
+	# html_buffer += f'<table class="w3-table responsive-text">\n'
+	# html_buffer += f'<tr>\n'
+	# html_buffer += f'<th>Position</th>\n'
+	# html_buffer += f'<th style="text-align:right">1<sup>st</sup></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th style="text-align:right">2<sup>nd</sup></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th style="text-align:right">3<sup>rd</sup></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# html_buffer += f'<th></th>\n'
+	# # html_buffer += f'<th></th>\n'
+	# html_buffer += f'</tr>\n'
 
-	md_buffer += position_template(league, league.captains, "Captain", gw)
-	md_buffer += position_template(league, league.starting_goalkeepers, "Keepers", gw)
-	md_buffer += position_template(league, league.starting_defenders, "Defence", gw)
-	md_buffer += position_template(league, league.starting_midfielders, "Midfield", gw)
-	md_buffer += position_template(league, league.starting_forwards, "Forwards", gw)
+	html_buffer += position_template(league, league.captains, "Captain", gw)	
+	html_buffer += position_template(league, league.starting_goalkeepers, "Goalkeeper", gw)
+	html_buffer += position_template(league, league.starting_defenders, "Defence", gw)
+	html_buffer += position_template(league, league.starting_midfielders, "Midfield", gw)
+	html_buffer += position_template(league, league.starting_forwards, "Forwards", gw)
+	
+	html_buffer += f'</table>\n'
 
-	md_buffer += '\n\n'
-
-	return md_buffer
+	return html_buffer
 
 def position_template(league,players,pos_str,gw):
 	global json
 
-	md_buffer = ""
+	html_buffer = ""
+
+	html_buffer += '<div class="w3-col s12 m6 l4">\n'
 
 	create_key(json[str(league.id)][gw],'template')
 	create_key(json[str(league.id)][gw]['template'],pos_str.lower())
 
-	md_buffer += f"| {pos_str} "
-	# md_buffer += f"### Most popular forwards\n"
+	ranks = [
+		"1<sup>st</sup>",
+		"2<sup>nd</sup>",
+		"3<sup>rd</sup>",
+		"4<sup>th</sup>",
+		"5<sup>th</sup>",
+	]
+
 	lst = [p.full_name for p in players]
 	data = Counter(lst)
 	archive = []
-	for name,count in data.most_common()[0:3]:
-		md_buffer += f"| "
+	for i,(name,count) in enumerate(data.most_common()[0:5]):
+
+		if i == 0:
+			p = Player(name,api)
+			score = p.get_event_score()
+
+			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-top:0px;padding-bottom:4px;">\n'
+			html_buffer += f'<div class="w3-center w3-{p.shortteam.lower()}-inv w3-{p.shortteam.lower()}-border-inv" style="padding:0px;padding-bottom:0px;">\n'
+
+			html_buffer += f'<h2>{pos_str}</h2>\n'
+
+			html_buffer += f'<img class="w3-image hide-if-narrow" style="width:30%" src="{p._photo_url}?raw=true"></img>\n'
+
+			html_buffer += f'</div>\n'
+
+			html_buffer += '<div class="w3-white">\n'
+			
+			html_buffer += f'<table class="w3-table w3-hoverable responsive-text">\n'
+
+		html_buffer += f'<tr style="vertical-align:middle;">\n'
 		if count > 1:
 			p = Player(name,api)
 			score = p.get_event_score()
@@ -4033,15 +4068,44 @@ def position_template(league,players,pos_str,gw):
 				flag_str = f'⚠️ '
 			elif p.is_yellow_flagged:
 				flag_str = f'⛔️ '
-			md_buffer += f"[[https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}]]"
-			md_buffer += f" [{p.name}]({p._gui_url}){flag_str}<br>({100*count/league.num_managers:.1f}%)"
+			html_buffer += f'<td style="vertical-align:middle;text-align:left;">\n'
+			html_buffer += f'<b>{ranks[i]}</b>\n'
+			html_buffer += f'</td>\n'
+			html_buffer += f'<td style="vertical-align:middle;text-align:right;">\n'
+			html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+			html_buffer += f'</td>\n'
+			html_buffer += f'<td style="vertical-align:middle;">\n'
+			html_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
+			html_buffer += f'</td>\n'
+			html_buffer += f'<td style="vertical-align:middle;text-align:right;">\n'
+			html_buffer += f'{count/league.num_managers:.1%}\n'
+			html_buffer += f'</td>\n'
 			if score is not None:
-				md_buffer += f" **{score}**"
+				style_str = get_style_from_event_score(score,border=False).rstrip('"')+';text-align:right;vertical-align:middle;"'
+				# html_buffer += f'<td style={style_str}>\n'
+				html_buffer += f'<td style="text-align:center;">\n'
+				# html_buffer += f'{score}\n'
+				html_buffer += f'<span class="w3-tag" style={style_str}>{score}pts</span>\n'
+				html_buffer += f'</td>\n'
+			else:
+				html_buffer += f'<td>\n'
+				html_buffer += f'</td>\n'
+			# if i < 2:
+			# 	html_buffer += f'<td>\n'
+			# 	html_buffer += f'</td>\n'
 			archive.append([p.id,count/league.num_managers,score])
-	md_buffer += f"|\n"
+		else:
+			break
+		html_buffer += f'</tr>\n'
 	json[str(league.id)][gw]['template'][pos_str.lower()] = archive
+	
+	html_buffer += f'</table>\n'
 
-	return md_buffer
+	html_buffer += f'</div>\n'
+	html_buffer += f'</div>\n'
+	html_buffer += f'</div>\n'
+
+	return html_buffer
 
 def league_differentials(league,gw):
 	global json

@@ -91,6 +91,7 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 	fout.write('.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}\n')
 	fout.write('@media screen and (min-width: 601px) { .responsive-text { font-size: 16px;  } }')
 	fout.write('@media screen and (max-width: 600px) { .responsive-text { font-size: 12px;  } }')
+	fout.write('@media screen and (max-width: 600px) { .hide-if-narrow { display: none !important; } }')
 
 	if extra_style is not None:
 		fout.write(extra_style)
@@ -356,8 +357,11 @@ def get_player_history_table(player):
 
 	return player_history_tables[player.id]
 
-def get_style_from_event_score(score):
-	style_str = '"border:2px solid white;border-collapse:collapse;'
+def get_style_from_event_score(score,border=True):
+	if border:
+		style_str = '"border:2px solid white;border-collapse:collapse;'
+	else:
+		style_str = '"'
 	if score < 1:
 		style_str += 'background-color:darkred;color:white'
 	elif score == 2:
