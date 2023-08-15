@@ -19,20 +19,22 @@ timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 
 path = '../FPL_GUI.wiki'
 
-create_launchd_plist = False
-scrape_kits = False
-force_generate_kits = True
 run_push_changes = True
+test = False
+offline = True
+
+create_launchd_plist = False
+force_generate_kits = False
+
+scrape_kits = False
 fetch_latest = True
 force_plot = False
-recalculate = True
 force_go_graphs = True
-test = False
+
 force = False
 halfway_awards = False
 season_awards = False
 cup_active = False
-offline = False
 
 wc1_cutoff = 19
 
@@ -202,118 +204,7 @@ def main():
 		json = {}
 
 	if test:
-
-		# p = Player("Havertz",api)
-
-		# print(p.expected_points(gw=1,use_official=True))
-
-		# toilet = League(121011, api)
-		toilet = League(146330, api)
-
-		for man in toilet.managers:
-			print(man.team_name,',', man.name)
-			print(man.gw_performed_xpts)
-			break
-
-		# members = js.load(open('members_2324.json'))
-
-		# import difflib
-
-		# for member in members:
-
-		# 	matches = difflib.get_close_matches(member, [m.name for m in toilet.managers])
-
-		# 	if len(matches) == 0:
-		# 		# mout.error(f'{len(matches)} {member} {matches}')
-		# 		mout.out(f'{member}')
-		# 	# else:
-		# 	# 	print(len(matches),member,matches)
-
-		exit()
-
-		# create_cup_page(api,toilet,[toilet],None)
-
-		# exit()
-
-		# create_teampage(api,None,[])
-		# exit()
-
-		# league = League(663873, api)
-
-		# navbar = create_navbar([])
-
-		# create_homepage(navbar)
-
-		p = Player("Havertz",api)
-
-		create_assetpage([])
-
-		# print(p.expected_points(gw=1,use_official=True))
-		# print(p.expected_points(gw=1,fit_ratio=0.8))
-
-		# create_playerpage(api,p,[])
-
-		exit()
-
-		# print(p.history.columns)
-
-		# print(p.get_performed_xpts(25))
-
-		# print(p.get_event_score(25,True))
-
-		# exit()
-
-		# import sys
-		# sys.path.insert(1,'go')
-		# from league import create_value_figure
-		# from gwexp import create_gwexp_figure
-		# create_fixturepage(api,None,[])
-		
-		# man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=False)
-
-		# create_manager_pick_history(api, man)
-
-		# print(man._history_current.keys())
-
-		# man = Manager("Max Winokan", 4999117, api, team_name="Loyd's Groß Men", authenticate=False)
-		# man = Manager("Max Winokan", 780664, api, team_name="Loyd's Groß Men", authenticate=True)
-		# man = Manager("Harry", 2795914, api, team_name="Harry's Team", authenticate=False)
-		# # print(man.is_dead)
-		# # man.create_rank_graph(show=True)
-		# # man.create_leaguepos_graph(show=True)
-		# # man.create_points_graph(show=True)
-
-		# print(man.num_hits)
-		# print(man.num_nonwc_transfers)
-
-		# create_managerpage(api, man, None, [])
-
-		# print(get_player_history_table(wilson))
-
-		# create_assetpage(None,[])
-
-		# p = Player("Robert Sánchez", api)
-		# create_playerpage(api, p, None, [])
-
-		# print(p.appearances)
-
-		# create_playerpage(api,Player("Callum Wilson", api), None)
-		# create_playerpage(api,Player("Havertz", api), None)
-		# create_playerpage(api,Player("Erling", api), None,[])
-		# create_playerpage(api,Player("Arnold", api), None)
-		# create_playerpage(api,Player("Digne", api), None)
-		# create_playerpage(api,Player("Mbabu", api), None, [])
-
-		# print("GW4",wilson.get_playing_chance(4))
-		# print("GW5",wilson.get_playing_chance(5))
-		# print("GW6",wilson.get_playing_chance(6))
-		# print("GW7",wilson.get_playing_chance(7))
-		# print("GW8",wilson.get_playing_chance(8))
-
-		# man.make_autosubs()
-
-		api.finish()
-		exit()
+		run_test()
 
 	if scrape_kits:
 		api.scrape_team_kits()
@@ -430,6 +321,14 @@ def main():
 
 	if run_push_changes:
 		push_changes()
+
+def run_test():
+	# man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
+	man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
+	create_managerpage(api, man, [])
+
+	api.finish()
+	exit()
 
 def create_cup_page(api,league,leagues):
 
@@ -999,14 +898,12 @@ def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 	html_buffer += f'<div class="w3-bar w3-{colour} shadow89">\n'
 	html_buffer += f'<a class="w3-bar-item w3-{colour} w3-text-{colour}"></a>\n'
 	html_buffer += '<div class="w3-dropdown-hover">\n'
-	html_buffer += '<button class="w3-button w3-hover-aqua"><h3>FPL <span class="w3-tag w3-white">GUI</span></h3></button>\n'
+	html_buffer += '<button class="w3-button w3-hover-aqua"><h3><span class="w3-tag w3-white">toilet.football</span></h3></button>\n'
+	# html_buffer += '<button class="w3-button w3-hover-aqua"><h3>FPL <span class="w3-tag w3-white">GUI</span></h3></button>\n'
 	html_buffer += '<div class="w3-dropdown-content w3-bar-block w3-card-4">\n'
 
 	url = f'https://mwinokan.github.io/FPL_GUI/index.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>\n'
-
-	# url = f'https://mwinokan.github.io/FPL_GUI/html/fixtures.html'
-	# html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🗓 Fixtures</a>\n'
 
 	url = f'https://mwinokan.github.io/FPL_GUI/html/assets.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📊 Asset Graphs</a>\n'
@@ -1403,27 +1300,50 @@ def create_managerpage(api,man,leagues):
 	gw = api._current_gw
 
 	html_buffer = ''
-
-	html_buffer += '<table style="width:100%;spacing:40px;">\n'
-	html_buffer += '<tr>\n'
-	html_buffer += '<td style="text-align:right">\n'
-	html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{man._kit_path}?raw=true" alt="Team" width="66" height="87">'
 	
-	html_buffer += '</td>\n'
-	html_buffer += '<td>\n'
-	html_buffer += f'<h2>"{man.team_name}"</h2>\n'
-	html_buffer += f'<h2>{man.name}</h32\n'
-	html_buffer += '</td>\n'
-	html_buffer += '</tr>\n'
-	html_buffer += '</table>\n'
+	title_str = f"{man.name}'s " f'"{man.team_name}"'
 
-	html_buffer += '<ul>\n'
-	html_buffer += f'<li><a href="{man.fpl_event_url}">FPL: Event</a></li>\n'
-	html_buffer += f'<li><a href="{man.fpl_history_url}">FPL: History</a></li>\n'
-	html_buffer += f'<li>ID: {man.id}</li>\n'
-	html_buffer += '</ul>\n'
+	html_buffer += create_manager_formation(man,gw)
 
-	html_buffer += floating_subtitle('🏆 Trophy Cabinet',pad=0)
+	# season stats
+	html_buffer += '<div class="w3-col s12 m6 l4">\n'
+	html_buffer += '<div class="w3-panel w3-center w3-white w3-padding shadow89">\n'
+	html_buffer += f'<h2>{api._season_str_fmt} Season</h2>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Total Score: {man.total_livescore}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Overall Rank: {api.big_number_format(man.overall_rank)}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Avg. Player Selection: {man.avg_selection:.1f}%</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Team Value: £{man.team_value}M</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">#hits: {man.num_hits}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">#transfers: {man.num_nonwc_transfers}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Total Transfer Gain: {man.total_transfer_gain}</span>\n'
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
+
+	# gw
+	html_buffer += '<div class="w3-col s12 m6 l4">\n'
+	html_buffer += '<div class="w3-panel w3-center w3-white w3-padding shadow89">\n'
+	html_buffer += f'<h2>GW{gw}</h2>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Score: {man.livescore}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank: {api.big_number_format(man.gw_rank)}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank Gain: {man.gw_rank_gain}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">xG: {man.gw_xg:.1f}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">xA: {man.gw_xa:.1f}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Performed xPts: {man.gw_performed_xpts:.1f}</span>\n'
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
+	
+	# external links
+	html_buffer += '<div class="w3-col s12 m12 l4">\n'
+	html_buffer += '<div class="w3-panel w3-center w3-indigo w3-padding shadow89">\n'
+	url = man.fpl_event_url
+	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">🗓️ FPL Event</a>\n'
+	url = man.fpl_history_url
+	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">📈 FPL GW History</a>\n'
+	html_buffer += f'<a class="w3-bar-item w3-button w3-hover-blue">ID: {man.id}</a>\n'
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
+
+	html_buffer += floating_subtitle('🏆 Trophy Cabinet',pad=1)
 	
 	html_buffer += '<div class="w3-col s12 m12 l12">\n'
 	html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;">\n'
@@ -1474,13 +1394,71 @@ def create_managerpage(api,man,leagues):
 		
 	navbar = create_navbar(leagues)
 
-	html_page(man.gui_path,None,title=f"{man.team_name}", gw=gw, html=html_buffer, showtitle=False,bar_html=navbar)
+	style = api.create_team_styles_css()
+	html_page(man.gui_path,None,title=title_str, gw=gw, html=html_buffer, showtitle=True,bar_html=navbar, colour='blue-gray', extra_style=style)
+
+def create_manager_formation(man,gw):
+
+	html_buffer = ''
+
+	html_buffer += '<div class="w3-col s12 m12 l12">\n'
+	html_buffer += '<div class="w3-center w3-padding">\n'
+	html_buffer += '<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">\n'
+
+	last_pos_id = 1
+	for p in man.squad.sorted_players:
+
+		if p.multiplier == 0:
+			continue
+
+		if last_pos_id != p.position_id:
+			html_buffer += '</div>\n'
+			html_buffer += '<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">\n'
+
+		html_buffer += '<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">\n'
+
+		html_buffer += f'<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="{p._photo_url}?raw=true"></img>\n'
+		
+		score = p.get_event_score(gw)
+
+		style_str = get_style_from_event_score(score,border=False).rstrip('"')+';width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"'
+		
+		if p.multiplier == 3:
+			c_str = ' (TC)'
+		elif p.multiplier == 2:
+			c_str = ' (C)'
+		elif p.is_vice_captain:
+			c_str = ' (VC)'
+		else:
+			c_str = ''
+
+		html_buffer += f'<div class="w3-tag shadow89 responsive-text" style={style_str}><b>{p.name}{c_str}</b>\n'
+
+		html_buffer += f'<br>\n'
+		style_str = get_style_from_event_score(score,border=False).rstrip('"')+';width:90%;margin-bottom:2px;"'
+		html_buffer += p.event_stat_emojis(gw)
+
+		if score is None:
+			html_buffer += f' <b>-</b>\n'
+		else:
+			html_buffer += f' <b>{p.multiplier*score}pts</b>\n'
+
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
+
+		last_pos_id = p.position_id
+
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
+
+	return html_buffer
 
 def create_manager_history_table(api,man):
 	html_buffer = ""
 	
 	html_buffer += '<div class="w3-responsive">\n'
-	html_buffer += '<table class="w3-table-all w3-hoverable">\n'
+	html_buffer += '<table class="w3-table w3-hoverable">\n'
 	# html_buffer += '<table class="w3-table w3-border w3-hoverable">\n'
 	
 	html_buffer += '<tr>\n'
@@ -1641,11 +1619,7 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 	html_buffer = ""
 
 	html_buffer += '<div class="w3-responsive">\n'
-	# html_buffer += '<table class="w3-table-all w3-hoverable">\n'
-	html_buffer += '<table class="w3-table w3-border w3-hoverable">\n'
-
-	# html_buffer += f'<th class="w3-right"></td>'
-	# html_buffer += f'<th class="w3-center"><h4>{fix["day_str"]}</h4></td>'
+	html_buffer += '<table class="w3-table responsive-text">\n'
 
 	now_gw = api._current_gw
 	start_gw = max(1,now_gw-prev_gw_count)
@@ -1660,15 +1634,10 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 	html_buffer += f'<th class="w3-center">Trans.</th>\n'
 	for i in range(start_gw,now_gw+1):
 		html_buffer += f'<th class="w3-center">GW{i}</th>\n'
-		# print("prev",i\n)
 	html_buffer += f'<th class="w3-center">Form</th>\n'
 	for i in range(now_gw+1,end_gw+1):
-		# print("next",i\n)
 		html_buffer += f'<th class="w3-center">GW{i}</th>\n'
-	# html_buffer += f'<th class="w3-center">Difficulty</th>\n'
 	html_buffer += '</tr>\n'
-
-	# <td class="w3-center">
 
 	for player in players:
 		html_buffer += '<tr>\n'
@@ -1677,7 +1646,7 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 
 		bg_color = player.team_obj.get_style()['background-color']
 		text_color = player.team_obj.get_style()['color']
-		style_str = f'"background-color:{bg_color};color:{text_color};"'
+		style_str = f'"background-color:{bg_color};color:{text_color};vertical-align:middle;"'
 
 		html_buffer += f'<td class="w3-center" style={style_str}><b>{["GKP","DEF","MID","FWD"][player.position_id-1]}</b></td>\n'
 		html_buffer += f'<td class="w3-center" style={style_str}><b>{player.shortteam}</b></td>\n'
@@ -1690,57 +1659,51 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 			html_buffer += f'⛔️ '
 		if player.was_subbed:
 			html_buffer += f'🔄 '
-		# html_buffer += f'{player.name}</b></td>\n'
 		html_buffer += f'<a href="https://mwinokan.github.io/FPL_GUI/html/player_{player.id}.html">{player.name}</a></b></td>\n'
 
 		###
 
 		if player.name in [p[0].name for p in risers]:
-			style_str = '"color:green"'
+			style_str = '"color:green;vertical-align:middle;"'
 		elif player.name in [p[0].name for p in fallers]:
-			style_str = '"color:red"'
+			style_str = '"color:red;vertical-align:middle;"'
 		else:
 			style_str = None
 
 		if style_str is None:
-			html_buffer += f'<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">£{player.price}</td>\n'
+			html_buffer += f'<td class="w3-center" style="vertical-align:middle;">£{player.price}</td>\n'
 		else:
 			html_buffer += f'<td class="w3-center" style={style_str}><b>£{player.price}</b></td>\n'
 
 		score = player.total_points/now_gw
-		style_str = get_style_from_event_score(score)
+		style_str = get_style_from_event_score(score).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{player.total_points}</td>\n'
 
 		value = player.transfer_percent
 		text = f'{player.transfer_percent:.1f}%'
 		if abs(value) > 10:
 			if text.startswith("-"):
-				style_str = '"border:2px solid white;border-collapse:collapse;color:darkred"'
+				style_str = '"color:darkred;vertical-align:middle;"'
 			else:
-				style_str = '"border:2px solid white;border-collapse:collapse;color:darkgreen"'
+				style_str = '"color:darkgreen;vertical-align:middle;"'
 			html_buffer += f'<td class="w3-center" style={style_str}><b>{text}</b></td>\n'
 		else:
 			if text.startswith("-"):
-				style_str = '"border:2px solid white;border-collapse:collapse;color:red"'
+				style_str = '"color:red;vertical-align:middle;"'
 			else:
-				style_str = '"border:2px solid white;border-collapse:collapse;color:green"'
+				style_str = '"color:green;vertical-align:middle;"'
 			html_buffer += f'<td class="w3-center" style={style_str}>{text}</td>\n'
 
 		for i in range(start_gw,now_gw+1):
 			html_buffer += player_summary_cell_modal(player,i)
 
 		form = player.form
-		style_str = get_style_from_event_score(form)
+		style_str = get_style_from_event_score(form).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{player.form}</td>\n'
 
 		for i in range(now_gw+1,end_gw+1):
 			exp = player.expected_points(gw=i,fit_ratio=0.8,use_official=True)
-			style_str = get_style_from_event_score(exp)
-			# difficulty = player.get_fixture_diff(i,old=True,overall=False)
-			# style_str = get_style_from_difficulty(difficulty,old=True)
-			# if style_str is None:
-			# 	html_buffer += f'<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">{player.get_fixture_str(i,short=True,lower_away=True)}</td>\n'
-			# else:
+			style_str = get_style_from_event_score(exp).rstrip('"')+';vertical-align:middle;"'
 			assert style_str is not None
 			flag_str = ""
 			chance = player.get_playing_chance(i)
@@ -1748,48 +1711,42 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 				flag_str = '⛔️ '
 			elif chance < 1:
 				flag_str = '⚠️ '
-			html_buffer += f'<td class="w3-center" style={style_str}>{flag_str}{player.get_fixture_str(i,short=True,lower_away=True)} ({exp:.1f})</td>\n'
+			# html_buffer += f'<td class="w3-center" style={style_str}>{flag_str}{player.get_fixture_str(i,short=True,lower_away=True)} ({exp:.1f})</td>\n'
+			html_buffer += f'<td class="w3-center" style={style_str}>{flag_str}{player.get_fixture_str(i,short=True,lower_away=True)}</td>\n'
 
-		# diff_list = [player.get_fixture_diff(i,old=False,overall=False) for i in range(now_gw+1,end_gw+1)]
-		# diff = sum([d for d in diff_list if d is not None])/next_gw_count
-		# style_str = get_style_from_difficulty(diff,old=False)
-		# if style_str is None:
-		# 	html_buffer += f'<td class="w3-center">{diff:.1f}</td>\n'
-		# else:
-		# 	html_buffer += f'<td class="w3-center" style={style_str}>{diff:.1f}</td>\n'
 		html_buffer += '</tr>\n'
 
 	if manager is not None:
 
 		html_buffer += '<tr>\n'
 		#pos
-		html_buffer += f'<td class="w3-center"></td>\n'
+		html_buffer += f'<td class="w3-center" style="vertical-align:middle;"></td>\n'
 		#team
-		html_buffer += f'<td class="w3-center"></td>\n'
+		html_buffer += f'<td class="w3-center" style="vertical-align:middle;"></td>\n'
 		#name
-		html_buffer += f'<td class="w3-center">{manager.name}</td>\n'
+		html_buffer += f'<td class="w3-center" style="vertical-align:middle;">{manager.name}</td>\n'
 		#price
-		html_buffer += f'<td class="w3-center">£{manager.team_value:.1f}</td>\n'
+		html_buffer += f'<td class="w3-center" style="vertical-align:middle;">£{manager.team_value:.1f}</td>\n'
 		#points
 		score = manager.score
-		style_str = get_style_from_event_score(score/12/now_gw)
+		style_str = get_style_from_event_score(score/12/now_gw).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{score:1}</td>\n'
 		#transfers
-		html_buffer += f'<td class="w3-center"> </td>\n'
+		html_buffer += f'<td class="w3-center" style="vertical-align:middle;"> </td>\n'
 		#previous + live
 		for i in range(start_gw,now_gw+1):
 			score = manager.get_event_score(gw=i)
-			style_str = get_style_from_event_score(score/12)
+			style_str = get_style_from_event_score(score/12).rstrip('"')+';vertical-align:middle;"'
 			html_buffer += f'<td class="w3-center" style={style_str}>{score:1n}</td>\n'
 		#form
 		form = sum([p.form for p in players])
-		style_str = get_style_from_event_score(form/len(players))
+		style_str = get_style_from_event_score(form/len(players)).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{form:.1f}</td>\n'
 		#upcoming
 		for i in range(now_gw+1,end_gw+1):
 			manager.squad.set_best_multipliers(gw=i)
 			exp = manager.squad.expected_points(gw=i)
-			style_str = get_style_from_event_score(exp/12)
+			style_str = get_style_from_event_score(exp/12).rstrip('"')+';vertical-align:middle;"'
 			html_buffer += f'<td class="w3-center" style={style_str}>{exp:.1f}</td>\n'
 		html_buffer += '</tr>\n'
 
@@ -1822,7 +1779,7 @@ def create_manager_pick_history(api,man):
 
 def get_style_from_difficulty(difficulty,old=False):
 
-	style_str = '"border:2px solid white;border-collapse:collapse;'
+	style_str = '"'
 
 	if old:
 
@@ -2315,6 +2272,32 @@ def create_homepage(navbar):
 
 	gw = api._current_gw
 
+	html_buffer += ''
+
+	# tagline
+	html_buffer += '<div class="w3-col s12 m12 l4">\n'
+	html_buffer += '<div class="w3-panel w3-amber w3-center w3-padding shadow89">\n'
+	html_buffer += '<h3>Home of the RBS Diamond Invitational and Tesco Bean Value Toilet League</h3>\n'
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
+
+	# navigation links
+	html_buffer += '<div class="w3-col s12 m6 l4">\n'
+	html_buffer += '<div class="w3-panel w3-center w3-white w3-padding shadow89">\n'
+	html_buffer += '\n'.join(navbar.split('\n')[7:-9])
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
+
+	# external links
+	html_buffer += '<div class="w3-col s12 m6 l4">\n'
+	html_buffer += '<div class="w3-panel w3-center w3-indigo w3-padding shadow89">\n'
+	url = 'https://www.facebook.com/groups/1488748394903477/'
+	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">🗯️ Facebook Group</a>\n'
+	url = 'https://github.com/mwinokan/FPL_GUI/issues/new'
+	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">❓ Feature Request</a>\n'
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
+
 	if preseason:
 
 		# table of total player information
@@ -2338,7 +2321,7 @@ def create_homepage(navbar):
 		html_buffer += '</div>\n'
 
 	style = api.create_team_styles_css()
-	html_page('index.html', html=html_buffer,title="Max's FPL GUI", gw=api._current_gw,bar_html=navbar,colour='aqua',extra_style=style)
+	html_page('index.html', html=html_buffer,title="toilet.football", gw=api._current_gw,bar_html=navbar,colour='aqua',extra_style=style)
 
 		# html_page(f'html/player_{player.id}.html',None,title=f"{player.name}",sidebar_content=None, gw=gw, html=html_buffer, showtitle=False, bar_html=navbar,extra_style=style,colour=player.team_obj.style['accent'],nonw3_colour=True)
 
@@ -4157,8 +4140,13 @@ def launchd_plist(interval=3600):
 	<dict>
 		<key>Label</key>
 		<string>com.mwinokan.fpl.wiki</string>
-		<key>Program</key>
-		<string>/Users/mw00368/Box/Python/FPL_GUI/wiki.py</string>
+		<key>RunAtLoad</key>
+		<true/>
+		<key>ProgramArguments</key>
+		<array>
+			<string>/Users/mw00368/miniconda3/bin/python3</string>
+			<string>/Users/mw00368/Box/Python/FPL_GUI/wiki.py</string>
+		</array>
 		<key>EnvironmentVariables</key>
 		<dict>
 			<key>PATH</key>
@@ -4175,8 +4163,8 @@ def launchd_plist(interval=3600):
 		<key>WorkingDirectory</key>
 		<string>/Users/mw00368/Box/Python/FPL_GUI</string>
 		<key>StartInterval</key>"""
-	str_buffer += f"        <integer>{interval}</integer>"
-	str_buffer += """    </dict>
+	str_buffer += f"		<integer>{interval}</integer>"
+	str_buffer += """	</dict>
 </plist>"""
 		
 		# <key>StartCalendarInterval</key>
@@ -4195,6 +4183,8 @@ def launchd_plist(interval=3600):
 	os.system("launchctl load ~/Library/LaunchAgents/com.mwinokan.fpl.wiki.plist")
 
 	print("/Users/mw00368/Library/LaunchAgents/com.mwinokan.fpl.wiki.plist")
+	print("first time:")
+	print("launchctl bootstrap gui/$(id -u) com.mwinokan.fpl.wiki.plist")
 	print("start with:")
 	print("launchctl start com.mwinokan.fpl.wiki")
 	print("see details with:")

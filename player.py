@@ -136,6 +136,8 @@ class Player():
 
 			self._name = elements['web_name'][i]
 			self._first_name = elements['first_name'][i]
+			self._last_name = elements['second_name'][i]
+			self._full_name = f'{self._first_name} {self._last_name}'
 			self._team_id = elements['team'][i]
 			self._team = api.team_name(elements['team'][i])
 			self._shortteam = api.team_name(elements['team'][i],short=True)
@@ -224,8 +226,12 @@ class Player():
 
 			self._team_obj = self._api.get_player_team_obj(self._team_id)
 
-			if api._prev_element_dict and self._name in api._prev_element_dict:
-				pd = api._prev_element_dict[self._name]
+			# print(api._prev_element_dict.keys())
+			# exit()
+
+			if api._prev_element_dict and self._full_name in api._prev_element_dict:
+				
+				pd = api._prev_element_dict[self._full_name]
 				self._prev_dreamteam_count = pd['dreamteam_count']
 				self._prev_now_cost = pd['now_cost']
 				self._prev_points_per_game = pd['points_per_game']
@@ -259,8 +265,58 @@ class Player():
 				self._prev_goals_conceded_per_90 = pd['goals_conceded_per_90']
 				self._prev_starts_per_90 = pd['starts_per_90']
 				self._prev_clean_sheets_per_90 = pd['clean_sheets_per_90']
+
+				return True
+				# print(pd['web_name'],self._name)
+
+			# else:
+
+			import difflib
+			close_matches = difflib.get_close_matches(self._full_name, api._prev_element_dict.keys())
+
+			if len(close_matches) == 1:
+				self._full_name = close_matches[0]
+
+				pd = api._prev_element_dict[self._full_name]
+				self._prev_dreamteam_count = pd['dreamteam_count']
+				self._prev_now_cost = pd['now_cost']
+				self._prev_points_per_game = pd['points_per_game']
+				self._prev_total_points = pd['total_points']
+				self._prev_minutes = pd['minutes']
+				self._prev_goals_scored = pd['goals_scored']
+				self._prev_assists = pd['assists']
+				self._prev_clean_sheets = pd['clean_sheets']
+				self._prev_goals_conceded = pd['goals_conceded']
+				self._prev_own_goals = pd['own_goals']
+				self._prev_penalties_saved = pd['penalties_saved']
+				self._prev_penalties_missed = pd['penalties_missed']
+				self._prev_yellow_cards = pd['yellow_cards']
+				self._prev_red_cards = pd['red_cards']
+				self._prev_saves = pd['saves']
+				self._prev_bonus = pd['bonus']
+				self._prev_bps = pd['bps']
+				self._prev_influence = pd['influence']
+				self._prev_creativity = pd['creativity']
+				self._prev_threat = pd['threat']
+				self._prev_starts = pd['starts']
+				self._prev_expected_goals = float(pd['expected_goals'])
+				self._prev_expected_assists = float(pd['expected_assists'])
+				self._prev_expected_goal_involvements = pd['expected_goal_involvements']
+				self._prev_expected_goals_conceded = pd['expected_goals_conceded']
+				self._prev_expected_goals_per_90 = pd['expected_goals_per_90']
+				self._prev_saves_per_90 = pd['saves_per_90']
+				self._prev_expected_assists_per_90 = pd['expected_assists_per_90']
+				self._prev_expected_goal_involvements_per_90 = pd['expected_goal_involvements_per_90']
+				self._prev_expected_goals_conceded_per_90 = pd['expected_goals_conceded_per_90']
+				self._prev_goals_conceded_per_90 = pd['goals_conceded_per_90']
+				self._prev_starts_per_90 = pd['starts_per_90']
+				self._prev_clean_sheets_per_90 = pd['clean_sheets_per_90']
+
 			else:
-				mout.warning(f'No previous data for {self._name}')
+
+				# mout.warning(f'No previous data for {self._full_name}')
+				# mout.out(close_matches)
+
 				self._prev_dreamteam_count = 0.0
 				self._prev_now_cost = 0.0
 				self._prev_points_per_game = 0.0
@@ -676,6 +732,61 @@ class Player():
 			return score, self.get_event_summary(gw,event_stats,md_bold=md_bold,pts_line=pts_line,team_line=team_line,html_highlight=html_highlight)
 		else:
 			return score
+
+	def event_stat_emojis(self,gw):
+		stats = self._api.get_player_event_stats(gw,self._id)
+
+		emoji_str = ""
+
+		if self.is_yellow_flagged:
+			emoji_str += f'⚠️'
+		elif self.is_red_flagged:
+			emoji_str += f'⛔️'
+
+		# if self.multiplier > 1:
+		# 	emoji_str += '©️'
+
+		if self.multiplier < 0:
+			emoji_str += '🪑'
+
+		for i in range(stats['goals_scored']):
+			emoji_str += '⚽️'
+
+		for i in range(stats['assists']):
+			emoji_str += '🅰️'
+
+		for i in range(stats['penalties_saved']):
+			emoji_str += '✋'
+
+		for i in range(stats['penalties_missed']):
+			emoji_str += '🚫'
+
+		for i in range(stats['own_goals']):
+			emoji_str += '🫥'
+
+		if self.position_id < 4 and stats['clean_sheets']:
+			emoji_str += '🛡️'
+
+		for i in range(stats['saves']//3):
+			emoji_str += '🧤'
+
+		if stats['bonus'] == 1:
+			emoji_str += '1️⃣'
+		elif stats['bonus'] == 2:
+			emoji_str += '2️⃣'
+		elif stats['bonus'] == 3:
+			emoji_str += '3️⃣'
+
+		for i in range(stats['red_cards']):
+			emoji_str += '🟥'
+
+		for i in range(stats['yellow_cards']):
+			emoji_str += '🟨'
+		
+		if self.was_subbed:
+			emoji_str += f'🔄'
+
+		return emoji_str
 
 	def get_gw_xg(self,gw=None):
 		if gw is None:

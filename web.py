@@ -166,7 +166,7 @@ def player_summary_cell_modal(player,gw):
 			score = None
 
 		if score is not None:
-			style_str = get_style_from_event_score(score)
+			style_str = get_style_from_event_score(score).rstrip('"')+';vertical-align:middle;"'
 		if gw == player._api.current_gw and player.multiplier == 0:
 			stag = "<s>"
 			etag = "</s>"
@@ -182,13 +182,13 @@ def player_summary_cell_modal(player,gw):
 
 		if score is None:
 			if status == 'Did not play':
-				html_buffer += f' style="border:2px solid white;border-collapse:collapse;">x'
+				html_buffer += f' style="border:2px solid white;border-collapse:collapse;vertical-align:middle;">x'
 			elif status == 'Bench':
-				html_buffer += f' style="border:2px solid white;border-collapse:collapse;">🪑'
+				html_buffer += f' style="border:2px solid white;border-collapse:collapse;vertical-align:middle;">🪑'
 			elif status == 'Yet to play':
-				html_buffer += f' style="border:2px solid white;border-collapse:collapse;">-'
+				html_buffer += f' style="border:2px solid white;border-collapse:collapse;vertical-align:middle;">-'
 			else:
-				html_buffer += f' style="border:2px solid white;border-collapse:collapse;">o'
+				html_buffer += f' style="border:2px solid white;border-collapse:collapse;vertical-align:middle;">o'
 		else:
 			html_buffer += f' style={style_str}>'
 			html_buffer += f'{stag}{score}{etag}'
@@ -357,22 +357,46 @@ def get_player_history_table(player):
 
 	return player_history_tables[player.id]
 
-def get_style_from_event_score(score,border=True):
+# def get_style_from_event_score(score,border=False):
+# 	if border:
+# 		style_str = '"border:2px solid white;border-collapse:collapse;'
+# 	else:
+# 		style_str = '"'
+# 	if score is None:
+# 		style_str += 'background-color:black;color:white'
+# 	elif score < 1:
+# 		style_str += 'background-color:darkred;color:white'
+# 	elif score == 2:
+# 		style_str += 'background-color:orange;color:black'
+# 	elif score > 9:
+# 		style_str += 'background-color:darkgreen;color:white'
+# 	elif score > 5:
+# 		style_str += 'background-color:lightgreen;color:black'
+# 	elif score > 2:
+# 		style_str += 'background-color:yellow;color:black'
+# 	elif score > 0:
+# 		style_str += 'background-color:red;color:black'	
+# 	style_str += '"'
+# 	return style_str
+
+def get_style_from_event_score(score,border=False):
 	if border:
 		style_str = '"border:2px solid white;border-collapse:collapse;'
 	else:
 		style_str = '"'
-	if score < 1:
-		style_str += 'background-color:darkred;color:white'
+	if score is None:
+		style_str += 'background-color:#17202A;color:white'
+	elif score < 1:
+		style_str += 'background-color:#A93226;color:white'
 	elif score == 2:
-		style_str += 'background-color:orange;color:black'
+		style_str += 'background-color:#DC7633;color:black'
 	elif score > 9:
-		style_str += 'background-color:darkgreen;color:white'
+		style_str += 'background-color:#196F3D;color:white'
 	elif score > 5:
-		style_str += 'background-color:lightgreen;color:black'
+		style_str += 'background-color:#52BE80;color:black'
 	elif score > 2:
-		style_str += 'background-color:yellow;color:black'
+		style_str += 'background-color:#F4D03F;color:black'
 	elif score > 0:
-		style_str += 'background-color:red;color:black'	
+		style_str += 'background-color:#CB4335;color:black'	
 	style_str += '"'
 	return style_str

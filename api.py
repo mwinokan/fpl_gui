@@ -38,7 +38,8 @@ class FPL_API():
 	_wc_cutoff = 16
 
 	_season_str = 2324
-	_last_season_str = 2324
+	_season_str_fmt = '23/24'
+	_last_season_str = 2223
 
 	_prev_element_dict = None
 
@@ -316,6 +317,7 @@ class FPL_API():
 			
 			self._prev_events = pd.DataFrame(self._prev_bootstrapjson['events'])
 			self._prev_elements = pd.DataFrame(self._prev_bootstrapjson['elements'])
+
 			self._prev_element_dict = self.build_element_dict(self._prev_elements)
 			self._prev_element_types = pd.DataFrame(self._prev_bootstrapjson['element_types'])
 			self._prev_teamdata = pd.DataFrame(self._prev_bootstrapjson['teams'])
@@ -326,12 +328,16 @@ class FPL_API():
 
 	def build_element_dict(self,df):
 
+		# print(df.columns)
+
 		data = {}
-		for i,web_name in enumerate(df['web_name']):
-			data[web_name] = {}
+		for i,key in enumerate(df['id']):
 			pd = df.iloc[i]
+			# data[key] = {}
+			data[f"{pd['first_name']} {pd['second_name']}"] = {}
 			for col in df.columns:
-				data[web_name][col] = pd[col]
+				# data[key][col] = pd[col]
+				data[f"{pd['first_name']} {pd['second_name']}"][col] = pd[col]
 
 		return data
 
