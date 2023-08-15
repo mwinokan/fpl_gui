@@ -64,7 +64,7 @@ def create_value_figure(api,players,show=False):
 
 		next5_sum = 0
 		for i in range(gw,gw+6):
-			next5_sum += p.expected_points(gw=i,fit_ratio=0.8,use_official=False)
+			next5_sum += p.expected_points(gw=i,use_official=False)
 
 		next5_sum = float(f'{next5_sum:.1f}')
 

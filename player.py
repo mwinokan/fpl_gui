@@ -5,6 +5,9 @@ import datetime
 import pytz
 local_tz = pytz.timezone("Europe/London")
 
+from expected import weighted_average
+import numpy as np
+
 '''
 To-Do's
 
@@ -900,6 +903,10 @@ class Player():
 	@property
 	def goal_multiplier(self):
 		return [6,6,5,4][self.position_id-1]
+
+	@property
+	def clean_sheet_multiplier(self):
+		return [4,4,1,0][self.position_id-1]
 	
 	@property
 	def assist_multiplier(self):
@@ -940,8 +947,280 @@ class Player():
 				self._appearances = len([m for m in self.history['minutes'] if m > 0])
 		return self._appearances
 
+
+	"""
+
+	New xPts Approach
+	=================
+
+	Weight recent returns higher
+	----------------------------
+
+	* Define some sort of weighted average function?
+
+	sigma(f(gw))
+
+	Expected goals
+	--------------
+
+	xG_GW = sigma(xGs) * sum(Gs)/sum(xGs)
+	xA_GW = sigma(xGs) * sum(As)/sum(xAs)
+
+	Scale by Opponent
+	-----------------
+
+	xG_GW *= sigma(xGCs) / league_average(xGCs)
+	xA_GW *= sigma(xGCs) / league_average(xGCs)
+
+	SCALE CS PROBABILITY BY OPPONENT STRENGTH
+
+	xMinutes
+	--------
+
+	* Injuries
+	* Weighted average of recent minutes per game
+
+	xCleans
+	-------
+
+	* sigma(GC < 1)
+
+	xBonus
+	------
+
+	* sigma(bonus)
+
+	"""
+
+	def expected_points(self,opponent=None,gw=None,debug=False,use_official=False,force=False):
+
+		if gw is None:
+			gw = self._api._current_gw
+		
+		if self.id in self._api._exp_archive.keys():
+			if gw in self._api._exp_archive[self.id].keys():
+				if not force:
+					return self._api._exp_archive[self.id][gw]
+			else:
+				self._api._exp_archive[self.id] = {}
+		else:
+			self._api._exp_archive[self.id] = {}
+		
+		if opponent is None:
+			opponent = self.team_obj.get_opponent(gw)
+			if opponent is None:
+				self._api._exp_archive[self.id][gw] = 0
+				return 0
+
+		if debug:
+			mout.debug(f'{self.name}.expected_points({opponent=},{gw=},{use_official=})')
+
+		if isinstance(opponent,list):
+			total = 0
+			for opp in opponent:
+				total += self.expected_points(opponent=opp,gw=gw,debug=debug,use_official=use_official,force=force)
+			return total
+
+		if opponent is None:
+			if debug:
+				mout.out(f'no opponent (gw={gw})')
+			self._api._exp_archive[self.id][gw] = 0
+			return 0
+
+		# use flag status for prediction
+		chance = self.get_playing_chance(gw)
+		if debug:
+			mout.varOut('playing_chance',chance)
+		if chance == 0.0:
+			self._api._exp_archive[self.id][gw] = 0
+			return self._api._exp_archive[self.id][gw]
+
+		if use_official and gw == self._api._current_gw:
+			if debug:
+				mout.varOut('expected_points (official)',chance*self._exp_next_round)
+			self._api._exp_archive[self.id][gw] = chance*self._exp_this_round
+			return self._api._exp_archive[self.id][gw]
+		elif use_official and gw == self._api._current_gw + 1:
+			if debug:
+				mout.varOut('expected_points (official)',chance*self._exp_next_round)
+			self._api._exp_archive[self.id][gw] = chance*self._exp_next_round
+			return self._api._exp_archive[self.id][gw]
+		else:
+
+			expected_points = 0
+
+			# weighted_average(this_season_by_gw,this_season_minutes_by_gw,last_season_value,last_season_minutes)
+
+			if debug: mout.varOut('self._prev_expected_goals',self._prev_expected_goals)
+			if debug: mout.varOut('self._prev_expected_assists',self._prev_expected_assists)
+			if debug: mout.varOut('self._prev_minutes',self._prev_minutes)
+			if debug: mout.varOut('self._prev_clean_sheets_per_90',self._prev_clean_sheets_per_90)
+			if debug: mout.varOut('self._prev_bonus',self._prev_bonus)
+
+			### MINUTES
+
+			Ms = [float(x) for x in self.history['minutes']]
+			xM = weighted_average(Ms) * chance
+
+			if xM < 1:
+				xMPts = 0.0
+				self._api._exp_archive[self.id][gw] = 0
+				return 0
+			else:
+				xMPts = 1 + min([1,xM/60])
+
+			### OPPONENT GOALS CONCEDED
+
+			if opponent._prev_obj is None:
+				opp_GC_per_game = opponent.goals_conceded/opponent.games_played
+				opp_GF_per_game = opponent.goals_scored/opponent.games_played
+			else:
+				opp_GF_per_game = (opponent.goals_scored/opponent.games_played + opponent._prev_obj.goals_scored/38)/2
+				opp_GC_per_game = (opponent.goals_conceded/opponent.games_played + opponent._prev_obj.goals_conceded/38)/2
+
+			avg_GC_per_game = (sum([t.goals_conceded/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gc_per_game )/2
+			opp_GC_ratio = opp_GC_per_game/avg_GC_per_game
+			opp_GC_ratio = opp_GC_ratio or 1.0
+			
+			### OPPONENT GOALS THREAT
+
+			avg_GF_per_game = (sum([t.goals_scored/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gf_per_game )/2
+			opp_GF_ratio = opp_GF_per_game/avg_GF_per_game
+			opp_GF_ratio = opp_GF_ratio or 1.0
+
+			### CLEAN SHEETS
+			
+			xCSs = [int(int(x) < 1) for x in self.history['goals_conceded']]
+			xGCs = [float(x) for x in self.history['expected_goals_conceded']]
+			CSs = [int(float(x) < 0.5) for x in self.history['expected_goals_conceded']]
+
+			CS_prob = weighted_average(CSs,None,self._prev_clean_sheets_per_90*self._prev_minutes/90,self._prev_minutes/90)
+			
+			xCSPts = CS_prob * self.clean_sheet_multiplier / opp_GF_ratio
+
+			xCSPts *= min([1,xM/60])
+
+			### GOALS
+
+			xGs = [float(x) for x in self.history['expected_goals']]
+		
+			# weighted average xG per game
+			xG_per_minute = weighted_average(xGs,Ms,self._prev_expected_goals,self._prev_minutes)
+
+			# scale by G/xG ratio
+			if (self._total_expected_goals + self._prev_expected_goals) == 0:
+				G_per_xG = 1.0
+			else:
+				G_per_xG = (self.total_goals + self._prev_goals_scored)/(self._total_expected_goals + self._prev_expected_goals)
+
+			### ASSISTS
+
+			xAs = [float(x) for x in self.history['expected_assists']]
+		
+			# weighted average xA per game
+			xA_per_minute = weighted_average(xAs,Ms,self._prev_expected_assists,self._prev_minutes)
+
+			# scale by G/xA ratio
+			if (self._total_expected_assists + self._prev_expected_assists) == 0:
+				A_per_xA = 1.0
+			else:
+				A_per_xA = (self.total_assists + self._prev_assists)/(self._total_expected_assists + self._prev_expected_assists)
+
+			### ATTACKING POINTS
+
+			xG = xG_per_minute * xM * G_per_xG * opp_GC_ratio
+			xA = xA_per_minute * xM * A_per_xA * opp_GC_ratio
+			xGIPts = self.goal_multiplier * xG + 3 * xA
+
+			### BONUS POINTS
+
+			Bs = [float(x) for x in self.history['bonus']]
+
+			xBPts = weighted_average(Bs,None,self._prev_bonus,self._prev_minutes/90)
+
+			### YELLOW CARDS
+
+			YCs = [int(x) for x in self.history['yellow_cards']]
+			xYCPts = - weighted_average(YCs,None,self._prev_yellow_cards,self._prev_minutes/90)
+
+			### RED CARDS
+
+			RCs = [int(x) for x in self.history['red_cards']]
+			xRCPts = -3 * weighted_average(RCs,None,self._prev_red_cards,self._prev_minutes/90)
+
+			### OWN GOALS
+
+			OGs = [int(x) for x in self.history['own_goals']]
+			xOGPts = -2 * weighted_average(OGs,None,self._prev_own_goals,self._prev_minutes/90)
+
+			### PENALTY MISS
+
+			PMs = [int(x) for x in self.history['penalties_missed']]
+			xPMPts = -2 * weighted_average(PMs,None,self._prev_penalties_missed,self._prev_minutes/90)
+
+			if self.position_id == 1:
+				
+				### PENALTY SAVE
+
+				PSs = [int(x) for x in self.history['penalties_saved']]
+				xPSPts = 5 * weighted_average(PSs,None,self._prev_penalties_saved,self._prev_minutes/90)
+
+				### SAVES
+
+				Ss = [int(x) for x in self.history['saves']]
+				xSPts = 1/3 * weighted_average(Ss,None,self._prev_saves,self._prev_minutes/90)
+
+			else:
+
+				xPSPts = 0.0
+				xSPts = 0.0
+
+			### COMBINE
+
+			expected_points = xMPts + xCSPts + xGIPts + xBPts + xYCPts + xRCPts + xOGPts + xPMPts + xPSPts + xSPts
+						
+			if debug: 
+				mout.varOut('opp_GC_per_game',opp_GC_per_game)
+				mout.varOut('avg_GC_per_game',avg_GC_per_game)
+				mout.varOut('opp_GC_ratio',opp_GC_ratio)
+
+				mout.varOut('opp_GF_per_game',opp_GF_per_game)
+				mout.varOut('avg_GF_per_game',avg_GF_per_game)
+				mout.varOut('opp_GF_ratio',opp_GF_ratio)
+				
+				mout.varOut('xCSs',xCSs)
+				mout.varOut('xGCs',xGCs)
+				mout.varOut('CSs',CSs)
+				mout.varOut('CS_prob',CS_prob)
+				
+				mout.varOut('xGs',xGs)
+				mout.varOut('xAs',xAs)
+				
+				mout.varOut('Bs',Bs)
+
+				mout.varOut('Ms',Ms)
+				mout.varOut('xM',xM)
+				
+				mout.varOut('xG_per_minute',xG_per_minute)
+				mout.varOut('xA_per_minute',xA_per_minute)
+				
+				mout.varOut('G_per_xG',G_per_xG)
+				mout.varOut('A_per_xA',A_per_xA)
+				
+				mout.varOut('xG',xG)
+				mout.varOut('xA',xA)
+
+				mout.varOut('xBPts',xBPts)
+				mout.varOut('xMPts',xMPts)
+				mout.varOut('xGIPts',xGIPts)
+				mout.varOut('xCSPts',xCSPts)
+				mout.varOut('expected_points',expected_points)
+
+			self._api._exp_archive[self.id][gw] = expected_points
+			return self._api._exp_archive[self.id][gw]
+
 	# @mout.debug_log
-	def expected_points(self,opponent=None,gw=None,fit_ratio=0.8,debug=False,use_official=False,force=False):
+	def old_expected_points(self,opponent=None,gw=None,fit_ratio=0.8,debug=False,use_official=False,force=False):
 
 		if gw is None:
 			gw = self._api._current_gw

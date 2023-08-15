@@ -64,7 +64,7 @@ def create_gwexp_figure(api,players,show=False):
 		mout.progress(i,maximum,width=50,fill="#")
 
 		# official_gwexp = p.expected_points(gw=gw+1,fit_ratio=0.8,use_official=True,debug=False)
-		gwexp = p.expected_points(gw=gw+1,fit_ratio=0.8,use_official=False,debug=False,force=True)
+		gwexp = p.expected_points(gw=gw+1,use_official=False,debug=False,force=True)
 		
 		form = p.form
 

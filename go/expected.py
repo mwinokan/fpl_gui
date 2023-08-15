@@ -40,7 +40,7 @@ def main():
 
 		tdata.append(f'{p.name}, {p.team_obj.shortname}')
 
-		expected, actual = p.expected_total_points(return_actual=True,fit_ratio=0.8,use_official=False)
+		expected, actual = p.expected_total_points(return_actual=True,use_official=False)
 
 		xdata.append(expected)
 		ydata.append(actual)

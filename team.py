@@ -59,6 +59,8 @@ class Team():
 		self._games_played = None
 		self._difficulty_next5 = None
 
+		self._prev_obj = None
+
 		self._shortname = self._api._teamdata['short_name'][id-1]
 
 		# print(self._api._prev_teamdata)

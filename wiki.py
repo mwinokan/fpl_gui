@@ -323,8 +323,14 @@ def main():
 		push_changes()
 
 def run_test():
-	# man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
-	man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
+	p = Player('Havertz',api)
+
+	create_playerpage(api,p,[])
+
+	# p.expected_points(gw=2,use_official=True,debug=True)
+	# p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
+	man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
+	# man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
 	create_managerpage(api, man, [])
 
 	api.finish()
@@ -1702,7 +1708,7 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 		html_buffer += f'<td class="w3-center" style={style_str}>{player.form}</td>\n'
 
 		for i in range(now_gw+1,end_gw+1):
-			exp = player.expected_points(gw=i,fit_ratio=0.8,use_official=True)
+			exp = player.expected_points(gw=i,debug=False)
 			style_str = get_style_from_event_score(exp).rstrip('"')+';vertical-align:middle;"'
 			assert style_str is not None
 			flag_str = ""
@@ -3658,7 +3664,7 @@ def transfer_table(ids,title_str):
 		html_buffer += player_summary_cell_modal(p,now_gw)
 
 		for i in range(now_gw+1,end_gw+1):
-			exp = p.expected_points(gw=i,fit_ratio=0.8)
+			exp = p.expected_points(gw=i)
 			style_str = get_style_from_event_score(exp)
 			if style_str is None:
 				html_buffer += f'<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">{p.get_fixture_str(i,short=True,lower_away=True)}</td>\n'

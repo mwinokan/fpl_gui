@@ -16,6 +16,58 @@ from collections import Counter
 
 url = 'https://fantasy.premierleague.com/api/'
 
+GC_DICT = {
+	"MCI":33,
+	"ARS":43,
+	"MUN":43,
+	"NEW":33,
+	"LIV":47,
+	"BHA":53,
+	"AVL":46,
+	"TOT":63,
+	"BRE":46,
+	"FUL":53,
+	"CRY":49,
+	"CHE":47,
+	"WOL":58,
+	"WHU":55,
+	"BOU":71,
+	"NFO":68,
+	"EVE":57,
+	"LEI":68,
+	"LEE":78,
+	"SOU":73,
+	"BUR":35*2,
+	"SHU":39*2,
+	"LUT":39*2,
+}
+
+GF_DICT = {
+	"MCI":94,
+	"ARS":88,
+	"MUN":58,
+	"NEW":68,
+	"LIV":75,
+	"BHA":72,
+	"AVL":51,
+	"TOT":70,
+	"BRE":58,
+	"FUL":55,
+	"CRY":40,
+	"CHE":38,
+	"WOL":31,
+	"WHU":42,
+	"BOU":37,
+	"NFO":38,
+	"EVE":34,
+	"LEI":51,
+	"LEE":48,
+	"SOU":36,
+	"BUR":87/2,
+	"SHU":73/2,
+	"LUT":57/2,
+}
+
 class Request404(Exception):
 	pass
 
@@ -322,9 +374,20 @@ class FPL_API():
 			self._prev_element_types = pd.DataFrame(self._prev_bootstrapjson['element_types'])
 			self._prev_teamdata = pd.DataFrame(self._prev_bootstrapjson['teams'])
 
+			self._prev_avg_gc_per_game = sum(GC_DICT.values())/len(GC_DICT)/38
+			self._prev_avg_gf_per_game = sum(GF_DICT.values())/len(GF_DICT)/38
+
 			self._prev_teams = []
 			for id,name,shortname in zip(self._prev_teamdata['id'],self._prev_teamdata['name'],self._prev_teamdata['short_name']):
-				self._prev_teams.append(Team(id,name,self,shortname=shortname))
+				team = Team(id,name,self,shortname=shortname)
+
+				team._goals_conceded = GC_DICT[team.shortname]
+				team._goals_scored = GF_DICT[team.shortname]
+
+				matches = [t for t in self.teams if t.name == name]
+				if matches:
+					matches[0]._prev_obj = team
+				self._prev_teams.append(team)
 
 	def build_element_dict(self,df):
 
@@ -408,8 +471,14 @@ class FPL_API():
 	def _teams(self):
 		if self.__teams is None:
 			self.__teams = []
+			total_gc = 0
 			for id,name,shortname in zip(self._teamdata['id'],self._teamdata['name'],self._teamdata['short_name']):
-				self.__teams.append(Team(id,name,self,shortname=shortname))
+				team = Team(id,name,self,shortname=shortname)
+				# self.__teams[-1].total_goals
+				total_gc += team.goals_conceded
+
+				self.__teams.append(team)
+			self._avg_gc = total_gc/len(self.__teams)
 
 			# team_strength(self.__teams)
 	

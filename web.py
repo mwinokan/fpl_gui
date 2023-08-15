@@ -296,7 +296,7 @@ def get_player_history_table(player):
 			# html_buffer += f'</td>\n'
 
 			html_buffer += """<td class="w3-center" """
-			exp = player.expected_points(gw=gw,fit_ratio=0.8)
+			exp = player.expected_points(gw=gw)
 			style_str = get_style_from_event_score(exp)
 			html_buffer += f' style={style_str}>'
 			html_buffer += f'{exp:.1f}'
