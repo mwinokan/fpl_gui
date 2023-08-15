@@ -3359,18 +3359,18 @@ def create_leaguepage(league,leagues,i):
 
 			### HOT STUFF
 
-			sorted_managers = sorted(league.active_managers, key=lambda x: (x.gw_performed_xpts - x.livescore, x.gw_performed_xpts), reverse=True)
+			sorted_managers = sorted(league.active_managers, key=lambda x: ((x.livescore - x.gw_performed_xpts)/x.gw_performed_xpts, x.gw_performed_xpts), reverse=True)
 			m = sorted_managers[0]
-			score = m.gw_performed_xpts - m.livescore
+			score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
 
-			html_buffer += award_panel('🥵','Hot Stuff','xGI Overperformer',f'{score:+.1f} pts',m,colour=award_colour['hot_stuff'],name_class="h2")
+			html_buffer += award_panel('🥵','Hot Stuff','xGI Overperformer',f'{score:+.1%}',m,colour=award_colour['hot_stuff'],name_class="h2")
 			json[str(league.id)][gw]['awards']['hot_stuff'] = [m.id,score]
 
 			### SOGGY BISCUIT
 
 			m = sorted_managers[-1]
-			score = m.gw_performed_xpts - m.livescore
-			html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1f} pts',m,colour=award_colour['soggy_biscuit'],name_class="h3")
+			score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
+			html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1%}',m,colour=award_colour['soggy_biscuit'],name_class="h3")
 			json[str(league.id)][gw]['awards']['soggy_biscuit'] = [m.id,score]
 
 			### BONER
