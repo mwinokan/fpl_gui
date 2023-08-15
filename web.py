@@ -387,7 +387,7 @@ def get_style_from_event_score(score,border=False):
 	if score is None:
 		style_str += 'background-color:#17202A;color:white'
 	elif score < 1:
-		style_str += 'background-color:#A93226;color:white'
+		style_str += 'background-color:#901517;color:white'
 	elif score == 2:
 		style_str += 'background-color:#DC7633;color:black'
 	elif score > 9:
