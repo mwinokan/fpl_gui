@@ -83,6 +83,26 @@ h5.double {line-height: 2}
 .w3-wol{color:black !important; background-color:#F2BC44 !important}
 .w3-wol-inv{color:#F2BC44 !important; background-color:black !important}
 .w3-wol-border-inv{border: 1px black solid !important; }
+
+.glass{
+	/* background styles */
+	position: relative;
+	display: inline-block;
+	padding: 15px 25px;
+	background-color: green; /*for compatibility with older browsers*/
+	background-image: linear-gradient(dark-grey,lightgreen);
+}
+
+.glass:after{
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: calc(100% - 4px);
+	height: 50%;
+	background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+}
+
 </style>
 </head>
 
@@ -241,17 +261,17 @@ h5.double {line-height: 2}
 <button class="w3-bar-item w3-mobile w3-button tablink" onclick="openLeague(event,121011)">Tesco Bean Value Toilet League</button>
 <button class="w3-bar-item w3-mobile w3-button tablink" onclick="openLeague(event,114707)">Super Dinner League</button>
 </div>
-<div id="146330" class="w3-container w3-aqua league">
+<div id="146330" class="w3-container w3-aqua league glass">
 <div class="w3-justify w3-row-padding">
 <p> Empty, no league awards to be found :(</p>
 </div>
 </div>
-<div id="121011" class="w3-container w3-dark-grey league" style="display:none">
+<div id="121011" class="w3-container w3-dark-grey league glass" style="display:none">
 <div class="w3-justify w3-row-padding">
 <p> Empty, no league awards to be found :(</p>
 </div>
 </div>
-<div id="114707" class="w3-container w3-dark-grey league" style="display:none">
+<div id="114707" class="w3-container w3-dark-grey league glass" style="display:none">
 <div class="w3-justify w3-row-padding">
 <div class="w3-justify"><div class="w3-row-padding"><div class="w3-col s12 m6 l4">
 <div class="w3-panel w3-yellow w3-card shadow89">
@@ -587,7 +607,7 @@ evt.currentTarget.className += " w3-aqua";
 </div>
 </div>
 <div class="w3-center" style="padding:32px">
-<p>Accurate as of 2023-08-15 18:24:47, (GW1)</p>
+<p>Accurate as of 2023-08-15 18:54:40, (GW1)</p>
 <p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>
 </div>
 </body>
