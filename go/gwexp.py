@@ -64,7 +64,7 @@ def create_gwexp_figure(api,players,show=False):
 		mout.progress(i,maximum,width=50,fill="#")
 
 		# official_gwexp = p.expected_points(gw=gw+1,fit_ratio=0.8,use_official=True,debug=False)
-		gwexp = p.expected_points(gw=gw+1,use_official=False,debug=False,force=True)
+		gwexp = p.expected_points(gw=gw+1,use_official=True,debug=False,force=True)
 		
 		form = p.form
 
@@ -111,7 +111,7 @@ def create_gwexp_figure(api,players,show=False):
 	fig.update_layout(legend_title_text = "Position",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
 	fig.update_xaxes(title_text=f"Form")
 	# fig.update_xaxes(title_text=f"Official GW{gw} xPts")
-	fig.update_yaxes(title_text=f"GW{gw} xPts")
+	fig.update_yaxes(title_text=f"GW{gw+1} xPts")
 
 	# Get HTML representation of plotly.js and this figure
 	plot_div = plot(fig, output_type='div', include_plotlyjs=True)
