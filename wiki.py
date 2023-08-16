@@ -21,7 +21,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = False
+offline = True
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -877,7 +877,9 @@ def create_assetpage(leagues):
 		html_buffer += floating_subtitle('Attacking Points')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		html_buffer += '<div class="w3-padding">\n'
 		html_buffer += '<p>Returned attacking points vs expected attacking points including previous season data. Using official xG and xA data.</p>'
+		html_buffer += '</div>\n'
 		html_buffer += create_xgi_figure(api,players)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -886,15 +888,19 @@ def create_assetpage(leagues):
 			html_buffer += floating_subtitle('Best Value: Next 5 GWs')
 			html_buffer += '<div class="w3-col s12 m12 l12">\n'
 			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+			html_buffer += '<div class="w3-padding">\n'
 			html_buffer += "<p>Expected points over the next five gameweeks per player price. Expected poins from Max's algorithm</p>"
+			html_buffer += '</div>\n'
 			html_buffer += create_value_figure(api,players)
 			html_buffer += '</div>\n'
 			html_buffer += '</div>\n'
 
-			html_buffer += floating_subtitle('Best GW{gw+1} Assets')
+			html_buffer += floating_subtitle(f'Best GW{gw+1} Assets')
 			html_buffer += '<div class="w3-col s12 m12 l12">\n'
 			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+			html_buffer += '<div class="w3-padding">\n'
 			html_buffer += "<p>Next gameweek expected points (official FPL source) versus player form.</p>"
+			html_buffer += '</div>\n'
 			html_buffer += create_gwexp_figure(api,players)
 			html_buffer += '</div>\n'
 			html_buffer += '</div>\n'
