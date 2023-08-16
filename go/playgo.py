@@ -38,7 +38,10 @@ def create_player_figure(api,player,show=False):
 		event_summaries.append(summary)
 		past_3 = [ event_points[j-1] for j in range(max(1,i-3),i+1)]
 		event_form.append(sum(past_3)/len(past_3))
-		event_performed_xpts.append(round(player.get_performed_xpts(gw=i),1))
+		xpts = player.get_performed_xpts(gw=i)
+		if xpts is not None:
+			xpts = round(xpts,1)
+		event_performed_xpts.append(xpts)
 		
 	all_gws = []
 	for i in range(38):

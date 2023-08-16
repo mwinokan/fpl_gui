@@ -823,6 +823,9 @@ class Player():
 			mout.errorOut("Gameweek has not happened yet")
 			return None
 
+		if 'round' not in self.history:
+			return None
+
 		indices = [i for i,r in enumerate(self.history['round']) if r == gw]
 
 		minutes = [float(self.history['minutes'][i]) for i in indices]
@@ -1058,6 +1061,11 @@ class Player():
 			if debug: mout.varOut('self._prev_bonus',self._prev_bonus)
 
 			### MINUTES
+
+			if 'minutes' not in self.history:
+				mout.error(f'{self} has no minutes in self.history')
+				self._api._exp_archive[self.id][gw] = 0
+				return self._api._exp_archive[self.id][gw]
 
 			Ms = [float(x) for x in self.history['minutes']]
 			xM = weighted_average(Ms) * chance
@@ -1595,10 +1603,13 @@ class Player():
 
 		# print(self.name,list(self.history['round']))
 
-		h_indices = []
+
+		if 'round' not in self.history:
+			mout.error(f'{self} has no round in self.history')
+			return 'No data.'
 
 		# if the player was added to the game late, their history is weird
-		h_index = None
+		h_indices = []
 		for i,r in enumerate(self.history['round']):
 			if gw == r:
 				h_indices.append(i)

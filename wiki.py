@@ -21,7 +21,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = True
+offline = False
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -874,23 +874,40 @@ def create_assetpage(leagues):
 
 		html_buffer = ""
 
-		html_buffer += floating_subtitle('xGI: Performed vs Expected')
+		html_buffer += floating_subtitle('Attacking Points')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		html_buffer += '<p>Returned attacking points vs expected attacking points including previous season data. Using official xG and xA data.</p>'
 		html_buffer += create_xgi_figure(api,players)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 		
 		if gw > 0 and not api._live_gw:
-			html_buffer += "<h4>Best Value Assets for Next 5 Gameweeks</h4>"
+			html_buffer += floating_subtitle('Best Value: Next 5 GWs')
+			html_buffer += '<div class="w3-col s12 m12 l12">\n'
+			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+			html_buffer += "<p>Expected points over the next five gameweeks per player price. Expected poins from Max's algorithm</p>"
 			html_buffer += create_value_figure(api,players)
-			
-			html_buffer += f"<h4>GW{gw+1} Best Assets</h4>"
+			html_buffer += '</div>\n'
+			html_buffer += '</div>\n'
+
+			html_buffer += floating_subtitle('Best GW{gw+1} Assets')
+			html_buffer += '<div class="w3-col s12 m12 l12">\n'
+			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+			html_buffer += "<p>Next gameweek expected points (official FPL source) versus player form.</p>"
 			html_buffer += create_gwexp_figure(api,players)
+			html_buffer += '</div>\n'
+			html_buffer += '</div>\n'
 
-			html_buffer += f"<h4>BPS Influence</h4>"
-			html_buffer += create_bonus_figure(api,players)
-
+		# if gw > 3:
+		# 	html_buffer += floating_subtitle('BPS vs ')
+		# 	html_buffer += '<div class="w3-col s12 m12 l12">\n'
+		# 	html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		# 	html_buffer += "<p>Player </p>"
+		# 	html_buffer += create_bonus_figure(api,players)
+		# 	html_buffer += '</div>\n'
+		# 	html_buffer += '</div>\n'
+			
 		# navbar = None
 		navbar = create_navbar(leagues)
 		html_page('html/assets.html',None,title=f"Asset Analysis", gw=gw, html=html_buffer, showtitle=True, bar_html=navbar,colour='aqua')
