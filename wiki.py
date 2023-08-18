@@ -21,7 +21,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = False
+offline = True
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -3488,13 +3488,13 @@ def create_leaguepage(league,leagues,i):
 		
 		html_buffer += floating_subtitle('Popular Moves')
 		
-		html_buffer += '<div class="w3-col s12 m6 l6">\n'
+		html_buffer += '<div class="w3-col s12 m12 l6">\n'
 		html_buffer += '<div class="w3-panel w3-pale-green shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 		html_buffer += transfer_table(ids_in, 'In')
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
-		html_buffer += '<div class="w3-col s12 m6 l6">\n'
+		html_buffer += '<div class="w3-col s12 m12 l6">\n'
 		html_buffer += '<div class="w3-panel w3-pale-red shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 		html_buffer += transfer_table(ids_out, 'Out')
 		html_buffer += '</div>\n'
@@ -3632,8 +3632,10 @@ def transfer_table(ids,title_str):
 	global api
 	html_buffer = ""
 
-	html_buffer += f'<h2>Transferred {title_str}:</h2>\n'
 	html_buffer += '<div class="w3-responsive w3-padding">\n'
+	html_buffer += f'<h2>Transferred {title_str}:</h2>\n'
+	html_buffer += '</div>\n'
+	html_buffer += '<div class="w3-responsive">\n'
 	html_buffer += '<table class="w3-table w3-hoverable responsive-text">\n'
 	html_buffer += '<thead>\n'
 	html_buffer += '<tr>\n'
@@ -3668,7 +3670,7 @@ def transfer_table(ids,title_str):
 
 		html_buffer += '<tr>\n'
 
-		html_buffer += '<td>'
+		html_buffer += '<td style="vertical-align:middle;">'
 		html_buffer += p.kit_name_html
 		html_buffer += '</td>\n'
 		
@@ -3681,16 +3683,16 @@ def transfer_table(ids,title_str):
 		# summary = summary.replace("\n","<br>")
 
 		form = p.form
-		style_str = get_style_from_event_score(form)
+		style_str = get_style_from_event_score(form).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{form}</td>\n'
 
 		html_buffer += player_summary_cell_modal(p,now_gw)
 
 		for i in range(now_gw+1,end_gw+1):
 			exp = p.expected_points(gw=i)
-			style_str = get_style_from_event_score(exp)
+			style_str = get_style_from_event_score(exp).rstrip('"')+';vertical-align:middle;"'
 			if style_str is None:
-				html_buffer += f'<td class="w3-center" style="border:2px solid white;border-collapse:collapse;">{p.get_fixture_str(i,short=True,lower_away=True)}</td>\n'
+				html_buffer += f'<td class="w3-center" style="vertical-align:middle;">{p.get_fixture_str(i,short=True,lower_away=True)}</td>\n'
 			else:
 				html_buffer += f'<td class="w3-center" style={style_str}>{p.get_fixture_str(i,short=True,lower_away=True)} ({exp:.1f})</td>\n'
 

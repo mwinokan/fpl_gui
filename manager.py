@@ -288,7 +288,7 @@ class Manager():
 			elif chip['name'] == 'wildcard':
 				if self._wc1_week is None:
 					self._wc1_week = chip['event']
-					cutoff = min(self._api._wc_cutoff,self._wc1_week+5)
+					cutoff = min(min(self._api._wc_cutoff,self._wc1_week+5),self._api._current_gw)
 					rel_gw1 = self.active_gws.index(self._wc1_week-1)
 					rel_gw2 = self.active_gws.index(cutoff)
 					self._wc1_ordelta = self._overall_rank[rel_gw1] - self._overall_rank[rel_gw2]
