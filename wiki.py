@@ -21,7 +21,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = True
+offline = False
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -3371,19 +3371,20 @@ def create_leaguepage(league,leagues,i):
 
 			### HOT STUFF
 
-			sorted_managers = sorted(league.active_managers, key=lambda x: ((x.livescore - x.gw_performed_xpts)/x.gw_performed_xpts, x.gw_performed_xpts), reverse=True)
-			m = sorted_managers[0]
-			score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
+			sorted_managers = sorted([m for m in league.active_managers if m.gw_performed_xpts > 0], key=lambda x: ((x.livescore - x.gw_performed_xpts)/x.gw_performed_xpts, x.gw_performed_xpts), reverse=True)
+			if len(sorted_managers) > 0:
+				m = sorted_managers[0]
+				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
 
-			html_buffer += award_panel('🥵','Hot Stuff','xGI Overperformer',f'{score:+.1%}',m,colour=award_colour['hot_stuff'],name_class="h2")
-			json[str(league.id)][gw]['awards']['hot_stuff'] = [m.id,score]
+				html_buffer += award_panel('🥵','Hot Stuff','xGI Overperformer',f'{score:+.1%}',m,colour=award_colour['hot_stuff'],name_class="h2")
+				json[str(league.id)][gw]['awards']['hot_stuff'] = [m.id,score]
 
-			### SOGGY BISCUIT
+				### SOGGY BISCUIT
 
-			m = sorted_managers[-1]
-			score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
-			html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1%}',m,colour=award_colour['soggy_biscuit'],name_class="h3")
-			json[str(league.id)][gw]['awards']['soggy_biscuit'] = [m.id,score]
+				m = sorted_managers[-1]
+				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
+				html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1%}',m,colour=award_colour['soggy_biscuit'],name_class="h3")
+				json[str(league.id)][gw]['awards']['soggy_biscuit'] = [m.id,score]
 
 			### BONER
 
