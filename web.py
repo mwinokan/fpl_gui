@@ -182,13 +182,13 @@ def player_summary_cell_modal(player,gw):
 
 		if score is None:
 			if status == 'Did not play':
-				html_buffer += f' style="border:2px solid white;border-collapse:collapse;vertical-align:middle;">x'
+				html_buffer += f' style="vertical-align:middle;">x'
 			elif status == 'Bench':
-				html_buffer += f' style="border:2px solid white;border-collapse:collapse;vertical-align:middle;">🪑'
+				html_buffer += f' style="vertical-align:middle;">🪑'
 			elif status == 'Yet to play':
-				html_buffer += f' style="border:2px solid white;border-collapse:collapse;vertical-align:middle;">-'
+				html_buffer += f' style="vertical-align:middle;">-'
 			else:
-				html_buffer += f' style="border:2px solid white;border-collapse:collapse;vertical-align:middle;">o'
+				html_buffer += f' style="vertical-align:middle;">o'
 		else:
 			html_buffer += f' style={style_str}>'
 			html_buffer += f'{stag}{score}{etag}'
@@ -321,13 +321,13 @@ def get_player_history_table(player):
 
 				if score is None:
 					if status == 'Did not play':
-						html_buffer += f' style="border:2px solid white;border-collapse:collapse;">x'
+						html_buffer += f' style="">x'
 					elif status == 'Bench':
-						html_buffer += f' style="border:2px solid white;border-collapse:collapse;">🪑'
+						html_buffer += f' style="">🪑'
 					elif status == 'Yet to play':
-						html_buffer += f' style="border:2px solid white;border-collapse:collapse;">-'
+						html_buffer += f' style="">-'
 					else:
-						html_buffer += f' style="border:2px solid white;border-collapse:collapse;">o'
+						html_buffer += f' style="">o'
 				else:
 					html_buffer += f' style={style_str}>'
 					html_buffer += f'{score}'
@@ -359,7 +359,7 @@ def get_player_history_table(player):
 
 # def get_style_from_event_score(score,border=False):
 # 	if border:
-# 		style_str = '"border:2px solid white;border-collapse:collapse;'
+# 		style_str = '"'
 # 	else:
 # 		style_str = '"'
 # 	if score is None:
@@ -381,7 +381,7 @@ def get_player_history_table(player):
 
 def get_style_from_event_score(score,border=False):
 	if border:
-		style_str = '"border:2px solid white;border-collapse:collapse;'
+		style_str = '"'
 	else:
 		style_str = '"'
 	if score is None:
