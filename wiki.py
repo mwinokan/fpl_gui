@@ -1866,12 +1866,12 @@ def get_style_from_game_score(is_home,team_h_score,team_a_score):
 		if clean_sheet:
 			style_str += 'background-color:darkgreen;color:white'
 		else:
-			style_str += 'background-color:lightgreen'
+			style_str += 'background-color:lightgreen;color:black'
 	elif not draw:
 		if opp_clean_sheet:
 			style_str += 'background-color:darkred;color:white'
 		else:
-			style_str += 'background-color:red'
+			style_str += 'background-color:red;color:black'
 	style_str += '"'
 
 	return style_str
