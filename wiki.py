@@ -529,7 +529,7 @@ def create_teampage(api,leagues):
 		html_buffer += floating_subtitle('Fixture Table',pad=0)
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89 w3-responsive">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive">\n'
 
 		html_buffer += '<table class="w3-table w3-hoverable responsive-text">\n'
 
@@ -543,7 +543,7 @@ def create_teampage(api,leagues):
 
 			team_bg_color = team.get_style()['background-color']
 			team_text_color = team.get_style()['color']
-			team_style_str = f'"border:2px solid white;border-collapse:collapse;background-color:{team_bg_color};color:{team_text_color};"'
+			team_style_str = f'"background-color:{team_bg_color};color:{team_text_color};"'
 
 			table_buffer += '<tr>\n'
 			table_buffer += f'<th style={team_style_str}>'
@@ -587,9 +587,9 @@ def create_teampage(api,leagues):
 			if gw in api._special_gws.keys():
 				gw_str = api._special_gws[gw]
 			if gw_str in ["DGW","TGW"]:
-				html_buffer += f'<th class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:yellow">{gw_str}{gw}</th>\n'
+				html_buffer += f'<th class="w3-center" style="background-color:yellow">{gw_str}{gw}</th>\n'
 			elif gw_str == "BGW":
-				html_buffer += f'<th class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red">{gw_str}{gw}</th>\n'
+				html_buffer += f'<th class="w3-center" style="background-color:red">{gw_str}{gw}</th>\n'
 			else:
 				html_buffer += f'<th class="w3-center">{gw_str}{gw}</th>\n'
 		html_buffer += '</tr>\n'
@@ -610,16 +610,18 @@ def create_teampage(api,leagues):
 	for i,team in enumerate(api.teams):
 		mout.progress(i,20)
 
-		html_buffer += '<div class="w3-col s12 m12 l6">\n'
-		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89 w3-responsive">\n'
-
-		html_buffer += f'<h2><img class="w3-image" src="{team._badge_url}" alt="Team" width="30" height="30">\t{team.name}</h2>\n'
-
-		players = api.elements_by_team[team.shortname]
-
 		team_bg_color = team.get_style()['background-color']
 		team_text_color = team.get_style()['color']
-		team_style_str = f'"background-color:{team_bg_color};color:{team_text_color};"'
+		team_style_str = f'background-color:{team_bg_color};color:{team_text_color};'
+
+		html_buffer += '<div class="w3-col s12 m12 l6">\n'
+		html_buffer += f'<div class="w3-panel shadow89 w3-responsive" style="{team_style_str};padding:0px;padding-bottom:4px;">\n'
+
+		html_buffer += '<div class="w3-padding">\n'
+		html_buffer += f'<h2><img class="w3-image" src="{team._badge_url}" alt="Team" width="30" height="30">\t{team.name}</h2>\n'
+		html_buffer += '</div>\n'
+
+		players = api.elements_by_team[team.shortname]
 
 		# Recent results
 
@@ -754,11 +756,11 @@ def create_teampage(api,leagues):
 			if gw in special_gws.keys():
 				num_fixs = special_gws[gw]
 				if num_fixs == 2:
-					html_buffer += f'<th class="w3-center" scope="col" colspan="2" style="border:2px solid white;border-collapse:collapse;background-color:yellow">DGW{gw}</th>\n'
+					html_buffer += f'<th class="w3-center" scope="col" colspan="2" style="background-color:yellow">DGW{gw}</th>\n'
 				elif num_fixs == 3:
-					html_buffer += f'<th class="w3-center" scope="col" colspan="3" style="border:2px solid white;border-collapse:collapse;background-color:yellow">TGW{gw}</th>\n'
+					html_buffer += f'<th class="w3-center" scope="col" colspan="3" style="background-color:yellow">TGW{gw}</th>\n'
 				elif num_fixs == 0:
-					html_buffer += f'<th class="w3-center" style="border:2px solid white;border-collapse:collapse;background-color:red">BGW{gw}</th>\n'
+					html_buffer += f'<th class="w3-center" style="background-color:red">BGW{gw}</th>\n'
 			else:
 				html_buffer += f'<th class="w3-center">GW{gw}</th>\n'
 
@@ -1817,11 +1819,11 @@ def get_style_from_difficulty(difficulty,old=False):
 		if difficulty == 1:
 			style_str += 'background-color:darkgreen;color:white'
 		elif difficulty == 2:
-			style_str += 'background-color:lightgreen'
+			style_str += 'background-color:lightgreen;color:black'
 		elif difficulty == 3:
 			pass
 		elif difficulty == 4:
-			style_str += 'background-color:red'
+			style_str += 'background-color:red;color:black'
 		elif difficulty == 5:
 			style_str += 'background-color:darkred;color:white'
 	else:
@@ -1833,12 +1835,12 @@ def get_style_from_difficulty(difficulty,old=False):
 			pass
 		elif difficulty > 0.0:
 			if difficulty < 2.0:
-				style_str += 'background-color:lightgreen'
+				style_str += 'background-color:lightgreen;color:black'
 			else:
 				style_str += 'background-color:darkgreen;color:white'
 		elif difficulty < 0.0:
 			if difficulty > -2.0:
-				style_str += 'background-color:red'
+				style_str += 'background-color:red;color:black'
 			else:
 				style_str += 'background-color:darkred;color:white'
 		
@@ -1853,7 +1855,7 @@ def get_style_from_game_score(is_home,team_h_score,team_a_score):
 	if not is_home:
 		_team_h_score, _team_a_score = _team_a_score, _team_h_score
 
-	style_str = '"border:2px solid white;border-collapse:collapse;'
+	style_str = '"'
 
 	won = _team_h_score > _team_a_score
 	draw = _team_h_score == _team_a_score
