@@ -324,9 +324,14 @@ class Manager():
 	@property
 	def gw_rank_gain(self):
 		try:
-			rel_gw1 = self.active_gws.index(self._api._current_gw)
-			rel_gw2 = self.active_gws.index(self._api._current_gw-1)
-			return 100*(self._overall_rank[rel_gw2] - self._overall_rank[rel_gw1])/self._overall_rank[rel_gw2]
+			this_gw = self.active_gws.index(self._api._current_gw)			
+			last_gw = self.active_gws.index(self._api._current_gw-1)
+
+			# 1M - 2M / 1M = -100%
+			# 2M - 500k / 2M = +75%
+			# 464 - 27 / 464 = +94%
+
+			return 100*(self._overall_rank[last_gw] - self._overall_rank[this_gw])/self._overall_rank[last_gw]
 		except ValueError:
 			return 0
 

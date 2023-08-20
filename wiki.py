@@ -80,6 +80,8 @@ award_flavourtext = dict(
 	glow_up="💡 Glow-Up",
 	has_been="👨‍🦳 Has-Been",
 	kneejerker="🔨 Kneejerker",
+	rocket="🚀 Rocket",
+	flushed="🚽 Down the Toilet",
 	wc1_best="Best Wildcard 1",
 	wc1_worst="Worst Wildcard 1",
 	wc2_best="Best Wildcard 2",
@@ -102,6 +104,8 @@ award_unittext = dict(
 	asbo="cards",
 	nerd="%",
 	innovator="%",
+	rocket="%",
+	flushed="%",
 	fortune="points gained",
 	clown="points lost",
 	hot_stuff="points overperformed",
@@ -114,7 +118,7 @@ award_colour = dict(king="amber",
 	scientist="green",
 	boner="grey",
 	smooth_brain="pale-red",
-	chair="brown",
+	chair="light-blue",
 	asbo="yellow",
 	fortune="purple",
 	clown="pink",
@@ -138,6 +142,8 @@ award_colour = dict(king="amber",
 	fh_worst='green',
 	hot_stuff='orange',
 	soggy_biscuit='teal',
+	rocket='lime',
+	flushed='brown',
 )
 
 
@@ -3408,6 +3414,24 @@ def create_leaguepage(league,leagues,i):
 				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
 				html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1%}',m,colour=award_colour['soggy_biscuit'],name_class="h3")
 				json[str(league.id)][gw]['awards']['soggy_biscuit'] = [m.id,score]
+
+			if gw > 1:
+
+				sorted_managers = sorted(league.active_managers, key=lambda x: x.gw_rank_gain, reverse=True)
+
+				### rocketeer
+
+				m = sorted_managers[0]
+				score = m.gw_rank_gain
+				html_buffer += award_panel('🚀','Rocketeer','Best Rank Gain',f'{score:+.1f}%',m,colour=award_colour['rocket'],name_class="h2")
+				json[str(league.id)][gw]['awards']['rocket'] = [m.id,score]
+
+				### submariner
+
+				m = sorted_managers[-1]
+				score = m.gw_rank_gain
+				html_buffer += award_panel('🚽','Down the Toilet','Worst Rank Loss',f'{score:.1f}%',m,colour=award_colour['flushed'],name_class="h3")
+				json[str(league.id)][gw]['awards']['flushed'] = [m.id,score]
 
 			### BONER
 
