@@ -21,7 +21,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = False
+offline = True
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -523,6 +523,8 @@ def create_teampage(api,leagues):
 	mout.debugOut(f"create_teampage()")
 
 	html_buffer = ""
+
+	### fixture table
 	
 	if api._current_gw < 38:
 
@@ -607,6 +609,8 @@ def create_teampage(api,leagues):
 
 	gw_range = range(max(1,api._current_gw-3),min(api._current_gw+5,39))
 
+	### team assets
+
 	for i,team in enumerate(api.teams):
 		mout.progress(i,20)
 
@@ -631,6 +635,8 @@ def create_teampage(api,leagues):
 		# html_buffer += f'<th class="w3-center" style={team_style_str}>Opponent</th>\n'
 
 		table_buffer = "<tr>\n"
+
+		### opponents
 
 		for gw in gw_range:
 			fixs = team.get_gw_fixtures(gw)
@@ -676,7 +682,7 @@ def create_teampage(api,leagues):
 				table_buffer += '</td>\n'
 
 			else:
-				table_buffer += f'<td class="w3-center">-</td>\n'
+				table_buffer += f'<td class="w3-center" style="background-color:black;color:white">-</td>\n'
 
 		table_buffer += '</tr>\n'
 
@@ -685,10 +691,13 @@ def create_teampage(api,leagues):
 
 		special_gws = {}
 
+		### results / game scores
+
 		for gw in gw_range:
 
 			fixs = team.get_gw_fixtures(gw)
 
+			# multiple fixtures
 			if isinstance(fixs,list) and len(fixs) > 0:
 
 				special_gws[gw] = len(fixs)
@@ -719,7 +728,7 @@ def create_teampage(api,leagues):
 				table_buffer += '</td>\n'
 
 			elif len(fixs) == 0:
-				table_buffer += f'<td class="w3-center">-</td>\n'
+				table_buffer += f'<td class="w3-center" style="background-color:black;color:white">-</td>\n'
 
 			else:
 
@@ -1832,7 +1841,7 @@ def get_style_from_difficulty(difficulty,old=False):
 			return style_str
 
 		if abs(difficulty) < 1.0:
-			pass
+			style_str += 'background-color:white;color:black'
 		elif difficulty > 0.0:
 			if difficulty < 2.0:
 				style_str += 'background-color:lightgreen;color:black'
@@ -1872,6 +1881,8 @@ def get_style_from_game_score(is_home,team_h_score,team_a_score):
 			style_str += 'background-color:darkred;color:white'
 		else:
 			style_str += 'background-color:red;color:black'
+	else:
+		style_str += 'background-color:white;color:black'
 	style_str += '"'
 
 	return style_str
