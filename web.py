@@ -48,6 +48,7 @@ def fix_table_classes(html):
 	html = html.replace('</table>','</table>\n</div>')
 	return html
 
+# @mout.debug_time
 def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None,colour='white',nonw3_colour=False):
 	mout.debugOut(f"html_page({target})")
 
@@ -61,88 +62,89 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 	if sidebar_content is not None:
 		sidebar_html = md2html(sidebar_content)
 
-	fout = open(target,'wt')
+	fout_buffer = []
 
-	fout.write('<!DOCTYPE html>\n')
-	fout.write('<html>\n')
-	fout.write('<head>\n')
-	fout.write(f'<title>{title}</title>\n')
-	fout.write('<meta charset="UTF-8">\n')
-	fout.write('<meta name="viewport" content="width=device-width, initial-scale=1">\n')
-	fout.write('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">\n')
-	fout.write('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">\n')
-	fout.write('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">\n')
-	fout.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">\n')
-	fout.write('<style>\n')
-	fout.write('h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}')
-	fout.write('body {font-family: "Open Sans"}\n')
-	fout.write('h5.double {line-height: 2}\n')
-	fout.write('/*drop shadow*/\n')
-	fout.write('.shadow10 {box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}\n')
-	fout.write('/*drop shadow*/\n')
-	fout.write('.shadow20 {box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}\n')
-	fout.write('/*inner shadow*/\n')
-	fout.write('.shadow25 {box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;}\n')
-	fout.write('/*pink effect*/\n')
-	fout.write('.shadow50 {box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;}\n')
-	fout.write('/*soft inner and outer*/\n')
-	fout.write('.shadow87 {box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}\n')
-	fout.write('/*button shadow*/\n')
-	fout.write('.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}\n')
-	fout.write('@media screen and (min-width: 601px) { .responsive-text { font-size: 16px;  } }')
-	fout.write('@media screen and (max-width: 600px) { .responsive-text { font-size: 12px;  } }')
-	fout.write('@media screen and (max-width: 600px) { .hide-if-narrow { display: none !important; } }')
+	fout_buffer.append('<!DOCTYPE html>\n')
+	fout_buffer.append('<html>\n')
+	fout_buffer.append('<head>\n')
+	fout_buffer.append(f'<title>{title}</title>\n')
+	fout_buffer.append('<meta charset="UTF-8">\n')
+	fout_buffer.append('<meta name="viewport" content="width=device-width, initial-scale=1">\n')
+	fout_buffer.append('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">\n')
+	fout_buffer.append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">\n')
+	fout_buffer.append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">\n')
+	fout_buffer.append('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">\n')
+	fout_buffer.append('<style>\n')
+	fout_buffer.append('h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}')
+	fout_buffer.append('body {font-family: "Open Sans"}\n')
+	fout_buffer.append('h5.double {line-height: 2}\n')
+	fout_buffer.append('/*drop shadow*/\n')
+	fout_buffer.append('.shadow10 {box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}\n')
+	fout_buffer.append('/*drop shadow*/\n')
+	fout_buffer.append('.shadow20 {box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}\n')
+	fout_buffer.append('/*inner shadow*/\n')
+	fout_buffer.append('.shadow25 {box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;}\n')
+	fout_buffer.append('/*pink effect*/\n')
+	fout_buffer.append('.shadow50 {box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;}\n')
+	fout_buffer.append('/*soft inner and outer*/\n')
+	fout_buffer.append('.shadow87 {box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}\n')
+	fout_buffer.append('/*button shadow*/\n')
+	fout_buffer.append('.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}\n')
+	fout_buffer.append('@media screen and (min-width: 601px) { .responsive-text { font-size: 16px;  } }')
+	fout_buffer.append('@media screen and (max-width: 600px) { .responsive-text { font-size: 12px;  } }')
+	fout_buffer.append('@media screen and (max-width: 600px) { .hide-if-narrow { display: none !important; } }')
 
 	if extra_style is not None:
-		fout.write(extra_style)
-	fout.write('</style>\n')
-	fout.write('</head>\n')
+		fout_buffer.append(extra_style)
+	fout_buffer.append('</style>\n')
+	fout_buffer.append('</head>\n')
 
 	# BAR
 	if bar_html is not None:
-		fout.write(bar_html)
+		fout_buffer.append(bar_html)
 
 	# BODY
 	if nonw3_colour:
-		fout.write(f'<body class="shadow25" style="background-color:{colour};">\n')
+		fout_buffer.append(f'<body class="shadow25" style="background-color:{colour};">\n')
 	else:
-		fout.write(f'<body class="w3-{colour} shadow25">\n')
+		fout_buffer.append(f'<body class="w3-{colour} shadow25">\n')
 
 	# CONTENT
-	fout.write('<div class="w3-content" style="max-width:1400px;min-height:1200px;">\n')
+	fout_buffer.append('<div class="w3-content" style="max-width:1400px;min-height:1200px;">\n')
 
 	# TITLE
 	if showtitle:
-		fout.write('<div class="w3-center w3-padding-large">\n')
+		fout_buffer.append('<div class="w3-center w3-padding-large">\n')
 		if colour == 'white':
-			fout.write(f'\t<h1><span class="w3-tag w3-black shadow50">{title}</span></h1>\n')
+			fout_buffer.append(f'\t<h1><span class="w3-tag w3-black shadow50">{title}</span></h1>\n')
 		else:
-			fout.write(f'\t<h1><span class="w3-tag w3-white shadow50">{title}</span></h1>\n')
-		fout.write('</div>\n')
+			fout_buffer.append(f'\t<h1><span class="w3-tag w3-white shadow50">{title}</span></h1>\n')
+		fout_buffer.append('</div>\n')
 
 	# HTML
-	fout.write('<div class="w3-row-padding" style="padding-left:0px;padding-right:0px">\n')
-	fout.write(html_content)
-	fout.write('</div>\n')
+	fout_buffer.append('<div class="w3-row-padding" style="padding-left:0px;padding-right:0px">\n')
+	fout_buffer.append(html_content)
+	fout_buffer.append('</div>\n')
 
 	# END CONTENT
-	fout.write('</div>\n')
+	fout_buffer.append('</div>\n')
 	# END BODY
-	# fout.write('</body>\n')
+	# fout_buffer.append('</body>\n')
 
 	from datetime import datetime
 	timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 
-	fout.write('<div class="w3-center" style="padding:32px">\n')
-	# fout.write('<footer class="w3-container w3-black w3-center" style="padding:32px">\n')
-	fout.write(f'<p>Accurate as of {timestamp}, (GW{gw})</p>\n')
-	fout.write('<p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>\n')
-	# fout.write('</footer>\n')
-	fout.write('</div>\n')
-	fout.write('</body>\n')
-	fout.write('</html>\n')
+	fout_buffer.append('<div class="w3-center" style="padding:32px">\n')
+	# fout_buffer.append('<footer class="w3-container w3-black w3-center" style="padding:32px">\n')
+	fout_buffer.append(f'<p>Accurate as of {timestamp}, (GW{gw})</p>\n')
+	fout_buffer.append('<p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>\n')
+	# fout_buffer.append('</footer>\n')
+	fout_buffer.append('</div>\n')
+	fout_buffer.append('</body>\n')
+	fout_buffer.append('</html>\n')
 
-	fout.close()
+	with open(target,'wt') as fout:
+		fout.writelines(''.join(fout_buffer))
 
 def player_summary_cell_modal(player,gw):
 

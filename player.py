@@ -715,11 +715,10 @@ class Player():
 		if gw > self._api.current_gw:
 			mout.errorOut("Gameweek has not happened yet")
 			return None
+		
 		event_stats = self._api.get_player_event_stats(gw,self._id)
 		score = int(event_stats['total_points'])
 		
-		# if return_str and self.needs_autosub:
-		# 	return 'DNP'
 		if not_playing_is_none and event_stats['minutes'] == 0:
 			if not return_str:
 				score = None

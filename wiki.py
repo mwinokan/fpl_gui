@@ -3365,26 +3365,26 @@ def create_leaguepage(league,leagues,i):
 			html_buffer += floating_subtitle(f'🏆 GW{gw} Awards',pad=0)
 
 			### KING
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.livescore, x.gw_rank_gain), reverse=True)
 			m = sorted_managers[0]
 			score = m.livescore
 			html_buffer += award_panel('👑','King','Best GW',f'{score} pts',m,colour=award_colour['king'],name_class="h2")
 			json[str(league.id)][gw]['awards']['king'] = [m.id,score]
-			mout.out(f'King {time.perf_counter()-start:.1f}s')
+			# mout.out(f'King {time.perf_counter()-start:.1f}s')
 
 			### COCK
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			m = sorted_managers[-1]
 			score = m.livescore
 			html_buffer += award_panel('🐓','Cock','Worst GW',f'{score} pts',m,colour=award_colour['cock'],name_class="h2")
 			json[str(league.id)][gw]['awards']['cock'] = [m.id,score]
-			mout.out(f'Cock {time.perf_counter()-start:.1f}s')
+			# mout.out(f'Cock {time.perf_counter()-start:.1f}s')
 
 			### MASSIVE GOALS
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.goals, x.gw_xg, x.gw_xa, x.livescore), reverse=True)
 			m = sorted_managers[0]
 			score = m.goals
@@ -3394,11 +3394,11 @@ def create_leaguepage(league,leagues,i):
 				score_str = f'{"⚽️"*score}'
 			html_buffer += award_panel('⚽️','Massive Goal FC','Most Goals',score_str,m,colour=award_colour['goals'],name_class="h3")
 			json[str(league.id)][gw]['awards']['goals'] = [m.id,score]
-			mout.out(f'Massive Goals {time.perf_counter()-start:.1f}s')
+			# mout.out(f'Massive Goals {time.perf_counter()-start:.1f}s')
 
 			### SCIENTIST
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			players = league.get_starting_players(unique=False)
 			p = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)[0]
 			m = p._parent_manager
@@ -3409,32 +3409,32 @@ def create_leaguepage(league,leagues,i):
 				p_str += " (VC)"
 			html_buffer += award_panel('🧑‍🔬','Scientist','Best Differential',p_str,m,colour=award_colour['scientist'],value_class='h3',name_class="h2")
 			json[str(league.id)][gw]['awards']['scientist'] = [m.id,p.id,p.is_captain,int(p.multiplier*p.get_event_score(not_playing_is_none=False))]
-			mout.out(f'Scientist {time.perf_counter()-start:.1f}s')
+			# mout.out(f'Scientist {time.perf_counter()-start:.1f}s')
 
 			### HOT STUFF
 
 			sorted_managers = sorted([m for m in league.active_managers if m.gw_performed_xpts > 0], key=lambda x: ((x.livescore - x.gw_performed_xpts)/x.gw_performed_xpts, x.gw_performed_xpts), reverse=True)
 			if len(sorted_managers) > 0:
-				start = time.perf_counter()
+				# start = time.perf_counter()
 				m = sorted_managers[0]
 				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
 
 				html_buffer += award_panel('🥵','Hot Stuff','xGI Overperformer',f'{score:+.1%}',m,colour=award_colour['hot_stuff'],name_class="h2")
 				json[str(league.id)][gw]['awards']['hot_stuff'] = [m.id,score]
-				mout.out(f'Hot Stuff {time.perf_counter()-start:.1f}s')
+				# mout.out(f'Hot Stuff {time.perf_counter()-start:.1f}s')
 
 				### SOGGY BISCUIT
 
-				start = time.perf_counter()
+				# start = time.perf_counter()
 				m = sorted_managers[-1]
 				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
 				html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1%}',m,colour=award_colour['soggy_biscuit'],name_class="h3")
 				json[str(league.id)][gw]['awards']['soggy_biscuit'] = [m.id,score]
-				mout.out(f'Soggy Biscuit {time.perf_counter()-start:.1f}s')
+				# mout.out(f'Soggy Biscuit {time.perf_counter()-start:.1f}s')
 
 			if gw > 1:
 
-				start = time.perf_counter()
+				# start = time.perf_counter()
 				sorted_managers = sorted(league.active_managers, key=lambda x: x.gw_rank_gain, reverse=True)
 
 				### rocketeer
@@ -3443,70 +3443,70 @@ def create_leaguepage(league,leagues,i):
 				score = m.gw_rank_gain
 				html_buffer += award_panel('🚀','Rocketeer','Best Rank Gain',f'{score:+.1f}%',m,colour=award_colour['rocket'],name_class="h2")
 				json[str(league.id)][gw]['awards']['rocket'] = [m.id,score]
-				mout.out(f'Rocket {time.perf_counter()-start:.1f}s')
+				# mout.out(f'Rocket {time.perf_counter()-start:.1f}s')
 
 				### down the toilet
 
-				start = time.perf_counter()
+				# start = time.perf_counter()
 				m = sorted_managers[-1]
 				score = m.gw_rank_gain
 				html_buffer += award_panel('🚽','Down the Toilet','Worst Rank Loss',f'{score:.1f}%',m,colour=award_colour['flushed'],name_class="h3")
 				json[str(league.id)][gw]['awards']['flushed'] = [m.id,score]
-				mout.out(f'Toilet {time.perf_counter()-start:.1f}s')
+				# mout.out(f'Toilet {time.perf_counter()-start:.1f}s')
 
 			### BONER
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			m = sorted(league.active_managers, key=lambda x: x.bps, reverse=True)[0]
 			html_buffer += award_panel('🦴',f'Boner','Highest Bonus',f'{m.bps} BPS',m,colour=award_colour['boner'],name_class="h2")
 			json[str(league.id)][gw]['awards']['boner'] = [m.id,m.bps]
-			mout.out(f'Boner {time.perf_counter()-start:.1f}s')
+			# mout.out(f'Boner {time.perf_counter()-start:.1f}s')
 
 			### SMOOTH BRAIN
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			m = sorted(league.active_managers, key=lambda x: x.bench_points, reverse=True)[0]
 			html_buffer += award_panel('🧠',f'Smooth Brain','Most Bench Points',f'{m.bench_points} pts',m,colour=award_colour['smooth_brain'],name_class="h3")
 			json[str(league.id)][gw]['awards']['smooth_brain'] = [m.id,m.bench_points]
-			mout.out(f'Smooth Brain {time.perf_counter()-start:.1f}s')
+			# mout.out(f'Smooth Brain {time.perf_counter()-start:.1f}s')
 
 			### CHAIR
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			m = sorted(league.active_managers, key=lambda x: x.minutes, reverse=False)[0]
 			html_buffer += award_panel('🪑',f'Chair','Least Minutes Played',f"{m.minutes}'",m,colour=award_colour['chair'],name_class="h2")
 			json[str(league.id)][gw]['awards']['chair'] = [m.id,m.minutes]
-			mout.out(f'Chair {time.perf_counter()-start:.1f}s')
+			# mout.out(f'Chair {time.perf_counter()-start:.1f}s')
 
 			### ASBO
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.get_card_count(), -x.minutes), reverse=True)
 			m = sorted_managers[0]
 			html_buffer += award_panel('🥊',f'ASBO','Most Carded',m.card_emojis,m,colour=award_colour['asbo'],name_class="h2")
 			json[str(league.id)][gw]['awards']['asbo'] = [m.id,m.card_emojis]
-			mout.out(f'ASBO {time.perf_counter()-start:.1f}s')
+			# mout.out(f'ASBO {time.perf_counter()-start:.1f}s')
 
 		if gw > 1:
 
 			### FORTUNE TELLER
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.calculate_transfer_gain(), x._transfer_uniqueness), reverse=True)
 			m = sorted_managers[0]
 			score = m.calculate_transfer_gain()
 			html_buffer += award_panel('🔮','Fortune Teller','Best Transfers',f"{score:+d} pts",m,colour=award_colour['fortune'],name_class="h2")
 			json[str(league.id)][gw]['awards']['fortune'] = [m.id,score]
-			mout.out(f'Fortune {time.perf_counter()-start:.1f}s')
+			# mout.out(f'Fortune {time.perf_counter()-start:.1f}s')
 
 			### CLOWN
 
-			start = time.perf_counter()
+			# start = time.perf_counter()
 			m = sorted_managers[-1]
 			score = m.calculate_transfer_gain()
 			html_buffer += award_panel('🤡','Clown','Worst Transfers',f"{score:+d} pts",m,colour=award_colour['clown'],name_class="h2")
 			json[str(league.id)][gw]['awards']['clown'] = [m.id,score]
-			mout.out(f'Clown {time.perf_counter()-start:.1f}s')
+			# mout.out(f'Clown {time.perf_counter()-start:.1f}s')
 
 		# if gw > 0:
 
