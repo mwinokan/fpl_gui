@@ -9,7 +9,7 @@ import mout
 from player import Player
 from manager import Manager
 import json as js
-from web import html_page, player_summary_cell_modal, get_style_from_event_score, md2html, get_player_history_table
+from web import html_page, player_summary_cell_modal, get_style_from_event_score, md2html, get_player_history_table, get_style_from_minutes_played
 from squad import Squad
 
 # https://stackoverflow.com/questions/60598837/html-to-image-using-python
@@ -522,6 +522,8 @@ def create_cup_page(api,league,leagues):
 def create_teampage(api,leagues):
 	mout.debugOut(f"create_teampage()")
 
+	from expected import weighted_average
+
 	html_buffer = ""
 
 	### fixture table
@@ -531,9 +533,9 @@ def create_teampage(api,leagues):
 		html_buffer += floating_subtitle('Fixture Table',pad=0)
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive" style="padding:0px;padding-bottom:3px;">\n'
 
-		html_buffer += '<table class="w3-table w3-hoverable responsive-text">\n'
+		html_buffer += '<table class="w3-table responsive-text">\n'
 
 		sorted_teams = sorted(api.teams,key=lambda x: x.difficulty_next5, reverse=True)
 
@@ -609,7 +611,7 @@ def create_teampage(api,leagues):
 
 	gw_range = range(max(1,api._current_gw-3),min(api._current_gw+5,39))
 
-	### team assets
+	### by team info
 
 	for i,team in enumerate(api.teams):
 		mout.progress(i,20)
@@ -629,7 +631,7 @@ def create_teampage(api,leagues):
 
 		# Recent results
 
-		html_buffer += '<table class="w3-table w3-hoverable responsive-text">\n'
+		html_buffer += '<table class="w3-table responsive-text">\n'
 
 		# table_buffer += '<tr>\n'
 		# html_buffer += f'<th class="w3-center" style={team_style_str}>Opponent</th>\n'
@@ -727,9 +729,11 @@ def create_teampage(api,leagues):
 
 				table_buffer += '</td>\n'
 
+			# blank
 			elif len(fixs) == 0:
 				table_buffer += f'<td class="w3-center" style="background-color:black;color:white">-</td>\n'
 
+			# single fixture
 			else:
 
 				opp = team.get_opponent(gw)
@@ -738,28 +742,21 @@ def create_teampage(api,leagues):
 				team_h_score = fixs['team_h_score']
 				team_a_score = fixs['team_a_score']
 
+				# fixture hasn't started
 				if not fixs['started']:
-					team_h_obj = api.get_player_team_obj(fixs['team_h'])
-					team_a_obj = api.get_player_team_obj(fixs['team_a'])
+					table_buffer += f'<td class="w3-center" style="background-color:white;color:black;">\n'
 
-					# predicted score
-					# team_h_score = (team_a_obj.goals_conceded_per_game + team_h_obj.goals_scored_per_game)/2 * (1-team_a_obj.expected_clean_sheet(team_h_obj))
-					# team_a_score = (team_h_obj.goals_conceded_per_game + team_a_obj.goals_scored_per_game)/2 * (1-team_h_obj.expected_clean_sheet(team_a_obj))
-					table_buffer += f'<td class="w3-center">\n'
+				# fixture in progress
 				else:
 					style_str = get_style_from_game_score(is_home, team_h_score, team_a_score)
 					table_buffer += f'<td class="w3-center" style={style_str}>\n'
-				
-				if not fixs['started']:
-					# table_buffer += f"({team_h_score:.0f} - {team_a_score:.0f})"
-					pass
-				else:
 					table_buffer += f"{team_h_score:.0f} - {team_a_score:.0f}"
-
+				
 				table_buffer += '</td>\n'
 
 		html_buffer += '<tr>\n'
 		
+		### GW header row
 		for gw in gw_range:
 
 			if gw in special_gws.keys():
@@ -773,8 +770,6 @@ def create_teampage(api,leagues):
 			else:
 				html_buffer += f'<th class="w3-center">GW{gw}</th>\n'
 
-			# html_buffer += f'<th class="w3-center">GW{gw}</td>\n'
-
 		html_buffer += '</tr>\n'
 
 		html_buffer += table_buffer
@@ -785,10 +780,12 @@ def create_teampage(api,leagues):
 		if test:
 			break
 
+		### team assets
+
 		if api._current_gw > 0:
 
 			html_buffer += '<br>\n'
-			html_buffer += '<table class="w3-table w3-hoverable">\n'
+			html_buffer += '<table class="w3-table">\n'
 
 			def player_name_str(p):
 				str_buffer = ""
@@ -820,6 +817,19 @@ def create_teampage(api,leagues):
 				html_buffer += f'{player_name_str(p)} {p.form}'
 				html_buffer += '</td>\n'
 			html_buffer += '</tr>\n'
+
+			if api._current_gw < 38:
+
+				# Most minutes
+				html_buffer += '<tr>\n'
+				html_buffer += f'<th style={team_style_str}>GW{api._current_gw+1} xMins</th>\n'
+				sorted_players = sorted(players,key=lambda x: x.expected_minutes() or 0.0,reverse=True)
+				for p in sorted_players[:5]:
+					style_str = get_style_from_minutes_played(p.expected_minutes())
+					html_buffer += f'<td class="w3-center" style={style_str}>'
+					html_buffer += f"{player_name_str(p)} {p.expected_minutes():.0f}'"
+					html_buffer += '</td>\n'
+				html_buffer += '</tr>\n'
 
 			# Top predicted points assets
 			html_buffer += '<tr>\n'
@@ -1461,7 +1471,7 @@ def create_manager_formation(man,gw):
 		
 		score = p.get_event_score(gw)
 
-		style_str = get_style_from_event_score(score,border=False).rstrip('"')+';width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"'
+		style_str = get_style_from_event_score(score).rstrip('"')+';width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"'
 		
 		if p.multiplier == 3:
 			c_str = ' (TC)'
@@ -1472,10 +1482,10 @@ def create_manager_formation(man,gw):
 		else:
 			c_str = ''
 
-		html_buffer += f'<div class="w3-tag shadow89 responsive-text" style={style_str}><b>{p.name}{c_str}</b>\n'
+		html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
 
 		html_buffer += f'<br>\n'
-		style_str = get_style_from_event_score(score,border=False).rstrip('"')+';width:90%;margin-bottom:2px;"'
+		style_str = get_style_from_event_score(score).rstrip('"')+';width:90%;margin-bottom:2px;"'
 		html_buffer += p.event_stat_emojis(gw)
 
 		if score is None:
@@ -3411,7 +3421,7 @@ def create_leaguepage(league,leagues,i):
 			html_buffer += award_panel('🧠',f'Smooth Brain','Most Bench Points',f'{m.bench_points} pts',m,colour=award_colour['smooth_brain'],name_class="h3")
 			json[str(league.id)][gw]['awards']['smooth_brain'] = [m.id,m.bench_points]
 
-			### CHAIR (REMOVED)
+			### CHAIR
 
 			m = sorted(league.active_managers, key=lambda x: x.minutes, reverse=False)[0]
 			html_buffer += award_panel('🪑',f'Chair','Least Minutes Played',f"{m.minutes}'",m,colour=award_colour['chair'],name_class="h2")
@@ -4109,7 +4119,7 @@ def position_template(league,players,pos_str,gw):
 			html_buffer += f'{count/league.num_managers:.1%}\n'
 			html_buffer += f'</td>\n'
 			if score is not None:
-				style_str = get_style_from_event_score(score,border=False).rstrip('"')+';text-align:right;vertical-align:middle;"'
+				style_str = get_style_from_event_score(score).rstrip('"')+';text-align:right;vertical-align:middle;"'
 				# html_buffer += f'<td style={style_str}>\n'
 				html_buffer += f'<td style="text-align:center;">\n'
 				# html_buffer += f'{score}\n'

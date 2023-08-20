@@ -950,6 +950,20 @@ class Player():
 				self._appearances = len([m for m in self.history['minutes'] if m > 0])
 		return self._appearances
 
+	def expected_minutes(self,gw=None,Ms=None):
+		if gw is None:
+			gw = self._api._current_gw+1
+		if gw > 38:
+			return None
+		if 'minutes' not in self.history:
+			return None
+
+		Ms = Ms or [float(x) for x in self.history['minutes']]
+
+		if self.num_gwfix(gw) > 0 and not self.has_fixture_finished:
+			Ms = Ms[:-1]
+		
+		return weighted_average(Ms) * self.get_playing_chance(gw)
 
 	"""
 
@@ -1068,7 +1082,7 @@ class Player():
 				return self._api._exp_archive[self.id][gw]
 
 			Ms = [float(x) for x in self.history['minutes']]
-			xM = weighted_average(Ms) * chance
+			xM = self.expected_minutes(gw,Ms=Ms) # or 0.0
 
 			if xM < 1:
 				xMPts = 0.0

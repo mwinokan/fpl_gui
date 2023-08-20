@@ -58,7 +58,15 @@ def create_player_figure(api,player,show=False):
 	fig.update_layout(autosize=True,margin=dict(l=20, r=20, t=20, b=20),plot_bgcolor=style['background-color'])
 	fig.update_xaxes(title_text="GW")
 	fig.update_yaxes(title_text="Points")
-	fig.update_yaxes(range=[0,math.ceil((max(event_points)+0.5)/5)*5])
+
+	def largest_value(lists):
+		all_vals = sum(lists,[])
+		all_vals = [v for v in all_vals if v is not None]
+		return max(all_vals)
+
+	max_yval = largest_value([event_points,event_expected,event_form,event_performed_xpts])
+
+	fig.update_yaxes(range=[0,math.ceil((max_yval+0.5)/5)*5])
 
 	# Get HTML representation of plotly.js and this figure
 	plot_div = plot(fig, output_type='div', include_plotlyjs=True)

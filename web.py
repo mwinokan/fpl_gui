@@ -379,24 +379,61 @@ def get_player_history_table(player):
 # 	style_str += '"'
 # 	return style_str
 
-def get_style_from_event_score(score,border=False):
-	if border:
-		style_str = '"'
-	else:
-		style_str = '"'
+def get_style_from_event_score(score):
+	style_str = '"'
 	if score is None:
+		# blackish
 		style_str += 'background-color:#17202A;color:white'
 	elif score < 1:
+		# dark red
 		style_str += 'background-color:#901517;color:white'
 	elif score == 2:
+		# orange
 		style_str += 'background-color:#DC7633;color:black'
 	elif score > 9:
+		# dark green
 		style_str += 'background-color:#196F3D;color:white'
 	elif score > 5:
+		# green
 		style_str += 'background-color:#52BE80;color:black'
 	elif score > 2:
+		# yellow
 		style_str += 'background-color:#F4D03F;color:black'
 	elif score > 0:
+		# red
 		style_str += 'background-color:#CB4335;color:black'	
+	style_str += '"'
+	return style_str
+
+def get_style_from_minutes_played(minutes):
+	style_str = '"'
+	if minutes is None:
+		# blackish
+		style_str += 'background-color:#17202A;color:white'
+
+	elif minutes > 89:
+		# dark green
+		style_str += 'background-color:#196F3D;color:white'
+
+	elif minutes > 59:
+		# green
+		style_str += 'background-color:#52BE80;color:black'
+
+	elif minutes > 29:
+		# yellow
+		style_str += 'background-color:#F4D03F;color:black'
+
+	elif minutes > 19:
+		# orange
+		style_str += 'background-color:#DC7633;color:black'
+
+	elif minutes > 9:
+		# red
+		style_str += 'background-color:#CB4335;color:black'	
+
+	else:
+		# dark red
+		style_str += 'background-color:#901517;color:white'
+
 	style_str += '"'
 	return style_str
