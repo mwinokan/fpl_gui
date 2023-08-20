@@ -163,8 +163,8 @@ class Player():
 				self._chance_of_playing_this_round = 1.0
 			
 			if self._api._current_gw > 0:
-				self._exp_this_round = float(elements['ep_this'][i] if not None else 0.0)
-				self._exp_next_round = float(elements['ep_next'][i] if not None else 0.0)
+				self._exp_this_round = float(elements['ep_this'][i] or 0.0)
+				self._exp_next_round = float(elements['ep_next'][i] or 0.0)
 			else:
 				self._exp_this_round = 0.0
 				self._exp_next_round = 0.0
@@ -1689,13 +1689,8 @@ class Player():
 			else:
 				str_buffer += f'{self.name}: '
 
-		elif not pts_line:
-			str_buffer = ''
 		else:
-			if md_bold:
-				str_buffer = f'<b>{self.name}</b>: '
-			else:
-				str_buffer = f'{self.name}: '
+			str_buffer = ''
 
 		### general 
 

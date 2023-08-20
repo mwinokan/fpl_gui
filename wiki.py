@@ -3547,8 +3547,7 @@ def create_leaguepage(league,leagues,i):
 		html_buffer += floating_subtitle('Killer Differentials')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
-		md_buffer = league_differentials(league, gw)
-		html_buffer += md2html(md_buffer)
+		html_buffer += league_differentials(league, gw)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
@@ -4103,20 +4102,33 @@ def ownership_template(league,title,gw):
 	data = []
 	for team in api.teams:
 
+		mult_attacker = 0
+		mult_defender = 0
 		sum_attacker = 0
 		sum_defender = 0
 
+		started = None
+
 		for p in [p for p in league.all_players if p.shortteam == team.shortname]:
 			if p.position_id > 2:
-				sum_attacker += p.multiplier
+				mult_attacker += p.multiplier
+				if p.multiplier > 0:
+					sum_attacker += p.get_event_score(not_playing_is_none=False)
 			else:
-				sum_defender += p.multiplier
+				mult_defender += p.multiplier
+				if p.multiplier > 0:
+					sum_defender += p.get_event_score(not_playing_is_none=False)
 
-		d = dict(shortteam=team.shortname,position='Attack',multiplier=sum_attacker/league.num_managers,kit_path=team._kit_path)
-		data.append(d)
+			if started is None:
+				started = p.has_fixture_started
+
+		if mult_attacker > 0:
+			d = dict(shortteam=team.shortname,position='Attack',multiplier=mult_attacker/league.num_managers,kit_path=team._kit_path,points=sum_attacker/mult_attacker,started=started)
+			data.append(d)
 		
-		d = dict(shortteam=team.shortname,position='Defence',multiplier=sum_defender/league.num_managers,kit_path=team._kit_path)
-		data.append(d)
+		if mult_defender > 0:
+			d = dict(shortteam=team.shortname,position='Defence',multiplier=mult_defender/league.num_managers,kit_path=team._kit_path,points=sum_defender/mult_defender,started=started)
+			data.append(d)
 
 	data = sorted(data,key=lambda x: x['multiplier'],reverse=True)
 
@@ -4158,6 +4170,14 @@ def ownership_template(league,title,gw):
 		html_buffer += f' {d["shortteam"]} \n'
 		html_buffer += f'{d["position"]}</td>\n'
 		html_buffer += f'<td style="vertical-align:middle;text-align:right;">{d["multiplier"]:.0%}   </td>\n'
+
+		html_buffer += f'<td style="text-align:center;">\n'
+
+		if d["started"]:
+			style_str = get_style_from_event_score(d["points"]).rstrip('"')+';text-align:right;vertical-align:middle;"'
+			html_buffer += f'<span class="w3-tag" style={style_str}>{d["points"]:.1f}pts</span>\n'
+
+		html_buffer += f'</td>\n'
 
 		html_buffer += f'</tr>\n'
 
@@ -4258,42 +4278,67 @@ def position_template(league,players,pos_str,gw):
 def league_differentials(league,gw):
 	global json
 
-	md_buffer = ""
+	html_buffer = ""
 
 	players = league.get_starting_players(unique=False)
 
 	sorted_players = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)
 
-	md_buffer += f"| Player | Points | Team | Manager | Summary |\n"
-	md_buffer += f"| --- | --- | --- | --- | --- |\n"
+	html_buffer += f'<table class="w3-table responsive-text">\n'
+	# html_buffer += f'<tr>\n'
+	# html_buffer += f'<th>Player</th>\n'
+	# html_buffer += f'<th>Points</th>\n'
+	# html_buffer += f'<th>Team</th>\n'
+	# html_buffer += f'<th>Summary</th>\n'
+	# html_buffer += f'</tr>\n'
 
 	archive = []
 
 	for p in sorted_players[:5]:
 		m = p._parent_manager
-		score, summary = p.get_event_score(summary=True,not_playing_is_none=False)
+		score, summary = p.get_event_score(summary=True,not_playing_is_none=False,team_line=False)
 		summary = summary.replace("\n","<br>")
-		md_buffer += f"| [[https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}]]"
-		md_buffer += f" [{p.name}]({p._gui_url}) "
+
+		html_buffer += f'<tr>\n'
+		html_buffer += f'<td style="vertical-align:middle;">\n'
+		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+		html_buffer += f'</td>\n'
+		html_buffer += f'<td style="vertical-align:middle;">\n'
+		html_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
+
 		if p.is_yellow_flagged:
-			md_buffer += f'⚠️ '
+			html_buffer += f'⚠️ '
 		elif p.is_yellow_flagged:
-			md_buffer += f'⛔️ '
-		md_buffer += f"| {p.multiplier*score}"
+			html_buffer += f'⛔️ '
 		if p.is_captain:
-			md_buffer += f" (C) "
-		# if p.is_vice_captain:
-		# 	md_buffer += f" (VC) "
-		md_buffer += f"| [[https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}]]"
-		md_buffer += f" [{m.team_name}]({m.gui_url})"
-		md_buffer += f"| [{m.name}]({m.gui_url})"
-		md_buffer += f"| {summary} |\n"
+			html_buffer += f" (C) "
+
+		html_buffer += f'</td>\n'
+
+		html_buffer += f'<td style="vertical-align:middle;">\n'
+		style_str = get_style_from_event_score(score).rstrip('"')+';text-align:right;vertical-align:middle;"'
+		html_buffer += f'<span class="w3-tag" style={style_str}>{p.multiplier*score}pts</span>\n'
+		html_buffer += f'</td>\n'
+
+		html_buffer += f'<td style="vertical-align:middle;">\n'
+		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+		html_buffer += f'</td>\n'
+		html_buffer += f'<td style="vertical-align:middle;">\n'
+		html_buffer += f'<a href="{m.gui_url}">{m.team_name}</a>\n'
+		html_buffer += f'<br><a href="{m.gui_url}">{m.name}</a>\n'
+		html_buffer += f'</td>\n'
+		html_buffer += f'<td style="vertical-align:middle;">\n'
+		html_buffer += f"{summary}\n"
+		html_buffer += f'</td>\n'
+		html_buffer += f'</tr>\n'
 		archive.append([p.id,m.id,p.is_captain,p.multiplier*score])
 		# print(p.name,p.league_count,p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count)
+	
+	html_buffer += f'</table>\n'
 
 	json[str(league.id)][gw]['differentials'] = archive
 
-	return md_buffer
+	return html_buffer
 
 def launchd_plist(interval=3600):
 

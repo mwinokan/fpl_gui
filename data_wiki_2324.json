@@ -193,7 +193,7 @@
 			"awards": {
 				"king": [
 					114074,
-					58
+					59
 				],
 				"cock": [
 					2557668,
@@ -211,27 +211,27 @@
 				],
 				"hot_stuff": [
 					264578,
-					0.4961101137043686
+					0.4879649890590807
 				],
 				"soggy_biscuit": [
 					7425798,
-					-0.3276968523988998
+					-0.32115403813517013
 				],
 				"rocket": [
-					554798,
-					90.39507542242113
+					114074,
+					90.08490341465135
 				],
 				"flushed": [
-					3674681,
-					-100.1014743459286
+					2557668,
+					-120.26445073225335
 				],
 				"boner": [
 					114074,
-					179
+					182
 				],
 				"smooth_brain": [
 					1408554,
-					8
+					10
 				],
 				"chair": [
 					2557668,
@@ -246,7 +246,7 @@
 					16
 				],
 				"clown": [
-					114074,
+					786203,
 					0
 				]
 			},
@@ -284,7 +284,7 @@
 					[
 						195,
 						0.5833333333333334,
-						0
+						1
 					],
 					[
 						398,
@@ -346,241 +346,153 @@
 						"shortteam": "MCI",
 						"position": "Attack",
 						"multiplier": 1.5833333333333333,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 2.210526315789474,
+						"started": true
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Attack",
 						"multiplier": 1.3333333333333333,
-						"kit_path": "kits/Liverpool.png"
+						"kit_path": "kits/Liverpool.png",
+						"points": 2.6875,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Attack",
 						"multiplier": 1.25,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "MUN",
 						"position": "Attack",
 						"multiplier": 1.25,
-						"kit_path": "kits/Man Utd.png"
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.6,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Defence",
 						"multiplier": 1.0833333333333333,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Defence",
 						"multiplier": 1.0833333333333333,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 9.692307692307692,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Attack",
 						"multiplier": 1.0,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 6.083333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Defence",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "NFO",
 						"position": "Defence",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Nott'm Forest.png"
+						"kit_path": "kits/Nott'm Forest.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Attack",
 						"multiplier": 0.5833333333333334,
-						"kit_path": "kits/Aston Villa.png"
+						"kit_path": "kits/Aston Villa.png",
+						"points": 4.714285714285714,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Attack",
 						"multiplier": 0.4166666666666667,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 16.0,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Defence",
 						"multiplier": 0.25,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 5.333333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "MUN",
 						"position": "Defence",
 						"multiplier": 0.25,
-						"kit_path": "kits/Man Utd.png"
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.3333333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "CRY",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Crystal Palace.png"
+						"kit_path": "kits/Crystal Palace.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Attack",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 5.0,
+						"started": true
 					},
 					{
 						"shortteam": "FUL",
 						"position": "Defence",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Fulham.png"
+						"kit_path": "kits/Fulham.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "MCI",
 						"position": "Defence",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 7.0,
+						"started": true
 					},
 					{
 						"shortteam": "SHU",
 						"position": "Defence",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Sheffield Utd.png"
+						"kit_path": "kits/Sheffield Utd.png",
+						"points": 0.0,
+						"started": true
 					},
 					{
 						"shortteam": "TOT",
 						"position": "Attack",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Spurs.png"
-					},
-					{
-						"shortteam": "AVL",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Aston Villa.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Crystal Palace.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "FUL",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Fulham.png"
-					},
-					{
-						"shortteam": "LIV",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Liverpool.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "NEW",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Newcastle.png"
-					},
-					{
-						"shortteam": "NEW",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Newcastle.png"
-					},
-					{
-						"shortteam": "NFO",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Nott'm Forest.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Sheffield Utd.png"
-					},
-					{
-						"shortteam": "TOT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Spurs.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WOL",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Wolves.png"
-					},
-					{
-						"shortteam": "WOL",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Wolves.png"
+						"kit_path": "kits/Spurs.png",
+						"points": 3.0,
+						"started": true
 					}
 				]
 			},
@@ -619,8 +531,8 @@
 			"positions": {
 				"114074": 0,
 				"554798": 1,
-				"904172": 2,
-				"264578": 3,
+				"264578": 2,
+				"904172": 3,
 				"475362": 4,
 				"3674681": 5,
 				"80434": 6,
@@ -653,19 +565,19 @@
 				],
 				"hot_stuff": [
 					264578,
-					0.4810512559895454
+					0.4879649890590807
 				],
 				"soggy_biscuit": [
 					7425798,
 					-0.32115403813517013
 				],
 				"rocket": [
-					554798,
-					90.39507542242113
+					114074,
+					90.08480545294066
 				],
 				"flushed": [
-					3674681,
-					-100.1014743459286
+					2557668,
+					-120.26982143816197
 				],
 				"boner": [
 					114074,
@@ -673,7 +585,7 @@
 				],
 				"smooth_brain": [
 					1408554,
-					9
+					10
 				],
 				"chair": [
 					2557668,
@@ -788,241 +700,153 @@
 						"shortteam": "MCI",
 						"position": "Attack",
 						"multiplier": 1.5833333333333333,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 2.210526315789474,
+						"started": true
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Attack",
 						"multiplier": 1.3333333333333333,
-						"kit_path": "kits/Liverpool.png"
+						"kit_path": "kits/Liverpool.png",
+						"points": 2.6875,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Attack",
 						"multiplier": 1.25,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "MUN",
 						"position": "Attack",
 						"multiplier": 1.25,
-						"kit_path": "kits/Man Utd.png"
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.6,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Defence",
 						"multiplier": 1.0833333333333333,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Defence",
 						"multiplier": 1.0833333333333333,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 9.692307692307692,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Attack",
 						"multiplier": 1.0,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 6.083333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Defence",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "NFO",
 						"position": "Defence",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Nott'm Forest.png"
+						"kit_path": "kits/Nott'm Forest.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Attack",
 						"multiplier": 0.5833333333333334,
-						"kit_path": "kits/Aston Villa.png"
+						"kit_path": "kits/Aston Villa.png",
+						"points": 4.714285714285714,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Attack",
 						"multiplier": 0.4166666666666667,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 16.0,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Defence",
 						"multiplier": 0.25,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 5.333333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "MUN",
 						"position": "Defence",
 						"multiplier": 0.25,
-						"kit_path": "kits/Man Utd.png"
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.3333333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "CRY",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Crystal Palace.png"
+						"kit_path": "kits/Crystal Palace.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Attack",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 5.0,
+						"started": true
 					},
 					{
 						"shortteam": "FUL",
 						"position": "Defence",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Fulham.png"
+						"kit_path": "kits/Fulham.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "MCI",
 						"position": "Defence",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 7.0,
+						"started": true
 					},
 					{
 						"shortteam": "SHU",
 						"position": "Defence",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Sheffield Utd.png"
+						"kit_path": "kits/Sheffield Utd.png",
+						"points": 0.0,
+						"started": true
 					},
 					{
 						"shortteam": "TOT",
 						"position": "Attack",
 						"multiplier": 0.08333333333333333,
-						"kit_path": "kits/Spurs.png"
-					},
-					{
-						"shortteam": "AVL",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Aston Villa.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Crystal Palace.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "FUL",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Fulham.png"
-					},
-					{
-						"shortteam": "LIV",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Liverpool.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "NEW",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Newcastle.png"
-					},
-					{
-						"shortteam": "NEW",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Newcastle.png"
-					},
-					{
-						"shortteam": "NFO",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Nott'm Forest.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Sheffield Utd.png"
-					},
-					{
-						"shortteam": "TOT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Spurs.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WOL",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Wolves.png"
-					},
-					{
-						"shortteam": "WOL",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Wolves.png"
+						"kit_path": "kits/Spurs.png",
+						"points": 3.0,
+						"started": true
 					}
 				]
 			},
@@ -1406,596 +1230,6 @@
 					61
 				],
 				"cock": [
-					2786749,
-					9
-				],
-				"goals": [
-					1045956,
-					6
-				],
-				"scientist": [
-					1236549,
-					294,
-					false,
-					12
-				],
-				"hot_stuff": [
-					3331654,
-					0.6850668216153398
-				],
-				"soggy_biscuit": [
-					2786749,
-					-0.654510556621881
-				],
-				"rocket": [
-					1677242,
-					94.16501897537294
-				],
-				"flushed": [
-					2786803,
-					-1244.5598294051313
-				],
-				"boner": [
-					417434,
-					216
-				],
-				"smooth_brain": [
-					2156706,
-					24
-				],
-				"chair": [
-					1639497,
-					546
-				],
-				"asbo": [
-					8880188,
-					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
-				],
-				"fortune": [
-					554798,
-					16
-				],
-				"clown": [
-					3415845,
-					-17
-				]
-			},
-			"template": {
-				"captain": [
-					[
-						355,
-						0.6608695652173913,
-						2
-					],
-					[
-						308,
-						0.20869565217391303,
-						5
-					],
-					[
-						19,
-						0.034782608695652174,
-						null
-					],
-					[
-						290,
-						0.02608695652173913,
-						2
-					],
-					[
-						433,
-						0.017391304347826087,
-						1
-					]
-				],
-				"goalkeeper": [
-					[
-						28,
-						0.19130434782608696,
-						2
-					],
-					[
-						597,
-						0.1826086956521739,
-						2
-					],
-					[
-						17,
-						0.16521739130434782,
-						null
-					],
-					[
-						352,
-						0.10434782608695652,
-						6
-					],
-					[
-						263,
-						0.08695652173913043,
-						0
-					]
-				],
-				"defence": [
-					[
-						131,
-						0.6782608695652174,
-						11
-					],
-					[
-						5,
-						0.4,
-						null
-					],
-					[
-						195,
-						0.30434782608695654,
-						0
-					],
-					[
-						290,
-						0.2782608695652174,
-						2
-					],
-					[
-						398,
-						0.2608695652173913,
-						1
-					]
-				],
-				"midfield": [
-					[
-						19,
-						0.808695652173913,
-						null
-					],
-					[
-						396,
-						0.5652173913043478,
-						2
-					],
-					[
-						143,
-						0.4260869565217391,
-						12
-					],
-					[
-						308,
-						0.2956521739130435,
-						5
-					],
-					[
-						373,
-						0.28695652173913044,
-						1
-					]
-				],
-				"forwards": [
-					[
-						355,
-						0.9652173913043478,
-						2
-					],
-					[
-						135,
-						0.4,
-						0
-					],
-					[
-						60,
-						0.25217391304347825,
-						5
-					],
-					[
-						415,
-						0.13043478260869565,
-						2
-					],
-					[
-						211,
-						0.11304347826086956,
-						1
-					]
-				],
-				"ownership": [
-					{
-						"shortteam": "MCI",
-						"position": "Attack",
-						"multiplier": 1.8782608695652174,
-						"kit_path": "kits/Man City.png"
-					},
-					{
-						"shortteam": "ARS",
-						"position": "Attack",
-						"multiplier": 1.4173913043478261,
-						"kit_path": "kits/Arsenal.png"
-					},
-					{
-						"shortteam": "BHA",
-						"position": "Attack",
-						"multiplier": 0.9478260869565217,
-						"kit_path": "kits/Brighton.png"
-					},
-					{
-						"shortteam": "MUN",
-						"position": "Attack",
-						"multiplier": 0.8869565217391304,
-						"kit_path": "kits/Man Utd.png"
-					},
-					{
-						"shortteam": "LIV",
-						"position": "Attack",
-						"multiplier": 0.8347826086956521,
-						"kit_path": "kits/Liverpool.png"
-					},
-					{
-						"shortteam": "ARS",
-						"position": "Defence",
-						"multiplier": 0.8173913043478261,
-						"kit_path": "kits/Arsenal.png"
-					},
-					{
-						"shortteam": "BHA",
-						"position": "Defence",
-						"multiplier": 0.7652173913043478,
-						"kit_path": "kits/Brighton.png"
-					},
-					{
-						"shortteam": "MUN",
-						"position": "Defence",
-						"multiplier": 0.46956521739130436,
-						"kit_path": "kits/Man Utd.png"
-					},
-					{
-						"shortteam": "AVL",
-						"position": "Attack",
-						"multiplier": 0.4608695652173913,
-						"kit_path": "kits/Aston Villa.png"
-					},
-					{
-						"shortteam": "CHE",
-						"position": "Defence",
-						"multiplier": 0.41739130434782606,
-						"kit_path": "kits/Chelsea.png"
-					},
-					{
-						"shortteam": "LIV",
-						"position": "Defence",
-						"multiplier": 0.4,
-						"kit_path": "kits/Liverpool.png"
-					},
-					{
-						"shortteam": "NEW",
-						"position": "Defence",
-						"multiplier": 0.391304347826087,
-						"kit_path": "kits/Newcastle.png"
-					},
-					{
-						"shortteam": "NEW",
-						"position": "Attack",
-						"multiplier": 0.2956521739130435,
-						"kit_path": "kits/Newcastle.png"
-					},
-					{
-						"shortteam": "BRE",
-						"position": "Attack",
-						"multiplier": 0.2608695652173913,
-						"kit_path": "kits/Brentford.png"
-					},
-					{
-						"shortteam": "MCI",
-						"position": "Defence",
-						"multiplier": 0.2608695652173913,
-						"kit_path": "kits/Man City.png"
-					},
-					{
-						"shortteam": "TOT",
-						"position": "Attack",
-						"multiplier": 0.20869565217391303,
-						"kit_path": "kits/Spurs.png"
-					},
-					{
-						"shortteam": "CHE",
-						"position": "Attack",
-						"multiplier": 0.19130434782608696,
-						"kit_path": "kits/Chelsea.png"
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Attack",
-						"multiplier": 0.19130434782608696,
-						"kit_path": "kits/Crystal Palace.png"
-					},
-					{
-						"shortteam": "NFO",
-						"position": "Defence",
-						"multiplier": 0.19130434782608696,
-						"kit_path": "kits/Nott'm Forest.png"
-					},
-					{
-						"shortteam": "AVL",
-						"position": "Defence",
-						"multiplier": 0.1565217391304348,
-						"kit_path": "kits/Aston Villa.png"
-					},
-					{
-						"shortteam": "BRE",
-						"position": "Defence",
-						"multiplier": 0.13043478260869565,
-						"kit_path": "kits/Brentford.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Defence",
-						"multiplier": 0.10434782608695652,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "FUL",
-						"position": "Defence",
-						"multiplier": 0.06956521739130435,
-						"kit_path": "kits/Fulham.png"
-					},
-					{
-						"shortteam": "NFO",
-						"position": "Attack",
-						"multiplier": 0.05217391304347826,
-						"kit_path": "kits/Nott'm Forest.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Defence",
-						"multiplier": 0.02608695652173913,
-						"kit_path": "kits/Sheffield Utd.png"
-					},
-					{
-						"shortteam": "TOT",
-						"position": "Defence",
-						"multiplier": 0.02608695652173913,
-						"kit_path": "kits/Spurs.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Attack",
-						"multiplier": 0.02608695652173913,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Defence",
-						"multiplier": 0.02608695652173913,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Attack",
-						"multiplier": 0.017391304347826087,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Defence",
-						"multiplier": 0.017391304347826087,
-						"kit_path": "kits/Crystal Palace.png"
-					},
-					{
-						"shortteam": "FUL",
-						"position": "Attack",
-						"multiplier": 0.017391304347826087,
-						"kit_path": "kits/Fulham.png"
-					},
-					{
-						"shortteam": "WOL",
-						"position": "Attack",
-						"multiplier": 0.017391304347826087,
-						"kit_path": "kits/Wolves.png"
-					},
-					{
-						"shortteam": "WOL",
-						"position": "Defence",
-						"multiplier": 0.008695652173913044,
-						"kit_path": "kits/Wolves.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Sheffield Utd.png"
-					}
-				]
-			},
-			"differentials": [
-				[
-					294,
-					1236549,
-					false,
-					12
-				],
-				[
-					343,
-					7805029,
-					false,
-					7
-				],
-				[
-					112,
-					7393593,
-					false,
-					7
-				],
-				[
-					506,
-					1351282,
-					false,
-					6
-				],
-				[
-					196,
-					786203,
-					false,
-					5
-				]
-			],
-			"positions": {
-				"1677242": 0,
-				"2827087": 1,
-				"114074": 2,
-				"369992": 3,
-				"133190": 4,
-				"3331654": 5,
-				"554798": 6,
-				"629923": 7,
-				"1236549": 8,
-				"805716": 9,
-				"566": 10,
-				"622861": 11,
-				"904172": 12,
-				"264578": 13,
-				"475362": 14,
-				"1255885": 15,
-				"3674681": 16,
-				"3139": 17,
-				"1403738": 18,
-				"5712728": 19,
-				"1034581": 0,
-				"579933": 21,
-				"597607": 22,
-				"1428358": 0,
-				"5620362": 24,
-				"266517": 25,
-				"59634": 26,
-				"927208": 27,
-				"3536344": 28,
-				"2410442": 29,
-				"624223": 30,
-				"80434": 31,
-				"347478": 32,
-				"157079": 33,
-				"4241392": 34,
-				"3553173": 35,
-				"236891": 36,
-				"1408554": 37,
-				"7083500": 38,
-				"462518": 39,
-				"1045956": 40,
-				"4460790": 41,
-				"2438325": 42,
-				"417434": 43,
-				"7495809": 44,
-				"2838722": 45,
-				"4446862": 46,
-				"5784441": 47,
-				"2904622": 48,
-				"464110": 49,
-				"1623852": 50,
-				"4650311": 0,
-				"786203": 52,
-				"1639497": 53,
-				"5055400": 54,
-				"1221993": 55,
-				"4771057": 56,
-				"134884": 57,
-				"118952": 58,
-				"225523": 59,
-				"2557668": 60,
-				"5055743": 61,
-				"1351282": 62,
-				"1973224": 63,
-				"1016971": 64,
-				"1441250": 65,
-				"3535458": 66,
-				"69814": 67,
-				"621667": 68,
-				"4694555": 69,
-				"864102": 70,
-				"6515619": 71,
-				"300734": 72,
-				"7171275": 0,
-				"2156706": 74,
-				"957641": 75,
-				"2675834": 76,
-				"778734": 77,
-				"1098669": 78,
-				"2786803": 79,
-				"6959557": 80,
-				"674124": 81,
-				"5566286": 82,
-				"4098261": 83,
-				"492940": 84,
-				"2580663": 85,
-				"3415845": 86,
-				"7124230": 87,
-				"6413244": 88,
-				"963579": 2,
-				"943303": 90,
-				"2344525": 91,
-				"3763762": 92,
-				"859189": 0,
-				"4739123": 94,
-				"671151": 1,
-				"6671771": 96,
-				"3605789": 97,
-				"2786749": 98,
-				"1327451": 0,
-				"6510099": 100,
-				"596972": 101,
-				"7805029": 102,
-				"3925785": 103,
-				"2425614": 104,
-				"2822979": 105,
-				"1209846": 106,
-				"4088597": 107,
-				"5434316": 1,
-				"7393593": 109,
-				"3766320": 110,
-				"5235889": 111,
-				"1025346": 112,
-				"8880188": 113,
-				"8657223": 114
-			}
-		},
-		"2": {
-			"awards": {
-				"king": [
-					629923,
-					61
-				],
-				"cock": [
 					5434316,
 					9
 				],
@@ -2018,12 +1252,12 @@
 					-0.6501457725947523
 				],
 				"rocket": [
-					1677242,
-					94.16501897537294
+					629923,
+					90.18338462687595
 				],
 				"flushed": [
 					2786803,
-					-1244.5598294051313
+					-1376.197167759818
 				],
 				"boner": [
 					417434,
@@ -2031,7 +1265,7 @@
 				],
 				"smooth_brain": [
 					2156706,
-					25
+					26
 				],
 				"chair": [
 					1639497,
@@ -2191,241 +1425,265 @@
 						"shortteam": "MCI",
 						"position": "Attack",
 						"multiplier": 1.8782608695652174,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 1.9212962962962963,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Attack",
 						"multiplier": 1.4173913043478261,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Attack",
 						"multiplier": 0.9478260869565217,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 5.63302752293578,
+						"started": true
 					},
 					{
 						"shortteam": "MUN",
 						"position": "Attack",
 						"multiplier": 0.8869565217391304,
-						"kit_path": "kits/Man Utd.png"
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.6764705882352942,
+						"started": true
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Attack",
 						"multiplier": 0.8347826086956521,
-						"kit_path": "kits/Liverpool.png"
+						"kit_path": "kits/Liverpool.png",
+						"points": 2.65625,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Defence",
 						"multiplier": 0.8173913043478261,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Defence",
 						"multiplier": 0.7652173913043478,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 10.0,
+						"started": true
 					},
 					{
 						"shortteam": "MUN",
 						"position": "Defence",
 						"multiplier": 0.46956521739130436,
-						"kit_path": "kits/Man Utd.png"
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.3148148148148149,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Attack",
 						"multiplier": 0.4608695652173913,
-						"kit_path": "kits/Aston Villa.png"
+						"kit_path": "kits/Aston Villa.png",
+						"points": 4.584905660377358,
+						"started": true
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Defence",
 						"multiplier": 0.41739130434782606,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 0.8333333333333334,
+						"started": true
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Defence",
 						"multiplier": 0.4,
-						"kit_path": "kits/Liverpool.png"
+						"kit_path": "kits/Liverpool.png",
+						"points": 1.8695652173913044,
+						"started": true
 					},
 					{
 						"shortteam": "NEW",
 						"position": "Defence",
 						"multiplier": 0.391304347826087,
-						"kit_path": "kits/Newcastle.png"
+						"kit_path": "kits/Newcastle.png",
+						"points": 2.1777777777777776,
+						"started": true
 					},
 					{
 						"shortteam": "NEW",
 						"position": "Attack",
 						"multiplier": 0.2956521739130435,
-						"kit_path": "kits/Newcastle.png"
+						"kit_path": "kits/Newcastle.png",
+						"points": 1.411764705882353,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Attack",
 						"multiplier": 0.2608695652173913,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 14.233333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "MCI",
 						"position": "Defence",
 						"multiplier": 0.2608695652173913,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 5.533333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "TOT",
 						"position": "Attack",
 						"multiplier": 0.20869565217391303,
-						"kit_path": "kits/Spurs.png"
+						"kit_path": "kits/Spurs.png",
+						"points": 2.875,
+						"started": true
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Attack",
 						"multiplier": 0.19130434782608696,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 0.8636363636363636,
+						"started": true
 					},
 					{
 						"shortteam": "CRY",
 						"position": "Attack",
 						"multiplier": 0.19130434782608696,
-						"kit_path": "kits/Crystal Palace.png"
+						"kit_path": "kits/Crystal Palace.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "NFO",
 						"position": "Defence",
 						"multiplier": 0.19130434782608696,
-						"kit_path": "kits/Nott'm Forest.png"
+						"kit_path": "kits/Nott'm Forest.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Defence",
 						"multiplier": 0.1565217391304348,
-						"kit_path": "kits/Aston Villa.png"
+						"kit_path": "kits/Aston Villa.png",
+						"points": 6.0,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Defence",
 						"multiplier": 0.13043478260869565,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 5.0,
+						"started": true
 					},
 					{
 						"shortteam": "EVE",
 						"position": "Defence",
 						"multiplier": 0.10434782608695652,
-						"kit_path": "kits/Everton.png"
+						"kit_path": "kits/Everton.png",
+						"points": 0.0,
+						"started": true
 					},
 					{
 						"shortteam": "FUL",
 						"position": "Defence",
 						"multiplier": 0.06956521739130435,
-						"kit_path": "kits/Fulham.png"
+						"kit_path": "kits/Fulham.png",
+						"points": 1.75,
+						"started": true
 					},
 					{
 						"shortteam": "NFO",
 						"position": "Attack",
 						"multiplier": 0.05217391304347826,
-						"kit_path": "kits/Nott'm Forest.png"
+						"kit_path": "kits/Nott'm Forest.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "SHU",
 						"position": "Defence",
 						"multiplier": 0.02608695652173913,
-						"kit_path": "kits/Sheffield Utd.png"
+						"kit_path": "kits/Sheffield Utd.png",
+						"points": 0.3333333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "TOT",
 						"position": "Defence",
 						"multiplier": 0.02608695652173913,
-						"kit_path": "kits/Spurs.png"
+						"kit_path": "kits/Spurs.png",
+						"points": 5.333333333333333,
+						"started": true
 					},
 					{
 						"shortteam": "WHU",
 						"position": "Attack",
 						"multiplier": 0.02608695652173913,
-						"kit_path": "kits/West Ham.png"
+						"kit_path": "kits/West Ham.png",
+						"points": 0.6666666666666666,
+						"started": true
 					},
 					{
 						"shortteam": "WHU",
 						"position": "Defence",
 						"multiplier": 0.02608695652173913,
-						"kit_path": "kits/West Ham.png"
+						"kit_path": "kits/West Ham.png",
+						"points": 8.0,
+						"started": true
 					},
 					{
 						"shortteam": "BOU",
 						"position": "Attack",
 						"multiplier": 0.017391304347826087,
-						"kit_path": "kits/Bournemouth.png"
+						"kit_path": "kits/Bournemouth.png",
+						"points": 5.0,
+						"started": true
 					},
 					{
 						"shortteam": "CRY",
 						"position": "Defence",
 						"multiplier": 0.017391304347826087,
-						"kit_path": "kits/Crystal Palace.png"
+						"kit_path": "kits/Crystal Palace.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "FUL",
 						"position": "Attack",
 						"multiplier": 0.017391304347826087,
-						"kit_path": "kits/Fulham.png"
+						"kit_path": "kits/Fulham.png",
+						"points": 1.5,
+						"started": true
 					},
 					{
 						"shortteam": "WOL",
 						"position": "Attack",
 						"multiplier": 0.017391304347826087,
-						"kit_path": "kits/Wolves.png"
+						"kit_path": "kits/Wolves.png",
+						"points": 0.5,
+						"started": true
 					},
 					{
 						"shortteam": "WOL",
 						"position": "Defence",
 						"multiplier": 0.008695652173913044,
-						"kit_path": "kits/Wolves.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Sheffield Utd.png"
+						"kit_path": "kits/Wolves.png",
+						"points": -1.0,
+						"started": true
 					}
 				]
 			},
@@ -2524,16 +1782,16 @@
 				"225523": 59,
 				"2557668": 60,
 				"5055743": 61,
-				"1351282": 62,
-				"69814": 63,
-				"621667": 64,
+				"621667": 62,
+				"1351282": 63,
+				"69814": 64,
 				"1973224": 65,
 				"1016971": 66,
-				"1441250": 67,
-				"3535458": 68,
-				"4694555": 69,
-				"864102": 70,
-				"6515619": 71,
+				"6515619": 67,
+				"1441250": 68,
+				"3535458": 69,
+				"4694555": 70,
+				"864102": 71,
 				"300734": 72,
 				"7171275": 0,
 				"2156706": 74,
@@ -2553,9 +1811,623 @@
 				"7124230": 88,
 				"6413244": 89,
 				"963579": 2,
-				"2344525": 91,
-				"3763762": 92,
 				"671151": 1,
+				"2344525": 92,
+				"3763762": 93,
+				"859189": 0,
+				"4739123": 95,
+				"6671771": 96,
+				"3605789": 97,
+				"2786749": 98,
+				"1327451": 0,
+				"6510099": 100,
+				"596972": 101,
+				"7805029": 102,
+				"3925785": 103,
+				"2425614": 104,
+				"2822979": 105,
+				"1209846": 106,
+				"4088597": 107,
+				"5434316": 1,
+				"7393593": 109,
+				"3766320": 110,
+				"5235889": 111,
+				"1025346": 112,
+				"8657223": 113,
+				"8880188": 114
+			}
+		},
+		"2": {
+			"awards": {
+				"king": [
+					629923,
+					61
+				],
+				"cock": [
+					5434316,
+					9
+				],
+				"goals": [
+					1045956,
+					6
+				],
+				"scientist": [
+					1236549,
+					294,
+					false,
+					12
+				],
+				"hot_stuff": [
+					3331654,
+					0.6850668216153398
+				],
+				"soggy_biscuit": [
+					5434316,
+					-0.6501457725947523
+				],
+				"rocket": [
+					629923,
+					90.18320956359057
+				],
+				"flushed": [
+					2786803,
+					-1376.2301906545208
+				],
+				"boner": [
+					417434,
+					216
+				],
+				"smooth_brain": [
+					2156706,
+					26
+				],
+				"chair": [
+					1639497,
+					546
+				],
+				"asbo": [
+					2344525,
+					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
+				],
+				"fortune": [
+					554798,
+					16
+				],
+				"clown": [
+					3415845,
+					-16
+				]
+			},
+			"template": {
+				"captain": [
+					[
+						355,
+						0.6608695652173913,
+						2
+					],
+					[
+						308,
+						0.20869565217391303,
+						5
+					],
+					[
+						19,
+						0.034782608695652174,
+						null
+					],
+					[
+						290,
+						0.02608695652173913,
+						2
+					],
+					[
+						433,
+						0.017391304347826087,
+						1
+					]
+				],
+				"goalkeeper": [
+					[
+						28,
+						0.19130434782608696,
+						2
+					],
+					[
+						597,
+						0.1826086956521739,
+						2
+					],
+					[
+						17,
+						0.16521739130434782,
+						null
+					],
+					[
+						352,
+						0.10434782608695652,
+						6
+					],
+					[
+						263,
+						0.08695652173913043,
+						0
+					]
+				],
+				"defence": [
+					[
+						131,
+						0.6782608695652174,
+						11
+					],
+					[
+						5,
+						0.4,
+						null
+					],
+					[
+						195,
+						0.30434782608695654,
+						1
+					],
+					[
+						290,
+						0.2782608695652174,
+						2
+					],
+					[
+						398,
+						0.2608695652173913,
+						1
+					]
+				],
+				"midfield": [
+					[
+						19,
+						0.808695652173913,
+						null
+					],
+					[
+						396,
+						0.5652173913043478,
+						2
+					],
+					[
+						143,
+						0.4260869565217391,
+						12
+					],
+					[
+						308,
+						0.2956521739130435,
+						5
+					],
+					[
+						373,
+						0.28695652173913044,
+						1
+					]
+				],
+				"forwards": [
+					[
+						355,
+						0.9652173913043478,
+						2
+					],
+					[
+						135,
+						0.4,
+						0
+					],
+					[
+						60,
+						0.25217391304347825,
+						5
+					],
+					[
+						415,
+						0.13043478260869565,
+						2
+					],
+					[
+						211,
+						0.11304347826086956,
+						1
+					]
+				],
+				"ownership": [
+					{
+						"shortteam": "MCI",
+						"position": "Attack",
+						"multiplier": 1.8782608695652174,
+						"kit_path": "kits/Man City.png",
+						"points": 1.9212962962962963,
+						"started": true
+					},
+					{
+						"shortteam": "ARS",
+						"position": "Attack",
+						"multiplier": 1.4173913043478261,
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
+					},
+					{
+						"shortteam": "BHA",
+						"position": "Attack",
+						"multiplier": 0.9478260869565217,
+						"kit_path": "kits/Brighton.png",
+						"points": 5.63302752293578,
+						"started": true
+					},
+					{
+						"shortteam": "MUN",
+						"position": "Attack",
+						"multiplier": 0.8869565217391304,
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.6764705882352942,
+						"started": true
+					},
+					{
+						"shortteam": "LIV",
+						"position": "Attack",
+						"multiplier": 0.8347826086956521,
+						"kit_path": "kits/Liverpool.png",
+						"points": 2.65625,
+						"started": true
+					},
+					{
+						"shortteam": "ARS",
+						"position": "Defence",
+						"multiplier": 0.8173913043478261,
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
+					},
+					{
+						"shortteam": "BHA",
+						"position": "Defence",
+						"multiplier": 0.7652173913043478,
+						"kit_path": "kits/Brighton.png",
+						"points": 10.0,
+						"started": true
+					},
+					{
+						"shortteam": "MUN",
+						"position": "Defence",
+						"multiplier": 0.46956521739130436,
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.3148148148148149,
+						"started": true
+					},
+					{
+						"shortteam": "AVL",
+						"position": "Attack",
+						"multiplier": 0.4608695652173913,
+						"kit_path": "kits/Aston Villa.png",
+						"points": 4.584905660377358,
+						"started": true
+					},
+					{
+						"shortteam": "CHE",
+						"position": "Defence",
+						"multiplier": 0.41739130434782606,
+						"kit_path": "kits/Chelsea.png",
+						"points": 0.8333333333333334,
+						"started": true
+					},
+					{
+						"shortteam": "LIV",
+						"position": "Defence",
+						"multiplier": 0.4,
+						"kit_path": "kits/Liverpool.png",
+						"points": 1.8695652173913044,
+						"started": true
+					},
+					{
+						"shortteam": "NEW",
+						"position": "Defence",
+						"multiplier": 0.391304347826087,
+						"kit_path": "kits/Newcastle.png",
+						"points": 2.1777777777777776,
+						"started": true
+					},
+					{
+						"shortteam": "NEW",
+						"position": "Attack",
+						"multiplier": 0.2956521739130435,
+						"kit_path": "kits/Newcastle.png",
+						"points": 1.411764705882353,
+						"started": true
+					},
+					{
+						"shortteam": "BRE",
+						"position": "Attack",
+						"multiplier": 0.2608695652173913,
+						"kit_path": "kits/Brentford.png",
+						"points": 14.233333333333333,
+						"started": true
+					},
+					{
+						"shortteam": "MCI",
+						"position": "Defence",
+						"multiplier": 0.2608695652173913,
+						"kit_path": "kits/Man City.png",
+						"points": 5.533333333333333,
+						"started": true
+					},
+					{
+						"shortteam": "TOT",
+						"position": "Attack",
+						"multiplier": 0.20869565217391303,
+						"kit_path": "kits/Spurs.png",
+						"points": 2.875,
+						"started": true
+					},
+					{
+						"shortteam": "CHE",
+						"position": "Attack",
+						"multiplier": 0.19130434782608696,
+						"kit_path": "kits/Chelsea.png",
+						"points": 0.8636363636363636,
+						"started": true
+					},
+					{
+						"shortteam": "CRY",
+						"position": "Attack",
+						"multiplier": 0.19130434782608696,
+						"kit_path": "kits/Crystal Palace.png",
+						"points": 0.0,
+						"started": false
+					},
+					{
+						"shortteam": "NFO",
+						"position": "Defence",
+						"multiplier": 0.19130434782608696,
+						"kit_path": "kits/Nott'm Forest.png",
+						"points": 2.0,
+						"started": true
+					},
+					{
+						"shortteam": "AVL",
+						"position": "Defence",
+						"multiplier": 0.1565217391304348,
+						"kit_path": "kits/Aston Villa.png",
+						"points": 6.0,
+						"started": true
+					},
+					{
+						"shortteam": "BRE",
+						"position": "Defence",
+						"multiplier": 0.13043478260869565,
+						"kit_path": "kits/Brentford.png",
+						"points": 5.0,
+						"started": true
+					},
+					{
+						"shortteam": "EVE",
+						"position": "Defence",
+						"multiplier": 0.10434782608695652,
+						"kit_path": "kits/Everton.png",
+						"points": 0.0,
+						"started": true
+					},
+					{
+						"shortteam": "FUL",
+						"position": "Defence",
+						"multiplier": 0.06956521739130435,
+						"kit_path": "kits/Fulham.png",
+						"points": 1.75,
+						"started": true
+					},
+					{
+						"shortteam": "NFO",
+						"position": "Attack",
+						"multiplier": 0.05217391304347826,
+						"kit_path": "kits/Nott'm Forest.png",
+						"points": 2.0,
+						"started": true
+					},
+					{
+						"shortteam": "SHU",
+						"position": "Defence",
+						"multiplier": 0.02608695652173913,
+						"kit_path": "kits/Sheffield Utd.png",
+						"points": 0.3333333333333333,
+						"started": true
+					},
+					{
+						"shortteam": "TOT",
+						"position": "Defence",
+						"multiplier": 0.02608695652173913,
+						"kit_path": "kits/Spurs.png",
+						"points": 5.333333333333333,
+						"started": true
+					},
+					{
+						"shortteam": "WHU",
+						"position": "Attack",
+						"multiplier": 0.02608695652173913,
+						"kit_path": "kits/West Ham.png",
+						"points": 0.6666666666666666,
+						"started": true
+					},
+					{
+						"shortteam": "WHU",
+						"position": "Defence",
+						"multiplier": 0.02608695652173913,
+						"kit_path": "kits/West Ham.png",
+						"points": 8.0,
+						"started": true
+					},
+					{
+						"shortteam": "BOU",
+						"position": "Attack",
+						"multiplier": 0.017391304347826087,
+						"kit_path": "kits/Bournemouth.png",
+						"points": 5.0,
+						"started": true
+					},
+					{
+						"shortteam": "CRY",
+						"position": "Defence",
+						"multiplier": 0.017391304347826087,
+						"kit_path": "kits/Crystal Palace.png",
+						"points": 0.0,
+						"started": false
+					},
+					{
+						"shortteam": "FUL",
+						"position": "Attack",
+						"multiplier": 0.017391304347826087,
+						"kit_path": "kits/Fulham.png",
+						"points": 1.5,
+						"started": true
+					},
+					{
+						"shortteam": "WOL",
+						"position": "Attack",
+						"multiplier": 0.017391304347826087,
+						"kit_path": "kits/Wolves.png",
+						"points": 0.5,
+						"started": true
+					},
+					{
+						"shortteam": "WOL",
+						"position": "Defence",
+						"multiplier": 0.008695652173913044,
+						"kit_path": "kits/Wolves.png",
+						"points": -1.0,
+						"started": true
+					}
+				]
+			},
+			"differentials": [
+				[
+					294,
+					1236549,
+					false,
+					12
+				],
+				[
+					343,
+					7805029,
+					false,
+					7
+				],
+				[
+					112,
+					7393593,
+					false,
+					7
+				],
+				[
+					506,
+					1351282,
+					false,
+					6
+				],
+				[
+					196,
+					786203,
+					false,
+					5
+				]
+			],
+			"positions": {
+				"1677242": 0,
+				"2827087": 1,
+				"114074": 2,
+				"369992": 3,
+				"133190": 4,
+				"3331654": 5,
+				"554798": 6,
+				"629923": 7,
+				"1236549": 8,
+				"566": 9,
+				"805716": 10,
+				"622861": 11,
+				"264578": 12,
+				"904172": 13,
+				"475362": 14,
+				"3674681": 15,
+				"3139": 16,
+				"1255885": 17,
+				"1403738": 18,
+				"5712728": 19,
+				"1034581": 0,
+				"579933": 21,
+				"1428358": 0,
+				"597607": 23,
+				"5620362": 24,
+				"266517": 25,
+				"59634": 26,
+				"927208": 27,
+				"2410442": 28,
+				"624223": 29,
+				"80434": 30,
+				"347478": 31,
+				"3536344": 32,
+				"157079": 33,
+				"236891": 34,
+				"1408554": 35,
+				"7083500": 36,
+				"4241392": 37,
+				"462518": 38,
+				"3553173": 39,
+				"2838722": 40,
+				"2438325": 41,
+				"1045956": 42,
+				"4460790": 43,
+				"417434": 44,
+				"7495809": 45,
+				"5784441": 46,
+				"464110": 47,
+				"4446862": 48,
+				"4650311": 0,
+				"2904622": 50,
+				"1623852": 51,
+				"786203": 52,
+				"1639497": 53,
+				"5055400": 54,
+				"1221993": 55,
+				"4771057": 56,
+				"118952": 57,
+				"134884": 58,
+				"225523": 59,
+				"2557668": 60,
+				"5055743": 61,
+				"621667": 62,
+				"1351282": 63,
+				"69814": 64,
+				"1973224": 65,
+				"1016971": 66,
+				"6515619": 67,
+				"1441250": 68,
+				"3535458": 69,
+				"4694555": 70,
+				"864102": 71,
+				"300734": 72,
+				"7171275": 0,
+				"2156706": 74,
+				"957641": 75,
+				"2675834": 76,
+				"1098669": 77,
+				"2786803": 78,
+				"778734": 79,
+				"492940": 80,
+				"6959557": 81,
+				"674124": 82,
+				"5566286": 83,
+				"4098261": 84,
+				"2580663": 85,
+				"3415845": 86,
+				"943303": 87,
+				"7124230": 88,
+				"6413244": 89,
+				"963579": 2,
+				"671151": 1,
+				"2344525": 92,
+				"3763762": 93,
 				"859189": 0,
 				"4739123": 95,
 				"6671771": 96,
@@ -2753,7 +2625,7 @@
 			"awards": {
 				"king": [
 					264578,
-					50
+					51
 				],
 				"cock": [
 					7962178,
@@ -2771,34 +2643,34 @@
 				],
 				"hot_stuff": [
 					264578,
-					0.4961101137043686
+					0.4879649890590807
 				],
 				"soggy_biscuit": [
 					7962178,
-					-0.1676234213547647
+					-0.19084821428571436
 				],
 				"rocket": [
-					7411754,
-					68.3971186027724
+					264578,
+					69.35962812101614
 				],
 				"flushed": [
 					7962178,
-					-26.12660894753078
+					-12.822638957994311
 				],
 				"boner": [
 					264578,
-					170
+					172
 				],
 				"smooth_brain": [
 					1408554,
-					8
+					10
 				],
 				"chair": [
 					1408554,
-					746
+					747
 				],
 				"asbo": [
-					927208,
+					7411754,
 					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
 				],
 				"fortune": [
@@ -2844,7 +2716,7 @@
 					[
 						197,
 						0.3333333333333333,
-						0
+						1
 					],
 					[
 						430,
@@ -2901,241 +2773,177 @@
 						"shortteam": "MCI",
 						"position": "Attack",
 						"multiplier": 1.8333333333333333,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 2.5454545454545454,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Attack",
 						"multiplier": 1.6666666666666667,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "MUN",
 						"position": "Attack",
 						"multiplier": 1.1666666666666667,
-						"kit_path": "kits/Man Utd.png"
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.4285714285714286,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Attack",
 						"multiplier": 1.0,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 8.0,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Defence",
 						"multiplier": 1.0,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 8.333333333333334,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Defence",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Attack",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Liverpool.png"
+						"kit_path": "kits/Liverpool.png",
+						"points": 3.25,
+						"started": true
 					},
 					{
 						"shortteam": "NEW",
 						"position": "Defence",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Newcastle.png"
+						"kit_path": "kits/Newcastle.png",
+						"points": 2.25,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Attack",
 						"multiplier": 0.5,
-						"kit_path": "kits/Aston Villa.png"
+						"kit_path": "kits/Aston Villa.png",
+						"points": 5.0,
+						"started": true
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Defence",
 						"multiplier": 0.5,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Defence",
 						"multiplier": 0.3333333333333333,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 5.0,
+						"started": true
 					},
 					{
 						"shortteam": "TOT",
 						"position": "Attack",
 						"multiplier": 0.3333333333333333,
-						"kit_path": "kits/Spurs.png"
+						"kit_path": "kits/Spurs.png",
+						"points": 3.0,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Aston Villa.png"
+						"kit_path": "kits/Aston Villa.png",
+						"points": 8.0,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 16.0,
+						"started": true
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "EVE",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Everton.png"
+						"kit_path": "kits/Everton.png",
+						"points": 0.0,
+						"started": true
 					},
 					{
 						"shortteam": "FUL",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Fulham.png"
+						"kit_path": "kits/Fulham.png",
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Liverpool.png"
+						"kit_path": "kits/Liverpool.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "MCI",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 6.0,
+						"started": true
 					},
 					{
 						"shortteam": "NEW",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Newcastle.png"
+						"kit_path": "kits/Newcastle.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "NFO",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Nott'm Forest.png"
+						"kit_path": "kits/Nott'm Forest.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "WOL",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Wolves.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Crystal Palace.png"
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Crystal Palace.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "FUL",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Fulham.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "MUN",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Man Utd.png"
-					},
-					{
-						"shortteam": "NFO",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Nott'm Forest.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Sheffield Utd.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Sheffield Utd.png"
-					},
-					{
-						"shortteam": "TOT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Spurs.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WOL",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Wolves.png"
+						"kit_path": "kits/Wolves.png",
+						"points": 2.0,
+						"started": true
 					}
 				]
 			},
@@ -3202,34 +3010,34 @@
 				],
 				"hot_stuff": [
 					264578,
-					0.4810512559895454
+					0.4879649890590807
 				],
 				"soggy_biscuit": [
 					7962178,
 					-0.19084821428571436
 				],
 				"rocket": [
-					7411754,
-					68.3971186027724
+					264578,
+					69.35906278355208
 				],
 				"flushed": [
 					7962178,
-					-26.12660894753078
+					-12.825297179519776
 				],
 				"boner": [
 					264578,
-					174
+					172
 				],
 				"smooth_brain": [
 					1408554,
-					9
+					10
 				],
 				"chair": [
 					1408554,
 					747
 				],
 				"asbo": [
-					927208,
+					7411754,
 					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
 				],
 				"fortune": [
@@ -3332,241 +3140,177 @@
 						"shortteam": "MCI",
 						"position": "Attack",
 						"multiplier": 1.8333333333333333,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 2.5454545454545454,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Attack",
 						"multiplier": 1.6666666666666667,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "MUN",
 						"position": "Attack",
 						"multiplier": 1.1666666666666667,
-						"kit_path": "kits/Man Utd.png"
+						"kit_path": "kits/Man Utd.png",
+						"points": 1.4285714285714286,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Attack",
 						"multiplier": 1.0,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 8.0,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Defence",
 						"multiplier": 1.0,
-						"kit_path": "kits/Brighton.png"
+						"kit_path": "kits/Brighton.png",
+						"points": 8.333333333333334,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Defence",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Arsenal.png"
+						"kit_path": "kits/Arsenal.png",
+						"points": 0.0,
+						"started": false
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Attack",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Liverpool.png"
+						"kit_path": "kits/Liverpool.png",
+						"points": 3.25,
+						"started": true
 					},
 					{
 						"shortteam": "NEW",
 						"position": "Defence",
 						"multiplier": 0.6666666666666666,
-						"kit_path": "kits/Newcastle.png"
+						"kit_path": "kits/Newcastle.png",
+						"points": 2.25,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Attack",
 						"multiplier": 0.5,
-						"kit_path": "kits/Aston Villa.png"
+						"kit_path": "kits/Aston Villa.png",
+						"points": 5.0,
+						"started": true
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Defence",
 						"multiplier": 0.5,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Defence",
 						"multiplier": 0.3333333333333333,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 5.0,
+						"started": true
 					},
 					{
 						"shortteam": "TOT",
 						"position": "Attack",
 						"multiplier": 0.3333333333333333,
-						"kit_path": "kits/Spurs.png"
+						"kit_path": "kits/Spurs.png",
+						"points": 3.0,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Aston Villa.png"
+						"kit_path": "kits/Aston Villa.png",
+						"points": 8.0,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Brentford.png"
+						"kit_path": "kits/Brentford.png",
+						"points": 16.0,
+						"started": true
 					},
 					{
 						"shortteam": "CHE",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Chelsea.png"
+						"kit_path": "kits/Chelsea.png",
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "EVE",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Everton.png"
+						"kit_path": "kits/Everton.png",
+						"points": 0.0,
+						"started": true
 					},
 					{
 						"shortteam": "FUL",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Fulham.png"
+						"kit_path": "kits/Fulham.png",
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Liverpool.png"
+						"kit_path": "kits/Liverpool.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "MCI",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Man City.png"
+						"kit_path": "kits/Man City.png",
+						"points": 6.0,
+						"started": true
 					},
 					{
 						"shortteam": "NEW",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Newcastle.png"
+						"kit_path": "kits/Newcastle.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "NFO",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Nott'm Forest.png"
+						"kit_path": "kits/Nott'm Forest.png",
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "WOL",
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
-						"kit_path": "kits/Wolves.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BOU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Bournemouth.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "BUR",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Burnley.png"
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Crystal Palace.png"
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Crystal Palace.png"
-					},
-					{
-						"shortteam": "EVE",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Everton.png"
-					},
-					{
-						"shortteam": "FUL",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Fulham.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "LUT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Luton.png"
-					},
-					{
-						"shortteam": "MUN",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Man Utd.png"
-					},
-					{
-						"shortteam": "NFO",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Nott'm Forest.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/Sheffield Utd.png"
-					},
-					{
-						"shortteam": "SHU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Sheffield Utd.png"
-					},
-					{
-						"shortteam": "TOT",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Spurs.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Attack",
-						"multiplier": 0.0,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WHU",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/West Ham.png"
-					},
-					{
-						"shortteam": "WOL",
-						"position": "Defence",
-						"multiplier": 0.0,
-						"kit_path": "kits/Wolves.png"
+						"kit_path": "kits/Wolves.png",
+						"points": 2.0,
+						"started": true
 					}
 				]
 			},
@@ -3612,5 +3356,5 @@
 			}
 		}
 	},
-	"timestamp": "2023-08-20 18:16:20"
+	"timestamp": "2023-08-20 19:19:11"
 }
