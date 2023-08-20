@@ -3334,7 +3334,6 @@ def award_rules_md():
 
 	'''
 
-
 def create_leaguepage(league,leagues,i):
 	mout.debugOut(f"create_leaguepage({league})")
 
@@ -3537,16 +3536,14 @@ def create_leaguepage(league,leagues,i):
 	if gw > 0:
 		mout.debugOut(f"create_leaguepage({league})::Template")
 		html_buffer += floating_subtitle('League Template')
-		# html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		# html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:2px;padding-bottom:4px">\n'
 		html_buffer += league_template(league, gw)
-		# html_buffer += '</div>\n'
-		# html_buffer += '</div>\n'
 
 		mout.debugOut(f"create_leaguepage({league})::Differentials")
 		html_buffer += floating_subtitle('Killer Differentials')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
+
+	if awards:
 		html_buffer += league_differentials(league, gw)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -3566,17 +3563,9 @@ def create_leaguepage(league,leagues,i):
 		
 		html_buffer += floating_subtitle('Popular Moves')
 		
-		html_buffer += '<div class="w3-col s12 m12 l6">\n'
-		html_buffer += '<div class="w3-panel w3-pale-green shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
-		html_buffer += transfer_table(ids_in, 'In')
-		html_buffer += '</div>\n'
-		html_buffer += '</div>\n'
+		html_buffer += transfer_table(ids_in, 'In', 'pale-green')
 
-		html_buffer += '<div class="w3-col s12 m12 l6">\n'
-		html_buffer += '<div class="w3-panel w3-pale-red shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
-		html_buffer += transfer_table(ids_out, 'Out')
-		html_buffer += '</div>\n'
-		html_buffer += '</div>\n'
+		html_buffer += transfer_table(ids_out, 'Out', 'pale-red')
 	
 	if not preseason:
 
@@ -3713,10 +3702,13 @@ def league_chips(league,gw):
 
 	return html_buffer
 
-def transfer_table(ids,title_str):
+def transfer_table(ids,title_str,colour_str):
 
 	global api
 	html_buffer = ""
+
+	html_buffer += '<div class="w3-col s12 m12 l6">\n'
+	html_buffer += f'<div class="w3-panel w3-{colour_str} shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 
 	html_buffer += '<div class="w3-responsive w3-padding">\n'
 	html_buffer += f'<h2>Transferred {title_str}:</h2>\n'
@@ -3764,10 +3756,6 @@ def transfer_table(ids,title_str):
 		html_buffer += f'{count}'
 		html_buffer += '</td>\n'
 
-		# html_buffer += '<td class="w3-center">'
-		# score, summary = p.get_event_score(gw=gw,summary=True,not_playing_is_none=True)
-		# summary = summary.replace("\n","<br>")
-
 		form = p.form
 		style_str = get_style_from_event_score(form).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{form}</td>\n'
@@ -3782,14 +3770,12 @@ def transfer_table(ids,title_str):
 			else:
 				html_buffer += f'<td class="w3-center" style={style_str}>{p.get_fixture_str(i,short=True,lower_away=True)} ({exp:.1f})</td>\n'
 
-		# html_buffer += '<td>'
-		# html_buffer += f'{summary}'
-		# html_buffer += '</td>\n'
-
 		html_buffer += '</tr>\n'
 
 	html_buffer += '</tbody>\n'
 	html_buffer += '</table>\n'
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
 
 	return html_buffer
@@ -3927,7 +3913,7 @@ def league_table_html(league,gw,awardkey=None):
 		if 'Toilet' in league.name and m.is_diamond and m.id != 3902717:
 			diamond_count += 1
 			# html_buffer += '<tr class="w3-pale-blue">\n'
-		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i <= 5 + diamond_count:
+		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i <= 3 + diamond_count:
 			# print('dimiond')
 			html_buffer += '<tr class="w3-pale-green">\n'
 		elif 'Diamond' in league.name and i >= len(sorted_managers)-4:
@@ -4308,7 +4294,7 @@ def league_differentials(league,gw):
 		summary = summary.replace("\n","<br>")
 
 		html_buffer += f'<tr>\n'
-		html_buffer += f'<td style="vertical-align:middle;">\n'
+		html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
 		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
 		html_buffer += f'</td>\n'
 		html_buffer += f'<td style="vertical-align:middle;">\n'
@@ -4328,7 +4314,7 @@ def league_differentials(league,gw):
 		html_buffer += f'<span class="w3-tag" style={style_str}>{p.multiplier*score}pts</span>\n'
 		html_buffer += f'</td>\n'
 
-		html_buffer += f'<td style="vertical-align:middle;">\n'
+		html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
 		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
 		html_buffer += f'</td>\n'
 		html_buffer += f'<td style="vertical-align:middle;">\n'

@@ -23,9 +23,6 @@ def create_league_figure(api,league,subset=None,show=False,rank=True):
 	gw = api._current_gw
 	mout.debugOut(f"create_league_figure()")
 
-	if subset:
-		print(subset)
-
 	fig = go.Figure()
 	
 	if not rank:
