@@ -15,6 +15,7 @@ class League():
 		self._average_event_points = None
 		self._graph_paths = []
 		self._active_managers = None
+		self._all_players = None
 
 	def get_stats(self):
 		name, manager_df = self._api.get_league_stats(self._code)
@@ -112,67 +113,48 @@ class League():
 		return len(self.managers)
 
 	@property
+	def all_players(self):
+		if self._all_players is None:
+			self._all_players = []
+			for m in self.managers:
+				self._all_players += m.squad.players
+		return self._all_players
+
+	@property
 	def goalkeepers(self):
-		lst = []
-		for m in self.managers:
-			lst += m.squad.goalkeepers
-		return lst
+		return [p for p in self.all_players if p.position_id == 1]
 
 	@property
 	def defenders(self):
-		lst = []
-		for m in self.managers:
-			lst += m.squad.defenders
-		return lst
-
-	@property
-	def captains(self):
-		lst = []
-		for m in self.managers:
-			lst.append(m.captain)
-		return lst
+		return [p for p in self.all_players if p.position_id == 2]
 
 	@property
 	def midfielders(self):
-		lst = []
-		for m in self.managers:
-			lst += m.squad.midfielders
-		return lst
+		return [p for p in self.all_players if p.position_id == 3]
 
 	@property
 	def forwards(self):
-		lst = []
-		for m in self.managers:
-			lst += m.squad.forwards
-		return lst
+		return [p for p in self.all_players if p.position_id == 4]
+
+	@property
+	def captains(self):
+		return [p for p in self.all_players if p.multiplier > 1]
 
 	@property
 	def starting_goalkeepers(self):
-		lst = []
-		for m in self.managers:
-			lst += m.squad.starting_goalkeepers
-		return lst
+		return [p for p in self.all_players if p.position_id == 1 and p.multiplier > 0]
 
 	@property
 	def starting_defenders(self):
-		lst = []
-		for m in self.managers:
-			lst += m.squad.starting_defenders
-		return lst
+		return [p for p in self.all_players if p.position_id == 2 and p.multiplier > 0]
 
 	@property
 	def starting_midfielders(self):
-		lst = []
-		for m in self.managers:
-			lst += m.squad.starting_midfielders
-		return lst
+		return [p for p in self.all_players if p.position_id == 3 and p.multiplier > 0]
 
 	@property
 	def starting_forwards(self):
-		lst = []
-		for m in self.managers:
-			lst += m.squad.starting_forwards
-		return lst
+		return [p for p in self.all_players if p.position_id == 4 and p.multiplier > 0]
 
 	def get_starting_players(self,unique=False,active_only=True):
 		lst = []

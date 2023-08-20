@@ -329,15 +329,20 @@ def main():
 		push_changes()
 
 def run_test():
-	p = Player('Havertz',api)
 
-	create_playerpage(api,p,[])
+	l = League(146330,api)
 
-	# p.expected_points(gw=2,use_official=True,debug=True)
-	# p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
-	man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
-	# man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
-	create_managerpage(api, man, [])
+	create_leaguepage(l,[],0)
+
+	# p = Player('Havertz',api)
+
+	# create_playerpage(api,p,[])
+
+	# # p.expected_points(gw=2,use_official=True,debug=True)
+	# # p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
+	# man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
+	# # man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
+	# create_managerpage(api, man, [])
 
 	api.finish()
 	exit()
@@ -4051,33 +4056,88 @@ def league_template(league,gw):
 
 	html_buffer = ""
 
-	# html_buffer += f'<table class="w3-table responsive-text">\n'
-	# html_buffer += f'<tr>\n'
-	# html_buffer += f'<th>Position</th>\n'
-	# html_buffer += f'<th style="text-align:right">1<sup>st</sup></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th style="text-align:right">2<sup>nd</sup></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th style="text-align:right">3<sup>rd</sup></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# html_buffer += f'<th></th>\n'
-	# # html_buffer += f'<th></th>\n'
-	# html_buffer += f'</tr>\n'
-
 	html_buffer += position_template(league, league.captains, "Captain", gw)	
 	html_buffer += position_template(league, league.starting_goalkeepers, "Goalkeeper", gw)
 	html_buffer += position_template(league, league.starting_defenders, "Defence", gw)
 	html_buffer += position_template(league, league.starting_midfielders, "Midfield", gw)
 	html_buffer += position_template(league, league.starting_forwards, "Forwards", gw)
 	
+	html_buffer += ownership_template(league, "Effective Ownership", gw)
+	
 	html_buffer += f'</table>\n'
+
+	return html_buffer
+
+def ownership_template(league,title,gw):
+
+	global json
+
+	### BUILD THE DATA
+
+	data = []
+	for team in api.teams:
+
+		sum_attacker = 0
+		sum_defender = 0
+
+		for p in [p for p in league.all_players if p.shortteam == team.shortname]:
+			if p.position_id > 2:
+				sum_attacker += p.multiplier
+			else:
+				sum_defender += p.multiplier
+
+		d = dict(shortteam=team.shortname,position='Attack',multiplier=sum_attacker/league.num_managers,kit_path=team._kit_path)
+		data.append(d)
+		
+		d = dict(shortteam=team.shortname,position='Defence',multiplier=sum_defender/league.num_managers,kit_path=team._kit_path)
+		data.append(d)
+
+	data = sorted(data,key=lambda x: x['multiplier'],reverse=True)
+
+	### STORE THE DATA
+	create_key(json[str(league.id)][gw],'template')
+	create_key(json[str(league.id)][gw]['template'],'ownership')
+	json[str(league.id)][gw]['template']['ownership'] = data
+
+	### DO THE HTML
+	html_buffer = ""
+	html_buffer += '<div class="w3-col s12 m6 l4">\n'
+
+	html_buffer += f'<div class="w3-panel w3-white w3-center shadow89" style="padding:0px;padding-top:0px;padding-bottom:4px;">\n'
+	html_buffer += f'<h2>{title}</h2>\n'
+
+	html_buffer += f'<table class="w3-table w3-hoverable responsive-text">\n'
+
+	ranks = [
+		"1<sup>st</sup>",
+		"2<sup>nd</sup>",
+		"3<sup>rd</sup>",
+		"4<sup>th</sup>",
+		"5<sup>th</sup>",
+		"6<sup>th</sup>",
+		"7<sup>th</sup>",
+		"8<sup>th</sup>",
+		"9<sup>th</sup>",
+		"10<sup>th</sup>",
+	]
+
+	for i,d in enumerate(data[:10]):
+		html_buffer += f'<tr style="vertical-align:middle;">\n'
+		
+		html_buffer += f'<td style="vertical-align:middle;text-align:right;"><b>{ranks[i]}</b></td>'
+
+		html_buffer += f'<td style="vertical-align:middle;">'
+		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{d["kit_path"]}?raw=true" alt="Kit Icon" width="22" height="29">'
+
+		html_buffer += f' {d["shortteam"]} \n'
+		html_buffer += f'{d["position"]}</td>\n'
+		html_buffer += f'<td style="vertical-align:middle;text-align:right;">{d["multiplier"]:.0%}   </td>\n'
+
+		html_buffer += f'</tr>\n'
+
+	html_buffer += f'</table>\n'
+	html_buffer += f'</div>\n'
+	html_buffer += f'</div>\n'
 
 	return html_buffer
 

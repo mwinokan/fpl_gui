@@ -1077,7 +1077,7 @@ class Player():
 			### MINUTES
 
 			if 'minutes' not in self.history:
-				mout.error(f'{self} has no minutes in self.history')
+				# mout.error(f'{self} has no minutes in self.history')
 				self._api._exp_archive[self.id][gw] = 0
 				return self._api._exp_archive[self.id][gw]
 
@@ -1617,9 +1617,8 @@ class Player():
 
 		# print(self.name,list(self.history['round']))
 
-
 		if 'round' not in self.history:
-			mout.error(f'{self} has no round in self.history')
+			# mout.error(f'{self} has no round in self.history')
 			return 'No data.'
 
 		# if the player was added to the game late, their history is weird
