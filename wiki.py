@@ -3598,18 +3598,26 @@ def create_leaguepage(league,leagues,i):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
-	if league.num_managers and awards > 20:
+	if league.num_managers > 20 and awards:
 		subset = []
-		subset += sum([d[0] for d in json[str(league.id)][gw]['awards'].values()],[])
+		subset += [d[0] for d in json[str(league.id)][gw]['awards'].values()]
 	else:
 		subset = None
 
 	import sys
 	sys.path.insert(1,'go')
-	from goleague import create_league_figure
+	from goleague import create_league_figure, create_league_histogram
 
 	if api._current_gw > 1:
-		html_buffer += floating_subtitle('League Graph')
+		html_buffer += floating_subtitle('League Graphs')
+
+		if len(league.managers) > 30:
+			html_buffer += '<div class="w3-col s12 m12 l12">\n'
+			html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
+			html_buffer += create_league_histogram(api, league, subset)
+			html_buffer += '</div>\n'
+			html_buffer += '</div>\n'
+		
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
 		html_buffer += create_league_figure(api, league, subset)

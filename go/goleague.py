@@ -129,5 +129,67 @@ def create_league_figure(api,league,subset=None,show=False,rank=True):
 
 	return html_str
 
+def create_league_histogram(api,league,subset=None,show=False):
+	
+	gw = api._current_gw
+	mout.debugOut(f"create_league_histogram()")
+
+	fig = go.Figure()
+
+	current_gw_points = [m.livescore for m in league.managers]
+	previous_points = [m.total_livescore for m in league.managers]
+
+	trace = go.Histogram(name=f'GW{gw}',x=current_gw_points)
+	fig.add_trace(trace)
+
+	trace = go.Histogram(name=f'GW1-{gw}',x=previous_points,visible='legendonly')
+	fig.add_trace(trace)
+	
+	fig.update_xaxes(title_text=f"Total points")
+	fig.update_yaxes(title_text=f"Count")
+		
+	fig.update_layout(legend_title_text = f"{league.name}",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
+
+	# Get HTML representation of plotly.js and this figure
+	plot_div = plot(fig, output_type='div', include_plotlyjs=True)
+
+	# Get id of html div element that looks like
+	# <div id="301d22ab-bfba-4621-8f5d-dc4fd855bb33" ... >
+	res = re.search('<div id="([^"]*)"', plot_div)
+	div_id = res.groups()[0]
+
+	# Build JavaScript callback for handling clicks
+	# and opening the URL in the trace's customdata 
+	js_callback = """
+	<script>
+	var plot_element = document.getElementById("{div_id}");
+	plot_element.on('plotly_click', function(data){{
+	    console.log(data);
+	    var point = data.points[0];
+	    if (point) {{
+	        console.log(point.customdata);
+	        window.open(point.customdata);
+	    }}
+	}})
+	</script>
+	""".format(div_id=div_id)
+
+	# Build HTML string
+	html_str = """{plot_div}
+	{js_callback}
+	""".format(plot_div=plot_div, js_callback=js_callback)
+
+	# # Write out HTML file
+	# with open('go/value.html', 'w') as f:
+	#     f.write(html_str)
+
+	if show:
+		pio.write_html(fig, file='go/hist.html', auto_open=show)
+		# fig.show()
+
+	return html_str
+
+
+
 if __name__ == '__main__':
 	main()
