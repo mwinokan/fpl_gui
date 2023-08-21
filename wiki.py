@@ -492,7 +492,7 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 		style_str = f'"background-color:{bg_color};color:{text_color};vertical-align:middle;"'
 		html_buffer += f'<td style={style_str}>\n'
 		html_buffer += f'<img class="w3-image" src="{p.team_obj._badge_url}" alt="{p.team_obj.shortname}" width="20" height="20">\n'
-		html_buffer += f'<b> {p.name}\n'
+		html_buffer += f'<a href="https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html"><b> {p.name}</a>\n'
 		if p.is_yellow_flagged:
 			html_buffer += f' ⚠️'
 		elif p.is_red_flagged:
@@ -583,7 +583,8 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 		for i in range(now_gw+1,end_gw+1):
 			exp = p.expected_points(gw=i,debug=False)
 			style_str = get_style_from_event_score(exp).rstrip('"')+';vertical-align:middle;"'
-			html_buffer += f'<td class="w3-center" style={style_str}>{exp:.1f}</td>\n'
+			# html_buffer += f'<td class="w3-center" style={style_str}>{exp:.1f}</td>\n'
+			html_buffer += f'<td class="w3-center" style={style_str}>{p.get_fixture_str(i,short=True,lower_away=True)}</td>\n'
 
 		html_buffer += f'</tr>\n'
 
@@ -4730,6 +4731,7 @@ def clear_logs():
 def push_changes():
 	mout.debugOut(f"push_changes()")
 	import os
+	os.system(r'rm -v html/*\@*')
 	num_changes = int(os.popen("git status | grep 'modified:' | grep -v '.pyc' | wc -l").read())
 	if num_changes > 0:
 	# os.system(f'cd {path}; git add *.md; git commit -m "auto-generated {timestamp}"; git push; cd {path.replace(".wiki","")}')
