@@ -21,8 +21,8 @@ timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 path = '../FPL_GUI.wiki'
 
 run_push_changes = True
-test = True
-offline = True
+test = False
+offline = False
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -401,6 +401,7 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 	html_buffer += '  tr.style.display = "";\n'
 	html_buffer += '  tr = document.getElementById("graphDiv");\n'
 	html_buffer += '  tr.style.display = "";\n'
+	html_buffer += '  showPlayerTrace(id);\n'
 	html_buffer += '};\n'
 	html_buffer += '</script>\n'
 
@@ -410,6 +411,7 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 	html_buffer += '  var id;\n'
 	html_buffer += '  tr = document.getElementById("statRow"+id);\n'
 	html_buffer += '  tr.style.display = "none";\n'
+	html_buffer += '  hidePlayerTrace(id);\n'
 	html_buffer += '};\n'
 	html_buffer += '</script>\n'
 
@@ -594,19 +596,59 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 	html_buffer += '<div class="w3-col s12 m12 l12">\n'
 	html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:none;">\n'
 	
+	# html_buffer += f'<h3>Expected Points Graph</h3>\n'
 	html_buffer += f'<div id="comparisonGraph" style="width:100%;height:500px">\n'
-	html_buffer += f'</div>'
+	html_buffer += f'</div>\n'
 
-	html_buffer += '<script>'
-	html_buffer += '	GRAPH = document.getElementById("comparisonGraph");'
-	html_buffer += '	Plotly.newPlot( GRAPH, [{'
-	html_buffer += '	x: [],'
-	html_buffer += '	y: [] }], {'
-	html_buffer += '	margin: { t: 0 } } );'
-	html_buffer += '</script>'
+	### BUILD THE PLOTTING DATA
+	gw_indices = [i+1 for i in range(now_gw+1,end_gw+1)]
+	gw_strs = [f'GW{i+1}' for i in range(now_gw+1,end_gw+1)]
 
-	html_buffer += f'</div>'
-	html_buffer += f'</div>'
+	plot_data = []
+	player_id_to_trace_id = {}
+	for i,p in enumerate(players):
+
+		player_id_to_trace_id[p.id] = i
+
+		plot_y = [round(p.expected_points(gw=i),1) for i in gw_indices]
+
+		plot_data.append(dict(
+			name=p.name,
+			x=gw_strs,
+			y=plot_y,
+			visible=False,
+			mode='lines+markers',
+		))
+
+	### CREATE THE GRAPH
+	html_buffer += '<script>\n'
+	html_buffer += '	GRAPH = document.getElementById("comparisonGraph");\n'
+	html_buffer += f'	Plotly.newPlot( GRAPH, {js.dumps(plot_data)}'
+	html_buffer += ', {	title: "Expected Points", margin: { r:0 }, font: {size: 14}} , {responsive: true});\n'
+	html_buffer += '</script>\n'
+
+	### SHOW TRACE SCRIPTING
+	html_buffer += '<script>\n'
+	html_buffer += 'function showPlayerTrace(id) {\n'
+	html_buffer += '  var id, player_id_to_trace_id, trace_id;\n'
+	html_buffer += f'  player_id_to_trace_id = {js.dumps(player_id_to_trace_id)};\n'
+	html_buffer += f'  trace_id = player_id_to_trace_id[id];\n'
+	html_buffer += '  Plotly.update(GRAPH, {"visible":true}, {}, [trace_id]);\n'
+	html_buffer += '};\n'
+	html_buffer += '</script>\n'
+
+	### HIDE TRACE SCRIPTING
+	html_buffer += '<script>\n'
+	html_buffer += 'function hidePlayerTrace(id) {\n'
+	html_buffer += '  var id, player_id_to_trace_id, trace_id;\n'
+	html_buffer += f'  player_id_to_trace_id = {js.dumps(player_id_to_trace_id)};\n'
+	html_buffer += f'  trace_id = player_id_to_trace_id[id];\n'
+	html_buffer += '  Plotly.update(GRAPH, {"visible":false}, {}, [trace_id]);\n'
+	html_buffer += '};\n'
+	html_buffer += '</script>\n'
+
+	html_buffer += f'</div>\n'
+	html_buffer += f'</div>\n'
 
 	### Help/Explainer
 	html_buffer += '<div class="w3-col s12 m6 l6">\n'
@@ -622,11 +664,11 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 	html_buffer += f'<span class="w3-tag">xC</span> Expected Clean Sheets <sup>1,2</sup><br><br>\n'
 	html_buffer += f'<span class="w3-tag">xB</span> Expected Bonus Points <sup>1,2</sup>\n'
 
-	html_buffer += f'</div>'
-	html_buffer += f'</div>'
+	html_buffer += f'</div>\n'
+	html_buffer += f'</div>\n'
 
 	navbar = create_navbar(leagues, colour='black')
-	html_page('html/comparison.html',None,title=f"Comparison Tool", gw=api._current_gw, html=html_buffer, showtitle=True, bar_html=navbar, colour='aqua')
+	html_page('html/comparison.html',None,title=f"Comparison Tool", gw=api._current_gw, html=html_buffer, showtitle=True, bar_html=navbar, colour='aqua', plotly=True)
 
 def create_cup_page(api,league,leagues):
 
