@@ -21,7 +21,7 @@ timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 path = '../FPL_GUI.wiki'
 
 run_push_changes = True
-test = False
+test = True
 offline = True
 
 create_launchd_plist = False
@@ -399,6 +399,8 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 	html_buffer += '  var id;\n'
 	html_buffer += '  tr = document.getElementById("statRow"+id);\n'
 	html_buffer += '  tr.style.display = "";\n'
+	html_buffer += '  tr = document.getElementById("graphDiv");\n'
+	html_buffer += '  tr.style.display = "";\n'
 	html_buffer += '};\n'
 	html_buffer += '</script>\n'
 
@@ -588,12 +590,29 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 	html_buffer += f'</div>'
 	html_buffer += f'</div>'
 
+	### GRAPH
+	html_buffer += '<div class="w3-col s12 m12 l12">\n'
+	html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:none;">\n'
+	
+	html_buffer += f'<div id="comparisonGraph" style="width:100%;height:500px">\n'
+	html_buffer += f'</div>'
+
+	html_buffer += '<script>'
+	html_buffer += '	GRAPH = document.getElementById("comparisonGraph");'
+	html_buffer += '	Plotly.newPlot( GRAPH, [{'
+	html_buffer += '	x: [],'
+	html_buffer += '	y: [] }], {'
+	html_buffer += '	margin: { t: 0 } } );'
+	html_buffer += '</script>'
+
+	html_buffer += f'</div>'
+	html_buffer += f'</div>'
+
 	### Help/Explainer
 	html_buffer += '<div class="w3-col s12 m6 l6">\n'
 	html_buffer += '<div class="w3-panel w3-blue shadow89 w3-responsive w3-padding">\n'
 
 	html_buffer += f'<h3>Legend</h3>'
-	# html_buffer += f'<ul>'
 	html_buffer += f'<span class="w3-tag">T%</span> Net transfer percentage <br><br>\n'
 	html_buffer += f'<span class="w3-tag"><sup>1</sup></span> Recent results are weighted higher <br><br>\n'
 	html_buffer += f'<span class="w3-tag"><sup>2</sup></span> Not adjusted for opponent <br><br>\n'
@@ -602,7 +621,6 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 	html_buffer += f'<span class="w3-tag">xA</span> Expected Assists <sup>1,2</sup><br><br>\n'
 	html_buffer += f'<span class="w3-tag">xC</span> Expected Clean Sheets <sup>1,2</sup><br><br>\n'
 	html_buffer += f'<span class="w3-tag">xB</span> Expected Bonus Points <sup>1,2</sup>\n'
-	# html_buffer += f'</ul>'
 
 	html_buffer += f'</div>'
 	html_buffer += f'</div>'
@@ -1211,7 +1229,7 @@ def create_assetpage(leagues):
 			
 		# navbar = None
 		navbar = create_navbar(leagues)
-		html_page('html/assets.html',None,title=f"Asset Analysis", gw=gw, html=html_buffer, showtitle=True, bar_html=navbar,colour='aqua')
+		html_page('html/assets.html',None,title=f"Asset Analysis", gw=gw, html=html_buffer, showtitle=True, bar_html=navbar,colour='aqua', plotly=True)
 
 def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 
@@ -1414,7 +1432,7 @@ def create_playerpage(api,player,leagues):
 
 		style = api.create_team_styles_css()
 
-		html_page(f'html/player_{player.id}.html',None,title=f"{player.name}",sidebar_content=None, gw=gw, html=html_buffer, showtitle=False, bar_html=navbar,extra_style=style,colour=player.team_obj.style['accent'],nonw3_colour=True)
+		html_page(f'html/player_{player.id}.html',None,title=f"{player.name}",sidebar_content=None, gw=gw, html=html_buffer, showtitle=False, bar_html=navbar,extra_style=style,colour=player.team_obj.style['accent'],nonw3_colour=True,plotly=True)
 
 		completed_playerpages.append(int(player.id))
 
@@ -2002,7 +2020,7 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 		else:
 			html_buffer += f'<td class="w3-center" style={style_str}><b>£{player.price}</b></td>\n'
 
-		if p.appearances < 1:
+		if player.appearances < 1:
 			score = 0.0
 		else:
 			score = player.total_points/player.appearances
@@ -2743,7 +2761,7 @@ def create_seasonpage(leagues):
 	html_buffer += '</script>\n'
 
 	navbar = create_navbar(leagues, active='S', colour='black', active_colour='green')
-	html_page(f'html/season.html',None,title='22/23 Season Review', gw=api._current_gw, html=html_buffer, bar_html=navbar, showtitle=True)
+	html_page(f'html/season.html',None,title='22/23 Season Review', gw=api._current_gw, html=html_buffer, bar_html=navbar, showtitle=True,plotly=True)
 
 def create_christmaspage(leagues):
 	mout.debugOut("create_christmaspage()")
@@ -2837,7 +2855,7 @@ def create_christmaspage(leagues):
 	html_buffer += '</script>\n'
 
 	navbar = create_navbar(leagues, active='C', colour='black', active_colour='red')
-	html_page(f'html/christmas.html',None,title='2022 Christmas Review', gw=api._current_gw, html=html_buffer, bar_html=navbar, showtitle=True)
+	html_page(f'html/christmas.html',None,title='2022 Christmas Review', gw=api._current_gw, html=html_buffer, bar_html=navbar, showtitle=True,plotly=True)
 
 def manager_ids(mans):
 	return [m.id for m in mans]
@@ -3883,7 +3901,7 @@ def create_leaguepage(league,leagues,i):
 
 	style = api.create_team_styles_css()
 	navbar = create_navbar(leagues, active=i, colour='black', active_colour='green')
-	html_page(f'html/{league.name.replace(" ","-")}.html',None,title=f"{league._icon} {league.name}", gw=gw, html=html_buffer, bar_html=navbar, showtitle=True,colour=league._colour_str, extra_style=style)
+	html_page(f'html/{league.name.replace(" ","-")}.html',None,title=f"{league._icon} {league.name}", gw=gw, html=html_buffer, bar_html=navbar, showtitle=True,colour=league._colour_str, extra_style=style, plotly=True)
 
 	# exit()
 

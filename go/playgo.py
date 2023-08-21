@@ -69,7 +69,7 @@ def create_player_figure(api,player,show=False):
 	fig.update_yaxes(range=[0,math.ceil((max_yval+0.5)/5)*5])
 
 	# Get HTML representation of plotly.js and this figure
-	plot_div = plot(fig, output_type='div', include_plotlyjs=True)
+	plot_div = plot(fig, output_type='div', include_plotlyjs=False)
 
 	# Get id of html div element that looks like
 	# <div id="301d22ab-bfba-4621-8f5d-dc4fd855bb33" ... >

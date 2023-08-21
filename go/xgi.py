@@ -136,7 +136,7 @@ def create_xgi_figure(api,players,show=False):
 	fig.update_yaxes(title_text="Returned Attacked Points (m*G + 3*A)")
 
 	# Get HTML representation of plotly.js and this figure
-	plot_div = plot(fig, output_type='div', include_plotlyjs=True)
+	plot_div = plot(fig, output_type='div', include_plotlyjs=False)
 
 	# Get id of html div element that looks like
 	# <div id="301d22ab-bfba-4621-8f5d-dc4fd855bb33" ... >

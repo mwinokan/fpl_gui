@@ -35,9 +35,6 @@ h5.double {line-height: 2}
 <a href="https://mwinokan.github.io/FPL_GUI/html/comparison.html" class="w3-bar-item w3-button w3-hover-aqua">📊 Comparison Tool</a>
 <a href="https://mwinokan.github.io/FPL_GUI/html/assets.html" class="w3-bar-item w3-button w3-hover-aqua">📈 Asset Graphs</a>
 <a href="https://mwinokan.github.io/FPL_GUI/html/teams.html" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua">💎 The RBS Diamond Invitational</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua">🚽 Tesco Bean Value Toilet League</a>
-<a href="https://mwinokan.github.io/FPL_GUI/html/Super-Dinner-League.html" class="w3-bar-item w3-button w3-hover-aqua">🍝 Super Dinner League</a>
 </div>
 </div>
 <a class="w3-bar-item w3-black w3-text-black w3-right"></a>
@@ -3414,6 +3411,8 @@ h5.double {line-height: 2}
 function addPlayer(id) {
   var id;
   tr = document.getElementById("statRow"+id);
+  tr.style.display = "";
+  tr = document.getElementById("graphDiv");
   tr.style.display = "";
 };
 </script>
@@ -18800,7 +18799,10 @@ function searchFunction() {
 <td class="w3-center" style="background-color:#CB4335;color:black;vertical-align:middle;">1.8</td>
 <td class="w3-center" style="background-color:#CB4335;color:black;vertical-align:middle;">1.6</td>
 </tr>
-</table></div></div><div class="w3-col s12 m6 l6">
+</table></div></div><div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:none;">
+<div id="comparisonGraph" style="width:100%;height:500px">
+</div><script>	GRAPH = document.getElementById("comparisonGraph");	Plotly.newPlot( GRAPH, [{	x: [],	y: [] }], {	margin: { t: 0 } } );</script></div></div><div class="w3-col s12 m6 l6">
 <div class="w3-panel w3-blue shadow89 w3-responsive w3-padding">
 <h3>Legend</h3><span class="w3-tag">T%</span> Net transfer percentage <br><br>
 <span class="w3-tag"><sup>1</sup></span> Recent results are weighted higher <br><br>
@@ -18808,12 +18810,12 @@ function searchFunction() {
 <span class="w3-tag">xM</span> Expected Minutes <sup>1</sup><br><br>
 <span class="w3-tag">xG</span> Expected Goals <sup>1,2</sup><br><br>
 <span class="w3-tag">xA</span> Expected Assists <sup>1,2</sup><br><br>
-<span class="w3-tag">xC</span> Expected Clean Sheets <sup>1</sup><br><br>
-<span class="w3-tag">xB</span> Expected Bonus Points <sup>1</sup>
+<span class="w3-tag">xC</span> Expected Clean Sheets <sup>1,2</sup><br><br>
+<span class="w3-tag">xB</span> Expected Bonus Points <sup>1,2</sup>
 </div></div></div>
 </div>
 <div class="w3-center" style="padding:32px">
-<p>Accurate as of 2023-08-21 13:49:04, (GW2)</p>
+<p>Accurate as of 2023-08-21 14:53:56, (GW2)</p>
 <p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>
 </div>
 </body>

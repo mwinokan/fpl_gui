@@ -88,7 +88,7 @@ def create_league_figure(api,league,subset=None,show=False,rank=True):
 	fig.update_xaxes(title_text=f"Gameweek")
 
 	# Get HTML representation of plotly.js and this figure
-	plot_div = plot(fig, output_type='div', include_plotlyjs=True)
+	plot_div = plot(fig, output_type='div', include_plotlyjs=False)
 
 	# Get id of html div element that looks like
 	# <div id="301d22ab-bfba-4621-8f5d-dc4fd855bb33" ... >
@@ -148,7 +148,7 @@ def create_league_histogram(api,league,subset=None,show=False):
 	fig.update_layout(legend_title_text = f"{league.name}",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
 
 	# Get HTML representation of plotly.js and this figure
-	plot_div = plot(fig, output_type='div', include_plotlyjs=True)
+	plot_div = plot(fig, output_type='div', include_plotlyjs=False)
 
 	# Get id of html div element that looks like
 	# <div id="301d22ab-bfba-4621-8f5d-dc4fd855bb33" ... >

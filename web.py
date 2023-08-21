@@ -49,7 +49,7 @@ def fix_table_classes(html):
 	return html
 
 # @mout.debug_time
-def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None,colour='white',nonw3_colour=False):
+def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None,colour='white',nonw3_colour=False,plotly=False):
 	mout.debugOut(f"html_page({target})")
 
 	if mdfile is None:
@@ -74,6 +74,8 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 	fout_buffer.append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">\n')
 	fout_buffer.append('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">\n')
 	fout_buffer.append('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">\n')
+	if plotly:
+		fout_buffer.append('<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>\n')
 	fout_buffer.append('<style>\n')
 	fout_buffer.append('h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}')
 	fout_buffer.append('body {font-family: "Open Sans"}\n')

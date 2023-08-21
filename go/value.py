@@ -116,7 +116,7 @@ def create_value_figure(api,players,show=False):
 
 
 	# Get HTML representation of plotly.js and this figure
-	plot_div = plot(fig, output_type='div', include_plotlyjs=True)
+	plot_div = plot(fig, output_type='div', include_plotlyjs=False)
 
 	# Get id of html div element that looks like
 	# <div id="301d22ab-bfba-4621-8f5d-dc4fd855bb33" ... >
