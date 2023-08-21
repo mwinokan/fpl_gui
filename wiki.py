@@ -22,7 +22,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = False
+offline = True
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -869,34 +869,34 @@ def create_teampage(api,leagues):
 def create_assetpage(leagues):
 	mout.debugOut(f"create_assetpage()")
 
-	gw = api._current_gw
-
-	if gw > 1:
-		minutes = 90
-	else:
-		minutes = 0
-
-	player_minutes = {}
-
-	# this season
-	player_ids = api._elements['id']
-	for i,pid in enumerate(player_ids):
-		player_minutes[pid] = api._elements['minutes'][i]
-	player_ids = api._prev_elements['id']
-	
-	# last season
-	for i,pid in enumerate(player_ids):
-		if pid in player_minutes:
-			player_minutes[pid] += api._prev_elements['minutes'][i]
-
-	players = []
-	for pid,mins in player_minutes.items():
-		if mins > minutes:
-			index = api.get_player_index(pid)
-			p = Player(None, api, index=index)
-			players.append(p)
-
 	if force_go_graphs or not api._live_gw:
+
+		gw = api._current_gw
+
+		if gw > 1:
+			minutes = 90
+		else:
+			minutes = 0
+
+		player_minutes = {}
+
+		# this season
+		player_ids = api._elements['id']
+		for i,pid in enumerate(player_ids):
+			player_minutes[pid] = api._elements['minutes'][i]
+		player_ids = api._prev_elements['id']
+		
+		# last season
+		for i,pid in enumerate(player_ids):
+			if pid in player_minutes:
+				player_minutes[pid] += api._prev_elements['minutes'][i]
+
+		players = []
+		for pid,mins in player_minutes.items():
+			if mins > minutes:
+				index = api.get_player_index(pid)
+				p = Player(None, api, index=index)
+				players.append(p)
 
 		import sys
 		sys.path.insert(1,'go')
@@ -917,7 +917,7 @@ def create_assetpage(leagues):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 		
-		if gw > 0 and not api._live_gw:
+		if gw > 0:
 			html_buffer += floating_subtitle('Best Value: Next 5 GWs')
 			html_buffer += '<div class="w3-col s12 m12 l12">\n'
 			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
