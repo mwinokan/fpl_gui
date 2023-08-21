@@ -9,7 +9,7 @@ import mout
 from player import Player
 from manager import Manager
 import json as js
-from web import html_page, player_summary_cell_modal, get_style_from_event_score, md2html, get_player_history_table, get_style_from_minutes_played
+from web import html_page, player_summary_cell_modal, get_style_from_event_score, md2html, get_player_history_table, get_style_from_minutes_played, get_style_from_expected_return, get_style_from_bonus
 from squad import Squad
 import time
 
@@ -238,6 +238,8 @@ def main():
 		except fpl_api.Request404:
 			mout.error(f'Could not init League({code},{shortname})')
 
+	create_comparison_page(api,leagues)
+
 	navbar = create_navbar(leagues)
 
 	create_homepage(navbar)
@@ -331,9 +333,11 @@ def main():
 
 def run_test():
 
-	l = League(146330,api)
+	create_comparison_page(api,[])
 
-	create_leaguepage(l,[],0)
+	# l = League(146330,api)
+
+	# create_leaguepage(l,[],0)
 
 	# p = Player('Havertz',api)
 
@@ -347,6 +351,264 @@ def run_test():
 
 	api.finish()
 	exit()
+
+def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
+	mout.debug(f'create_comparison_page()')
+
+	# instantiate all the player objects
+	players = []
+	for pid in api._elements['id']:
+		index = api.get_player_index(pid)
+		p = Player(None, api, index=index)
+		players.append(p)
+
+	players = sorted(players,key=lambda x: x.selected_by,reverse=True)
+
+	subset = ['Luis','Martinelli','Foden','Ederson','Chukwu']
+	subset = [Player(n,api) for n in subset]
+
+	html_buffer = ""
+
+	### SEARCH BOX
+	html_buffer += '<div class="w3-col s12 m12 l12">\n'
+	html_buffer += '<div class="w3-panel w3-black shadow89 w3-padding" style="padding:0px;padding-bottom:3px;">\n'
+
+	html_buffer += f'<h3><i class="fa fa-search"></i> Search for and click to add players: </h3>\n'
+	html_buffer += f'<h4><input class="w3-input w3-white shadow25" onkeyup="searchFunction()" id="searchInput" type="text" placeholder="Search players by name..."></h4>\n'
+	html_buffer += f'</div>\n'
+	html_buffer += f'</div>\n'
+
+	html_buffer += f'<div class="w3-padding w3-center" id="searchTable">\n'
+	for p in players:
+
+		team_bg_color = p.team_obj.get_style()['background-color']
+		team_text_color = p.team_obj.get_style()['color']
+		team_style_str = f'"background-color:{team_bg_color};color:{team_text_color};margin-bottom:5px;"'
+
+		html_buffer += f'<span style="display:none;">\n'
+		html_buffer += f'<button class="w3-button" onclick="addPlayer({p.id})" style={team_style_str}>\n'
+		html_buffer += f'<img class="w3-image" src="{p.team_obj._badge_url}" alt="{p.team_obj.shortname}" width="20" height="20">\n'
+		html_buffer += f' {p.full_name}</button>\n'
+		html_buffer += f'</span>\n'
+
+	html_buffer += f'</div>\n'
+
+	### ADD PLAYER SCRIPTING
+	html_buffer += '<script>\n'
+	html_buffer += 'function addPlayer(id) {\n'
+	html_buffer += '  var id;\n'
+	html_buffer += '  tr = document.getElementById("statRow"+id);\n'
+	html_buffer += '  tr.style.display = "";\n'
+	html_buffer += '};\n'
+	html_buffer += '</script>\n'
+
+	### REMOVE PLAYER SCRIPTING
+	html_buffer += '<script>\n'
+	html_buffer += 'function removePlayer(id) {\n'
+	html_buffer += '  var id;\n'
+	html_buffer += '  tr = document.getElementById("statRow"+id);\n'
+	html_buffer += '  tr.style.display = "none";\n'
+	html_buffer += '};\n'
+	html_buffer += '</script>\n'
+
+	### SEARCH SCRIPTING (SPANS)
+	html_buffer += '<script>\n'
+	html_buffer += 'function searchFunction() {\n'
+	html_buffer += '  var input, filter, table, tr, td, i, txtValue;\n'
+	html_buffer += '  input = document.getElementById("searchInput");\n'
+	html_buffer += '  filter = input.value.toUpperCase();\n'
+	html_buffer += '  table = document.getElementById("searchTable");\n'
+	html_buffer += '  tr = table.getElementsByTagName("span");\n'
+	html_buffer += '\n'
+	html_buffer += '  if (filter.length < 1) {\n'
+	html_buffer += '    for (i = 0; i < tr.length; i++) {\n'
+	html_buffer += '      td = tr[i].getElementsByTagName("button")[0];\n'
+	html_buffer += '      if (td) {\n'
+	html_buffer += '        tr[i].style.display = "none";\n'
+	html_buffer += '      } \n'
+	html_buffer += '    }\n'
+	html_buffer += '  } else {\n'
+	html_buffer += '    for (i = 0; i < tr.length; i++) {\n'
+	html_buffer += '      td = tr[i].getElementsByTagName("button")[0];\n'
+	html_buffer += '      if (td) {\n'
+	html_buffer += '        txtValue = td.textContent || td.innerText;\n'
+	html_buffer += '        if (txtValue.toUpperCase().indexOf(filter) > -1) {\n'
+	html_buffer += '          tr[i].style.display = "";\n'
+	html_buffer += '        } else {\n'
+	html_buffer += '          tr[i].style.display = "none";\n'
+	html_buffer += '        }\n'
+	html_buffer += '      } \n'
+	html_buffer += '    }\n'
+	html_buffer += '  }\n'
+	html_buffer += '}\n'
+	html_buffer += '</script>\n'
+
+	### STATS DATA
+	html_buffer += '<div class="w3-col s12 m12 l12">\n'
+	html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive" style="padding:0px;padding-bottom:3px;">\n'
+
+	html_buffer += f'<table class="w3-table responsive-text" id="statTable">\n'
+
+	now_gw = api._current_gw
+	start_gw = max(1,now_gw-prev_gw_count)
+	end_gw = min(38,now_gw+next_gw_count)
+
+	### HEADERS
+	html_buffer += f'<tr>\n'
+	html_buffer += f'<th></th>\n'
+	html_buffer += f'<th>Name</th>\n'
+	html_buffer += f'<th style="text-align:center;">Price</th>\n'
+	html_buffer += f'<th style="text-align:center;">ΣPts</th>\n'
+	html_buffer += f'<th style="text-align:center;">Trans.</th>\n'
+	html_buffer += f'<th style="text-align:center;">xM</th>\n'
+	html_buffer += f'<th style="text-align:center;">xG</th>\n'
+	html_buffer += f'<th style="text-align:center;">xA</th>\n'
+	html_buffer += f'<th style="text-align:center;">xC</th>\n'
+	html_buffer += f'<th style="text-align:center;">xB</th>\n'
+
+	for i in range(start_gw,now_gw+1):
+		html_buffer += f'<th style="text-align:center;">GW{i}</th>\n'
+
+	html_buffer += f'<th style="text-align:center;">Form</th>\n'
+
+	for i in range(now_gw+1,end_gw+1):
+		html_buffer += f'<th style="text-align:center;">GW{i}</th>\n'
+
+	html_buffer += f'</tr>\n'
+
+	### PLAYER ROWS
+	for p in players:
+		html_buffer += f'<tr id="statRow{p.id}" style="display:none;">\n'
+		
+		html_buffer += f'<td class="w3-center w3-button w3-black" onclick="removePlayer({p.id})"><i class="fa fa-close"></i></td>\n'
+
+		# name
+		bg_color = p.team_obj.get_style()['background-color']
+		text_color = p.team_obj.get_style()['color']
+		style_str = f'"background-color:{bg_color};color:{text_color};vertical-align:middle;"'
+		html_buffer += f'<td style={style_str}>\n'
+		html_buffer += f'<img class="w3-image" src="{p.team_obj._badge_url}" alt="{p.team_obj.shortname}" width="20" height="20">\n'
+		html_buffer += f'<b> {p.name}\n'
+		if p.is_yellow_flagged:
+			html_buffer += f' ⚠️'
+		elif p.is_red_flagged:
+			html_buffer += f' ⛔️'
+		html_buffer += f'</b></td>\n'
+
+		html_buffer += f'<td style="text-align:center;vertical-align:middle;">£{p.price}</td>\n'
+		
+		# total points
+		if p.appearances < 1:
+			score = 0
+		else:
+			score = p.total_points/p.appearances
+		style_str = get_style_from_event_score(score).rstrip('"')+';vertical-align:middle;"'
+		html_buffer += f'<td class="w3-center" style={style_str}>{p.total_points}</td>\n'
+
+		# transfer percent
+		value = p.transfer_percent
+		text = f'{p.transfer_percent:.1f}%'
+		if abs(value) > 10:
+			if text.startswith("-"):
+				style_str = '"color:darkred;vertical-align:middle;"'
+			else:
+				style_str = '"color:darkgreen;vertical-align:middle;"'
+			html_buffer += f'<td class="w3-center" style={style_str}><b>{text}</b></td>\n'
+		else:
+			if text.startswith("-"):
+				style_str = '"color:red;vertical-align:middle;"'
+			else:
+				style_str = '"color:green;vertical-align:middle;"'
+			html_buffer += f'<td class="w3-center" style={style_str}>{text}</td>\n'
+
+		# minutes
+		style_str = get_style_from_minutes_played(p.expected_minutes()).rstrip('"')+';vertical-align:middle;text-align:right;"'
+		html_buffer += f'<td class="w3-center" style={style_str}>'
+		if p.xG_no_opponent is None:
+			html_buffer += f"-"
+		else:
+			html_buffer += f"{p.expected_minutes():.0f}"
+		html_buffer += '</td>\n'
+
+		# xG
+		style_str = get_style_from_expected_return(p.xG_no_opponent).rstrip('"')+';vertical-align:middle;text-align:right;"'
+		html_buffer += f'<td class="w3-center" style={style_str}>'
+		if p.xG_no_opponent is None:
+			html_buffer += f"-"
+		else:
+			html_buffer += f"{p.xG_no_opponent:.2f}"
+		html_buffer += '</td>\n'
+
+		# xA
+		style_str = get_style_from_expected_return(p.xA_no_opponent).rstrip('"')+';vertical-align:middle;text-align:right;"'
+		html_buffer += f'<td class="w3-center" style={style_str}>'
+		if p.xA_no_opponent is None:
+			html_buffer += f"-"
+		else:
+			html_buffer += f"{p.xA_no_opponent:.2f}"
+		html_buffer += '</td>\n'
+
+		# xCS
+		style_str = get_style_from_expected_return(p.xC_no_opponent).rstrip('"')+';vertical-align:middle;text-align:right;"'
+		html_buffer += f'<td class="w3-center" style={style_str}>'
+		if p.xC_no_opponent is None:
+			html_buffer += f"-"
+		else:
+			html_buffer += f"{p.xC_no_opponent:.0%}"
+		html_buffer += '</td>\n'
+
+		# xB
+		style_str = get_style_from_bonus(p.xBpts).rstrip('"')+';vertical-align:middle;text-align:right;border-right: 4px solid white;border-collapse:collapse;"'
+		html_buffer += f'<td class="w3-center" style={style_str}>'
+		if p.xBpts is None:
+			html_buffer += f"-"
+		else:
+			html_buffer += f"{p.xBpts:.2f}"
+		html_buffer += '</td>\n'
+
+		# previous GWs
+		for i in range(start_gw,now_gw+1):
+			html_buffer += player_summary_cell_modal(p,i)
+
+		# form
+		form = p.form
+		style_str = get_style_from_event_score(form).rstrip('"')+';vertical-align:middle;border-right:4px solid white;border-left:4px solid white;border-collapse:collapse;"'
+		html_buffer += f'<td class="w3-center" style={style_str}>{form}</td>\n'
+
+		# upcoming GWs
+		for i in range(now_gw+1,end_gw+1):
+			exp = p.expected_points(gw=i,debug=False)
+			style_str = get_style_from_event_score(exp).rstrip('"')+';vertical-align:middle;"'
+			html_buffer += f'<td class="w3-center" style={style_str}>{exp:.1f}</td>\n'
+
+		html_buffer += f'</tr>\n'
+
+	html_buffer += f'</table>'
+	
+	html_buffer += f'</div>'
+	html_buffer += f'</div>'
+
+	### Help/Explainer
+	html_buffer += '<div class="w3-col s12 m6 l6">\n'
+	html_buffer += '<div class="w3-panel w3-blue shadow89 w3-responsive w3-padding">\n'
+
+	html_buffer += f'<h3>Legend</h3>'
+	# html_buffer += f'<ul>'
+	html_buffer += f'<span class="w3-tag">T%</span> Net transfer percentage <br><br>\n'
+	html_buffer += f'<span class="w3-tag"><sup>1</sup></span> Recent results are weighted higher <br><br>\n'
+	html_buffer += f'<span class="w3-tag"><sup>2</sup></span> Not adjusted for opponent <br><br>\n'
+	html_buffer += f'<span class="w3-tag">xM</span> Expected Minutes <sup>1</sup><br><br>\n'
+	html_buffer += f'<span class="w3-tag">xG</span> Expected Goals <sup>1,2</sup><br><br>\n'
+	html_buffer += f'<span class="w3-tag">xA</span> Expected Assists <sup>1,2</sup><br><br>\n'
+	html_buffer += f'<span class="w3-tag">xC</span> Expected Clean Sheets <sup>1,2</sup><br><br>\n'
+	html_buffer += f'<span class="w3-tag">xB</span> Expected Bonus Points <sup>1,2</sup>\n'
+	# html_buffer += f'</ul>'
+
+	html_buffer += f'</div>'
+	html_buffer += f'</div>'
+
+	navbar = create_navbar(leagues, colour='black')
+	html_page('html/comparison.html',None,title=f"Comparison Tool", gw=api._current_gw, html=html_buffer, showtitle=True, bar_html=navbar, colour='aqua')
 
 def create_cup_page(api,league,leagues):
 
@@ -967,8 +1229,11 @@ def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 	url = f'https://mwinokan.github.io/FPL_GUI/index.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>\n'
 
+	url = f'https://mwinokan.github.io/FPL_GUI/html/comparison.html'
+	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📊 Comparison Tool</a>\n'
+
 	url = f'https://mwinokan.github.io/FPL_GUI/html/assets.html'
-	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📊 Asset Graphs</a>\n'
+	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📈 Asset Graphs</a>\n'
 
 	if season_awards:
 		url = f'https://mwinokan.github.io/FPL_GUI/html/season.html'
@@ -1737,7 +2002,10 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 		else:
 			html_buffer += f'<td class="w3-center" style={style_str}><b>£{player.price}</b></td>\n'
 
-		score = player.total_points/now_gw
+		if p.appearances < 1:
+			score = 0.0
+		else:
+			score = player.total_points/player.appearances
 		style_str = get_style_from_event_score(score).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{player.total_points}</td>\n'
 
@@ -2327,7 +2595,7 @@ def previous_player_table(min_minutes=200,show_top=10):
 	# trace = go.Histogram(x=temp_elements['minutes'])
 	# fig.add_trace(trace)
 
-	# fig.show()
+	# fig.show()/
 
 def create_homepage(navbar):
 	mout.debugOut(f"create_homepage()")

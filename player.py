@@ -62,6 +62,11 @@ class Player():
 				mout.errorOut("Problem accessing player stats ("+name+")",fatal=False)
 				return None
 
+		self._xG_no_opponent = None
+		self._xA_no_opponent = None
+		self._xC_no_opponent = None
+		self._xBpts = None
+
 		self._parent_manager = None
 		self._league_count[self._id] = 1
 		self._is_captain = False
@@ -949,6 +954,30 @@ class Player():
 				self._appearances = len([m for m in self.history['minutes'] if m > 0])
 		return self._appearances
 
+	@property
+	def xG_no_opponent(self):
+		if self._xG_no_opponent is None:
+			self.expected_points()
+		return self._xG_no_opponent
+
+	@property
+	def xA_no_opponent(self):
+		if self._xA_no_opponent is None:
+			self.expected_points()
+		return self._xA_no_opponent
+
+	@property
+	def xC_no_opponent(self):
+		if self._xC_no_opponent is None:
+			self.expected_points()
+		return self._xC_no_opponent
+
+	@property
+	def xBpts(self):
+		if self._xBpts is None:
+			self.expected_points()
+		return self._xBpts
+	
 	def expected_minutes(self,gw=None,Ms=None):
 		if gw is None:
 			gw = self._api._current_gw+1
@@ -1111,13 +1140,13 @@ class Player():
 
 			### CLEAN SHEETS
 			
-			xCSs = [int(int(x) < 1) for x in self.history['goals_conceded']]
-			xGCs = [float(x) for x in self.history['expected_goals_conceded']]
-			CSs = [int(float(x) < 0.5) for x in self.history['expected_goals_conceded']]
+			# xCSs = [int(int(x) < 1) for x in self.history['goals_conceded']]
+			# xGCs = [float(x) for x in self.history['expected_goals_conceded']]
+			xCSs = [int(float(x) < 0.5) for x in self.history['expected_goals_conceded']]
 
-			CS_prob = weighted_average(CSs,None,self._prev_clean_sheets_per_90*self._prev_minutes/90,self._prev_minutes/90)
+			self._xC_no_opponent = weighted_average(xCSs,None,self._prev_clean_sheets_per_90*self._prev_minutes/90,self._prev_minutes/90)
 			
-			xCSPts = CS_prob * self.clean_sheet_multiplier / opp_GF_ratio
+			xCSPts = self._xC_no_opponent * self.clean_sheet_multiplier / opp_GF_ratio
 
 			xCSPts *= min([1,xM/60])
 
@@ -1149,15 +1178,18 @@ class Player():
 
 			### ATTACKING POINTS
 
-			xG = xG_per_minute * xM * G_per_xG * opp_GC_ratio
-			xA = xA_per_minute * xM * A_per_xA * opp_GC_ratio
+			self._xG_no_opponent = xG_per_minute * xM * G_per_xG
+			self._xA_no_opponent = xA_per_minute * xM * A_per_xA
+
+			xG = self._xG_no_opponent * opp_GC_ratio
+			xA = self._xA_no_opponent * opp_GC_ratio
 			xGIPts = self.goal_multiplier * xG + 3 * xA
 
 			### BONUS POINTS
 
 			Bs = [float(x) for x in self.history['bonus']]
 
-			xBPts = weighted_average(Bs,None,self._prev_bonus,self._prev_minutes/90)
+			self._xBpts = weighted_average(Bs,None,self._prev_bonus,self._prev_minutes/90)
 
 			### YELLOW CARDS
 
@@ -1198,7 +1230,7 @@ class Player():
 
 			### COMBINE
 
-			expected_points = xMPts + xCSPts + xGIPts + xBPts + xYCPts + xRCPts + xOGPts + xPMPts + xPSPts + xSPts
+			expected_points = xMPts + xCSPts + xGIPts + self._xBpts + xYCPts + xRCPts + xOGPts + xPMPts + xPSPts + xSPts
 						
 			if debug: 
 				mout.varOut('opp_GC_per_game',opp_GC_per_game)
@@ -1209,8 +1241,8 @@ class Player():
 				mout.varOut('avg_GF_per_game',avg_GF_per_game)
 				mout.varOut('opp_GF_ratio',opp_GF_ratio)
 				
-				mout.varOut('xCSs',xCSs)
-				mout.varOut('xGCs',xGCs)
+				# mout.varOut('xCSs',xCSs)
+				# mout.varOut('xGCs',xGCs)
 				mout.varOut('CSs',CSs)
 				mout.varOut('CS_prob',CS_prob)
 				
@@ -1231,7 +1263,7 @@ class Player():
 				mout.varOut('xG',xG)
 				mout.varOut('xA',xA)
 
-				mout.varOut('xBPts',xBPts)
+				mout.varOut('xBPts',self._xBpts)
 				mout.varOut('xMPts',xMPts)
 				mout.varOut('xGIPts',xGIPts)
 				mout.varOut('xCSPts',xCSPts)

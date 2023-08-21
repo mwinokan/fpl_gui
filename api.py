@@ -78,6 +78,7 @@ class FPL_API():
 	_gw_stats = {}
 	_element_histories = {}
 	_element_summaries = {}
+	
 	_managers = {}
 	_team_fixtures = {}
 	_gw_fixtures = {}
