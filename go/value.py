@@ -60,7 +60,7 @@ def create_value_figure(api,players,show=False):
 	maximum = len(players)
 
 	for i,p in enumerate(players):
-		mout.progress(i,maximum,width=50,fill="#")
+		mout.progress(i,maximum)
 
 		next5_sum = 0
 		for i in range(gw,gw+6):
@@ -99,7 +99,7 @@ def create_value_figure(api,players,show=False):
 			sdata_fwd.append(size)
 			udata_fwd.append(f'https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html')
 
-	mout.progress(maximum,maximum,width=50,fill="#")
+	mout.progress(maximum,maximum)
 
 	fig = go.Figure()
 	fig.add_trace(go.Scatter(name="Goalkeepers",opacity=0.8,x=xdata_gkp, y=ydata_gkp, text=tdata_gkp, marker_size=sdata_gkp, customdata=udata_gkp, textposition='middle right', mode='markers'))

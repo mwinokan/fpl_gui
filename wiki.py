@@ -289,13 +289,13 @@ def main():
 	maximum = len(api._managers)
 	plot = force_plot or not api._live_gw
 	for i,m in enumerate(api._managers.values()):
-		mout.progress(i,maximum,width=50,fill="#")
+		mout.progress(i,maximum)
 		if api._current_gw > 1:
 			m.create_rank_graph(plot=plot,show=False)
 			m.create_points_graph(plot=plot,show=False)
 		# m.create_leaguepos_graph(plot=plot,show=False)
 		create_managerpage(api, m, leagues)
-	mout.progress(maximum,maximum,width=50,fill="#")
+	mout.progress(maximum,maximum)
 	mout.showDebug()
 
 	count = 0
@@ -303,13 +303,13 @@ def main():
 	mout.hideDebug()
 	maximum = len(api._loaded_players)
 	for pid in api._loaded_players:
-		mout.progress(count,maximum,width=50,fill="#",append=f' {count}/{maximum}')
+		mout.progress(count,maximum,append=f' {count}/{maximum}')
 		pid = int(pid)
 		create_playerpage(api,Player(None,index=api.get_player_index(pid),api=api),leagues)
 		# if count > 10:
 		# 	exit()	
 		count += 1
-	mout.progress(maximum,maximum,width=50,fill="#")
+	mout.progress(maximum,maximum)
 	mout.showDebug()
 	
 	# if api._current_gw > 0:

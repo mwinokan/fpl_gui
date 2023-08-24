@@ -57,7 +57,7 @@ class League():
 		count = 0
 		if 'player_name' in manager_df.keys():
 			for c,n,t in zip(manager_df['entry'],manager_df['player_name'],manager_df['entry_name']):
-				mout.progress(count,maximum,width=50,fill="#")
+				mout.progress(count,maximum)
 
 				m = self._api.get_manager(f"{n}", c, t, authenticate=False)
 				# m = Manager(f"{n}",c,self._api,team_name=t)
@@ -70,7 +70,7 @@ class League():
 		else:
 
 			for c,f,l,t in zip(manager_df['entry'],manager_df['player_first_name'],manager_df['player_last_name'],manager_df['entry_name']):
-				mout.progress(count,maximum,width=50,fill="#")
+				mout.progress(count,maximum)
 				
 				m = self._api.get_manager(f"{f} {l}", c, t, authenticate=False)
 				# m = Manager(f"{f} {l}",c,self._api,team_name=t)
@@ -80,7 +80,7 @@ class League():
 					mout.warningOut(f"Skipping invalid manager '{m.name}' with ID: {m.id}")
 				
 				count += 1
-		mout.progress(maximum,maximum,width=50,fill="#")
+		mout.progress(maximum,maximum)
 		mout.showDebug()
 
 		for m in self._managers:

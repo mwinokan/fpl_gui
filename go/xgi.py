@@ -62,7 +62,7 @@ def create_xgi_figure(api,players,show=False):
 	# hival = 0.0
 
 	for i,p in enumerate(players):
-		mout.progress(i,maximum,width=50,fill="#")
+		mout.progress(i,maximum)
 
 		size = p.selected_by/2+5
 
@@ -117,7 +117,7 @@ def create_xgi_figure(api,players,show=False):
 			else:
 				ndata_fwd.append(None)
 
-	mout.progress(maximum,maximum,width=50,fill="#")
+	mout.progress(maximum,maximum)
 
 	fig = go.Figure()
 
