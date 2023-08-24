@@ -22,7 +22,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = False
+offline = True
 
 create_launchd_plist = False
 force_generate_kits = False

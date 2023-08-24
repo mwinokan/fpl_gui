@@ -1158,7 +1158,7 @@ class Player():
 			xG_per_minute = weighted_average(xGs,Ms,self._prev_expected_goals,self._prev_minutes)
 
 			# scale by G/xG ratio
-			if (self._total_expected_goals + self._prev_expected_goals) == 0:
+			if (self._total_expected_goals + self._prev_expected_goals) == 0 or (self.total_goals + self._prev_goals_scored) == 0:
 				G_per_xG = 1.0
 			else:
 				G_per_xG = (self.total_goals + self._prev_goals_scored)/(self._total_expected_goals + self._prev_expected_goals)
@@ -1241,10 +1241,9 @@ class Player():
 				mout.varOut('avg_GF_per_game',avg_GF_per_game)
 				mout.varOut('opp_GF_ratio',opp_GF_ratio)
 				
-				# mout.varOut('xCSs',xCSs)
-				# mout.varOut('xGCs',xGCs)
-				mout.varOut('CSs',CSs)
-				mout.varOut('CS_prob',CS_prob)
+				mout.var(xCSs,xCSs)
+				mout.var(self._xC_no_opponent,self._xC_no_opponent)
+				mout.var(xCSPts,xCSPts)
 				
 				mout.varOut('xGs',xGs)
 				mout.varOut('xAs',xAs)
