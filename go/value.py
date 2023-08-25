@@ -28,7 +28,7 @@ def main():
 
 	create_value_figure(api,players,show=True)
 
-def create_value_figure(api,players,show=False):
+def create_value_figure(api,players,show=False, return_fig=False):
 
 	budget = None
 	position = None
@@ -113,6 +113,9 @@ def create_value_figure(api,players,show=False):
 	fig.update_xaxes(title_text="Price")
 	# fig.update_xaxes(title_text="Price (Relative to Fodder)")
 	fig.update_yaxes(title_text="Next5 xPts")
+
+	if return_fig:
+		return fig
 
 
 	# Get HTML representation of plotly.js and this figure

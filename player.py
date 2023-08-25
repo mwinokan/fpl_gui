@@ -5,7 +5,7 @@ import datetime
 import pytz
 local_tz = pytz.timezone("Europe/London")
 
-from expected import weighted_average
+from expected import weighted_average, scale_by_sample_size
 import numpy as np
 
 '''
@@ -66,6 +66,9 @@ class Player():
 		self._xA_no_opponent = None
 		self._xC_no_opponent = None
 		self._xBpts = None
+
+		self._A_per_xA = None
+		self._G_per_xG = None
 
 		self._parent_manager = None
 		self._league_count[self._id] = 1
@@ -273,6 +276,7 @@ class Player():
 				self._prev_goals_conceded_per_90 = pd['goals_conceded_per_90']
 				self._prev_starts_per_90 = pd['starts_per_90']
 				self._prev_clean_sheets_per_90 = pd['clean_sheets_per_90']
+				self._prev_appearances = self._prev_minutes/90 * self._prev_starts_per_90
 
 				return True
 				# print(pd['web_name'],self._name)
@@ -319,6 +323,7 @@ class Player():
 				self._prev_goals_conceded_per_90 = pd['goals_conceded_per_90']
 				self._prev_starts_per_90 = pd['starts_per_90']
 				self._prev_clean_sheets_per_90 = pd['clean_sheets_per_90']
+				self._prev_appearances = self._prev_minutes/90 * self._prev_starts_per_90
 
 			else:
 
@@ -358,6 +363,7 @@ class Player():
 				self._prev_goals_conceded_per_90 = 0.0
 				self._prev_starts_per_90 = 0.0
 				self._prev_clean_sheets_per_90 = 0.0
+				self._prev_appearances = 0.0
 
 			return True
 
@@ -993,6 +999,26 @@ class Player():
 		
 		return weighted_average(Ms) * self.get_playing_chance(gw)
 
+	@property
+	def A_per_xA(self):
+		if self._A_per_xA is None:
+			if (self._total_expected_assists + self._prev_expected_assists) == 0:
+				self._A_per_xA = 1.0
+			else:
+				self._A_per_xA = (self.total_assists + self._prev_assists)/(self._total_expected_assists + self._prev_expected_assists)
+			# mout.out(f'A/xA {self} {self._A_per_xA:.2f}')
+		return self._A_per_xA
+
+	@property
+	def G_per_xG(self):
+		if self._G_per_xG is None:
+			if (self._total_expected_goals + self._prev_expected_goals) == 0:
+				self._G_per_xG = 1.0
+			else:
+				self._G_per_xG = (self.total_goals + self._prev_goals_scored)/(self._total_expected_goals + self._prev_expected_goals)
+			# mout.out(f'G/xG {self} {self._G_per_xG:.2f}')
+		return self._G_per_xG
+
 	"""
 
 	New xPts Approach
@@ -1122,8 +1148,8 @@ class Player():
 			### OPPONENT GOALS CONCEDED
 
 			if opponent._prev_obj is None:
-				opp_GC_per_game = opponent.goals_conceded/opponent.games_played
 				opp_GF_per_game = opponent.goals_scored/opponent.games_played
+				opp_GC_per_game = opponent.goals_conceded/opponent.games_played
 			else:
 				opp_GF_per_game = (opponent.goals_scored/opponent.games_played + opponent._prev_obj.goals_scored/38)/2
 				opp_GC_per_game = (opponent.goals_conceded/opponent.games_played + opponent._prev_obj.goals_conceded/38)/2
@@ -1131,12 +1157,14 @@ class Player():
 			avg_GC_per_game = (sum([t.goals_conceded/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gc_per_game )/2
 			opp_GC_ratio = opp_GC_per_game/avg_GC_per_game
 			opp_GC_ratio = opp_GC_ratio or 1.0
+			opp_GC_ratio = scale_by_sample_size(opp_GC_ratio,opponent.games_played)
 			
 			### OPPONENT GOALS THREAT
 
 			avg_GF_per_game = (sum([t.goals_scored/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gf_per_game )/2
 			opp_GF_ratio = opp_GF_per_game/avg_GF_per_game
 			opp_GF_ratio = opp_GF_ratio or 1.0
+			opp_GF_ratio = scale_by_sample_size(opp_GF_ratio,opponent.games_played)
 
 			### CLEAN SHEETS
 			
@@ -1157,12 +1185,6 @@ class Player():
 			# weighted average xG per game
 			xG_per_minute = weighted_average(xGs,Ms,self._prev_expected_goals,self._prev_minutes)
 
-			# scale by G/xG ratio
-			if (self._total_expected_goals + self._prev_expected_goals) == 0 or (self.total_goals + self._prev_goals_scored) == 0:
-				G_per_xG = 1.0
-			else:
-				G_per_xG = (self.total_goals + self._prev_goals_scored)/(self._total_expected_goals + self._prev_expected_goals)
-
 			### ASSISTS
 
 			xAs = [float(x) for x in self.history['expected_assists']]
@@ -1170,16 +1192,12 @@ class Player():
 			# weighted average xA per game
 			xA_per_minute = weighted_average(xAs,Ms,self._prev_expected_assists,self._prev_minutes)
 
-			# scale by G/xA ratio
-			if (self._total_expected_assists + self._prev_expected_assists) == 0:
-				A_per_xA = 1.0
-			else:
-				A_per_xA = (self.total_assists + self._prev_assists)/(self._total_expected_assists + self._prev_expected_assists)
-
 			### ATTACKING POINTS
 
-			self._xG_no_opponent = xG_per_minute * xM * G_per_xG
-			self._xA_no_opponent = xA_per_minute * xM * A_per_xA
+			n = self.appearances + self._prev_appearances
+
+			self._xG_no_opponent = xG_per_minute * xM * scale_by_sample_size(self.G_per_xG,n)
+			self._xA_no_opponent = xA_per_minute * xM * scale_by_sample_size(self.A_per_xA,n)
 
 			xG = self._xG_no_opponent * opp_GC_ratio
 			xA = self._xA_no_opponent * opp_GC_ratio
@@ -1233,6 +1251,7 @@ class Player():
 			expected_points = xMPts + xCSPts + xGIPts + self._xBpts + xYCPts + xRCPts + xOGPts + xPMPts + xPSPts + xSPts
 						
 			if debug: 
+				mout.varOut('opponent',str(opponent))
 				mout.varOut('opp_GC_per_game',opp_GC_per_game)
 				mout.varOut('avg_GC_per_game',avg_GC_per_game)
 				mout.varOut('opp_GC_ratio',opp_GC_ratio)
@@ -1241,12 +1260,17 @@ class Player():
 				mout.varOut('avg_GF_per_game',avg_GF_per_game)
 				mout.varOut('opp_GF_ratio',opp_GF_ratio)
 				
-				mout.var(xCSs,xCSs)
-				mout.var(self._xC_no_opponent,self._xC_no_opponent)
-				mout.var(xCSPts,xCSPts)
+				mout.var('xCSs',xCSs)
+				mout.var('self._xC_no_opponent',self._xC_no_opponent)
+				mout.var('xCSPts',xCSPts)
 				
 				mout.varOut('xGs',xGs)
+				mout.varOut('_prev_expected_goals',self._prev_expected_goals)
+				mout.varOut('_xG_no_opponent',self._xG_no_opponent)
+
 				mout.varOut('xAs',xAs)
+				mout.varOut('_prev_expected_assists',self._prev_expected_goals)
+				mout.varOut('self._xA_no_opponent',self._xA_no_opponent)
 				
 				mout.varOut('Bs',Bs)
 
@@ -1256,8 +1280,8 @@ class Player():
 				mout.varOut('xG_per_minute',xG_per_minute)
 				mout.varOut('xA_per_minute',xA_per_minute)
 				
-				mout.varOut('G_per_xG',G_per_xG)
-				mout.varOut('A_per_xA',A_per_xA)
+				mout.varOut('G_per_xG',self.G_per_xG)
+				mout.varOut('A_per_xA',self.A_per_xA)
 				
 				mout.varOut('xG',xG)
 				mout.varOut('xA',xA)

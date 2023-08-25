@@ -7,7 +7,7 @@ import numpy as np
 def multiplier(gw_diff):
 	return 5.5 * np.exp(-(gw_diff-1)/20.0) + 0.5
 
-def weighted_average(this_season_by_gw,this_season_minutes_by_gw=None,last_season_total=None,last_season_minutes=None,plot=False,last_season_weight=0.1):
+def weighted_average(this_season_by_gw,this_season_minutes_by_gw=None,last_season_total=None,last_season_minutes=None,plot=False,last_season_weight=1.0):
 
 	"""
 
@@ -24,6 +24,8 @@ def weighted_average(this_season_by_gw,this_season_minutes_by_gw=None,last_seaso
 		this_season_minutes_by_gw = [1]*n
 
 	for i,(value,mins) in enumerate(zip(this_season_by_gw,this_season_minutes_by_gw,strict=True)):
+		if mins == 0:
+			continue
 		total_multiplier += multiplier(n-i) * mins
 		total_value += value * multiplier(n-i)
 
@@ -45,6 +47,8 @@ def weighted_average(this_season_by_gw,this_season_minutes_by_gw=None,last_seaso
 		plot_mult = []
 		
 		for i,(value,mins) in enumerate(zip(this_season_by_gw,this_season_minutes_by_gw,strict=True)):
+			if mins == 0:
+				continue
 			plot_x.append(n-i)
 			plot_y.append(value/mins)
 			plot_mult.append(multiplier(n-i))
@@ -67,3 +71,8 @@ def weighted_average(this_season_by_gw,this_season_minutes_by_gw=None,last_seaso
 		fig.show()
 
 	return result
+
+
+def scale_by_sample_size(value,samples,default=1.0,steepness=5):
+	scaled =  value - np.exp((1.0-samples)/steepness)*(value-default)
+	return scaled
