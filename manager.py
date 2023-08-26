@@ -951,7 +951,11 @@ class Manager():
 
 		j = gw - start_gw
 
-		return self._event_points[j-1]
+		try:
+			return self._event_points[j-1]
+		except IndexError:
+			mout.error(f"Can't index {self}'s _event_points[{j-1}] {gw=}")
+			return 0.0
 
 	def get_event_performed_xpts(self,gw):
 		# for p in self.players:
