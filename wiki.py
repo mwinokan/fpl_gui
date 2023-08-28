@@ -82,7 +82,7 @@ award_flavourtext = dict(
 	has_been="👨‍🦳 Has-Been",
 	kneejerker="🔨 Kneejerker",
 	rocket="🚀 Rocket",
-	flushed="🚽 Down the Toilet",
+	flushed="🚽 #DownTheToilet",
 	wc1_best="Best Wildcard 1",
 	wc1_worst="Worst Wildcard 1",
 	wc2_best="Best Wildcard 2",
@@ -3778,7 +3778,7 @@ def create_leaguepage(league,leagues,i):
 				# start = time.perf_counter()
 				m = sorted_managers[-1]
 				score = m.gw_rank_gain
-				html_buffer += award_panel('🚽','Down the Toilet','Worst Rank Loss',f'{score:.1f}%',m,colour=award_colour['flushed'],name_class="h3")
+				html_buffer += award_panel('🚽','#DownTheToilet','Worst Rank Loss',f'{score:.1f}%',m,colour=award_colour['flushed'],name_class="h3")
 				json[str(league.id)][gw]['awards']['flushed'] = [m.id,score]
 				# mout.out(f'Toilet {time.perf_counter()-start:.1f}s')
 
