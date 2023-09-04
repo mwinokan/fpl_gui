@@ -447,6 +447,10 @@ class Manager():
 					new_cap.is_captain = True
 					old_cap.multiplier = 0
 					old_cap.is_captain = False
+
+			if self._tc_week is not None:
+				if gw == self._tc_week:
+					self.captain.multiplier = 3
 				
 		return self._squad
 
