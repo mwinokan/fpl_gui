@@ -364,8 +364,8 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 
 	players = sorted(players,key=lambda x: x.selected_by,reverse=True)
 
-	subset = ['Luis','Martinelli','Foden','Ederson','Chukwu']
-	subset = [Player(n,api) for n in subset]
+	# subset = ['Luis','Martinelli','Foden','Ederson','Chukwu']
+	# subset = [Player(n,api) for n in subset]
 
 	html_buffer = ""
 
