@@ -1776,6 +1776,9 @@ def create_managerpage(api,man,leagues):
 		html_buffer += f'<div id="comparisonGraph" style="width:100%;height:500px">\n'
 		html_buffer += f'</div>\n'
 
+		html_buffer += f'</div>\n'
+		html_buffer += f'</div>\n'
+
 		### BUILD THE PLOTTING DATA
 		gw_indices = [i+1 for i in range(now_gw,end_gw+1)]
 		gw_strs = [f'GW{i+1}' for i in range(now_gw,end_gw+1)]
@@ -1829,7 +1832,7 @@ def create_managerpage(api,man,leagues):
 	navbar = create_navbar(leagues)
 
 	style = api.create_team_styles_css()
-	html_page(man.gui_path,None,title=title_str, gw=gw, html=html_buffer, showtitle=True,bar_html=navbar, colour='blue-gray', extra_style=style)
+	html_page(man.gui_path,None,title=title_str, gw=gw, html=html_buffer, showtitle=True,bar_html=navbar, colour='blue-gray', extra_style=style, plotly=True)
 
 def create_manager_formation(man,gw):
 
@@ -1881,6 +1884,14 @@ def create_manager_formation(man,gw):
 		html_buffer += '</div>\n'
 
 		last_pos_id = p.position_id
+
+	## BENCH
+	bench = [p for p in man.squad.sorted_players if p.multiplier == 0]
+
+	if bench:
+		
+
+
 
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'

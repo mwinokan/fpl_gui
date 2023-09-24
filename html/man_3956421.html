@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <style>
 h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}body {font-family: "Open Sans"}
 h5.double {line-height: 2}
@@ -243,6 +244,19 @@ h5.double {line-height: 2}
 <div id="114707" class="w3-container w3-dark-grey league">
 <div class="w3-justify w3-row-padding">
 <div class="w3-justify"><div class="w3-row-padding"><div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-red w3-card shadow89">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1>2 &times  🐓 Cock</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW1, GW3</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
 <div class="w3-panel w3-grey w3-card shadow89">
 <table class="w3-table">
 <tr>
@@ -269,19 +283,6 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-red w3-card shadow89">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1>2 &times  🐓 Cock</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW1, GW3</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
 <div class="w3-panel w3-amber w3-card shadow89">
 <table class="w3-table">
 <tr>
@@ -295,19 +296,6 @@ h5.double {line-height: 2}
 </div>
 </div>
 <div class="w3-col s12 m6 l4">
-<div class="w3-panel w3-indigo w3-card shadow89">
-<table class="w3-table">
-<tr>
-<td style="text-align:left;vertical-align:middle;">
-<h1> ⚽️ Massive Goal FC</h1>
-</td>
-<td style="text-align:right;vertical-align:middle;">
-<h2><span class="w3-tag">GW4</span></h2>
-</tr>
-</table>
-</div>
-</div>
-<div class="w3-col s12 m6 l4">
 <div class="w3-panel w3-light-blue w3-card shadow89">
 <table class="w3-table">
 <tr>
@@ -316,6 +304,19 @@ h5.double {line-height: 2}
 </td>
 <td style="text-align:right;vertical-align:middle;">
 <h2><span class="w3-tag">GW1</span></h2>
+</tr>
+</table>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-indigo w3-card shadow89">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> ⚽️ Massive Goal FC</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW4</span></h2>
 </tr>
 </table>
 </div>
@@ -735,6 +736,8 @@ evt.currentTarget.className += " w3-aqua";
 <div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:none;">
 <div id="comparisonGraph" style="width:100%;height:500px">
 </div>
+</div>
+</div>
 <script>
 	GRAPH = document.getElementById("comparisonGraph");
 	Plotly.newPlot( GRAPH, [{"name": "Ederson M.", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.2, 3.5, 3.4, 3.8, 4.2, 4.1], "visible": true, "mode": "lines+markers"}, {"name": "Forster", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [0, 0, 0, 0, 0, 0], "visible": true, "mode": "lines+markers"}, {"name": "Trippier", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [5.2, 4.6, 4.7, 4.9, 4.2, 5.0], "visible": true, "mode": "lines+markers"}, {"name": "Estupi\u00f1an", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.6, 4.6, 3.9, 5.1, 5.0, 5.7], "visible": true, "mode": "lines+markers"}, {"name": "Saliba", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.4, 3.4, 4.2, 4.6, 3.6, 4.5], "visible": true, "mode": "lines+markers"}, {"name": "Romero", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [3.0, 3.6, 3.4, 3.2, 3.3, 3.4], "visible": true, "mode": "lines+markers"}, {"name": "Bell", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.4, 2.2, 2.2, 2.2, 2.2, 2.2], "visible": true, "mode": "lines+markers"}, {"name": "Saka", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [7.3, 5.3, 6.6, 8.9, 5.8, 8.3], "visible": true, "mode": "lines+markers"}, {"name": "\u00d8degaard", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [5.8, 4.4, 5.4, 6.9, 4.8, 6.5], "visible": true, "mode": "lines+markers"}, {"name": "Maddison", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [5.3, 6.1, 5.5, 5.0, 5.2, 5.7], "visible": true, "mode": "lines+markers"}, {"name": "Mbeumo", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [5.9, 5.5, 6.9, 5.6, 5.7, 5.6], "visible": true, "mode": "lines+markers"}, {"name": "Anderson", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [2.7, 2.5, 2.5, 2.6, 2.3, 2.6], "visible": true, "mode": "lines+markers"}, {"name": "Haaland", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [9.5, 7.8, 8.5, 8.6, 9.7, 8.7], "visible": true, "mode": "lines+markers"}, {"name": "Watkins", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.6, 5.0, 4.8, 5.3, 4.8, 4.8], "visible": true, "mode": "lines+markers"}, {"name": "J.Alvarez", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [6.3, 5.3, 5.7, 5.8, 6.4, 5.8], "visible": true, "mode": "lines+markers"}], {	title: "Expected Points", margin: { r:0 }, font: {size: 14}} , {responsive: true});
@@ -831,7 +834,7 @@ evt.currentTarget.className += " w3-aqua";
 </div>
 </div>
 <div class="w3-center" style="padding:32px">
-<p>Accurate as of 2023-09-24 16:38:52, (GW6)</p>
+<p>Accurate as of 2023-09-24 16:44:27, (GW6)</p>
 <p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>
 </div>
 </body>
