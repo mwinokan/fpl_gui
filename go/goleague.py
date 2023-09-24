@@ -137,12 +137,13 @@ def create_league_histogram(api,league,subset=None,show=False,all_gws=True):
 		current_gw_points = [m.livescore for m in league.managers]
 		trace = go.Histogram(name=f'GW{gw}',x=current_gw_points)
 		fig.add_trace(trace)
+		fig.update_xaxes(title_text=f"GW{gw} points")
 	else:
 		previous_points = [m.total_livescore for m in league.managers]
 		trace = go.Histogram(name=f'GW1-{gw}',x=previous_points)
 		fig.add_trace(trace)
+		fig.update_xaxes(title_text=f"GW1-{gw} points")
 	
-	fig.update_xaxes(title_text=f"Total points")
 	fig.update_yaxes(title_text=f"Count")
 		
 	fig.update_layout(legend_title_text = f"{league.name}",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
