@@ -3940,7 +3940,13 @@ def create_leaguepage(league,leagues,i):
 		if len(league.managers) > 30:
 			html_buffer += '<div class="w3-col s12 m12 l12">\n'
 			html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
-			html_buffer += create_league_histogram(api, league, subset)
+			html_buffer += create_league_histogram(api, league, subset, all_gws=True)
+			html_buffer += '</div>\n'
+			html_buffer += '</div>\n'
+
+			html_buffer += '<div class="w3-col s12 m12 l12">\n'
+			html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
+			html_buffer += create_league_histogram(api, league, subset, all_gws=False)
 			html_buffer += '</div>\n'
 			html_buffer += '</div>\n'
 		

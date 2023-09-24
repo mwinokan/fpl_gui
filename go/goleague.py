@@ -126,7 +126,7 @@ def create_league_figure(api,league,subset=None,show=False,rank=True):
 
 	return html_str
 
-def create_league_histogram(api,league,subset=None,show=False):
+def create_league_histogram(api,league,subset=None,show=False,all_gws=True):
 	
 	gw = api._current_gw
 	mout.debugOut(f"create_league_histogram()")
