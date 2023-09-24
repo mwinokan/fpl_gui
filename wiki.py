@@ -22,7 +22,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = False
+offline = True
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -610,8 +610,8 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 	html_buffer += f'</div>\n'
 
 	### BUILD THE PLOTTING DATA
-	gw_indices = [i+1 for i in range(now_gw+1,end_gw+1)]
-	gw_strs = [f'GW{i+1}' for i in range(now_gw+1,end_gw+1)]
+	gw_indices = [i+1 for i in range(now_gw,end_gw+1)]
+	gw_strs = [f'GW{i+1}' for i in range(now_gw,end_gw+1)]
 
 	plot_data = []
 	player_id_to_trace_id = {}
