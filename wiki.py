@@ -1765,6 +1765,44 @@ def create_managerpage(api,man,leagues):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
+		now_gw = api._current_gw
+		end_gw = min(38,now_gw+5)
+
+		### GRAPH
+		html_buffer += '<div class="w3-col s12 m12 l12">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:none;">\n'
+		
+		# html_buffer += f'<h3>Expected Points Graph</h3>\n'
+		html_buffer += f'<div id="comparisonGraph" style="width:100%;height:500px">\n'
+		html_buffer += f'</div>\n'
+
+		### BUILD THE PLOTTING DATA
+		gw_indices = [i+1 for i in range(now_gw,end_gw+1)]
+		gw_strs = [f'GW{i+1}' for i in range(now_gw,end_gw+1)]
+
+		plot_data = []
+		player_id_to_trace_id = {}
+		for i,p in enumerate(man.squad.sorted_players):
+
+			player_id_to_trace_id[p.id] = i
+
+			plot_y = [round(p.expected_points(gw=i),1) for i in gw_indices]
+
+			plot_data.append(dict(
+				name=p.name,
+				x=gw_strs,
+				y=plot_y,
+				visible=True,
+				mode='lines+markers',
+			))
+
+		### CREATE THE GRAPH
+		html_buffer += '<script>\n'
+		html_buffer += '	GRAPH = document.getElementById("comparisonGraph");\n'
+		html_buffer += f'	Plotly.newPlot( GRAPH, {js.dumps(plot_data)}'
+		html_buffer += ', {	title: "Expected Points", margin: { r:0 }, font: {size: 14}} , {responsive: true});\n'
+		html_buffer += '</script>\n'
+
 		# if int(man.id) == 780664:
 		# 	html_buffer += '<h2>Watchlist</h2>\n'
 		# 	html_buffer += create_picks_table(api, squad.sorted_players, manager=None)

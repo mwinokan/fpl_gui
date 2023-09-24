@@ -629,6 +629,14 @@ evt.currentTarget.className += " w3-aqua";
 </div>
 </div>
 <div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:none;">
+<div id="comparisonGraph" style="width:100%;height:500px">
+</div>
+<script>
+	GRAPH = document.getElementById("comparisonGraph");
+	Plotly.newPlot( GRAPH, [{"name": "Ederson M.", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.2, 3.5, 3.4, 3.8, 4.2, 4.1], "visible": true, "mode": "lines+markers"}, {"name": "J.Virginia", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [0, 0, 0, 0, 0, 0], "visible": true, "mode": "lines+markers"}, {"name": "White", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.8, 3.6, 4.6, 5.2, 3.8, 5.0], "visible": true, "mode": "lines+markers"}, {"name": "Estupi\u00f1an", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.6, 4.6, 3.9, 5.1, 5.0, 5.7], "visible": true, "mode": "lines+markers"}, {"name": "Ak\u00e9", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.3, 3.4, 3.3, 3.9, 4.3, 4.2], "visible": true, "mode": "lines+markers"}, {"name": "Cash", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [3.4, 3.8, 3.6, 4.0, 3.7, 3.7], "visible": true, "mode": "lines+markers"}, {"name": "Lamptey", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [1.8, 1.8, 1.6, 2.2, 2.1, 2.2], "visible": true, "mode": "lines+markers"}, {"name": "Salah", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [6.7, 6.6, 6.9, 7.2, 8.0, 6.6], "visible": true, "mode": "lines+markers"}, {"name": "Saka", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [7.3, 5.3, 6.6, 8.9, 5.8, 8.3], "visible": true, "mode": "lines+markers"}, {"name": "Szoboszlai", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [3.5, 3.5, 3.5, 3.6, 3.8, 3.5], "visible": true, "mode": "lines+markers"}, {"name": "Enzo", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [2.2, 2.3, 2.0, 2.1, 2.1, 1.9], "visible": true, "mode": "lines+markers"}, {"name": "McAtee", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [1.9, 2.0, 1.9, 1.8, 2.0, 1.8], "visible": true, "mode": "lines+markers"}, {"name": "Haaland", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [9.5, 7.8, 8.5, 8.6, 9.7, 8.7], "visible": true, "mode": "lines+markers"}, {"name": "Wissa", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.7, 4.5, 5.4, 4.5, 4.6, 4.5], "visible": true, "mode": "lines+markers"}, {"name": "Edouard", "x": ["GW7", "GW8", "GW9", "GW10", "GW11", "GW12"], "y": [4.6, 4.8, 4.3, 4.6, 5.5, 4.7], "visible": true, "mode": "lines+markers"}], {	title: "Expected Points", margin: { r:0 }, font: {size: 14}} , {responsive: true});
+</script>
+<div class="w3-col s12 m12 l12">
 <br>
 	<h1 class="w3-tag shadow89">History</h1>
 </div>
@@ -720,7 +728,7 @@ evt.currentTarget.className += " w3-aqua";
 </div>
 </div>
 <div class="w3-center" style="padding:32px">
-<p>Accurate as of 2023-09-24 16:20:09, (GW6)</p>
+<p>Accurate as of 2023-09-24 16:38:50, (GW6)</p>
 <p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>
 </div>
 </body>
