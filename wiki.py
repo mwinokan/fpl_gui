@@ -1770,7 +1770,7 @@ def create_managerpage(api,man,leagues):
 
 		### GRAPH
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:none;">\n'
+		html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:block;">\n'
 		
 		# html_buffer += f'<h3>Expected Points Graph</h3>\n'
 		html_buffer += f'<div id="comparisonGraph" style="width:100%;height:500px">\n'
@@ -1889,9 +1889,33 @@ def create_manager_formation(man,gw):
 	bench = [p for p in man.squad.sorted_players if p.multiplier == 0]
 
 	if bench:
-		
+		html_buffer += '</div>\n'
+		html_buffer += '<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">\n'
 
+		for p in bench:
+			html_buffer += '<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">\n'
 
+			html_buffer += f'<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="{p._photo_url}?raw=true"></img>\n'
+			
+			score = p.get_event_score(gw)
+
+			style_str = get_style_from_event_score(score).rstrip('"')+';width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"'
+			
+			c_str = ''
+
+			html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
+
+			html_buffer += f'<br>\n'
+			style_str = get_style_from_event_score(score).rstrip('"')+';width:90%;margin-bottom:2px;"'
+			html_buffer += p.event_stat_emojis(gw)
+
+			if score is None:
+				html_buffer += f' <b>-</b>\n'
+			else:
+				html_buffer += f' <b>{score}pts</b>\n'
+
+			html_buffer += '</div>\n'
+			html_buffer += '</div>\n'
 
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
