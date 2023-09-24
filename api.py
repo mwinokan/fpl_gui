@@ -254,6 +254,10 @@ class FPL_API():
 				mout.warningOut("ConnectionError, trying again...")
 				return self.request(handle)
 
+			if '502' in str(r):
+				mout.warningOut("Error 502, trying again...")
+				return self.request(handle)
+
 			if '404' in str(r):
 				print(handle)
 				mout.errorOut("Request 404'd")

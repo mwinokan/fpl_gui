@@ -480,8 +480,14 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 
 	html_buffer += f'</tr>\n'
 
+	n = len(players)
+
+
 	### PLAYER ROWS
-	for p in players:
+	for i,p in enumerate(players):
+
+		mout.progress(i,n)
+
 		html_buffer += f'<tr id="statRow{p.id}" style="display:none;">\n'
 		
 		html_buffer += f'<td class="w3-center w3-button w3-black" onclick="removePlayer({p.id})"><i class="fa fa-close"></i></td>\n'
@@ -587,6 +593,8 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 			html_buffer += f'<td class="w3-center" style={style_str}>{p.get_fixture_str(i,short=True,lower_away=True)}</td>\n'
 
 		html_buffer += f'</tr>\n'
+
+	mout.finish()
 
 	html_buffer += f'</table>'
 	
