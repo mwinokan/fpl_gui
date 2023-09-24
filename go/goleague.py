@@ -133,14 +133,14 @@ def create_league_histogram(api,league,subset=None,show=False,all_gws=True):
 
 	fig = go.Figure()
 
-	current_gw_points = [m.livescore for m in league.managers]
-	previous_points = [m.total_livescore for m in league.managers]
-
-	trace = go.Histogram(name=f'GW{gw}',x=current_gw_points)
-	fig.add_trace(trace)
-
-	trace = go.Histogram(name=f'GW1-{gw}',x=previous_points,visible='legendonly')
-	fig.add_trace(trace)
+	if not all_gws:
+		current_gw_points = [m.livescore for m in league.managers]
+		trace = go.Histogram(name=f'GW{gw}',x=current_gw_points)
+		fig.add_trace(trace)
+	else:
+		previous_points = [m.total_livescore for m in league.managers]
+		trace = go.Histogram(name=f'GW1-{gw}',x=previous_points,visible='legendonly')
+		fig.add_trace(trace)
 	
 	fig.update_xaxes(title_text=f"Total points")
 	fig.update_yaxes(title_text=f"Count")
