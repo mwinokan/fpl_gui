@@ -22,7 +22,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = True
+offline = False
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -333,7 +333,24 @@ def main():
 
 def run_test():
 
-	create_comparison_page(api,[])
+	# print(api.fixtures.columns)
+
+	# print(api.get_gw_fixtures(6))
+
+	# print(api.elements_by_team['MCI'])
+
+	# print(api.get_player_team_obj(15))
+	# print(api.get_player_team_obj(17))
+
+	
+
+	p = Player('Foden',api)
+
+	s = p.get_event_score(6)
+
+	print(s)
+
+	# create_comparison_page(api,[])
 
 	# l = League(146330,api)
 

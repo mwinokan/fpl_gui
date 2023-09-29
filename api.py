@@ -14,6 +14,8 @@ from manager import Manager
 from plot import team_strength
 from collections import Counter
 
+from pprint import pprint
+
 url = 'https://fantasy.premierleague.com/api/'
 
 GC_DICT = {
@@ -85,6 +87,7 @@ class FPL_API():
 	_loaded_players = []
 	_exp_archive = {}
 	_elements_by_team = None
+	_element_indices_by_team = None
 	_special_gws = {}
 
 	_skip_gws = [7]
@@ -455,6 +458,33 @@ class FPL_API():
 		return self._elements_by_team
 
 	@property
+	def element_indices_by_team(self):
+		# mout.debugOut(f"FPL_API.element_indices_by_team()")
+
+		if not self._element_indices_by_team:
+
+			self._element_indices_by_team = {}
+
+			player_ids = self._elements['id']
+
+			for i,pid in enumerate(player_ids):
+
+				# if self._elements['minutes'][i] < 90:
+				# 	continue
+
+				index = self.get_player_index(pid)
+
+				p = Player(None, self, index=index)
+
+				if p._shortteam not in self._element_indices_by_team.keys():
+					self._element_indices_by_team[p._shortteam] = []
+				self._element_indices_by_team[p._shortteam].append(index)
+
+		# print(self._element_indices_by_team.keys())
+							
+		return self._element_indices_by_team
+
+	@property
 	def _elements(self):
 		if self.__elements is None:
 			self.__elements = pd.DataFrame(self._bootstrapjson['elements'])
@@ -736,12 +766,82 @@ class FPL_API():
 
 	def request_event_stats(self,gw):
 		json = self.request(url+'event/'+str(gw)+'/live')
-		# try:
-		# 	json = r.json()
-		# except:
-		# 	print(url+'event/'+str(gw)+'/live')
-		# 	mout.errorOut("Problem parsing event stats JSON, trying again")
-		# 	return self.request_event_stats(gw)
+
+		# # adjust live bonus?
+
+		# # if self._live_gw:
+
+		# gw_fixtures = self.get_gw_fixtures(gw)
+
+		# print(json['elements'][0])
+
+		# # clear bonus
+		# for element_stats in json['elements']:
+		# 	element_stats['stats']['bonus'] = 0
+
+		# # loop over fixtures
+		# for fix in gw_fixtures:
+
+		# 	pprint(fix)
+
+		# 	fid = fix['index']
+
+		# 	# get all player ids
+		# 	team_h = self.get_player_team_obj(fix['team_h']).shortname
+		# 	team_a = self.get_player_team_obj(fix['team_a']).shortname
+
+		# 	pids = self.element_indices_by_team[team_h] + self.element_indices_by_team[team_a]
+
+		# 	pid_bps_pairs = []
+
+		# 	for pid in pids:
+		# 		element_stats = json['elements'][pid-1]['stats']
+		# 		bps = element_stats['bps']
+		# 		pid_bps_pairs.append([pid-1,bps])
+
+		# 	pid_bps_pairs = sorted(pid_bps_pairs, key=lambda x: x[1], reverse=True)
+
+		# 	# print(team_h,team_a)
+		# 	# pprint(pid_bps_pairs)
+
+		# 	scores = [p[1] for p in pid_bps_pairs]
+		# 	counter = Counter(scores)
+
+		# 	count = 0
+
+		# 	award = {}
+
+		# 	for i,bps in enumerate(sorted(list(set(scores)), reverse=True)[:3]):
+		# 		num = counter[bps]
+
+		# 		print(bps,num)
+
+		# 		if count >= 3:
+		# 			break
+				
+		# 		count += num
+
+		# 		if i == 0:
+		# 			award[bps] = 3
+		# 		elif i == 1:
+		# 			award[bps] = 2
+		# 		elif i == 2:
+		# 			award[bps] = 1
+
+		# 	for element in json['elements']:
+		# 		element_stats = element['stats']
+
+		# 		# probably broken for DGWs
+
+		# 		# print(fid,[e['fixture'] for e in element['explain']])
+
+		# 		if fid not in [e['fixture'] for e in element['explain']]:
+		# 			continue
+
+		# 		if element_stats['bps'] in award:
+		# 			element_stats['bonus'] += award[element_stats['bps']]
+		# 			print('awarding:',element_stats['bps'],element_stats['bonus'])
+
 		return json
 
 	def get_player_event_stats(self,gw,player_id,dgw_index=0):
