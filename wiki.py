@@ -22,7 +22,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = False
+offline = True
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -1894,6 +1894,7 @@ def create_manager_formation(man,gw):
 
 		if score is None:
 			html_buffer += f' <b>-</b>\n'
+			# print(player,score)
 		else:
 			html_buffer += f' <b>{p.multiplier*score}pts</b>\n'
 
