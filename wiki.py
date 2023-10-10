@@ -12,6 +12,7 @@ import json as js
 from web import html_page, player_summary_cell_modal, get_style_from_event_score, md2html, get_player_history_table, get_style_from_minutes_played, get_style_from_expected_return, get_style_from_bonus
 from squad import Squad
 import time
+from pprint import pprint
 
 # https://stackoverflow.com/questions/60598837/html-to-image-using-python
 
@@ -22,7 +23,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = True
+offline = False
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -342,13 +343,21 @@ def run_test():
 	# print(api.get_player_team_obj(15))
 	# print(api.get_player_team_obj(17))
 
-	
+	# print(api.elements.columns)
+	print(api.get_player_index(664))
+	pprint(api.elements['web_name'][api.get_player_index(664)])
 
-	p = Player('Foden',api)
+	p = Player('Maddison',api)
 
-	s = p.get_event_score(6)
+	s = p.get_event_score(8,debug=True)
 
-	print(s)
+	print(p,s)
+
+	p = Player('Ward-Prowse',api)
+
+	s = p.get_event_score(8,debug=True)
+
+	print(p,s)
 
 	# create_comparison_page(api,[])
 
@@ -1738,7 +1747,7 @@ def create_managerpage(api,man,leagues):
 	html_buffer += f'<h2>GW{gw}</h2>\n'
 	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Score: {man.livescore}</span>\n'
 	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank: {api.big_number_format(man.gw_rank)}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank Gain: {man.gw_rank_gain}</span>\n'
+	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank Gain: {man.gw_rank_gain:.1%}</span>\n'
 	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">xG: {man.gw_xg:.1f}</span>\n'
 	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">xA: {man.gw_xa:.1f}</span>\n'
 	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Performed xPts: {man.gw_performed_xpts:.1f}</span>\n'
@@ -1894,7 +1903,7 @@ def create_manager_formation(man,gw):
 
 		if score is None:
 			html_buffer += f' <b>-</b>\n'
-			print(p,score)
+			# print(p,score)
 		else:
 			html_buffer += f' <b>{p.multiplier*score}pts</b>\n'
 

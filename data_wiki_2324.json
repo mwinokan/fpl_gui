@@ -2974,13 +2974,13 @@
 				],
 				"goals": [
 					475362,
-					4
+					5
 				],
 				"scientist": [
-					554798,
-					228,
+					475362,
+					639,
 					false,
-					9
+					15
 				],
 				"hot_stuff": [
 					475362,
@@ -3000,7 +3000,7 @@
 				],
 				"boner": [
 					475362,
-					276
+					321
 				],
 				"smooth_brain": [
 					264578,
@@ -3011,7 +3011,7 @@
 					915
 				],
 				"asbo": [
-					3674681,
+					2557668,
 					"\ud83d\udfe8"
 				],
 				"fortune": [
@@ -3151,7 +3151,7 @@
 						"position": "Defence",
 						"multiplier": 1.0,
 						"kit_path": "kits/Spurs.png",
-						"points": 5.666666666666667,
+						"points": 6.916666666666667,
 						"started": true
 					},
 					{
@@ -3207,7 +3207,7 @@
 						"position": "Defence",
 						"multiplier": 0.3333333333333333,
 						"kit_path": "kits/Fulham.png",
-						"points": 3.25,
+						"points": 2.0,
 						"started": true
 					},
 					{
@@ -3223,7 +3223,7 @@
 						"position": "Attack",
 						"multiplier": 0.3333333333333333,
 						"kit_path": "kits/West Ham.png",
-						"points": 0.5,
+						"points": 2.0,
 						"started": true
 					},
 					{
@@ -3342,6 +3342,12 @@
 			},
 			"differentials": [
 				[
+					639,
+					475362,
+					false,
+					15
+				],
+				[
 					228,
 					554798,
 					false,
@@ -3364,12 +3370,6 @@
 					904172,
 					false,
 					8
-				],
-				[
-					20,
-					475362,
-					false,
-					7
 				]
 			],
 			"positions": {
@@ -8170,7 +8170,7 @@
 					26
 				],
 				"goals": [
-					417434,
+					475362,
 					5
 				],
 				"scientist": [
@@ -8197,23 +8197,23 @@
 				],
 				"boner": [
 					475362,
-					276
+					321
 				],
 				"smooth_brain": [
 					3766320,
 					29
 				],
 				"chair": [
-					671151,
-					704
+					3553173,
+					823
 				],
 				"asbo": [
 					3536344,
 					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
 				],
 				"fortune": [
-					133190,
-					33
+					2438325,
+					46
 				],
 				"clown": [
 					2557668,
@@ -8394,7 +8394,7 @@
 						"position": "Defence",
 						"multiplier": 0.7863247863247863,
 						"kit_path": "kits/Spurs.png",
-						"points": 6.3478260869565215,
+						"points": 6.836956521739131,
 						"started": true
 					},
 					{
@@ -8432,9 +8432,9 @@
 					{
 						"shortteam": "ARS",
 						"position": "Attack",
-						"multiplier": 0.4188034188034188,
+						"multiplier": 0.41025641025641024,
 						"kit_path": "kits/Arsenal.png",
-						"points": 2.2244897959183674,
+						"points": 2.2708333333333335,
 						"started": true
 					},
 					{
@@ -8448,9 +8448,9 @@
 					{
 						"shortteam": "MUN",
 						"position": "Attack",
-						"multiplier": 0.358974358974359,
+						"multiplier": 0.37606837606837606,
 						"kit_path": "kits/Man Utd.png",
-						"points": 1.7619047619047619,
+						"points": 1.7727272727272727,
 						"started": true
 					},
 					{
@@ -8466,7 +8466,7 @@
 						"position": "Attack",
 						"multiplier": 0.2905982905982906,
 						"kit_path": "kits/West Ham.png",
-						"points": 0.7941176470588235,
+						"points": 2.1470588235294117,
 						"started": true
 					},
 					{
@@ -8514,7 +8514,7 @@
 						"position": "Defence",
 						"multiplier": 0.15384615384615385,
 						"kit_path": "kits/Fulham.png",
-						"points": 2.8333333333333335,
+						"points": 2.0,
 						"started": true
 					},
 					{
@@ -8538,7 +8538,7 @@
 						"position": "Defence",
 						"multiplier": 0.1111111111111111,
 						"kit_path": "kits/Man Utd.png",
-						"points": 1.8461538461538463,
+						"points": 2.0,
 						"started": true
 					},
 					{
@@ -8586,7 +8586,7 @@
 						"position": "Attack",
 						"multiplier": 0.05128205128205128,
 						"kit_path": "kits/Everton.png",
-						"points": 1.3333333333333333,
+						"points": 1.5,
 						"started": true
 					},
 					{
@@ -8642,7 +8642,7 @@
 						"position": "Defence",
 						"multiplier": 0.017094017094017096,
 						"kit_path": "kits/Bournemouth.png",
-						"points": 0.5,
+						"points": 1.0,
 						"started": true
 					},
 					{
@@ -11600,7 +11600,7 @@
 				],
 				"fortune": [
 					927208,
-					33
+					18
 				],
 				"clown": [
 					7962178,
@@ -11734,7 +11734,7 @@
 						"position": "Attack",
 						"multiplier": 0.6666666666666666,
 						"kit_path": "kits/West Ham.png",
-						"points": 1.5,
+						"points": 2.0,
 						"started": true
 					},
 					{
@@ -11909,5 +11909,5 @@
 			}
 		}
 	},
-	"timestamp": "2023-10-10 09:41:45"
+	"timestamp": "2023-10-10 10:26:06"
 }

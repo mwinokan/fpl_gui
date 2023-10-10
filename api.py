@@ -845,17 +845,21 @@ class FPL_API():
 		return json
 
 	def get_player_event_stats(self,gw,player_id,dgw_index=0):
-		if gw in self._gw_stats.keys():
-			try:
-				return self._gw_stats[gw][player_id-1]
-			except:
-				if gw == self._current_gw:
-					mout.warningOut(f"Could not retrieve stats for player {player_id} (GW:{gw})")
-				return {'minutes':0, 'goals_scored':0, 'assists':0, 'clean_sheets':0, 'goals_conceded':0, 'own_goals':0, 'penalties_saved':0, 'penalties_missed':0, 'yellow_cards':0, 'red_cards':0, 'saves':0, 'bonus':0, 'bps':0, 'influence':0, 'creativity':0, 'threat':0, 'ict_index':0, 'total_points':0, 'in_dreamteam':0}
-		else:
+		if gw not in self._gw_stats.keys():
 			json = self.request_event_stats(gw)
-			self._gw_stats[gw] = pd.DataFrame(json['elements'])['stats']
-			return pd.DataFrame(json['elements'])['stats'][player_id-1]
+			df = pd.DataFrame(json['elements'])
+			self._gw_stats[gw] = df
+		
+		df = self._gw_stats[gw]
+
+		player_stats = df[df['id'] == player_id]['stats'].values
+
+		if not player_stats:
+			if gw == self._current_gw:
+				mout.warningOut(f"Could not retrieve stats for player {player_id} (GW:{gw}, {len(player_stats)=})")
+			return {'minutes':0, 'goals_scored':0, 'assists':0, 'clean_sheets':0, 'goals_conceded':0, 'own_goals':0, 'penalties_saved':0, 'penalties_missed':0, 'yellow_cards':0, 'red_cards':0, 'saves':0, 'bonus':0, 'bps':0, 'influence':0, 'creativity':0, 'threat':0, 'ict_index':0, 'total_points':0, 'in_dreamteam':0}
+
+		return player_stats[0]
 
 	def get_event_averages(self):
 		# print(self._events['average_entry_score'][0:self._current_gw])		

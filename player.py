@@ -7,6 +7,7 @@ local_tz = pytz.timezone("Europe/London")
 
 from expected import weighted_average, scale_by_sample_size
 import numpy as np
+from pprint import pprint
 
 '''
 To-Do's
@@ -720,15 +721,27 @@ class Player():
 			else:
 				return int(self.fixtures['difficulty'][gw])
 
-	def get_event_score(self,gw=None,summary=False,not_playing_is_none=True,md_bold=True,return_str=False,pts_line=False,team_line=True,html_highlight=True):
+	def get_event_score(self,gw=None,summary=False,not_playing_is_none=True,md_bold=True,return_str=False,pts_line=False,team_line=True,html_highlight=True,debug=False):
 		if gw is None:
 			gw=self._api.current_gw
 		if gw > self._api.current_gw:
 			mout.errorOut("Gameweek has not happened yet")
 			return None
+
+		if debug:
+			mout.debug(f'Player("{self}",{self.id=}).get_event_score({gw=})')
 		
 		event_stats = self._api.get_player_event_stats(gw,self._id)
+
+		if debug:
+			pprint(event_stats)
+
 		score = int(event_stats['total_points'])
+
+		if debug:
+			print(f'{score=}')
+		if debug:
+			print(f'{event_stats["minutes"]=}')
 		
 		if not_playing_is_none and event_stats['minutes'] == 0:
 			if not return_str:
