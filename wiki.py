@@ -1894,7 +1894,7 @@ def create_manager_formation(man,gw):
 
 		if score is None:
 			html_buffer += f' <b>-</b>\n'
-			# print(player,score)
+			print(p,score)
 		else:
 			html_buffer += f' <b>{p.multiplier*score}pts</b>\n'
 
